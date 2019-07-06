@@ -37,7 +37,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light navbar-vnpt bg-vnpt fixed-top" id="mainNav">
         <a href="./default.aspx" class="site-logo"><img src="Images/logo.png" style="height: 40px;"></a>
-        <a class="navbar-brand" href="./default.aspx">CÔNG TY CỔ PHẦN BIA RƯỢU NƯỚC GIẢI KHÁT VIGER</a>
+        <a class="navbar-brand" href="./default.aspx">PHẦN MỀM QUẢN LÝ HÓA ĐƠN ĐIỆN VNPT EMAN</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -73,14 +73,24 @@
                         <span class="nav-link-text" style="font-size:18px">Danh mục</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                       
                         <li>
+                            <a href="./DanhMucSanPham.aspx">Danh mục bảng giá điện </a>
+                        </li>
+                        <li>
+                            <a href="./DanhMucSanPham.aspx">Danh mục trạm biến áp</a>
+                        </li>
+                         <li>
                             <a href="./DanhSachKhachHang.aspx">DS khách hàng</a>
                         </li>
                         <li>
-                            <a href="./DanhMucSanPham.aspx">Danh mục sản phấm </a>
+                            <a href="./DanhSachDiaBan.aspx">DS khu</a>
                         </li>
                         <li>
-                            <a href="./DanhSachDiaBan.aspx">DS địa bàn</a>
+                            <a href="./DanhSachDiaBan.aspx">DS phường xã</a>
+                        </li>
+                        <li>
+                            <a href="./DanhSachUser.aspx">DS nhân viên</a>
                         </li>
                         <li>
                             <a href="./DanhSachUser.aspx">DS người dùng</a>
@@ -98,16 +108,22 @@
                     </a>
                      <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
                         <li>
-                            <a href="./BaoCaoThongKe.aspx">Báo cáo hàng ngày</a>
+                            <a href="./BaoCaoThongKe.aspx">Bảng kê tiền điện hộ thường</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">Báo cáo sản lượng theo ca </a>
+                            <a href="./BaoCaoTheoCa.aspx">Báo cáo tổn thất điện năng </a>
                         </li>
                         <li>
-                            <a href="./BaoCaoChiTietCa.aspx">Báo cáo chi tiết ca </a>
+                            <a href="./BaoCaoChiTietCa.aspx">Báo cáo tình hình bán điện các trạm biến áp </a>
                         </li>
                         <li>
-                            <a href="./BaoCaoThang.aspx">Báo cáo sản lượng năm </a>
+                            <a href="./BaoCaoThang.aspx">Báo cáo tình hình sử dụng điện </a>
+                        </li>
+                        <li>
+                            <a href="./BaoCaoTheoCa.aspx">Bảng tổng hợp sản lượng theo đơn giá </a>
+                        </li>
+                        <li>
+                            <a href="./BaoCaoTheoCa.aspx">Báo cáo tình hình bán điện các xóm/thôn </a>
                         </li>
                       
                     </ul>

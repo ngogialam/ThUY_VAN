@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Phần mềm quản lý bia Viger" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="baocao._Default" %>
+﻿<%@ Page Title="Phần mềm quản lý hóa đơn điện" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="baocao._Default" %>
 
 <%--<asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
