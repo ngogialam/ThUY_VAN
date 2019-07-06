@@ -52,28 +52,17 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bán hàng">
                     <a class="nav-link" href="./BanHang.aspx">
                         <i class="fa fa-fw fa-cart-plus" style="font-size:20px"></i>
-                        <span class="nav-link-text" style="font-size:18px">Bán hàng</span>
+                        <span class="nav-link-text" style="font-size:18px">Hóa đơn bán điện</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bán hàng">
-                    <a class="nav-link" href="./ChotCa.aspx">
-                        <i class="fa fa-fw fa-clock-o" style="font-size:20px"></i>
-                        <span class="nav-link-text" style="font-size:18px">Chốt ca</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Quản lý phiếu thu">
-                    <a class="nav-link" href="./QuanLyPhieuThu.aspx">
-                        <i class="fa fa-fw fa-archive" style="font-size:20px"></i>
-                        <span class="nav-link-text" style="font-size:18px">Quản lý phiếu thu</span>
-                    </a>
-                </li>
+               
+  
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Danh mục">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-address-book-o" style="font-size:20px"></i>
                         <span class="nav-link-text" style="font-size:18px">Danh mục</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                       
+                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">                       
                         <li>
                             <a href="./DanhMucSanPham.aspx">Danh mục bảng giá điện </a>
                         </li>
@@ -87,47 +76,44 @@
                             <a href="./DanhSachDiaBan.aspx">DS khu</a>
                         </li>
                         <li>
-                            <a href="./DanhSachDiaBan.aspx">DS phường xã</a>
+                            <a href="./DanhSachDiaBan.aspx">Kỳ hóa đơn</a>
                         </li>
                         <li>
                             <a href="./DanhSachUser.aspx">DS nhân viên</a>
-                        </li>
-                        <li>
-                            <a href="./DanhSachUser.aspx">DS người dùng</a>
-                        </li>
-                        <li>
-                            <a href="./DoiMatKhau.aspx">Đổi mật khẩu</a>
-                        </li>
+                        </li>                                          
                     </ul>
                 </li>
                 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Báo cáo thống kê">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages1" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-bar-chart" style="font-size:20px"></i>
-                        <span class="nav-link-text" style="font-size:18px">Báo cáo thống kê</span>
+                        <span class="nav-link-text" style="font-size:18px">Báo cáo tổng hợp</span>
                     </a>
                      <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
                         <li>
-                            <a href="./BaoCaoThongKe.aspx">Bảng kê tiền điện hộ thường</a>
+                            <a href="./BaoCaoThongKe.aspx">A. Báo cáo tổng hợp</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">Báo cáo tổn thất điện năng </a>
+                            <a href="./BaoCaoTheoCa.aspx">B. Báo cáo công nợ khách hàng</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoChiTietCa.aspx">Báo cáo tình hình bán điện các trạm biến áp </a>
+                            <a href="./BaoCaoChiTietCa.aspx">C. Danh sách khách hàng theo các mục đích </a>
                         </li>
                         <li>
-                            <a href="./BaoCaoThang.aspx">Báo cáo tình hình sử dụng điện </a>
+                            <a href="./BaoCaoThang.aspx">D. Danh sách chốt chỉ số</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">Bảng tổng hợp sản lượng theo đơn giá </a>
+                            <a href="./BaoCaoTheoCa.aspx">E. Danh sách tiêu thụ </a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">Báo cáo tình hình bán điện các xóm/thôn </a>
+                            <a href="./BaoCaoTheoCa.aspx">P. Báo cáo lãi lỗ</a>
                         </li>
-                      
+                         <li>
+                            <a href="./BaoCaoTheoCa.aspx">Q. Báo cáo quản trị</a>
+                        </li>                      
                     </ul>
                 </li>
+            
                 <!--
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Báo cáo ngày">
                     <a class="nav-link" href="./CapNhatModuleOLT.aspx">
