@@ -48,7 +48,7 @@
               
                 </div>
                  <div class="p-1">
-                      <img src="Images/viger.png" style="height: 180px;display: block;margin-left: auto;margin-right: auto;"/>"
+                      <img src="Images/viger.png" style="height: 180px;display: block;margin-left: auto;margin-right: auto;"/>
                   </div>
               </div>
             </div>
