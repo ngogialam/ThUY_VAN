@@ -1,0 +1,204 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - VNPT PHÚ THỌ</title>
+    <link rel="stylesheet" href="Content/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="Content/vnpt.css" type="text/css" />
+    <!-- Bootstrap core JavaScript-->
+    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+   
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">   
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">   
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js"></script>
+    <link href="vendor/datatables/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+    <script src="vendor/datatables/js/dataTables.fixedHeader.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="fixed-nav sticky-footer bg-vnpt" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-vnpt bg-vnpt fixed-top" id="mainNav">
+        <a href="./default.aspx" class="site-logo"><img src="Images/logo.png" style="height: 40px;"></a>
+        <a class="navbar-brand" href="./default.aspx">CÔNG TY CỔ PHẦN BIA RƯỢU NƯỚC GIẢI KHÁT VIGER</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Trang chủ">
+                    <a class="nav-link" href="./Default.aspx">
+                        <i class="fa fa-fw fa-home" style="font-size:20px"></i>
+                        <span class="nav-link-text" style="font-size:18px">Trang chủ</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bán hàng">
+                    <a class="nav-link" href="./BanHang.aspx">
+                        <i class="fa fa-fw fa-cart-plus" style="font-size:20px"></i>
+                        <span class="nav-link-text" style="font-size:18px">Bán hàng</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bán hàng">
+                    <a class="nav-link" href="./ChotCa.aspx">
+                        <i class="fa fa-fw fa-clock-o" style="font-size:20px"></i>
+                        <span class="nav-link-text" style="font-size:18px">Chốt ca</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Quản lý phiếu thu">
+                    <a class="nav-link" href="./QuanLyPhieuThu.aspx">
+                        <i class="fa fa-fw fa-archive" style="font-size:20px"></i>
+                        <span class="nav-link-text" style="font-size:18px">Quản lý phiếu thu</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Danh mục">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-address-book-o" style="font-size:20px"></i>
+                        <span class="nav-link-text" style="font-size:18px">Danh mục</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                        <li>
+                            <a href="./DanhSachKhachHang.aspx">DS khách hàng</a>
+                        </li>
+                        <li>
+                            <a href="./DanhMucSanPham.aspx">Danh mục sản phấm </a>
+                        </li>
+                        <li>
+                            <a href="./DanhSachDiaBan.aspx">DS địa bàn</a>
+                        </li>
+                        <li>
+                            <a href="./DanhSachUser.aspx">DS người dùng</a>
+                        </li>
+                        <li>
+                            <a href="./DoiMatKhau.aspx">Đổi mật khẩu</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Báo cáo thống kê">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages1" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-bar-chart" style="font-size:20px"></i>
+                        <span class="nav-link-text" style="font-size:18px">Báo cáo thống kê</span>
+                    </a>
+                     <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
+                        <li>
+                            <a href="./BaoCaoThongKe.aspx">Báo cáo hàng ngày</a>
+                        </li>
+                        <li>
+                            <a href="./BaoCaoTheoCa.aspx">Báo cáo sản lượng theo ca </a>
+                        </li>
+                        <li>
+                            <a href="./BaoCaoChiTietCa.aspx">Báo cáo chi tiết ca </a>
+                        </li>
+                        <li>
+                            <a href="./BaoCaoThang.aspx">Báo cáo sản lượng năm </a>
+                        </li>
+                      
+                    </ul>
+                </li>
+                <!--
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Báo cáo ngày">
+                    <a class="nav-link" href="./CapNhatModuleOLT.aspx">
+                        <i class="fa fa-fw fa-wrench"></i>
+                        <span class="nav-link-text">Báo cáo ngày</span>
+                    </a>
+                </li>
+                -->
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link">
+                        Xin chào <asp:Label ID="txtUser" runat="server"></asp:Label> 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb mb-2">
+                <li class="breadcrumb-item">
+                    <a href="Default.aspx">Trang chủ</a>
+                </li>
+                <li class="breadcrumb-item active"><%: Page.Title %></li>
+            </ol>
+            <form runat="server" id="main">
+                <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            </form>
+        </div>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                     <small> Địa chỉ: Khu 7, Phường Thanh Miếu, Thành phố Việt Trì, Phú Thọ, 02103862721, 2600103843</small>
+                     <br />
+                    <small style="color:white">Copyright &copy; VNPT Phú Thọ <%: DateTime.Now.Year %></small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Bạn thật sự muốn đăng xuất?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Chọn "Đăng xuất" để thoát phiên.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
+                        <a class="btn btn-primary" href="./Logout.aspx">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+        <%--  <script src="vendor/jquery/jquery.min.js"></script>--%>
+        
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="vendor/chart.js/Chart.min.js"></script>
+       <script src="js/sb-admin.min.js"></script>
+        <%--<script src="js/sb-admin-charts.min.js"></script>--%>
+    </div>
+
+</body>
+</html>
