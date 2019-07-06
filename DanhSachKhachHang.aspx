@@ -43,27 +43,27 @@
                         </asp:TemplateField>
                          <asp:TemplateField HeaderText="Điện thoại">
                             <ItemTemplate>
-                                <asp:Label ID="lblDienThoai" runat="server" Text='<%# Eval("so_dt") %>'></asp:Label>
+                                <asp:Label ID="lblDienThoai" runat="server" Text='<%# Eval("dien_thoai") %>'></asp:Label>
                             </ItemTemplate>                            
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Năm bán hàng">
+                         <asp:TemplateField HeaderText="Số hộ">
                             <ItemTemplate>
-                                <asp:Label ID="lblNamBH" runat="server" Text='<%# Eval("nam_bh") %>'></asp:Label>
+                                <asp:Label ID="lblNamBH" runat="server" Text='<%# Eval("so_ho") %>'></asp:Label>
                             </ItemTemplate>                            
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Phường/Xã" >
+                         <asp:TemplateField HeaderText="Khu" >
                             <ItemTemplate>
-                                <asp:Label ID="lblDB" runat="server" Text='<%# Eval("ten_dia_ban") %>'></asp:Label>
+                                <asp:Label ID="lblDB" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>                             
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Vùng">
+                         <asp:TemplateField HeaderText="Id khu">
                             <ItemTemplate>
-                                <asp:Label ID="lblvung" runat="server" Text='<%# Eval("vung") %>'></asp:Label>
+                                <asp:Label ID="lblvung" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
                             </ItemTemplate>                            
                         </asp:TemplateField>
                          <asp:TemplateField HeaderText="idDiaban" Visible="False">
                             <ItemTemplate>
-                                <asp:Label ID="lblidDiaBan" runat="server" Text='<%# Eval("id_dia_ban") %>'></asp:Label>
+                                <asp:Label ID="lblidDiaBan" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>                            
                         </asp:TemplateField>
                          <asp:TemplateField  HeaderText="Thao tác" ItemStyle-Width="100px">

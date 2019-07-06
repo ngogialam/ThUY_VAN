@@ -17,7 +17,7 @@ public class clsKhachHang
         myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = myConn;
-        cmd.CommandText = "select a.ma_kh,a.ten_kh,a.dia_chi,a.so_dt,a.nam_bh,a.id_dia_ban,b.ten_dia_ban, b.vung from khach_hang a, dm_dia_ban b where a.id_dia_ban = b.id_dia_ban";
+        cmd.CommandText = "select a.ma_kh,a.id_tram_bien_ap,a.ten_kh,a.dia_chi,a.dien_thoai,a.so_ho,a.id_khu,b.ten_khu, b.id_khu from khach_hang a, dm_khu b where a.id_khu = b.id_khu";
         cmd.CommandType = CommandType.Text;
         SqlDataAdapter myData = new SqlDataAdapter(cmd);
         DataSet dts = new DataSet();
