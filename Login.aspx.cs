@@ -20,7 +20,7 @@ public partial class Login : System.Web.UI.Page
             if (Request.Cookies["USERNAME"] != null && Request.Cookies["PASSWORD"] != null)
                 chkSave.Checked = true;
         }
-        lblThongBao.Text = "";
+         lblThongBao.Text = ""; 
     }
     protected void btnDangNhap_Click(object sender, EventArgs e)
     {
