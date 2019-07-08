@@ -44,6 +44,7 @@ public class clsKhachHang
             }
         }
     }
+   
     public DataTable get_danh_sach_khach_hang()
     {
         SqlConnection myConn = null;
