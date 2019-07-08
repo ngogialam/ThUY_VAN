@@ -9,6 +9,41 @@ using System.Data;
 /// </summary>
 public class clsKhachHang
 {
+    //lyht.pto danh muc bang gia dien
+    public DataTable get_danh_muc_bang_gia_dien()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select ten_bang_gia,ten_viet_tat,don_gia,tien_thue_vat,phan_tram_thue,gia_ban,kich_hoat from bang_gia_dien";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     public DataTable get_danh_sach_khach_hang()
     {
         SqlConnection myConn = null;
