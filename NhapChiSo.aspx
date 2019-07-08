@@ -26,7 +26,7 @@
                                 <asp:Label ID="lblMaKH" runat="server" Text='<%# Eval("ma_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tên khách hàng">
+                        <asp:TemplateField HeaderText="Tên khách hàng" ControlStyle-Width="200px">
                             <ItemTemplate>
                                 <asp:Label ID="lblTenKH" runat="server" Text='<%# Eval("ten_kh") %>'></asp:Label>
                             </ItemTemplate>
@@ -41,12 +41,22 @@
                                 <asp:Label ID="lblSoHo" runat="server" Text='<%# Eval("so_ho") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="CS đầu kỳ">
+                        <asp:TemplateField HeaderText="Mã công tơ">
                             <ItemTemplate>
-                                <asp:Label ID="lblSoHo" runat="server" Text='<%# Eval("so_ho") %>'></asp:Label>
+                                <asp:Label ID="lblSoHo" runat="server" Text='<%# Eval("ma_congto") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                       
+                        <asp:TemplateField HeaderText="CS cũ">
+                            <ItemTemplate>
+                                <asp:Label ID="lblSoHo" runat="server" Text='<%# Eval("chi_so_cu") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="CS mới">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" placeholder="Nhập chỉ số mới"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
 
                          <asp:TemplateField HeaderText="idkhu" Visible="False">
                             <ItemTemplate>

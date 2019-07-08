@@ -16,6 +16,7 @@ public partial class NhapChiSo : System.Web.UI.Page
 {
     clsKhachHang myCus = new clsKhachHang();
     clsConnect myCon = new clsConnect();
+    clsNhapChiSo myNCS = new clsNhapChiSo();
     DataTable CusList = new DataTable();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -23,13 +24,12 @@ public partial class NhapChiSo : System.Web.UI.Page
         if (!IsPostBack)
         {
             gv_bind();
-
         }
 
     }
     protected void gv_bind()
     {
-        CusList = myCus.get_danh_sach_khach_hang();
+        CusList = myNCS.get_danh_sach_nhap_cs();
         GirdView.DataSource = CusList;
         GirdView.DataBind();
         GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
