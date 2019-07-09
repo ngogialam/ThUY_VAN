@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
@@ -45,8 +44,6 @@ public class clsKhachHang
             }
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
     
     //Them moi gia dien
     public int them_moi_gia_dien(string ten_bang_gia, string ten_viet_tat, float don_gia, float tien_thue_vat, float phan_tram_thue, float gia_ban, int kich_hoat)
@@ -103,12 +100,7 @@ public class clsKhachHang
     }
 
     //end 
-=======
-   
->>>>>>> eb75fb9753c2f1cd5b8ed4ee7542de1b4810a766
-=======
-   
->>>>>>> 4bdba28b06169d52251bf9494698c60674e5ebe6
+
     public DataTable get_danh_sach_khach_hang()
     {
         SqlConnection myConn = null;

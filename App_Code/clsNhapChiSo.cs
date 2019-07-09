@@ -11,15 +11,6 @@ using System.Data;
 /// tuanbn.pto cls Nhập chỉ số điện năng
 public class clsNhapChiSo
 {
-<<<<<<< HEAD
-    public DataTable get_danh_sach_nhap_cs()
-    {
-        SqlConnection myConn = null;
-        string sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.ky_hd,d.chi_so_cu,d.ma_congto, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
-        sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d ";
-        sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia " ;
-       
-=======
     public DataTable get_danh_sach_nhap_cs(string id_tramba)
     {
         SqlConnection myConn = null;
@@ -75,7 +66,6 @@ public class clsNhapChiSo
         sql = sql + " union all ";
         sql = sql + " select id_tram_bien_ap,ten_tram_bien_ap from tram_bien_ap where trang_thai=1 ";
 
->>>>>>> 4bdba28b06169d52251bf9494698c60674e5ebe6
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -107,9 +97,5 @@ public class clsNhapChiSo
             }
         }
     }
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 4bdba28b06169d52251bf9494698c60674e5ebe6
 }

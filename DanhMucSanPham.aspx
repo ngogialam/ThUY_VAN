@@ -1,6 +1,4 @@
-﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ThongKeBangThong.aspx.cs" Inherits="BaoCao_ThongKeBangThong" %>--%>
-
-<%@ Page Language="C#" Title="Danh mục sản phẩm" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DanhMucSanPham.aspx.cs" Inherits="DanhMucSanPham" %>
+﻿<%@ Page Language="C#" Title="Danh mục sản phẩm" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DanhMucSanPham.aspx.cs" Inherits="DanhMucSanPham" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script>
