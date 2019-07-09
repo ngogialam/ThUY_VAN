@@ -22,17 +22,23 @@ public partial class NhapChiSo : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {
-            gv_bind();
+        {           
+            drpTram.DataSource = myNCS.get_danh_sach_tba();            
+            drpTram.DataBind();
+           
+
         }
 
     }
-    protected void gv_bind()
+    protected void gv_bind(string id_tramba )
     {
-        CusList = myNCS.get_danh_sach_nhap_cs();
+        CusList = myNCS.get_danh_sach_nhap_cs(id_tramba);
         GirdView.DataSource = CusList;
         GirdView.DataBind();
-        GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+        if (CusList.Rows.Count > 0)
+        {
+            GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
     }
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
     {
@@ -81,5 +87,10 @@ public partial class NhapChiSo : System.Web.UI.Page
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
 
         Response.Redirect("DanhSachKhachHang.aspx");
+    }
+    protected void btnLaySL_Click(object sender, EventArgs e)
+    {
+        string id_tram = drpTram.SelectedValue.ToString();
+        gv_bind(id_tram);
     }
 }
