@@ -10,6 +10,7 @@ using System.Data;
 public class clsKhachHang
 {
     //lyht.pto danh muc bang gia dien
+    //hienthi danh sach gia dien
     public DataTable get_danh_muc_bang_gia_dien()
     {
         SqlConnection myConn = null;
@@ -44,6 +45,66 @@ public class clsKhachHang
             }
         }
     }
+<<<<<<< HEAD
+    
+    //Them moi gia dien
+    public int them_moi_gia_dien(string ten_bang_gia, string ten_viet_tat, float don_gia, float tien_thue_vat, float phan_tram_thue, float gia_ban, int kich_hoat)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "insert into bang_gia_dien(ten_bang_gia,ten_viet_tat,don_gia,tien_thue_vat,phan_tram_thue,gia_ban,kich_hoat) values(N'" + ten_bang_gia + "','" + ten_viet_tat + "'," + don_gia + "," + tien_thue_vat + "," + phan_tram_thue + "," + gia_ban + "," + kich_hoat + ") ";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
+    //Sua gia dien
+    public void cap_nhat_gia_dien(string id,string ten_bang_gia, string ten_viet_tat, string don_gia, string tien_thue_vat, string phan_tram_thue, string gia_ban, string kich_hoat)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "update khach_hang set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat=" + tien_thue_vat + ",phan_tram_thue=" + phan_tram_thue + " gia_ban='" + gia_ban + ",kich_hoat='" + kich_hoat + "where id_bang_gia=" + id + "";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+    }
+
+    //end 
+=======
+   
+>>>>>>> eb75fb9753c2f1cd5b8ed4ee7542de1b4810a766
     public DataTable get_danh_sach_khach_hang()
     {
         SqlConnection myConn = null;

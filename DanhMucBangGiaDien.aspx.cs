@@ -38,25 +38,27 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
     {
         GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
         int index = row.RowIndex;
-        Label id = (Label)row.FindControl("lblMaKH");
-        Label name = (Label)row.FindControl("lblTenKH");
-        Label diachi = (Label)row.FindControl("lblDiaChi");
-        Label dt = (Label)row.FindControl("lblDienThoai");
-        Label nambh = (Label)row.FindControl("lblNamBH");
-        Label iddb = (Label)row.FindControl("lblidDiaBan");
+        Label id = (Label)row.FindControl("lblId");
+        Label tenBangGia = (Label)row.FindControl("lblTenBangGia");
+        Label tenVietTat = (Label)row.FindControl("lblTenVT");
+        Label donGia = (Label)row.FindControl("lblDonGia");
+        Label thueVat = (Label)row.FindControl("lblThueVat");
+        Label phanTramThue = (Label)row.FindControl("lblPhanTramThue");
+        Label giaBan = (Label)row.FindControl("lblGiaBan");
+        Label trangThai = (Label)row.FindControl("lblTrangThai");
 
         if (e.CommandName == "suaGiaDien")
         {
-            DataTable DiaBanList = myCus.get_dia_ban();
-            txtMaKH.Text = id.Text;
-            txtTenKh.Text = name.Text;
-            txtDiaChi.Text = diachi.Text;
-            txtSoDT.Text = dt.Text;
-            txtNamBH.Text = nambh.Text;
+            //DataTable DiaBanList = myCus.get_dia_ban();
+            txtId.Text = id.Text;
+            txtTenBangGia.Text = tenBangGia.Text;
+            txtTenVietTat.Text = tenVietTat.Text;
+            txtDonGia.Text = donGia.Text;
+            txtTienThue.Text = thueVat.Text;
+            txtPhanTramThue.Text = phanTramThue.Text;
+            txtGiaBan.Text = giaBan.Text;
+            CkbKichHoat.Text = trangThai.Text;
 
-            cbVung.DataSource = DiaBanList;
-            cbVung.SelectedValue = iddb.Text;
-            cbVung.DataBind();
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#EditModal').modal('show');");
@@ -70,17 +72,17 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        string ma = txtMaKH.Text;
+        string ma = txtId.Text;
         string log = "Sửa khách hàng mã " + ma;
-        string nambh = txtNamBH.Text;
+        //string nambh = txtNamBH.Text;
         //if (nambh == "")
         //{
         //    nambh = "2019";
         //}
-        myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        //myCus.cap_nhat_khach_hang(ma, txtTenBangGia.Text, txtTenVietTat.Text, txtDonGia.Text, txtTienThue.Text, txtPhanTramThue.Text, txtGiaBan.Text, cbVung.SelectedValue.ToString());
+        //myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
 
-        Response.Redirect("DanhMucBangGiaDien.aspx");
+        //Response.Redirect("DanhMucBangGiaDien.aspx");
     }
 
 }

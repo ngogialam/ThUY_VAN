@@ -26,6 +26,11 @@
             <div class="table-responsive">
                 <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                      <Columns>
+                          <asp:TemplateField HeaderText="Id">
+                            <ItemTemplate>
+                                <asp:Label ID="lblId" runat="server" Text='<%# Eval("id_bang_gia") %>'></asp:Label>
+                            </ItemTemplate>                            
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tên bảng giá">
                             <ItemTemplate>
                                 <asp:Label ID="lblTenBangGia" runat="server" Text='<%# Eval("ten_bang_gia") %>'></asp:Label>
@@ -53,12 +58,12 @@
                         </asp:TemplateField>
                          <asp:TemplateField HeaderText="Giá bán" >
                             <ItemTemplate>
-                                <asp:Label ID="lblDB" runat="server" Text='<%# Eval("gia_ban") %>'></asp:Label>
+                                <asp:Label ID="lblGiaBan" runat="server" Text='<%# Eval("gia_ban") %>'></asp:Label>
                             </ItemTemplate>                             
                         </asp:TemplateField>
                          <asp:TemplateField HeaderText="Trạng thái" >
                             <ItemTemplate>
-                                <asp:Label ID="lblDB" runat="server" Text='<%# Eval("kich_hoat") %>'></asp:Label>
+                                <asp:Label ID="lblTrangThai" runat="server" Text='<%# Eval("kich_hoat") %>'></asp:Label>
                             </ItemTemplate>                             
                         </asp:TemplateField>
                          <asp:TemplateField  HeaderText="Thao tác" ItemStyle-Width="100px">
@@ -77,45 +82,54 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="huyModalLable">Sửa thông tin khách hàng</h5>
+                <h5 class="modal-title" id="huyModalLable">Sửa thông tin bảng giá điện</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body m-xl-3">
                   <div class="row mx5">   
-                        <label>Mã khách hàng</label>               
-                        <asp:TextBox ID="txtMaKH" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
-                       
-                    </div>
-                   <div class="row mx5">   
-                        <label>Tên khách hàng</label>               
-                        <asp:TextBox ID="txtTenKh" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                        <label>Id</label>               
+                        <asp:TextBox ID="txtId" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                        
                     </div>
                   <div class="row mx5">   
-                      <label>Địa chỉ</label>  
-                      <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg" ></asp:TextBox>
+                        <label>Tên bảng giá</label>               
+                        <asp:TextBox ID="txtTenBangGia" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                       
+                    </div>
+                   <div class="row mx5">   
+                        <label>Tên viết tắt</label>               
+                        <asp:TextBox ID="txtTenVietTat" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                       
+                    </div>
+                  <div class="row mx5">   
+                      <label>Đơn giá</label>  
+                      <asp:TextBox ID="txtDonGia" runat="server" CssClass="form-control input-lg" ></asp:TextBox>
                   
                       </div>
-                   <div class="row mx5"> 
-                       <label>Phường/Xã</label>                        
-                     <asp:DropDownList ID="cbVung" runat="server" CssClass="form-control input-lg" DataTextField="ten_dia_ban" DataValueField="id_dia_ban" >                            
-                    </asp:DropDownList>                  
-                    </div>                
+                   <div class="row mx5">   
+                      <label>Tiền thuế VAT</label>  
+                      <asp:TextBox ID="txtTienThue" runat="server" CssClass="form-control input-lg" ></asp:TextBox>
+                  
+                      </div>               
                    <div class="row mx5">
-                     <label>Điện thoại</label>                          
-                    <asp:TextBox ID="txtSoDT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                     <label>Phần trăm thuế</label>                          
+                    <asp:TextBox ID="txtPhanTramThue" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                    
                     </div>
                 <div class="row mx5">
-                    <label>Năm bán hàng</label>                          
-                    <asp:TextBox ID="txtNamBH" runat="server" CssClass="form-control input-lg" ></asp:TextBox>
-                </div>                   
+                    <label>Giá bán</label>                          
+                    <asp:TextBox ID="txtGiaBan" runat="server" CssClass="form-control input-lg" ></asp:TextBox>
+                </div>  
+                <div class="row mx5">
+                    <label>Kích hoạt</label>                          
+                    <asp:CheckBox ID="CkbKichHoat" runat="server" Text=""/> 
+                </div>                  
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa khách hàng" data-dismiss="modal" />
+                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa giá điện" data-dismiss="modal" />
               </div>
             </div>
           </div>

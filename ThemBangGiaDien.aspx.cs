@@ -11,4 +11,7 @@ public partial class ThemBangGiaDien : System.Web.UI.Page
     {
 
     }
+    public void ThemBangGiaDien_Click(object sender, EventArgs e)
+    {
+    }
 }
