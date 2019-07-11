@@ -98,7 +98,7 @@
                             <a href="./BaoCaoTheoCa.aspx">B. Báo cáo công nợ khách hàng</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoChiTietCa.aspx">C. Danh sách khách hàng theo các mục đích </a>
+                            <a href="./BAO_CAO/BaoCaoDSKhachHang.aspx">C. Danh sách khách hàng theo các mục đích </a>
                         </li>
                         <li>
                             <a href="./BaoCaoThang.aspx">D. Danh sách chốt chỉ số</a>

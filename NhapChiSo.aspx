@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" Title="Nhập chỉ số" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="NhapChiSo.aspx.cs" Inherits="NhapChiSo" %>
-
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
 </asp:Content>
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
@@ -15,17 +14,18 @@
     <div class="card mb-3">
         <div class="card-header">
             <div class="row">
-                <div class="col-sm-4 mb-1">
+                <div class="col-sm-3 mb-1">
                     <asp:DropDownList runat="server" ID="drpTram" DataValueField="id_tram_bien_ap" DataTextField="ten_tram_bien_ap" CssClass="form-control"></asp:DropDownList>
                 </div>
                 <div class="col-sm-4 mb-1">
                     <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click"/>
+                     <asp:Button ID="btnCapNhat" runat="server" Text="Cập nhật số liệu" CssClass="btn btn-success" OnClick="btnCapNhat_Click"/>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
                         <asp:TemplateField HeaderText="Mã">
                             <ItemTemplate>
@@ -49,17 +49,17 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã CT">
                             <ItemTemplate>
-                                <asp:Label ID="lblMaCT" runat="server" Text='<%# Eval("ma_congto") %>'></asp:Label>
+                                <asp:Label ID="lblMaCT" runat="server" Text='<%# Eval("ma_cong_to") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Trạm">
                             <ItemTemplate>
-                                <asp:Label ID="lblMaCT" runat="server" Text='<%# Eval("ten_tram_bien_ap") %>'></asp:Label>
+                                <asp:Label ID="lblMaTram" runat="server" Text='<%# Eval("ten_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="CS cũ">
                             <ItemTemplate>
-                                <asp:Label ID="lblCSCu" runat="server" Text='<%# Eval("chi_so_cu") %>'></asp:Label>
+                                <asp:Label ID="lblCSCu" runat="server" Text='<%# Eval("cs_cu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="CS mới">
@@ -67,8 +67,6 @@
                                 <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" placeholder="Nhập chỉ số mới"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-
-
                         <asp:TemplateField HeaderText="idkhu" Visible="False">
                             <ItemTemplate>
                                 <asp:Label ID="lblidKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
@@ -79,12 +77,7 @@
                                 <asp:Label ID="lblidTram" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="idDiaban" Visible="False">
-                            <ItemTemplate>
-                                <asp:Label ID="lblidDiaBan" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
+                    </Columns> 
                 </asp:GridView>
             </div>
         </div>
@@ -113,7 +106,6 @@
                                 <div class="row mx5">
                                     <label>Địa chỉ</label>
                                     <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
                                 </div>
                                 <div class="row mx5">
                                     <label>Phường/Xã</label>
@@ -139,7 +131,7 @@
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="GirdView" EventName="RowCommand" />
+                <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
             </Triggers>
         </asp:UpdatePanel>
 </asp:Content>

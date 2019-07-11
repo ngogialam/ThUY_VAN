@@ -49,7 +49,7 @@
                 </div>
                  <div class="p-1">
                       <img src="Images/evn.jpg" 
-                          style="height: 180px;display: block;margin-left: auto;margin-right: auto;"/>"
+                          style="height: 180px;display: block;margin-left: auto;margin-right: auto;"/>
                   </div>
               </div>
             </div>
