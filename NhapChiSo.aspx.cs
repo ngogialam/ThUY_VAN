@@ -33,11 +33,11 @@ public partial class NhapChiSo : System.Web.UI.Page
     protected void gv_bind(string id_tramba)
     {
         CusList = myNCS.get_danh_sach_nhap_cs(id_tramba);
-        GirdView.DataSource = CusList;
-        GirdView.DataBind();
+        GridViewEman.DataSource = CusList;
+        GridViewEman.DataBind();
         if (CusList.Rows.Count > 0)
         {
-            GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+            GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
     }
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
@@ -92,5 +92,19 @@ public partial class NhapChiSo : System.Web.UI.Page
     {
         string id_tram = drpTram.SelectedValue.ToString();
         gv_bind(id_tram);
+    }
+    protected void btnCapNhat_Click(object sender, EventArgs e)
+    {
+        int i = 0;
+        for (i = 0; i < GridViewEman.Rows.Count; i++)
+        {
+            GridViewRow row = GridViewEman.Rows[i];
+           // int index = row.RowIndex;
+            Label lblmact = (Label)row.FindControl("lblMaKH");
+            Label txtCSMoi = (Label)row.FindControl("lblMaCT");
+            string mact = lblmact.Text.ToString();
+            string csmoi = txtCSMoi.Text.ToString();
+
+        }
     }
 }
