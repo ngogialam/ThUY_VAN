@@ -26,13 +26,18 @@ public partial class NhapChiSo : System.Web.UI.Page
             drpTram.DataSource = myNCS.get_danh_sach_tba();
             drpTram.DataBind();
 
+            drpKy.DataSource = myNCS.get_danh_ky();
+            drpKy.DataBind();
+            lblErr.Text = "" ;
+
 
         }
 
     }
-    protected void gv_bind(string id_tramba)
+
+    protected void gv_bind(string id_tramba, string kyhd)
     {
-        CusList = myNCS.get_danh_sach_nhap_cs(id_tramba);
+        CusList = myNCS.get_danh_sach_nhap_cs(id_tramba, kyhd);
         GridViewEman.DataSource = CusList;
         GridViewEman.DataBind();
         if (CusList.Rows.Count > 0)
@@ -40,71 +45,82 @@ public partial class NhapChiSo : System.Web.UI.Page
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
     }
-    protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
-    {
-        GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
-        int index = row.RowIndex;
-        Label id = (Label)row.FindControl("lblMaKH");
-        Label name = (Label)row.FindControl("lblTenKH");
-        Label diachi = (Label)row.FindControl("lblDiaChi");
-        Label dt = (Label)row.FindControl("lblDienThoai");
-        Label nambh = (Label)row.FindControl("lblNamBH");
-        Label iddb = (Label)row.FindControl("lblidDiaBan");
 
-        if (e.CommandName == "suaKH")
-        {
-            DataTable DiaBanList = myCus.get_dia_ban();
-            txtMaKH.Text = id.Text;
-            txtTenKh.Text = name.Text;
-            txtDiaChi.Text = diachi.Text;
-            txtSoDT.Text = dt.Text;
-            txtNamBH.Text = nambh.Text;
-
-            cbVung.DataSource = DiaBanList;
-            cbVung.SelectedValue = iddb.Text;
-            cbVung.DataBind();
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(@"<script type='text/javascript'>");
-            sb.Append("$('#EditModal').modal('show');");
-            sb.Append(@"</script>");
-
-
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal",
-            sb.ToString(), false);
-        }
-
-    }
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        string ma = txtMaKH.Text;
-        string log = "Sửa khách hàng mã " + ma;
-        string nambh = txtNamBH.Text;
-        //if (nambh == "")
-        //{
-        //    nambh = "2019";
-        //}
-        myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-
-        Response.Redirect("DanhSachKhachHang.aspx");
-    }
     protected void btnLaySL_Click(object sender, EventArgs e)
     {
         string id_tram = drpTram.SelectedValue.ToString();
-        gv_bind(id_tram);
+        string kyhd = drpKy.SelectedItem.ToString();
+        gv_bind(id_tram,kyhd);
     }
+
     protected void btnCapNhat_Click(object sender, EventArgs e)
     {
         int i = 0;
         for (i = 0; i < GridViewEman.Rows.Count; i++)
         {
             GridViewRow row = GridViewEman.Rows[i];
-           // int index = row.RowIndex;
-            Label lblmact = (Label)row.FindControl("lblMaKH");
-            Label txtCSMoi = (Label)row.FindControl("lblMaCT");
+            string ky = "07/2019";
+           // string kymoi = "08/2019";
+            // int index = row.RowIndex;
+            Label lblmact = (Label)row.FindControl("lblMaCT");
+            TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
             string mact = lblmact.Text.ToString();
             string csmoi = txtCSMoi.Text.ToString();
-
+            if (csmoi !="")
+            {
+                int result = myNCS.cap_nhat_chi_so(mact, csmoi, ky);
+                if (result == 0)
+                {
+                    lblErr.Text = "Có lỗi xảy ra trong quá trình cập nhật mã công tơ " + mact;
+                }
+                //if (myNCS.check_cs_ct(mact, kymoi) < 1)
+                //{
+                //    result = myNCS.them_chi_so_ky_moi(mact, csmoi, kymoi);
+                //    if (result == 0)
+                //    {
+                //        lblErr.Text = "Có lỗi xảy ra trong quá trình khởi tạo dữ liệu kỳ sau mã công tơ " + mact;
+                //    }
+                //}
+            }
+          
         }
+    }
+
+    protected void ThemKyHD(object sender, EventArgs e)
+    {
+        string tungay = Request.Form["strTuNgay"].ToString();
+        string denngay = Request.Form["strDenNgay"].ToString();
+        string kyhd = Request.Form["strKyHD"].ToString();
+        if (tungay != "-1" && denngay != "-1")
+        {
+            // Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "xembieudo(" + tungay + "," + denngay + ")", true);
+            int inttungay = Convert.ToInt32(tungay);
+            int intdenngay = Convert.ToInt32(denngay);
+            if (inttungay > intdenngay)
+            {
+                txtErr.Text = "Thời gian từ ngày phải nhỏ hơn đến ngày";
+
+            }
+            else
+            {
+                string tungay1 = tungay.Substring(0, 4) + "-" + tungay.Substring(4, 2) + "-" + tungay.Substring(6, 2);
+                string denngay1 = denngay.Substring(0, 4) + "-" + denngay.Substring(4, 2) + "-" + denngay.Substring(6, 2);
+                string thang = kyhd.Substring(0, 2);
+                int intthang = Convert.ToInt32(thang) + 1;
+                if (intthang < 10)
+                {
+                    thang = "0" + intthang.ToString();
+                }
+                string nam = kyhd.Substring(3, 4);
+                kyhd = thang + "/" + nam;
+                int result = myNCS.them_kyhd(kyhd, thang, nam, tungay1, denngay1);
+                if (result == 1)
+                {
+                    Response.Redirect("NhapChiSo.aspx");
+                }
+                
+            }
+        }
+
     }
 }

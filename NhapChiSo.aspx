@@ -1,31 +1,75 @@
 ﻿<%@ Page Language="C#" Title="Nhập chỉ số" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="NhapChiSo.aspx.cs" Inherits="NhapChiSo" %>
+
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
+    <script type="text/javascript">
+        $(function () {
+            $('#txtTuNgay').datepicker(
+            {
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1950:2100',
+                onSelect: function () {
+                    var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                    $("#strTuNgay").val(date);
+
+                }
+            });
+            $('#txtDenNgay').datepicker(
+           {
+               dateFormat: 'dd/mm/yy',
+               changeMonth: true,
+               changeYear: true,
+               yearRange: '1950:2100',
+               onSelect: function () {
+                   var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                   $("#strDenNgay").val(date);
+               }
+           });
+            $('#txtKyHD').datepicker(
+            {
+              dateFormat: 'mm/yy',
+              changeMonth: true,
+              changeYear: true,
+              yearRange: '1950:2100',
+              onSelect: function () {
+                  var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));                  
+                  $("#strKyHD").val(date);
+              }
+          });
+
+        })
+    </script>
 </asp:Content>
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
     <div class="row">
         <div class="col-12">
         </div>
     </div>
-
     <div class="card mb-3">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-3 mb-1">
                     <asp:DropDownList runat="server" ID="drpTram" DataValueField="id_tram_bien_ap" DataTextField="ten_tram_bien_ap" CssClass="form-control"></asp:DropDownList>
                 </div>
-                <div class="col-sm-4 mb-1">
-                    <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click"/>
-                     <asp:Button ID="btnCapNhat" runat="server" Text="Cập nhật số liệu" CssClass="btn btn-success" OnClick="btnCapNhat_Click"/>
+                <div class="col-sm-3 mb-1">
+                    <asp:DropDownList runat="server" ID="drpKy" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>
                 </div>
+                <div class="col-sm-4 mb-1">
+                    <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
+                    <asp:Button ID="btnCapNhat" runat="server" Text="Cập nhật số liệu" CssClass="btn btn-success" OnClick="btnCapNhat_Click" />
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addKyModal">Thêm Kỳ HĐ</button>
+                </div>
+            </div>
+            <div class="row">
+                <asp:Label runat="server" ID="lblErr"></asp:Label>
             </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False">
                     <Columns>
                         <asp:TemplateField HeaderText="Mã">
                             <ItemTemplate>
@@ -64,7 +108,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="CS mới">
                             <ItemTemplate>
-                                <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" placeholder="Nhập chỉ số mới"></asp:TextBox>
+                                <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" Text='<%# Eval("cs_moi") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="idkhu" Visible="False">
@@ -77,61 +121,48 @@
                                 <asp:Label ID="lblidTram" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                    </Columns> 
+                    </Columns>
                 </asp:GridView>
             </div>
         </div>
     </div>
-    <asp:UpdatePanel ID="upModal" runat="server">
-            <ContentTemplate>
-                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="huyModalLable">Sửa thông tin khách hàng</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body m-xl-3">
-                                <div class="row mx5">
-                                    <label>Mã khách hàng</label>
-                                    <asp:TextBox ID="txtMaKH" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
-                                </div>
-                                <div class="row mx5">
-                                    <label>Tên khách hàng</label>
-                                    <asp:TextBox ID="txtTenKh" runat="server" CssClass="form-control input-lg"></asp:TextBox>
 
-                                </div>
-                                <div class="row mx5">
-                                    <label>Địa chỉ</label>
-                                    <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-                                <div class="row mx5">
-                                    <label>Phường/Xã</label>
-                                    <asp:DropDownList ID="cbVung" runat="server" CssClass="form-control input-lg" DataTextField="ten_dia_ban" DataValueField="id_dia_ban">
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="row mx5">
-                                    <label>Điện thoại</label>
-                                    <asp:TextBox ID="txtSoDT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+    <!-- Modal -->
 
-                                </div>
-                                <div class="row mx5">
-                                    <label>Năm bán hàng</label>
-                                    <asp:TextBox ID="txtNamBH" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa khách hàng" data-dismiss="modal" />
-                            </div>
-                        </div>
+    <div class="modal fade" id="addKyModal" tabindex="-1" role="dialog" aria-labelledby="addKyModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="huyModalLable">Thêm mới kỳ hóa đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body m-xl-3">
+                    <div class="row mx5">
+                        <label>Kỳ</label>
+                        <input type="text" class="form-control input-lg" id="txtKyHD" autocomplete="off">
+                        <input type="hidden" id="strKyHD" name="strKyHD" value="-1" />
+                    </div>
+                    <div class="row mx5">
+                        <label>Từ ngày</label>
+                        <input type="text" class="form-control input-lg" id="txtTuNgay" autocomplete="off">
+                        <input type="hidden" id="strTuNgay" name="strTuNgay" value="-1" />
+
+                    </div>
+                    <div class="row mx5">
+                        <label>Đến ngày</label>
+                        <input type="text" class="form-control input-lg" id="txtDenNgay" autocomplete="off">
+                        <input type="hidden" id="strDenNgay" name="strDenNgay" value="-1" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                        <asp:Button ID="btnAdd" runat="server" OnClick="ThemKyHD" CssClass="btn btn-success" Text="Thêm mới" />
+                        <asp:Label runat="server" ID="txtErr"></asp:Label>
                     </div>
                 </div>
-            </ContentTemplate>
-            <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
-            </Triggers>
-        </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
 </asp:Content>
