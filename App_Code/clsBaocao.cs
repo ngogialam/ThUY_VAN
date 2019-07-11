@@ -11,6 +11,145 @@ using System.Data.SqlClient;
 
     public class clsBaocao
     {
+        public DataTable get_tram_bien_ap()
+        {
+            SqlConnection myConn = null;
+            try
+            {
+                clsConnect cnstr = new clsConnect();
+                myConn = cnstr.ConnectSQL();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConn;
+                cmd.CommandText = "select id_tram_bien_ap,ten_tram_bien_ap from tram_bien_ap where trang_thai=1 order by id_tram_bien_ap ";
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter myData = new SqlDataAdapter(cmd);
+                DataSet dts = new DataSet();
+                myConn.Open();
+                myData.Fill(dts);
+                myData.Dispose();
+                cmd.Parameters.Clear();
+                cmd.Connection.Close();
+                myConn.Close();
+                return dts.Tables[0];
+                // return dts;    
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (myConn != null)
+                {
+                    myConn.Close();
+                }
+            }
+        }
+
+        public DataTable get_khu()
+        {
+            SqlConnection myConn = null;
+            try
+            {
+                clsConnect cnstr = new clsConnect();
+                myConn = cnstr.ConnectSQL();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConn;
+                cmd.CommandText = "select id_khu,ten_khu from dm_khu order by id_khu ";
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter myData = new SqlDataAdapter(cmd);
+                DataSet dts = new DataSet();
+                myConn.Open();
+                myData.Fill(dts);
+                myData.Dispose();
+                cmd.Parameters.Clear();
+                cmd.Connection.Close();
+                myConn.Close();
+                return dts.Tables[0];
+                // return dts;    
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (myConn != null)
+                {
+                    myConn.Close();
+                }
+            }
+        }
+
+        public DataTable get_bang_gia_dien()
+        {
+            SqlConnection myConn = null;
+            try
+            {
+                clsConnect cnstr = new clsConnect();
+                myConn = cnstr.ConnectSQL();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConn;
+                cmd.CommandText = "select id_bang_gia,ten_bang_gia from bang_gia_dien where kich_hoat=1 order by id_bang_gia ";
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter myData = new SqlDataAdapter(cmd);
+                DataSet dts = new DataSet();
+                myConn.Open();
+                myData.Fill(dts);
+                myData.Dispose();
+                cmd.Parameters.Clear();
+                cmd.Connection.Close();
+                myConn.Close();
+                return dts.Tables[0];
+                // return dts;    
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (myConn != null)
+                {
+                    myConn.Close();
+                }
+            }
+        }
+
+        public DataTable get_nam()
+        {
+            SqlConnection myConn = null;
+            try
+            {
+                clsConnect cnstr = new clsConnect();
+                myConn = cnstr.ConnectSQL();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = myConn;
+                cmd.CommandText = "select id,nam from dm_nam  order by id ";
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter myData = new SqlDataAdapter(cmd);
+                DataSet dts = new DataSet();
+                myConn.Open();
+                myData.Fill(dts);
+                myData.Dispose();
+                cmd.Parameters.Clear();
+                cmd.Connection.Close();
+                myConn.Close();
+                return dts.Tables[0];
+                // return dts;    
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (myConn != null)
+                {
+                    myConn.Close();
+                }
+            }
+        }
 
         public DataTable SELECT_SAN_LUONG_BIA(string tu_ngay,string den_ngay,int id_dia_ban)
         {
