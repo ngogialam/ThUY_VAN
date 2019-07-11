@@ -57,7 +57,11 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
             txtTienThue.Text = thueVat.Text;
             txtPhanTramThue.Text = phanTramThue.Text;
             txtGiaBan.Text = giaBan.Text;
-            CkbKichHoat.Text = trangThai.Text;
+            if (myCus.kt_trang_thai(Convert.ToInt32(id.Text)) == 1)
+                ckbTrangThai.Checked = true;
+            else
+                ckbTrangThai.Checked = false;
+            //ckbTrangThai.Checked = trangThai.Text;
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -70,19 +74,35 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         }
 
     }
+    //kiemtratrangthai
+
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        string ma = txtId.Text;
-        string log = "Sửa khách hàng mã " + ma;
-        //string nambh = txtNamBH.Text;
-        //if (nambh == "")
-        //{
-        //    nambh = "2019";
-        //}
-        //myCus.cap_nhat_khach_hang(ma, txtTenBangGia.Text, txtTenVietTat.Text, txtDonGia.Text, txtTienThue.Text, txtPhanTramThue.Text, txtGiaBan.Text, cbVung.SelectedValue.ToString());
-        //myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        int id_bang_gia = Convert.ToInt32(txtGiaBan.Text);
+        string log = "Sửa giá điện mã " + id_bang_gia;
+        string ten_bang_gia = txtTenBangGia.Text;
+        string ten_viet_tat = txtTenVietTat.Text;
+        double don_gia = Convert.ToDouble(txtDonGia.Text);
+        double tien_thue_vat = Convert.ToDouble(txtTienThue.Text);
+        double phan_tram_thue = Convert.ToDouble(txtPhanTramThue.Text);
+        double gia_ban = Convert.ToDouble(txtGiaBan.Text);
+        int kich_hoat = 0;
+        if (ckbTrangThai.Checked == true) kich_hoat = 1;
 
-        //Response.Redirect("DanhMucBangGiaDien.aspx");
+        myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
+        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+
+        Response.Redirect("DanhMucBangGiaDien.aspx");
+    }
+
+    //validate
+    protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        int n = int.Parse(args.Value);
+        if ((n==0) || (n == 1))
+            args.IsValid = true;
+        else
+            args.IsValid = false;
     }
 
 }
