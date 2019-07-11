@@ -186,39 +186,47 @@
                                 <PagerSettings Mode="Numeric" Position="Bottom" PageButtonCount="20" />
                                 <AlternatingRowStyle BackColor="White" />
                                 <Columns>
-                                    <asp:BoundField DataField="ca" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
-                                        HeaderText="Ca" />
+                                    <asp:BoundField DataField="stt" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                                        HeaderText="STT" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="bia_hoi50L" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia hơi 50L" />
+                                    <asp:BoundField DataField="ma_kh" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Mã KH" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="bia_hoi30L" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia hơi 30L" />
+                                    <asp:BoundField DataField="ten_kh" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Họ tên" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="bia_hoi20L" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia hơi 20L" />
+                                    <asp:BoundField DataField="so_ho" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Số hộ" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="bia_le" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia lẻ" />
+                                    <asp:BoundField DataField="ten_viet_tat" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Loại hình" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="bia_keg2L" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia keg 2L" />
+                                    <asp:BoundField DataField="chi_so_cu" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="CSĐK" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="bia_keg1L" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia keg 1L" />
+                                    <asp:BoundField DataField="chi_so_moi" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="CSCK" />
                                 </Columns>
 
                                 <Columns>
-                                    <asp:BoundField DataField="bia_chai" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Bia chai 1L" />
+                                    <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Tiêu thụ" />
                                 </Columns>
 
+                                 <Columns>
+                                    <asp:BoundField DataField="tong_tien_truoc_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Trước thuế" />
+                                </Columns>
+                                 <Columns>
+                                    <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Sau thuế" />
+                                </Columns>
 
                                 <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
