@@ -114,56 +114,6 @@
         </div>
         <div runat="server" id="Div1">
 
-            <div class="box-header">
-                <tr>
-                    <td style="width: 50%">
-                        <label>
-                            Số liệu <span class="style2" style="color: red">
-                                <asp:Label ID="lbl_solieu" runat="server" Text=""></asp:Label></span>
-                        </label>
-                    </td>
-                    <br />
-                </tr>
-                <tr>
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia hơi 50L : <span class="style2" style="color: red">
-                                <asp:Label ID="lblTongBH50L" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia hơi 30L : <span class="style2" style="color: red">
-                                <asp:Label ID="lblTongBH30L" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia hơi 20L : <span class="style2" style="color: red">
-                                <asp:Label ID="lblTongBH20L" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia lẻ: <span class="style2" style="color: red">
-                                <asp:Label ID="lblBiaLe" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia keg 2L: <span class="style2" style="color: red">
-                                <asp:Label ID="lblTongBK2" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia keg 1L: <span class="style2" style="color: red">
-                                <asp:Label ID="lblTongBK" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-
-
-                    <td style="width: 50%">
-                        <label>
-                            Tổng số bia chai 1L: <span class="style2" style="color: red">
-                                <asp:Label ID="lblBiaChai" runat="server" Text=""></asp:Label></span>.</label>
-                    </td>
-                </tr>
-            </div>
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-2"></div>
@@ -198,6 +148,10 @@
                                         HeaderText="Họ tên" />
                                 </Columns>
                                 <Columns>
+                                    <asp:BoundField DataField="dia_chi" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Địa chỉ" />
+                                </Columns>
+                                <Columns>
                                     <asp:BoundField DataField="so_ho" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
                                         HeaderText="Số hộ" />
                                 </Columns>
@@ -218,11 +172,7 @@
                                     <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
                                         HeaderText="Tiêu thụ" />
                                 </Columns>
-
-                                 <Columns>
-                                    <asp:BoundField DataField="tong_tien_truoc_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Trước thuế" />
-                                </Columns>
+                                
                                  <Columns>
                                     <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
                                         HeaderText="Sau thuế" />
