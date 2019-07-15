@@ -68,6 +68,9 @@ public partial class BaoCaoDSKhachHang : System.Web.UI.Page
 
             string ky_hd = thang + "/" + nam;
                 int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+                string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
+                int id_bang_gia_dien = int.Parse(ddlBangGiaDien.SelectedValue.ToString());
+                bindGrid(id_tram_bien_ap, id_dia_ban, id_bang_gia_dien, ky_hd);
            //     bindGrid(tungay1, denngay1, id_dia_ban);
             
         }
@@ -130,209 +133,41 @@ public partial class BaoCaoDSKhachHang : System.Web.UI.Page
         GridView1.PageIndex = e.NewPageIndex;
        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
-    void bindGrid(string tu_ngay,string den_ngay,int id_dia_ban)
+    void bindGrid(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
     {
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-        tbx = cslBC.SELECT_SAN_LUONG_THEO_CA(tu_ngay, den_ngay, id_dia_ban);
+        tbx = cslBC.SELECT_KHACH_HANG_THEO_CAC_DK( id_tram_bien_ap,  id_khu,  id_bang_gia_dien,  ky_hd);
 
-        double soluong_bh50l = 0;
-        double soluong_bh30l = 0;
-        double soluong_bh20l = 0;
-        double soluong_bk1 = 0;
-        double soluong_bk2 = 0;
-        double soluong_bl = 0;
-        double soluong_bc = 0;
+        double san_luong_tt = 0;
+        double tong_tien = 0;
 
-        double soluong_bh50l_2 = 0;
-        double soluong_bh30l_2 = 0;
-        double soluong_bh20l_2 = 0;
-        double soluong_bk1_2 = 0;
-        double soluong_bk2_2 = 0;
-        double soluong_bl_2 = 0;
-        double soluong_bc_2 = 0;
-
-        double soluong_bh50l_3 = 0;
-        double soluong_bh30l_3 = 0;
-        double soluong_bh20l_3 = 0;
-        double soluong_bk1_3 = 0;
-        double soluong_bk2_3 = 0;
-        double soluong_bl_3 = 0;
-        double soluong_bc_3 = 0;
-
-        double soluong_bh50l_4 = 0;
-        double soluong_bh30l_4 = 0;
-        double soluong_bh20l_4 = 0;
-        double soluong_bk1_4 = 0;
-        double soluong_bk2_4 = 0;
-        double soluong_bl_4 = 0;
-        double soluong_bc_4 = 0;
-
-
-        string ca = "";
-        string ma_hang = "";
+        string ma_kh = "";
         for (int i = 0; i < tbx.Rows.Count; i++)
         {
-            ca = tbx.Rows[i]["ca"].ToString().Trim();
-            ma_hang = tbx.Rows[i]["ma_hang"].ToString().Trim();
-            if (ca == "1")
+            ma_kh = tbx.Rows[i]["ma_kh"].ToString().Trim();
+            if (ma_kh != "")
             { 
-                if(ma_hang=="3")//bia hoi 50L
-                    soluong_bh50l += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if(ma_hang=="2")//bia hoi 30L
-                    soluong_bh30l += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "1")//bia hoi 20L
-                    soluong_bh20l += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "4")//bia keg 1l
-                    soluong_bk1 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "5")//bia keg 2l
-                    soluong_bk2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "7")//bia lit
-                    soluong_bl += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "6")//bia chai
-                    soluong_bc += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else//bao giờ có mã hàng mới thì tính sau
-                { }
+                    san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
+                    tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
             }
-            else if (ca == "2")
-            {
-                if (ma_hang == "3")//bia hoi 50L
-                    soluong_bh50l_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "2")//bia hoi 30L
-                    soluong_bh30l_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "1")//bia hoi 20L
-                    soluong_bh20l_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "4")//bia keg 1l
-                    soluong_bk1_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "5")//bia keg 2l
-                    soluong_bk2_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "7")//bia lit
-                    soluong_bl_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "6")//bia chai
-                    soluong_bc_2 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else//bao giờ có mã hàng mới thì tính sau
-                { }
-            }
-            else if (ca == "3")
-            {
-                if (ma_hang == "3")//bia hoi 50L
-                    soluong_bh50l_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "2")//bia hoi 30L
-                    soluong_bh30l_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "1")//bia hoi 20L
-                    soluong_bh20l_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "4")//bia keg 1l
-                    soluong_bk1_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "5")//bia keg 2l
-                    soluong_bk2_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "7")//bia lit
-                    soluong_bl_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "6")//bia chai
-                    soluong_bc_3 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else//bao giờ có mã hàng mới thì tính sau
-                { }
-            }
-            else// số liệu bia chưa chốt ca
-            {
-                if (ma_hang == "3")//bia hoi 50L
-                    soluong_bh50l_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "2")//bia hoi 30L
-                    soluong_bh30l_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "1")//bia hoi 20L
-                    soluong_bh20l_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "4")//bia keg 1l
-                    soluong_bk1_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "5")//bia keg 2l
-                    soluong_bk2_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "7")//bia lit
-                    soluong_bl_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else if (ma_hang == "6")//bia chai
-                    soluong_bc_4 += double.Parse(tbx.Rows[i]["tong_sl"].ToString());
-                else//bao giờ có mã hàng mới thì tính sau
-                { }
-            }
-            
         }
 
-        DataRow dr;
-        tbxView.Columns.Add("ca");
-        tbxView.Columns.Add("bia_hoi50L");
-        tbxView.Columns.Add("bia_hoi30L");
-        tbxView.Columns.Add("bia_hoi20L");
-        tbxView.Columns.Add("bia_keg1L");
-        tbxView.Columns.Add("bia_keg2L");
-        tbxView.Columns.Add("bia_le");
-        tbxView.Columns.Add("bia_chai");
-        dr = tbxView.NewRow();
+        DataRow newRow4 = tbx.NewRow();
+        //newRow4[0] = "Tổng";
+        newRow4[1] = "Tổng";
+        //newRow4[2] = "";
+        //newRow4[3] = "";
+        //newRow4[4] = "";
+        //newRow4[5] = "";
+        newRow4[8] = san_luong_tt;
+        newRow4[9] = tong_tien;
+        tbx.Rows.InsertAt(newRow4, 0);
 
-        DataRow newRowTong = tbxView.NewRow();
-        newRowTong[0] = "Tổng";
-        newRowTong[1] = soluong_bh50l_3 + soluong_bh50l_4 + soluong_bh50l_2 + soluong_bh50l;
-        newRowTong[2] = soluong_bh30l_3 + soluong_bh30l_4 + soluong_bh30l_2 + soluong_bh30l;
-        newRowTong[3] = soluong_bh20l_3 + soluong_bh20l_4 + soluong_bh20l_2 + soluong_bh20l;
-        newRowTong[4] = soluong_bk1_3 + soluong_bk1_4 + soluong_bk1_2 + soluong_bk1;
-        newRowTong[5] = soluong_bk2_3 + soluong_bk2_4 + soluong_bk2_2 + soluong_bk2;
-        newRowTong[6] = soluong_bl_3 + soluong_bl_4 + soluong_bl_2 + soluong_bl;
-        newRowTong[7] = soluong_bc_3 + soluong_bc_4 + soluong_bc_2 + soluong_bc;
-        tbxView.Rows.InsertAt(newRowTong, 0);
-
-        DataRow newRow2 = tbxView.NewRow();
-        newRow2[0] = "2";
-        newRow2[1] = soluong_bh50l_2 ;
-        newRow2[2] = soluong_bh30l_2 ;
-        newRow2[3] = soluong_bh20l_2 ;
-        newRow2[4] = soluong_bk1_2 ;
-        newRow2[5] = soluong_bk2_2 ;
-        newRow2[6] = soluong_bl_2 ;
-        newRow2[7] = soluong_bc_2 ;
-        tbxView.Rows.InsertAt(newRow2, 0);
-
-        DataRow newRow = tbxView.NewRow();
-        newRow[0] = "1";
-        newRow[1] = soluong_bh50l ;
-        newRow[2] = soluong_bh30l ;
-        newRow[3] = soluong_bh20l ;
-        newRow[4] = soluong_bk1;
-        newRow[5] = soluong_bk2 ;
-        newRow[6] = soluong_bl;
-        newRow[7] = soluong_bc ;
-        tbxView.Rows.InsertAt(newRow, 0);
-
-        DataRow newRow3 = tbxView.NewRow();
-        newRow3[0] = "3";
-        newRow3[1] = soluong_bh50l_3;
-        newRow3[2] = soluong_bh30l_3;
-        newRow3[3] = soluong_bh20l_3;
-        newRow3[4] = soluong_bk1_3;
-        newRow3[5] = soluong_bk2_3;
-        newRow3[6] = soluong_bl_3;
-        newRow3[7] = soluong_bc_3;
-        tbxView.Rows.InsertAt(newRow3, 0);
-
-        DataRow newRow4 = tbxView.NewRow();
-        newRow4[0] = "Chưa chốt";
-        newRow4[1] = soluong_bh50l_4;
-        newRow4[2] = soluong_bh30l_4;
-        newRow4[3] = soluong_bh20l_4;
-        newRow4[4] = soluong_bk1_4;
-        newRow4[5] = soluong_bk2_4;
-        newRow4[6] = soluong_bl_4;
-        newRow4[7] = soluong_bc_4;
-        tbxView.Rows.InsertAt(newRow4, 0);
-
-        lbl_solieu.Text = "Sản lượng tiêu thụ từ ngày: " + tu_ngay + " đến ngày: " + den_ngay;
-        lblTongBH50L.Text = (soluong_bh50l_3 + soluong_bh50l_4 + soluong_bh50l_2 + soluong_bh50l).ToString();
-        lblTongBH30L.Text = (soluong_bh30l_3 + soluong_bh30l_4 + soluong_bh30l_2 + soluong_bh30l).ToString();
-        lblTongBH20L.Text = (soluong_bh20l_3 + soluong_bh20l_4 + soluong_bh20l_2 + soluong_bh20l).ToString();
-        lblTongBK.Text = (soluong_bk1_3 + soluong_bk1_4 + soluong_bk1_2 + soluong_bk1).ToString();
-        lblTongBK2.Text = (soluong_bk2_3 + soluong_bk2_4 + soluong_bk2_2 + soluong_bk2).ToString();
-        lblBiaLe.Text = (soluong_bl_3 + soluong_bl_4 + soluong_bl_2 + soluong_bl).ToString();
-        lblBiaChai.Text = (soluong_bc_3 + soluong_bc_4 + soluong_bc_2 + soluong_bc).ToString();
-
-        GridView1.DataSource = tbxView;
+        GridView1.DataSource = tbx;
         GridView1.DataBind();
-        ViewState["DataTable"] = tbxView;
+        ViewState["DataTable"] = tbx;
     }
 
 
