@@ -28,7 +28,10 @@ public partial class NhapChiSo : System.Web.UI.Page
 
             drpKy.DataSource = myNCS.get_danh_ky();
             drpKy.DataBind();
-            lblErr.Text = "" ;
+
+            ddlKyCu.DataSource = myNCS.get_danh_ky();
+            ddlKyCu.DataBind();
+            lblErr.Text = "";
 
 
         }
@@ -50,7 +53,7 @@ public partial class NhapChiSo : System.Web.UI.Page
     {
         string id_tram = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
-        gv_bind(id_tram,kyhd);
+        gv_bind(id_tram, kyhd);
     }
 
     protected void btnCapNhat_Click(object sender, EventArgs e)
@@ -59,14 +62,14 @@ public partial class NhapChiSo : System.Web.UI.Page
         for (i = 0; i < GridViewEman.Rows.Count; i++)
         {
             GridViewRow row = GridViewEman.Rows[i];
-            string ky = "07/2019";
-           // string kymoi = "08/2019";
+            string ky = drpKy.SelectedItem.ToString();
+            // string kymoi = "08/2019";
             // int index = row.RowIndex;
             Label lblmact = (Label)row.FindControl("lblMaCT");
             TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
             string mact = lblmact.Text.ToString();
             string csmoi = txtCSMoi.Text.ToString();
-            if (csmoi !="")
+            if (csmoi != "")
             {
                 int result = myNCS.cap_nhat_chi_so(mact, csmoi, ky);
                 if (result == 0)
@@ -82,7 +85,7 @@ public partial class NhapChiSo : System.Web.UI.Page
                 //    }
                 //}
             }
-          
+
         }
     }
 
@@ -91,9 +94,10 @@ public partial class NhapChiSo : System.Web.UI.Page
         string tungay = Request.Form["strTuNgay"].ToString();
         string denngay = Request.Form["strDenNgay"].ToString();
         string kyhd = Request.Form["strKyHD"].ToString();
+        int i = 0;
         if (tungay != "-1" && denngay != "-1")
         {
-            // Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "xembieudo(" + tungay + "," + denngay + ")", true);
+
             int inttungay = Convert.ToInt32(tungay);
             int intdenngay = Convert.ToInt32(denngay);
             if (inttungay > intdenngay)
@@ -103,6 +107,7 @@ public partial class NhapChiSo : System.Web.UI.Page
             }
             else
             {
+
                 string tungay1 = tungay.Substring(0, 4) + "-" + tungay.Substring(4, 2) + "-" + tungay.Substring(6, 2);
                 string denngay1 = denngay.Substring(0, 4) + "-" + denngay.Substring(4, 2) + "-" + denngay.Substring(6, 2);
                 string thang = kyhd.Substring(0, 2);
@@ -114,6 +119,30 @@ public partial class NhapChiSo : System.Web.UI.Page
                 string nam = kyhd.Substring(3, 4);
                 kyhd = thang + "/" + nam;
                 int result = myNCS.them_kyhd(kyhd, thang, nam, tungay1, denngay1);
+                if (result == 1)
+                {
+                    string kycu = ddlKyCu.SelectedItem.ToString();
+                    CusList = myNCS.get_danh_sach_nhap_cs("0", kycu);
+                    for (i = 0; i < CusList.Rows.Count; i++)
+                    {
+
+                        string mact = CusList.Rows[i]["ma_cong_to"].ToString();
+                        string csmoi = CusList.Rows[i]["cs_moi"].ToString();
+                        if (csmoi != "")
+                        {
+                            if (myNCS.check_cs_ct(mact, kyhd) < 1)
+                            {
+                                result = myNCS.them_chi_so_ky_moi(mact, csmoi, kyhd);
+                                if (result ==0)
+                                {                                   
+                                    lblErr.Text = "Có lỗi xảy ra trong quá trình khởi tạo dữ liệu kỳ sau mã công tơ " + mact;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                }
                 if (result == 1)
                 {
                     Response.Redirect("NhapChiSo.aspx");

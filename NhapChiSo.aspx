@@ -133,12 +133,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="huyModalLable">Thêm mới kỳ hóa đơn</h5>
+                    <h5 class="modal-title" id="huyModalLable">Thêm kỳ hóa đơn mới</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body m-xl-3">
+                    <div class="row mx5">
+                        <label>Kỳ trước</label>
+                        <asp:DropDownList runat="server" ID="ddlKyCu" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>
+                    </div>
                     <div class="row mx5">
                         <label>Kỳ</label>
                         <input type="text" class="form-control input-lg" id="txtKyHD" autocomplete="off">
@@ -148,7 +152,6 @@
                         <label>Từ ngày</label>
                         <input type="text" class="form-control input-lg" id="txtTuNgay" autocomplete="off">
                         <input type="hidden" id="strTuNgay" name="strTuNgay" value="-1" />
-
                     </div>
                     <div class="row mx5">
                         <label>Đến ngày</label>
