@@ -95,22 +95,22 @@
                             <a href="./BAO_CAO/BaoCaoThongKe.aspx">A. Báo cáo tổng hợp</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">B. Báo cáo công nợ khách hàng</a>
+                            <a href="./BaoCaoCongNoKH.aspx">B. Báo cáo công nợ khách hàng</a>
                         </li>
                         <li>
                             <a href="./BAO_CAO/BaoCaoDSKhachHang.aspx">C. Danh sách khách hàng theo các mục đích </a>
                         </li>
                         <li>
-                            <a href="./BaoCaoThang.aspx">D. Danh sách chốt chỉ số</a>
+                            <a href="./DSChotChiSo.aspx">D. Danh sách chốt chỉ số</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">E. Danh sách tiêu thụ </a>
+                            <a href="./DanhSachTieuThu.aspx">E. Danh sách tiêu thụ </a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">P. Báo cáo lãi lỗ</a>
+                            <a href="./BaoCaoLaiLo.aspx">P. Báo cáo lãi lỗ</a>
                         </li>
                         <li>
-                            <a href="./BaoCaoTheoCa.aspx">Q. Báo cáo quản trị</a>
+                            <a href="./BaoCaoQuanTri.aspx">Q. Báo cáo quản trị</a>
                         </li>
                     </ul>
                 </li>
