@@ -346,8 +346,44 @@ using System.Data.SqlClient;
                 chi_so_cong_to = 0;
 
             return chi_so_cong_to;
+        }
 
-           
+        public double SELECT_DIEN_NANG_TT(string ma_kh, string thang, string nam)
+        {
+            string sql = "";
+            double dien_nang_tt = 0;
+            clsConnect cnstr = new clsConnect();
+            SqlConnection myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            string ky_hd = thang + "/" + nam;
+
+            sql = "select b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.dien_nang_tt  ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+            sql = sql + " and b.ma_kh='" + ma_kh + "'  ";
+            sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+
+            if (dts.Tables[0].Rows.Count >= 1)
+                dien_nang_tt = double.Parse(dts.Tables[0].Rows[0]["dien_nang_tt"].ToString());
+            else
+                dien_nang_tt = 0;
+
+            return dien_nang_tt;
         }
 
         public DataTable SELECT_KHACH_HANG_THEO_CAC_DK(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
