@@ -29,13 +29,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
             ddlTramBA.DataSource = tram_bien_ap;
             ddlTramBA.DataBind();
 
-            DataTable bang_gia_dien = myCus.get_bang_gia_dien();
-            //DataRow newRow1 = bang_gia_dien.NewRow();
-            //newRow[0] = 0;
-            //newRow[1] = "Tất cả";
-            //bang_gia_dien.Rows.InsertAt(newRow, 0);
-            ddlBangGiaDien.DataSource = bang_gia_dien;
-            ddlBangGiaDien.DataBind();
+           
 
             DataTable khu = myCus.get_khu();
             //DataRow newRow1 = bang_gia_dien.NewRow();
@@ -59,20 +53,16 @@ public partial class DSChotChiSo : System.Web.UI.Page
     protected void XemBC(object sender, EventArgs e)
     {
         txtErr.Text = "";
-        string thang = ddlThang.SelectedValue.ToString();
+      //  string thang = ddlThang.SelectedValue.ToString();
 
         string nam = ddlNam.SelectedValue.ToString();
         
-        if (thang != "" && nam != "")
+        if (nam != "")
         {
-
-            string ky_hd = thang + "/" + nam;
                 int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
                 string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
-                int id_bang_gia_dien = int.Parse(ddlBangGiaDien.SelectedValue.ToString());
-                bindGrid(id_tram_bien_ap, id_dia_ban, id_bang_gia_dien, ky_hd);
-           //     bindGrid(tungay1, denngay1, id_dia_ban);
-            
+                string id_thoi_gian = ddlThoiGian.SelectedValue.ToString();
+                bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
         }
         else
         {
@@ -133,41 +123,120 @@ public partial class DSChotChiSo : System.Web.UI.Page
         GridView1.PageIndex = e.NewPageIndex;
        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
-    void bindGrid(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
+    void bindGrid(string id_tram_bien_ap, int id_khu, string id_thoi_gian)
     {
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-        tbx = cslBC.SELECT_KHACH_HANG_THEO_CAC_DK( id_tram_bien_ap,  id_khu,  id_bang_gia_dien,  ky_hd);
+     //   string thoi_gian_xem = ddlThoiGian.SelectedValue.ToString();
+        string nam = ddlNam.SelectedValue.ToString();
+        //if(thoi_gian_xem == "01")
+        //    tbx = cslBC.SELECT_CHOT_CONG_TO(id_tram_bien_ap, id_khu, id_thoi_gian, ky_hd);
+        //else
+        tbx = cslBC.SELECT_CHOT_CONG_TO_ALL(id_tram_bien_ap, id_khu, nam);
 
-        double san_luong_tt = 0;
-        double tong_tien = 0;
 
-        string ma_kh = "";
+        DataRow dr;
+        tbxView.Columns.Add("stt");
+        tbxView.Columns.Add("ma_kh");
+        tbxView.Columns.Add("ten_kh");
+        tbxView.Columns.Add("dia_chi");
+        tbxView.Columns.Add("ma_cong_to");
+        tbxView.Columns.Add("t1");
+        tbxView.Columns.Add("t2");
+        tbxView.Columns.Add("t3");
+        tbxView.Columns.Add("t4");
+        tbxView.Columns.Add("t5");
+        tbxView.Columns.Add("t6");
+        tbxView.Columns.Add("t7");
+        tbxView.Columns.Add("t8");
+        tbxView.Columns.Add("t9");
+        tbxView.Columns.Add("t10");
+        tbxView.Columns.Add("t11");
+        tbxView.Columns.Add("t12");
+        
+        dr = tbxView.NewRow();
+
+   
+        double tong_thang_1 = 0;
+        double tong_thang_2 = 0;
+        double tong_thang_3 = 0;
+        double tong_thang_4 = 0;
+        double tong_thang_5 = 0;
+        double tong_thang_6 = 0;
+        double tong_thang_7 = 0;
+        double tong_thang_8 = 0;
+        double tong_thang_9 = 0;
+        double tong_thang_10 = 0;
+        double tong_thang_11 = 0;
+        double tong_thang_12 = 0;
+
+        
+
         for (int i = 0; i < tbx.Rows.Count; i++)
         {
-            ma_kh = tbx.Rows[i]["ma_kh"].ToString().Trim();
-            if (ma_kh != "")
-            { 
-                    san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                    tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
+            DataRow newRowTong = tbxView.NewRow();
+            newRowTong[0] = (i+1).ToString();
+            newRowTong[1] = tbx.Rows[i]["ma_kh"].ToString();
+            newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
+            newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
+            newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
+
+            if (id_thoi_gian == "03")
+            {
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(),"01", nam);
+                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
+                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
             }
+            else if (id_thoi_gian == "06")
+            {
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
+                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
+                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
+                tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "04", nam);
+                tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "05", nam);
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
+            }
+            else
+            {
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
+                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
+                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
+                tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "04", nam);
+                tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "05", nam);
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
+                tong_thang_7 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "07", nam);
+                tong_thang_8 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "08", nam);
+                tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "09", nam);
+                tong_thang_10 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "10", nam);
+                tong_thang_11 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "11", nam);
+                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "12", nam);
+            }
+            
+            newRowTong[5] = tong_thang_1;
+            newRowTong[6] = tong_thang_2;
+            newRowTong[7] = tong_thang_3;
+            newRowTong[8] = tong_thang_4;
+            newRowTong[9] = tong_thang_5;
+            newRowTong[10] = tong_thang_6;
+            newRowTong[11] = tong_thang_7;
+            newRowTong[12] = tong_thang_8;
+            newRowTong[13] = tong_thang_9;
+            newRowTong[14] = tong_thang_10;
+            newRowTong[15] = tong_thang_11;
+            newRowTong[16] = tong_thang_12;
+
+            //tong_1_kh = tong_thang_1 + tong_thang_2 + tong_thang_3 + tong_thang_4 + tong_thang_5 + tong_thang_6 + tong_thang_7 + tong_thang_8 + tong_thang_9 + tong_thang_10 + tong_thang_11 + tong_thang_12;
+            //newRowTong[16] = tong_1_kh;
+            // tong_nam = tong_nam + tong_1_kh;
+            tbxView.Rows.InsertAt(newRowTong, i);
+
         }
 
-        DataRow newRow4 = tbx.NewRow();
-        //newRow4[0] = "Tổng";
-        newRow4[1] = "Tổng";
-        //newRow4[2] = "";
-        //newRow4[3] = "";
-        //newRow4[4] = "";
-        //newRow4[5] = "";
-        newRow4[8] = san_luong_tt;
-        newRow4[9] = tong_tien;
-        tbx.Rows.InsertAt(newRow4, 0);
 
-        GridView1.DataSource = tbx;
+        GridView1.DataSource = tbxView;
         GridView1.DataBind();
-        ViewState["DataTable"] = tbx;
+        ViewState["DataTable"] = tbxView;
     }
 
 

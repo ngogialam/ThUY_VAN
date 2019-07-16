@@ -1,7 +1,7 @@
 ﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ThongKeBangThong.aspx.cs" Inherits="BaoCao_ThongKeBangThong" %>--%>
 
-<%@ Page Language="C#" Title="Báo cáo khách hàng" EnableEventValidation="false" MasterPageFile="~/Site.Master"
-    AutoEventWireup="true" CodeFile="Copy of BaoCaoDSKhachHang.aspx.cs" Inherits="BaoCaoDSKhachHang" %>
+<%@ Page Language="C#" Title="Danh sách chốt chỉ số công tơ" EnableEventValidation="false" MasterPageFile="~/Site.Master"
+    AutoEventWireup="true" CodeFile="DSChotChiSo.aspx.cs" Inherits="DSChotChiSo" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script type="text/javascript">
@@ -63,29 +63,18 @@
                     <br />
 
                     <tr>
-                        <td class="auto-style8"><span>Bảng giá điện(*):</span><asp:DropDownList ID="ddlBangGiaDien"
+                        <td class="auto-style8"><span>Khoảng thời gian(*):</span><asp:DropDownList ID="ddlThoiGian"
                             runat="server" DataTextField="ten_bang_gia"
-                            DataValueField="id_bang_gia" Width="264px" Height="26px">
+                            DataValueField="id_thoi_gian" Width="264px" Height="26px">
+                                <asp:ListItem Value="03">03 tháng</asp:ListItem>
+                                <asp:ListItem Value="06">06 tháng</asp:ListItem>
+                                <asp:ListItem Value="12">12 tháng</asp:ListItem>
                         </asp:DropDownList>
                         </td>
 
 
                         <td style="text-align: left;" class="auto-style4">
-                            <span>Chọn tháng, năm (*):</span><asp:DropDownList ID="ddlThang" runat="server" DataTextField="ca"
-                                DataValueField="ca" Width="70px" Height="26px">
-                                <asp:ListItem Value="01">01</asp:ListItem>
-                                <asp:ListItem Value="02">02</asp:ListItem>
-                                <asp:ListItem Value="03">03</asp:ListItem>
-                                <asp:ListItem Value="04">04</asp:ListItem>
-                                <asp:ListItem Value="05">05</asp:ListItem>
-                                <asp:ListItem Value="06">06</asp:ListItem>
-                                <asp:ListItem Value="07">07</asp:ListItem>
-                                <asp:ListItem Value="08">08</asp:ListItem>
-                                <asp:ListItem Value="09">09</asp:ListItem>
-                                <asp:ListItem Value="10">10</asp:ListItem>
-                                <asp:ListItem Value="11">11</asp:ListItem>
-                                <asp:ListItem Value="12">12</asp:ListItem>
-                            </asp:DropDownList>
+                            <span>Chọn năm (*):</span>
                             <asp:DropDownList ID="ddlNam"
                             runat="server" DataTextField="nam"
                             DataValueField="nam" Width="135px" Height="26px">
@@ -152,32 +141,57 @@
                                         HeaderText="Địa chỉ" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="so_ho" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Số hộ" />
+                                    <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                        HeaderText="Mã công tơ" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="ten_viet_tat" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Loại hình" />
+                                    <asp:BoundField DataField="T1" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T1" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="chi_so_cu" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="CSĐK" />
+                                    <asp:BoundField DataField="T2" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T2" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="chi_so_moi" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="CSCK" />
+                                    <asp:BoundField DataField="T3" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T3" />
                                 </Columns>
-
                                 <Columns>
-                                    <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Tiêu thụ" />
+                                    <asp:BoundField DataField="T4" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T4" />
                                 </Columns>
-                                
-                                 <Columns>
-                                    <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Sau thuế" />
+                                <Columns>
+                                    <asp:BoundField DataField="T5" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T5" />
                                 </Columns>
-
+                                <Columns>
+                                    <asp:BoundField DataField="T6" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T6" />
+                                </Columns>
+                                <Columns>
+                                    <asp:BoundField DataField="T7" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T7" />
+                                </Columns>
+                                <Columns>
+                                    <asp:BoundField DataField="T8" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T8" />
+                                </Columns>
+                                <Columns>
+                                    <asp:BoundField DataField="T9" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T9" />
+                                </Columns>
+                                <Columns>
+                                    <asp:BoundField DataField="T10" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T10" />
+                                </Columns>
+                                <Columns>
+                                    <asp:BoundField DataField="T11" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T11" />
+                                </Columns>
+                                <Columns>
+                                    <asp:BoundField DataField="T12" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="T12" />
+                                </Columns>
                                 <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />
                                 <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
