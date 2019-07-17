@@ -1,0 +1,276 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Drawing;
+using ClosedXML.Excel;
+using System.Configuration;
+using System.IO;
+using System.Data.SqlClient;
+
+public partial class DSChotChiSo : System.Web.UI.Page
+{
+    clsBaocao myCus = new clsBaocao();
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack)
+        {
+           
+
+            DataTable tram_bien_ap = myCus.get_tram_bien_ap();
+            DataRow newRow = tram_bien_ap.NewRow();
+            newRow[0] = 0;
+            newRow[1] = "Tất cả";
+            tram_bien_ap.Rows.InsertAt(newRow, 0);
+            ddlTramBA.DataSource = tram_bien_ap;
+            ddlTramBA.DataBind();
+
+           
+
+            DataTable khu = myCus.get_khu();
+            //DataRow newRow1 = bang_gia_dien.NewRow();
+            //newRow[0] = 0;
+            //newRow[1] = "Tất cả";
+            //bang_gia_dien.Rows.InsertAt(newRow, 0);
+            ddlXomKhu.DataSource = khu;
+            ddlXomKhu.DataBind();
+
+            DataTable nam = myCus.get_nam();
+            //DataRow newRow1 = bang_gia_dien.NewRow();
+            //newRow[0] = 0;
+            //newRow[1] = "Tất cả";
+            //bang_gia_dien.Rows.InsertAt(newRow, 0);
+            ddlNam.DataSource = nam;
+            ddlNam.DataBind();
+        }
+
+    }
+
+    protected void XemBC(object sender, EventArgs e)
+    {
+        txtErr.Text = "";
+      //  string thang = ddlThang.SelectedValue.ToString();
+
+        string nam = ddlNam.SelectedValue.ToString();
+        
+        if (nam != "")
+        {
+                int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+                string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
+                string id_thoi_gian = ddlThoiGian.SelectedValue.ToString();
+                bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
+        }
+        else
+        {
+            txtErr.Text = "Bạn phải nhập tháng, năm để tính được kì hóa đơn ";
+        }
+    }
+
+    protected void XuatExcel(object sender, EventArgs e)
+    {
+        ////getting datatable from viewstate  
+        DataTable dt = (DataTable)ViewState["DataTable"];
+        if (dt.Rows.Count == 0)
+        {
+            return;
+        }
+        
+        string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
+        //calling create Excel File Method and ing dataTable   
+        CreateExcelFile(dt, nameFile);
+    }
+
+    public void CreateExcelFile(DataTable baocao, string FileName)
+    {
+        using (baocao)
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(baocao, "Sheet1");
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+
+            }
+        }
+    }
+
+    void DisplayCurrentPage()
+    {
+        // Calculate the current page number.
+        int currentPage = GridView1.PageIndex + 1;
+    }
+    protected void GridView1_PageIndexChanged(object sender, EventArgs e)
+    {
+        DisplayCurrentPage();
+    }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+       // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
+    }
+    void bindGrid(string id_tram_bien_ap, int id_khu, string id_thoi_gian)
+    {
+        DataTable tbx = new DataTable();
+        DataTable tbxView = new DataTable();
+        clsBaocao cslBC = new clsBaocao();
+     //   string thoi_gian_xem = ddlThoiGian.SelectedValue.ToString();
+        string nam = ddlNam.SelectedValue.ToString();
+        //if(thoi_gian_xem == "01")
+        //    tbx = cslBC.SELECT_CHOT_CONG_TO(id_tram_bien_ap, id_khu, id_thoi_gian, ky_hd);
+        //else
+        tbx = cslBC.SELECT_CHOT_CONG_TO_ALL(id_tram_bien_ap, id_khu, nam);
+
+
+        DataRow dr;
+        tbxView.Columns.Add("stt");
+        tbxView.Columns.Add("ma_kh");
+        tbxView.Columns.Add("ten_kh");
+        tbxView.Columns.Add("dia_chi");
+        tbxView.Columns.Add("ma_cong_to");
+        tbxView.Columns.Add("t1");
+        tbxView.Columns.Add("t2");
+        tbxView.Columns.Add("t3");
+        tbxView.Columns.Add("t4");
+        tbxView.Columns.Add("t5");
+        tbxView.Columns.Add("t6");
+        tbxView.Columns.Add("t7");
+        tbxView.Columns.Add("t8");
+        tbxView.Columns.Add("t9");
+        tbxView.Columns.Add("t10");
+        tbxView.Columns.Add("t11");
+        tbxView.Columns.Add("t12");
+        
+        dr = tbxView.NewRow();
+
+   
+        double tong_thang_1 = 0;
+        double tong_thang_2 = 0;
+        double tong_thang_3 = 0;
+        double tong_thang_4 = 0;
+        double tong_thang_5 = 0;
+        double tong_thang_6 = 0;
+        double tong_thang_7 = 0;
+        double tong_thang_8 = 0;
+        double tong_thang_9 = 0;
+        double tong_thang_10 = 0;
+        double tong_thang_11 = 0;
+        double tong_thang_12 = 0;
+
+        
+
+        for (int i = 0; i < tbx.Rows.Count; i++)
+        {
+            DataRow newRowTong = tbxView.NewRow();
+            newRowTong[0] = (i+1).ToString();
+            newRowTong[1] = tbx.Rows[i]["ma_kh"].ToString();
+            newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
+            newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
+            newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
+
+            if (id_thoi_gian == "03")
+            {
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(),"01", nam);
+                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
+                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
+            }
+            else if (id_thoi_gian == "06")
+            {
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
+                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
+                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
+                tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "04", nam);
+                tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "05", nam);
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
+            }
+            else
+            {
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
+                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
+                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
+                tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "04", nam);
+                tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "05", nam);
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
+                tong_thang_7 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "07", nam);
+                tong_thang_8 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "08", nam);
+                tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "09", nam);
+                tong_thang_10 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "10", nam);
+                tong_thang_11 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "11", nam);
+                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "12", nam);
+            }
+            
+            newRowTong[5] = tong_thang_1;
+            newRowTong[6] = tong_thang_2;
+            newRowTong[7] = tong_thang_3;
+            newRowTong[8] = tong_thang_4;
+            newRowTong[9] = tong_thang_5;
+            newRowTong[10] = tong_thang_6;
+            newRowTong[11] = tong_thang_7;
+            newRowTong[12] = tong_thang_8;
+            newRowTong[13] = tong_thang_9;
+            newRowTong[14] = tong_thang_10;
+            newRowTong[15] = tong_thang_11;
+            newRowTong[16] = tong_thang_12;
+
+            //tong_1_kh = tong_thang_1 + tong_thang_2 + tong_thang_3 + tong_thang_4 + tong_thang_5 + tong_thang_6 + tong_thang_7 + tong_thang_8 + tong_thang_9 + tong_thang_10 + tong_thang_11 + tong_thang_12;
+            //newRowTong[16] = tong_1_kh;
+            // tong_nam = tong_nam + tong_1_kh;
+            tbxView.Rows.InsertAt(newRowTong, i);
+
+        }
+
+
+        GridView1.DataSource = tbxView;
+        GridView1.DataBind();
+        ViewState["DataTable"] = tbxView;
+    }
+
+
+    protected void GridView1_DataBound(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            DisplayCurrentPage();
+        }
+    }
+    protected void GridView1_RowDataBound1(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes["style"] = "cursor:pointer";
+        }
+    }
+
+    protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            if (row.RowIndex == GridView1.SelectedIndex)
+            {
+                row.ToolTip = string.Empty;
+            }
+            else
+            {
+                row.ToolTip = "Bấm để chọn dữ liệu.";
+                Session["madonvi_chon"] = GridView1.SelectedRow.Cells[2].Text.ToString();
+            }
+        }
+
+    }
+   
+    
+}
