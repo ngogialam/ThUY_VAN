@@ -221,6 +221,171 @@ using System.Data.SqlClient;
 
         }
 
+
+        public DataTable SELECT_CHOT_CONG_TO(string id_tram_bien_ap, int id_khu, int id_thoi_gian, string ky_hd)
+        {
+            string sql = "";
+            clsConnect cnstr = new clsConnect();
+            SqlConnection myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            if (id_tram_bien_ap == "0")
+            {
+                sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
+                sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+                sql = sql + " where a.ma_kh=b.ma_kh ";
+                sql = sql + " and b.id_khu=c.id_khu ";
+                sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+                sql = sql + " and c.id_khu=" + id_khu + "  ";
+                sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+                sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+            }
+            else
+            {
+                sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
+                sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+                sql = sql + " where a.ma_kh=b.ma_kh ";
+                sql = sql + " and b.id_khu=c.id_khu ";
+                sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+                sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
+                sql = sql + " and c.id_khu=" + id_khu + "  ";
+                sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+                sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+            }
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+
+        public DataTable SELECT_CHOT_CONG_TO_ALL(string id_tram_bien_ap, int id_khu,string nam)
+        {
+            string sql = "";
+            clsConnect cnstr = new clsConnect();
+            SqlConnection myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            if (id_tram_bien_ap == "0")
+            {
+                sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
+                sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+                sql = sql + " where a.ma_kh=b.ma_kh ";
+                sql = sql + " and b.id_khu=c.id_khu ";
+                sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+                sql = sql + " and c.id_khu=" + id_khu + "  ";
+                sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
+                sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+            }
+            else
+            {
+                sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
+                sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+                sql = sql + " where a.ma_kh=b.ma_kh ";
+                sql = sql + " and b.id_khu=c.id_khu ";
+                sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+                sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
+                sql = sql + " and c.id_khu=" + id_khu + "  ";
+                sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
+                sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+            }
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+
+        public double SELECT_CHOT_CONG_TO_THEO_MAKH(string ma_kh, string thang,string nam)
+        {
+            string sql = "";
+            double chi_so_cong_to = 0;
+            clsConnect cnstr = new clsConnect();
+            SqlConnection myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            string ky_hd = thang + "/" + nam;
+
+            sql = "select b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+            sql = sql + " and b.ma_kh='" + ma_kh + "'  ";
+            sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+           
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+
+            if (dts.Tables[0].Rows.Count >= 1)
+                chi_so_cong_to = double.Parse(dts.Tables[0].Rows[0]["chi_so_moi"].ToString());
+            else
+                chi_so_cong_to = 0;
+
+            return chi_so_cong_to;
+        }
+
+        public double SELECT_DIEN_NANG_TT(string ma_kh, string thang, string nam)
+        {
+            string sql = "";
+            double dien_nang_tt = 0;
+            clsConnect cnstr = new clsConnect();
+            SqlConnection myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            string ky_hd = thang + "/" + nam;
+
+            sql = "select b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.dien_nang_tt  ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+            sql = sql + " and b.ma_kh='" + ma_kh + "'  ";
+            sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+
+            if (dts.Tables[0].Rows.Count >= 1)
+                dien_nang_tt = double.Parse(dts.Tables[0].Rows[0]["dien_nang_tt"].ToString());
+            else
+                dien_nang_tt = 0;
+
+            return dien_nang_tt;
+        }
+
         public DataTable SELECT_KHACH_HANG_THEO_CAC_DK(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
         {
             string sql = "";
