@@ -1,0 +1,153 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Drawing;
+using ClosedXML.Excel;
+using System.Configuration;
+using System.IO;
+using System.Data.SqlClient;
+using System.Web.Services;
+using System.Web.UI.HtmlControls;
+
+public partial class LapHoaDon : System.Web.UI.Page
+{
+    clsKhachHang myCus = new clsKhachHang();
+    clsConnect myCon = new clsConnect();
+    clsNhapChiSo myNCS = new clsNhapChiSo();
+    DataTable CusList = new DataTable();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            drpTram.DataSource = myNCS.get_danh_sach_tba();
+            drpTram.DataBind();
+
+            drpKy.DataSource = myNCS.get_danh_ky();
+            drpKy.DataBind();
+
+            ddlKyCu.DataSource = myNCS.get_danh_ky();
+            ddlKyCu.DataBind();
+            lblErr.Text = "";
+
+
+        }
+
+    }
+
+    protected void gv_bind(string id_tramba, string kyhd)
+    {
+        CusList = myNCS.get_danh_sach_lap_hd(id_tramba, kyhd);
+        GridViewEman.DataSource = CusList;
+        GridViewEman.DataBind();
+        if (CusList.Rows.Count > 0)
+        {
+            GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+    }
+
+    protected void btnLaySL_Click(object sender, EventArgs e)
+    {
+        string id_tram = drpTram.SelectedValue.ToString();
+        string kyhd = drpKy.SelectedItem.ToString();
+        gv_bind(id_tram, kyhd);
+    }
+
+    protected void btnChotSL_Click(object sender, EventArgs e)
+    {
+        int i = 0;
+        for (i = 0; i < GridViewEman.Rows.Count; i++)
+        {
+            GridViewRow row = GridViewEman.Rows[i];
+            string ky = drpKy.SelectedItem.ToString();
+            Label lblmact = (Label)row.FindControl("lblMaCT");
+            TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
+            string mact = lblmact.Text.ToString();
+            string csmoi = txtCSMoi.Text.ToString();
+            if (csmoi != "")
+            {
+                int result = myNCS.cap_nhat_chi_so(mact, csmoi, ky);
+                if (result == 0)
+                {
+                    lblErr.Text = "Có lỗi xảy ra trong quá trình cập nhật mã công tơ " + mact;
+                }
+                //if (myNCS.check_cs_ct(mact, kymoi) < 1)
+                //{
+                //    result = myNCS.them_chi_so_ky_moi(mact, csmoi, kymoi);
+                //    if (result == 0)
+                //    {
+                //        lblErr.Text = "Có lỗi xảy ra trong quá trình khởi tạo dữ liệu kỳ sau mã công tơ " + mact;
+                //    }
+                //}
+            }
+
+        }
+    }
+
+    protected void ThemKyHD(object sender, EventArgs e)
+    {
+        string tungay = Request.Form["strTuNgay"].ToString();
+        string denngay = Request.Form["strDenNgay"].ToString();
+        string kyhd = Request.Form["strKyHD"].ToString();
+        int i = 0;
+        if (tungay != "-1" && denngay != "-1")
+        {
+
+            int inttungay = Convert.ToInt32(tungay);
+            int intdenngay = Convert.ToInt32(denngay);
+            if (inttungay > intdenngay)
+            {
+                txtErr.Text = "Thời gian từ ngày phải nhỏ hơn đến ngày";
+
+            }
+            else
+            {
+
+                string tungay1 = tungay.Substring(0, 4) + "-" + tungay.Substring(4, 2) + "-" + tungay.Substring(6, 2);
+                string denngay1 = denngay.Substring(0, 4) + "-" + denngay.Substring(4, 2) + "-" + denngay.Substring(6, 2);
+                string thang = kyhd.Substring(0, 2);
+                int intthang = Convert.ToInt32(thang) + 1;
+                if (intthang < 10)
+                {
+                    thang = "0" + intthang.ToString();
+                }
+                string nam = kyhd.Substring(3, 4);
+                kyhd = thang + "/" + nam;
+                int result = myNCS.them_kyhd(kyhd, thang, nam, tungay1, denngay1);
+                if (result == 1)
+                {
+                    string kycu = ddlKyCu.SelectedItem.ToString();
+                    CusList = myNCS.get_danh_sach_nhap_cs("0", kycu);
+                    for (i = 0; i < CusList.Rows.Count; i++)
+                    {
+
+                        string mact = CusList.Rows[i]["ma_cong_to"].ToString();
+                        string csmoi = CusList.Rows[i]["cs_moi"].ToString();
+                        if (csmoi != "")
+                        {
+                            if (myNCS.check_cs_ct(mact, kyhd) < 1)
+                            {
+                                result = myNCS.them_chi_so_ky_moi(mact, csmoi, kyhd);
+                                if (result ==0)
+                                {                                   
+                                    lblErr.Text = "Có lỗi xảy ra trong quá trình khởi tạo dữ liệu kỳ sau mã công tơ " + mact;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                if (result == 1)
+                {
+                    Response.Redirect("NhapChiSo.aspx");
+                }
+                
+            }
+        }
+
+    }
+}

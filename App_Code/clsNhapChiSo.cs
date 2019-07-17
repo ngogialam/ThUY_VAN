@@ -59,10 +59,58 @@ public class clsNhapChiSo
         }
 
     }
+    public DataTable get_danh_sach_lap_hd(string id_tramba, string ky)
+    {
+        SqlConnection myConn = null;
+        string sql = "";
+        if (id_tramba == "0")
+        {
+            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,(d.cs_moi - d.cs_cu) san_luong,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
+            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e, dm_cong_to f ";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to  and d.ky='" + ky + "'";
+        }
+        else
+        {
+            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,(d.cs_moi - d.cs_cu) san_luong,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
+            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f ";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+        }
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+
+    }
     public DataTable get_danh_sach_tba()
     {
         SqlConnection myConn = null;
-        string sql = "select '0' id_tram_bien_ap, N'-- Tất cả --' ten_tram_bien_ap ";
+        string sql = "select '0' id_tram_bien_ap, N'-- Tất cả trạm --' ten_tram_bien_ap ";
         sql = sql + " union all ";
         sql = sql + " select id_tram_bien_ap,ten_tram_bien_ap from tram_bien_ap where trang_thai=1 ";
         try
@@ -96,6 +144,63 @@ public class clsNhapChiSo
             }
         }
     }
+    public DataTable lay_bang_gia(string id_bang_gia)
+    {
+        SqlConnection myConn = null;
+        string sql = "select * from bang_gia_dien where id_bang_gia=" + id_bang_gia;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            if (dts.Tables[0].Rows[0]["don_gia"].ToString() == "0")
+            {
+
+                sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia;
+                cmd.CommandText = sql;
+                cmd.CommandType = CommandType.Text;
+                myData = new SqlDataAdapter(cmd);
+                dts = new DataSet();
+                myConn.Open();
+                myData.Fill(dts);
+                myData.Dispose();
+                cmd.Parameters.Clear();
+                cmd.Connection.Close();
+                myConn.Close();
+                return dts.Tables[0];
+            }
+            else
+            {
+                myData.Dispose();
+                cmd.Parameters.Clear();
+                cmd.Connection.Close();
+                myConn.Close();
+                return dts.Tables[0];
+            }
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+
+
     //Trạng thái kỳ 1-Chưa chốt, 0-đã chốt
     public DataTable get_danh_ky()
     {
