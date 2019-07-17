@@ -115,6 +115,168 @@ public class clsKhachHang
         return recordsAffected;
     }
 
+    //hienthi danh sach tram bien ap
+    public DataTable get_danh_muc_tram_bien_ap()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select id_tram_bien_ap, ten_tram_bien_ap, dia_chi, nguoi_phu_trach, ma_so_cong_to, he_so_nhan, trang_thai from tram_bien_ap";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    //them moi tram bien ap
+    public int them_moi_tram_bien_ap(string id_tram_bien_ap, string ten_tram_bien_ap, string dia_chi, string nguoi_phu_trach, string ma_so_cong_to, int he_so_nhan, int trang_thai)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "insert into tram_bien_ap values('" + id_tram_bien_ap + "',N'" + ten_tram_bien_ap + "',N'" + dia_chi + "',N'" + nguoi_phu_trach + "','" + ma_so_cong_to + "','" + he_so_nhan + "','" + trang_thai + "') ";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
+    //Sua tram bien ap
+    public void cap_nhat_tram_bien_ap(string id_tram_bien_ap, string ten_tram_bien_ap, string dia_chi, string nguoi_phu_trach, string ma_so_cong_to, int he_so_nhan, int trang_thai)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "update bang_gia_dien set ten_tram_bien_ap=N'" + ten_tram_bien_ap + "',dia_chi='" + dia_chi + "',nguoi_phu_trach='" + nguoi_phu_trach + "',ma_so_cong_to='" + ma_so_cong_to + "',he_so_nhan='" + he_so_nhan + "',trang_thai='" + trang_thai + "' where id_tram_bien_ap='" + id_tram_bien_ap + "'";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+    }
+
+    //lay danh sach khu
+    public DataTable get_danh_muc_khu()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select * from dm_khu";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    //lay danh sach nhan vien
+    public DataTable get_danh_sach_nhan_vien()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select * from nhan_vien";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
     //end 
 
     public DataTable get_danh_sach_khach_hang()

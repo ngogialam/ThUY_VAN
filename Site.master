@@ -68,19 +68,19 @@
                             <a href='<%= ResolveUrl("DanhMucBangGiaDien.aspx")%>'>Danh mục bảng giá điện </a>
                         </li>
                         <li>
-                            <a href="./DanhMucSanPham.aspx">Danh mục trạm biến áp</a>
+                            <a href="./DanhMucTramBienAp.aspx">Danh mục trạm biến áp</a>
                         </li>
                         <li>
                             <a href="./DanhSachKhachHang.aspx">DS khách hàng</a>
                         </li>
                         <li>
-                            <a href="./DanhSachDiaBan.aspx">DS khu</a>
+                            <a href="./DanhMucKhu.aspx">DS khu</a>
                         </li>
                         <li>
                             <a href="./DanhSachDiaBan.aspx">Kỳ hóa đơn</a>
                         </li>
                         <li>
-                            <a href="./DanhSachUser.aspx">DS nhân viên</a>
+                            <a href="./DanhMucNhanVien.aspx">DS nhân viên</a>
                         </li>
                     </ul>
                 </li>

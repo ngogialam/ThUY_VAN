@@ -92,7 +92,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
 
-        Response.Redirect("DanhMucBangGiaDien.aspx");
+        Response.Redirect("DanhMucTramBienAp.aspx");
     }
 
     //validate
