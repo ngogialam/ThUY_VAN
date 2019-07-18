@@ -29,13 +29,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
             ddlTramBA.DataSource = tram_bien_ap;
             ddlTramBA.DataBind();
 
-            DataTable bang_gia_dien = myCus.get_bang_gia_dien();
-            //DataRow newRow1 = bang_gia_dien.NewRow();
-            //newRow[0] = 0;
-            //newRow[1] = "Tất cả";
-            //bang_gia_dien.Rows.InsertAt(newRow, 0);
-            ddlBangGiaDien.DataSource = bang_gia_dien;
-            ddlBangGiaDien.DataBind();
+            
 
             DataTable khu = myCus.get_khu();
             //DataRow newRow1 = bang_gia_dien.NewRow();
@@ -65,12 +59,11 @@ public partial class BangKeTienDien : System.Web.UI.Page
         
         if (thang != "" && nam != "")
         {
-
             string ky_hd = thang + "/" + nam;
                 int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
                 string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
-                int id_bang_gia_dien = int.Parse(ddlBangGiaDien.SelectedValue.ToString());
-                bindGrid(id_tram_bien_ap, id_dia_ban, id_bang_gia_dien, ky_hd);
+                
+                bindGrid(id_tram_bien_ap, id_dia_ban,  ky_hd);
            //     bindGrid(tungay1, denngay1, id_dia_ban);
             
         }
@@ -133,12 +126,49 @@ public partial class BangKeTienDien : System.Web.UI.Page
         GridView1.PageIndex = e.NewPageIndex;
        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
-    void bindGrid(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
+    void bindGrid(string id_tram_bien_ap, int id_khu, string ky_hd)
     {
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-        tbx = cslBC.SELECT_KHACH_HANG_THEO_CAC_DK( id_tram_bien_ap,  id_khu,  id_bang_gia_dien,  ky_hd);
+        tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, id_khu, ky_hd);
+
+
+        DataRow dr;
+        tbx.Columns.Add("sh1");
+        tbx.Columns.Add("sh2");
+        tbx.Columns.Add("sh3");
+        tbx.Columns.Add("sh4");
+        tbx.Columns.Add("sh5");
+        tbx.Columns.Add("sh6");
+
+        tbx.Columns.Add("NT");
+        tbx.Columns.Add("BV");
+        tbx.Columns.Add("KD");
+        tbx.Columns.Add("CSCC");
+        tbx.Columns.Add("TH");
+        tbx.Columns.Add("HCSN");
+        tbx.Columns.Add("BN");
+        tbx.Columns.Add("SX");
+
+        dr = tbx.NewRow();
+
+        double tong_nam = 0;
+        double tong_1_kh = 0;
+        double tong_thang_1 = 0;
+        double tong_thang_2 = 0;
+        double tong_thang_3 = 0;
+        double tong_thang_4 = 0;
+        double tong_thang_5 = 0;
+        double tong_thang_6 = 0;
+        double tong_thang_7 = 0;
+        double tong_thang_8 = 0;
+        double tong_thang_9 = 0;
+        double tong_thang_10 = 0;
+        double tong_thang_11 = 0;
+        double tong_thang_12 = 0;
+        
+
 
         double san_luong_tt = 0;
         double tong_tien = 0;

@@ -436,6 +436,56 @@ public class clsBaocao
     }
 
 
+    public DataTable SELECT_BANG_KE_TIEN_DIEN(string id_tram_bien_ap, int id_khu,  string ky_hd)
+    {
+        string sql = "";
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = myConn;
+        if (id_tram_bien_ap == "0")
+        {
+            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.so_ho,d.ten_viet_tat,a.ma_cong_to,a.chi_so_cu,a.chi_so_moi,a.dien_nang_tt,a.tong_tien_sau_thue ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,bang_gia_dien d,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + " and c.id_khu=" + id_khu + "  ";
+            //sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+            sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+
+        }
+        else
+        {
+            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.so_ho,d.ten_viet_tat,a.ma_cong_to, a.chi_so_cu,a.chi_so_moi,a.dien_nang_tt,a.tong_tien_sau_thue ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,bang_gia_dien d,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + " and c.id_khu=" + id_khu + "  ";
+          //  sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
+            sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+            sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+        }
+        cmd.CommandText = sql;
+        cmd.CommandType = CommandType.Text;
+        SqlDataAdapter myData = new SqlDataAdapter(cmd);
+        DataSet dts = new DataSet();
+        myConn.Open();
+        myData.Fill(dts);
+        myData.Dispose();
+        cmd.Parameters.Clear();
+        cmd.Connection.Close();
+        myConn.Close();
+        return dts.Tables[0];
+        // return dts;    
+    }
+
+
     public DataTable SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(int id_khu, string ky_hd)
     {
         string sql = "";
