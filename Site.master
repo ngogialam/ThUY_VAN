@@ -10,7 +10,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src='<%= ResolveUrl("Scripts/jquery.js")%>'></script>
     <script src='<%= ResolveUrl("Scripts/jquery-ui.min.js")%>'></script>
-   
+
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS-->
@@ -23,13 +23,13 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     <script src='<%= ResolveUrl("vendor/datatables/jquery.dataTables.js")%>'></script>
     <script src='<%= ResolveUrl("vendor/datatables/dataTables.bootstrap4.js")%>'></script>
-       
+
     <!-- Custom scripts for all pages-->
 
     <!-- Custom scripts for this page-->
-    <script src='<%= ResolveUrl("js/sb-admin-datatables.min.js")%>'></script>    
+    <script src='<%= ResolveUrl("js/sb-admin-datatables.min.js")%>'></script>
     <link href="vendor/datatables/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
-    <script src='<%= ResolveUrl("vendor/datatables/js/dataTables.fixedHeader.min.js")%>'></script>   
+    <script src='<%= ResolveUrl("vendor/datatables/js/dataTables.fixedHeader.min.js")%>'></script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -40,7 +40,9 @@
         <a href='<%= ResolveUrl("Default.aspx")%>' class="site-logo">
             <img src='<%= ResolveUrl("Images/logo.png")%>' style="height: 40px;"></a>
         <a class="navbar-brand" href="./default.aspx">PHẦN MỀM QUẢN LÝ HÓA ĐƠN ĐIỆN VNPT EMAN</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -59,7 +61,8 @@
                 </li>
 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Danh mục">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
+                        data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-address-book-o" style="font-size: 20px"></i>
                         <span class="nav-link-text" style="font-size: 18px">Danh mục</span>
                     </a>
@@ -86,19 +89,21 @@
                 </li>
 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Báo cáo thống kê">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages1" data-parent="#exampleAccordion">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages1"
+                        data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-bar-chart" style="font-size: 20px"></i>
                         <span class="nav-link-text" style="font-size: 18px">Báo cáo tổng hợp</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
                         <li>
-                            <a href="./BAO_CAO/BaoCaoThongKe.aspx">A. Báo cáo tổng hợp</a>
+                            <a href="./BAO_CAO/BaoCaoTongHop.aspx">A. Báo cáo tổng hợp</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoCongNoKH.aspx">B. Báo cáo công nợ khách hàng</a>
+                            <a href="./BAO_CAO/BangKeTienDien.aspx">B. Bảng kê tiền điện</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoDSKhachHang.aspx">C. Danh sách khách hàng theo các mục đích </a>
+                            <a href="./BAO_CAO/BaoCaoDSKhachHang.aspx">C. Danh sách khách hàng theo các mục đích
+                            </a>
                         </li>
                         <li>
                             <a href="./BAO_CAO/DSChotChiSo.aspx">D. Danh sách chốt chỉ số</a>
@@ -163,7 +168,8 @@
         <footer class="sticky-footer">
             <div class="container">
                 <div class="text-center">
-                    <small>Địa chỉ: Khu 7, Phường Thanh Miếu, Thành phố Việt Trì, Phú Thọ, 02103862721, 2600103843</small>
+                    <small>Địa chỉ: Khu 7, Phường Thanh Miếu, Thành phố Việt Trì, Phú Thọ, 02103862721,
+                        2600103843</small>
                     <br />
                     <small style="color: white">Copyright &copy; VNPT Phú Thọ <%: DateTime.Now.Year %></small>
                 </div>
@@ -174,7 +180,8 @@
             <i class="fa fa-angle-up"></i>
         </a>
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal" aria-hidden="true">
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -195,7 +202,7 @@
         <%--  <script src="vendor/jquery/jquery.min.js"></script>--%>
         <script src='<%= ResolveUrl("vendor/bootstrap/js/bootstrap.bundle.min.js")%>'></script>
         <script src='<%= ResolveUrl("vendor/jquery-easing/jquery.easing.min.js")%>'></script>
-       <script src='<%= ResolveUrl("js/sb-admin.min.js")%>'></script>
+        <script src='<%= ResolveUrl("js/sb-admin.min.js")%>'></script>
 
     </div>
 
