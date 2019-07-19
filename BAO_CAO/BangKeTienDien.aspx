@@ -151,7 +151,7 @@
                                 </Columns>
                                  <Columns>
                                     <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Sau thuế" />
+                                        HeaderText="Tổng tiền" />
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"

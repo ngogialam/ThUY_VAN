@@ -153,32 +153,33 @@ public partial class BangKeTienDien : System.Web.UI.Page
 
         dr = tbx.NewRow();
 
-        double tong_nam = 0;
-        double tong_1_kh = 0;
-        double tong_thang_1 = 0;
-        double tong_thang_2 = 0;
-        double tong_thang_3 = 0;
-        double tong_thang_4 = 0;
-        double tong_thang_5 = 0;
-        double tong_thang_6 = 0;
-        double tong_thang_7 = 0;
-        double tong_thang_8 = 0;
-        double tong_thang_9 = 0;
-        double tong_thang_10 = 0;
-        double tong_thang_11 = 0;
-        double tong_thang_12 = 0;
-        
+        double sh1 = 0;
+        double sh2 = 0;
+        double sh3 = 0;
+        double sh4 = 0;
+        double sh5 = 0;
+        double sh6 = 0;
+
+        double NT = 0;
+        double BV = 0;
+        double KD = 0;
+        double CSCC = 0;
+        double TH = 0;
+        double SX = 0;
 
 
         double san_luong_tt = 0;
         double tong_tien = 0;
+        double so_ho = 0;
+        
 
         string ma_kh = "";
         for (int i = 0; i < tbx.Rows.Count; i++)
         {
             ma_kh = tbx.Rows[i]["ma_kh"].ToString().Trim();
             if (ma_kh != "")
-            { 
+            {
+                    so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
                     san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                     tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
             }
@@ -186,13 +187,14 @@ public partial class BangKeTienDien : System.Web.UI.Page
 
         DataRow newRow4 = tbx.NewRow();
         //newRow4[0] = "Tổng";
-        newRow4[1] = "Tổng";
+        newRow4[2] = "Tổng";
         //newRow4[2] = "";
         //newRow4[3] = "";
         //newRow4[4] = "";
-        //newRow4[5] = "";
-        newRow4[8] = san_luong_tt;
-        newRow4[9] = tong_tien;
+       // newRow4[5] = tong_tien;
+        newRow4[10] = tong_tien;
+        newRow4[9] = san_luong_tt;
+        newRow4[4] = so_ho;
         tbx.Rows.InsertAt(newRow4, 0);
 
         GridView1.DataSource = tbx;
