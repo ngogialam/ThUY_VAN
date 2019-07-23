@@ -133,27 +133,23 @@ public partial class BangKeTienDien : System.Web.UI.Page
         clsBaocao cslBC = new clsBaocao();
         tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, id_khu, ky_hd);
 
-
         DataRow dr;
         tbxView.Columns.Add("stt");
         tbxView.Columns.Add("ten_kh");
         tbxView.Columns.Add("ma_kh");
         tbxView.Columns.Add("dia_chi");
-
         tbxView.Columns.Add("tong_tien_sau_thue");
         tbxView.Columns.Add("ma_cong_to");
         tbxView.Columns.Add("chi_so_cu");
         tbxView.Columns.Add("chi_so_moi");
         tbxView.Columns.Add("so_ho");
         tbxView.Columns.Add("dien_nang_tt");
-
         tbxView.Columns.Add("sh1");
         tbxView.Columns.Add("sh2");
         tbxView.Columns.Add("sh3");
         tbxView.Columns.Add("sh4");
         tbxView.Columns.Add("sh5");
         tbxView.Columns.Add("sh6");
-
         tbxView.Columns.Add("NT");
         tbxView.Columns.Add("BV");
         tbxView.Columns.Add("KD");
@@ -162,7 +158,6 @@ public partial class BangKeTienDien : System.Web.UI.Page
         tbxView.Columns.Add("HCSN");
         tbxView.Columns.Add("BN");
         tbxView.Columns.Add("SX");
-
         dr = tbxView.NewRow();
 
         double sh1 = 0;
@@ -171,20 +166,18 @@ public partial class BangKeTienDien : System.Web.UI.Page
         double sh4 = 0;
         double sh5 = 0;
         double sh6 = 0;
-
         double NT = 0;
         double BV = 0;
         double KD = 0;
         double CSCC = 0;
+        double BN = 0;
+        double HCSN = 0;
         double TH = 0;
         double SX = 0;
-
 
         double san_luong_tt = 0;
         double tong_tien = 0;
         double so_ho = 0;
-        
-
         string ma_kh = "";
         for (int i = 0; i < tbx.Rows.Count; i++)
         {
@@ -203,20 +196,23 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
                 newRowTong[9] = tbx.Rows[i]["dien_nang_tt"].ToString();
 
-
-                //=================tinh san luong theo tung muc===============
-                //========ket thuc tinh san luong theo tung muc===============
-
+                //=================tinh san luong dien sinh hoat theo tung muc===============
                 if (tbx.Rows[i]["id_bang_gia_dien"].ToString() == "7" || tbx.Rows[i]["id_bang_gia_dien"].ToString() == "8")
                 {
                     string[] muc = new string[] { };
                     muc = cslBC.TINH_BAC_DIEN_SH(double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString()), int.Parse(tbx.Rows[i]["so_ho"].ToString()));
                     newRowTong[10] = muc[0];
+                    sh1=sh1+int.Parse(muc[0]);
                     newRowTong[11] = muc[1];
+                    sh2 = sh2 + int.Parse(muc[1]);
                     newRowTong[12] = muc[2];
+                    sh3 = sh4 + int.Parse(muc[2]);
                     newRowTong[13] = muc[3];
+                    sh4 = sh4 + int.Parse(muc[3]);
                     newRowTong[14] = muc[4];
+                    sh5 = sh5 + int.Parse(muc[4]);
                     newRowTong[15] = muc[5];
+                    sh6 = sh6 + int.Parse(muc[5]);
 
                     newRowTong[16] = "";
                     newRowTong[17] = "";
@@ -227,7 +223,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     newRowTong[22] = "";
                     newRowTong[23] = "";
                 }
-                else
+                else //========================tinh san luong dien su dung muc dich khac=====================
                 {
 
                     newRowTong[10] = "";
@@ -240,6 +236,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     if (tbx.Rows[i]["ten_viet_tat"].ToString() == "NT")
                     {
                         newRowTong[16] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        NT = NT + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[17] = "";
                         newRowTong[18] = "";
                         newRowTong[19] = "";
@@ -252,6 +249,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     {
                         newRowTong[16] = "";
                         newRowTong[17] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        BV = BV + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[18] = "";
                         newRowTong[19] = "";
                         newRowTong[20] = "";
@@ -264,6 +262,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[16] = "";
                         newRowTong[17] = "";
                         newRowTong[18] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        KD = KD + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[19] = "";
                         newRowTong[20] = "";
                         newRowTong[21] = "";
@@ -276,6 +275,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[17] = "";
                         newRowTong[18] = "";
                         newRowTong[19] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        CSCC = CSCC + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[20] = "";
                         newRowTong[21] = "";
                         newRowTong[22] = "";
@@ -288,6 +288,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[18] = "";
                         newRowTong[19] = "";
                         newRowTong[20] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        TH = TH + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[21] = "";
                         newRowTong[22] = "";
                         newRowTong[23] = "";
@@ -300,6 +301,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[19] = "";
                         newRowTong[20] = "";
                         newRowTong[21] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        HCSN = HCSN + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[22] = "";
                         newRowTong[23] = "";
                     }
@@ -312,6 +314,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[20] = "";
                         newRowTong[21] = "";
                         newRowTong[22] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        BN = BN + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         newRowTong[23] = "";
                     }
                     else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "SX")
@@ -324,6 +327,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[21] = "";
                         newRowTong[22] = "";
                         newRowTong[23] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        SX = SX + int.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                     }
                     else 
                     {
@@ -337,13 +341,12 @@ public partial class BangKeTienDien : System.Web.UI.Page
                         newRowTong[23] = "";
                     }
                 }
-               
 
-                
 
+                tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
                 so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
                 san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
+                
 
                 tbxView.Rows.InsertAt(newRowTong, i);
             }
@@ -356,9 +359,27 @@ public partial class BangKeTienDien : System.Web.UI.Page
         //newRow4[3] = "";
         //newRow4[4] = "";
        // newRow4[5] = tong_tien;
+        newRow4[4] = tong_tien;
         newRow4[8] = so_ho;
         newRow4[9] = san_luong_tt;
-        newRow4[4] = tong_tien;
+
+        newRow4[10] = sh1;
+        newRow4[11] = sh2;
+        newRow4[12] = sh3;
+        newRow4[13] = sh4;
+        newRow4[14] = sh5;
+        newRow4[15] = sh6;
+
+
+        newRow4[16] = NT;
+        newRow4[17] = BV;
+        newRow4[18] = KD;
+        newRow4[19] = CSCC;
+        newRow4[20] = TH;
+        newRow4[21] = HCSN;
+        newRow4[22] = BN;
+        newRow4[23] = SX;
+
         tbxView.Rows.InsertAt(newRow4, 0);
 
         GridView1.DataSource = tbxView;

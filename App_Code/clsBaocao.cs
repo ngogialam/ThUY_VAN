@@ -23,27 +23,27 @@ public class clsBaocao
         else if (sanluong > (300 * sh))
         {
             string bac5 = (sanluong - (300 * sh)).ToString();
-            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), (100 * sh).ToString(), bac5,"" };
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), (100 * sh).ToString(), bac5,"0" };
         }
         else if (sanluong > (200 * sh))
         {
             string bac4 = (sanluong - (200 * sh)).ToString();
-            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), bac4,"","" };
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), bac4,"0","0" };
         }
         else if (sanluong > (100 * sh))
         {
             string bac3 = (sanluong - (100 * sh)).ToString();
-            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), bac3,"","","" };
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), bac3,"0","0","0" };
         }
         else if (sanluong > (50 * sh))
         {
             string bac2 = (sanluong - (50 * sh)).ToString();
-            muc = new string[] { (50 * sh).ToString(), bac2,"","","","" };
+            muc = new string[] { (50 * sh).ToString(), bac2,"0","0","0","0" };
         }
         else
         {
             string bac1 = (sanluong - 0).ToString();
-            muc = new string[] { bac1,"","","","","" };
+            muc = new string[] { bac1,"0","0","0","0","0" };
         }
 
 
