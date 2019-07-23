@@ -96,26 +96,26 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
                         <li>
-                            <a href="./BAO_CAO/BaoCaoTongHop.aspx">A. Báo cáo tổng hợp</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoTongHop.aspx")%>'>A. Báo cáo tổng hợp</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BangKeTienDien.aspx">B. Bảng kê tiền điện</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BangKeTienDien.aspx")%>'>B. Bảng kê tiền điện</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoDSKhachHang.aspx">C. Danh sách khách hàng theo các mục đích
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoDSKhachHang.aspx")%>'>C. Danh sách khách hàng theo các mục đích
                             </a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/DSChotChiSo.aspx">D. Danh sách chốt chỉ số</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/DSChotChiSo.aspx")%>'>D. Danh sách chốt chỉ số</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/DanhSachTieuThu.aspx">E. Danh sách tiêu thụ </a>
+                            <a href='<%= ResolveUrl("BAO_CAO/DanhSachTieuThu.aspx")%>'>E. Danh sách tiêu thụ </a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoLaiLo.aspx">P. Báo cáo lãi lỗ</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoLaiLo.aspx")%>'>P. Báo cáo lãi lỗ</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoQuanTri.aspx">Q. Báo cáo quản trị</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoQuanTri.aspx")%>'>Q. Báo cáo quản trị</a>
                         </li>
                     </ul>
                 </li>
