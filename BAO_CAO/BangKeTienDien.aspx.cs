@@ -135,23 +135,35 @@ public partial class BangKeTienDien : System.Web.UI.Page
 
 
         DataRow dr;
-        tbx.Columns.Add("sh1");
-        tbx.Columns.Add("sh2");
-        tbx.Columns.Add("sh3");
-        tbx.Columns.Add("sh4");
-        tbx.Columns.Add("sh5");
-        tbx.Columns.Add("sh6");
+        tbxView.Columns.Add("stt");
+        tbxView.Columns.Add("ten_kh");
+        tbxView.Columns.Add("ma_kh");
+        tbxView.Columns.Add("dia_chi");
 
-        tbx.Columns.Add("NT");
-        tbx.Columns.Add("BV");
-        tbx.Columns.Add("KD");
-        tbx.Columns.Add("CSCC");
-        tbx.Columns.Add("TH");
-        tbx.Columns.Add("HCSN");
-        tbx.Columns.Add("BN");
-        tbx.Columns.Add("SX");
+        tbxView.Columns.Add("tong_tien_sau_thue");
+        tbxView.Columns.Add("ma_cong_to");
+        tbxView.Columns.Add("chi_so_cu");
+        tbxView.Columns.Add("chi_so_moi");
+        tbxView.Columns.Add("so_ho");
+        tbxView.Columns.Add("dien_nang_tt");
 
-        dr = tbx.NewRow();
+        tbxView.Columns.Add("sh1");
+        tbxView.Columns.Add("sh2");
+        tbxView.Columns.Add("sh3");
+        tbxView.Columns.Add("sh4");
+        tbxView.Columns.Add("sh5");
+        tbxView.Columns.Add("sh6");
+
+        tbxView.Columns.Add("NT");
+        tbxView.Columns.Add("BV");
+        tbxView.Columns.Add("KD");
+        tbxView.Columns.Add("CSCC");
+        tbxView.Columns.Add("TH");
+        tbxView.Columns.Add("HCSN");
+        tbxView.Columns.Add("BN");
+        tbxView.Columns.Add("SX");
+
+        dr = tbxView.NewRow();
 
         double sh1 = 0;
         double sh2 = 0;
@@ -179,28 +191,182 @@ public partial class BangKeTienDien : System.Web.UI.Page
             ma_kh = tbx.Rows[i]["ma_kh"].ToString().Trim();
             if (ma_kh != "")
             {
-                    so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
-                    san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                    tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
+                DataRow newRowTong = tbxView.NewRow();
+                newRowTong[0] = i + 1;
+                newRowTong[1] = tbx.Rows[i]["ten_kh"].ToString();
+                newRowTong[2] = tbx.Rows[i]["ma_kh"].ToString();
+                newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
+                newRowTong[4] = tbx.Rows[i]["tong_tien_sau_thue"].ToString();
+                newRowTong[5] = tbx.Rows[i]["ma_cong_to"].ToString();
+                newRowTong[6] = tbx.Rows[i]["chi_so_cu"].ToString();
+                newRowTong[7] = tbx.Rows[i]["chi_so_moi"].ToString();
+                newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
+                newRowTong[9] = tbx.Rows[i]["dien_nang_tt"].ToString();
+
+
+                //=================tinh san luong theo tung muc===============
+                //========ket thuc tinh san luong theo tung muc===============
+
+                if (tbx.Rows[i]["id_bang_gia_dien"].ToString() == "7" || tbx.Rows[i]["id_bang_gia_dien"].ToString() == "8")
+                {
+                    string[] muc = new string[] { };
+                    muc = cslBC.TINH_BAC_DIEN_SH(double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString()), int.Parse(tbx.Rows[i]["so_ho"].ToString()));
+                    newRowTong[10] = muc[0];
+                    newRowTong[11] = muc[1];
+                    newRowTong[12] = muc[2];
+                    newRowTong[13] = muc[3];
+                    newRowTong[14] = muc[4];
+                    newRowTong[15] = muc[5];
+
+                    newRowTong[16] = "";
+                    newRowTong[17] = "";
+                    newRowTong[18] = "";
+                    newRowTong[19] = "";
+                    newRowTong[20] = "";
+                    newRowTong[21] = "";
+                    newRowTong[22] = "";
+                    newRowTong[23] = "";
+                }
+                else
+                {
+
+                    newRowTong[10] = "";
+                    newRowTong[11] = "";
+                    newRowTong[12] = "";
+                    newRowTong[13] = "";
+                    newRowTong[14] = "";
+                    newRowTong[15] = "";
+
+                    if (tbx.Rows[i]["ten_viet_tat"].ToString() == "NT")
+                    {
+                        newRowTong[16] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "BV")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "KD")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "CSCC")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "TH")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "HCSN")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "BN")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                        newRowTong[23] = "";
+                    }
+                    else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "SX")
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                    }
+                    else 
+                    {
+                        newRowTong[16] = "";
+                        newRowTong[17] = "";
+                        newRowTong[18] = "";
+                        newRowTong[19] = "";
+                        newRowTong[20] = "";
+                        newRowTong[21] = "";
+                        newRowTong[22] = "";
+                        newRowTong[23] = "";
+                    }
+                }
+               
+
+                
+
+                so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
+                san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
+                tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
+
+                tbxView.Rows.InsertAt(newRowTong, i);
             }
         }
 
-        DataRow newRow4 = tbx.NewRow();
+        DataRow newRow4 = tbxView.NewRow();
         //newRow4[0] = "Tổng";
-        newRow4[2] = "Tổng";
+        newRow4[1] = "Tổng";
         //newRow4[2] = "";
         //newRow4[3] = "";
         //newRow4[4] = "";
        // newRow4[5] = tong_tien;
-        newRow4[10] = tong_tien;
+        newRow4[8] = so_ho;
         newRow4[9] = san_luong_tt;
-        newRow4[4] = so_ho;
-        tbx.Rows.InsertAt(newRow4, 0);
+        newRow4[4] = tong_tien;
+        tbxView.Rows.InsertAt(newRow4, 0);
 
-        GridView1.DataSource = tbx;
+        GridView1.DataSource = tbxView;
         GridView1.DataBind();
-        ViewState["DataTable"] = tbx;
+        ViewState["DataTable"] = tbxView;
     }
+
+
 
 
     protected void GridView1_DataBound(object sender, EventArgs e)

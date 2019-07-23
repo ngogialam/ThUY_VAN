@@ -11,6 +11,46 @@ using System.Data.SqlClient;
 
 public class clsBaocao
 {
+    public string[] TINH_BAC_DIEN_SH(double sanluong, int sh)
+    {
+        string[] muc = new string[] { };
+        if (sanluong > (400 * sh))
+        {
+            string bac6 = (sanluong - (400 * sh)).ToString();
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), (100 * sh).ToString(), (100 * sh).ToString(), bac6 };
+
+        }
+        else if (sanluong > (300 * sh))
+        {
+            string bac5 = (sanluong - (300 * sh)).ToString();
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), (100 * sh).ToString(), bac5,"" };
+        }
+        else if (sanluong > (200 * sh))
+        {
+            string bac4 = (sanluong - (200 * sh)).ToString();
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), (100 * sh).ToString(), bac4,"","" };
+        }
+        else if (sanluong > (100 * sh))
+        {
+            string bac3 = (sanluong - (100 * sh)).ToString();
+            muc = new string[] { (50 * sh).ToString(), (50 * sh).ToString(), bac3,"","","" };
+        }
+        else if (sanluong > (50 * sh))
+        {
+            string bac2 = (sanluong - (50 * sh)).ToString();
+            muc = new string[] { (50 * sh).ToString(), bac2,"","","","" };
+        }
+        else
+        {
+            string bac1 = (sanluong - 0).ToString();
+            muc = new string[] { bac1,"","","","","" };
+        }
+
+
+        return muc;
+
+    }
+
     public DataTable get_tram_bien_ap()
     {
         SqlConnection myConn = null;
@@ -436,7 +476,7 @@ public class clsBaocao
     }
 
 
-    public DataTable SELECT_BANG_KE_TIEN_DIEN(string id_tram_bien_ap, int id_khu,  string ky_hd)
+    public DataTable SELECT_BANG_KE_TIEN_DIEN(string id_tram_bien_ap, int id_khu, string ky_hd)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -445,7 +485,7 @@ public class clsBaocao
         cmd.Connection = myConn;
         if (id_tram_bien_ap == "0")
         {
-            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.so_ho,d.ten_viet_tat,a.ma_cong_to,a.chi_so_cu,a.chi_so_moi,a.dien_nang_tt,a.tong_tien_sau_thue ";
+            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.so_ho,d.ten_viet_tat,a.ma_cong_to,a.chi_so_cu,a.chi_so_moi,a.dien_nang_tt,a.tong_tien_sau_thue,a.id_bang_gia_dien,d.ten_viet_tat ";
             sql = sql + " from hoa_don a,khach_hang b,dm_khu c,bang_gia_dien d,tram_bien_ap e ";
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
@@ -459,14 +499,14 @@ public class clsBaocao
         }
         else
         {
-            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.so_ho,d.ten_viet_tat,a.ma_cong_to, a.chi_so_cu,a.chi_so_moi,a.dien_nang_tt,a.tong_tien_sau_thue ";
+            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.so_ho,d.ten_viet_tat,a.ma_cong_to, a.chi_so_cu,a.chi_so_moi,a.dien_nang_tt,a.tong_tien_sau_thue,a.id_bang_gia_dien,d.ten_viet_tat ";
             sql = sql + " from hoa_don a,khach_hang b,dm_khu c,bang_gia_dien d,tram_bien_ap e ";
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-          //  sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            //  sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
