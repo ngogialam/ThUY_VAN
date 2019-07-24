@@ -1,0 +1,214 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Drawing;
+using ClosedXML.Excel;
+using System.Configuration;
+using System.IO;
+using System.Data.SqlClient;
+
+public partial class BaoCaoTongHop : System.Web.UI.Page
+{
+    clsBaocao myCus = new clsBaocao();
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack)
+        {
+           
+
+            //DataTable tram_bien_ap = myCus.get_tram_bien_ap();
+            //DataRow newRow = tram_bien_ap.NewRow();
+            //newRow[0] = 0;
+            //newRow[1] = "Tất cả";
+            //tram_bien_ap.Rows.InsertAt(newRow, 0);
+            //ddlTramBA.DataSource = tram_bien_ap;
+            //ddlTramBA.DataBind();
+
+            //DataTable bang_gia_dien = myCus.get_bang_gia_dien();
+            ////DataRow newRow1 = bang_gia_dien.NewRow();
+            ////newRow[0] = 0;
+            ////newRow[1] = "Tất cả";
+            ////bang_gia_dien.Rows.InsertAt(newRow, 0);
+            //ddlBangGiaDien.DataSource = bang_gia_dien;
+            //ddlBangGiaDien.DataBind();
+
+            DataTable khu = myCus.get_khu();
+            DataRow newRow2 = khu.NewRow();
+            newRow2[0] = 0;
+            newRow2[1] = "Tất cả";
+            khu.Rows.InsertAt(newRow2, 0);
+            ddlXomKhu.DataSource = khu;
+            ddlXomKhu.DataBind();
+
+            DataTable nam = myCus.get_nam();
+            //DataRow newRow1 = bang_gia_dien.NewRow();
+            //newRow[0] = 0;
+            //newRow[1] = "Tất cả";
+            //bang_gia_dien.Rows.InsertAt(newRow, 0);
+            ddlNam.DataSource = nam;
+            ddlNam.DataBind();
+        }
+
+    }
+
+    protected void XemBC(object sender, EventArgs e)
+    {
+        txtErr.Text = "";
+        string thang = ddlThang.SelectedValue.ToString();
+
+        string nam = ddlNam.SelectedValue.ToString();
+        
+        if (thang != "" && nam != "")
+        {
+
+            string ky_hd = thang + "/" + nam;
+                int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+                string loai_bc = ddlChonBC.SelectedValue.ToString();
+                
+                bindGrid(loai_bc, id_dia_ban,  ky_hd);
+           //     bindGrid(tungay1, denngay1, id_dia_ban);
+            
+        }
+        else
+        {
+            txtErr.Text = "Bạn phải nhập tháng, năm để tính được kì hóa đơn ";
+        }
+    }
+
+    protected void XuatExcel(object sender, EventArgs e)
+    {
+        ////getting datatable from viewstate  
+        DataTable dt = (DataTable)ViewState["DataTable"];
+        if (dt.Rows.Count == 0)
+        {
+            return;
+        }
+        
+        string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
+        //calling create Excel File Method and ing dataTable   
+        CreateExcelFile(dt, nameFile);
+    }
+
+    public void CreateExcelFile(DataTable baocao, string FileName)
+    {
+        using (baocao)
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(baocao, "Sheet1");
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+
+            }
+        }
+    }
+
+    void DisplayCurrentPage()
+    {
+        // Calculate the current page number.
+        int currentPage = GridView1.PageIndex + 1;
+    }
+    protected void GridView1_PageIndexChanged(object sender, EventArgs e)
+    {
+        DisplayCurrentPage();
+    }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+       // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
+    }
+    void bindGrid(string loai_bc, int id_khu,  string ky_hd)
+    {
+        DataTable tbx = new DataTable();
+        DataTable tbxView = new DataTable();
+        clsBaocao cslBC = new clsBaocao();
+
+        if(loai_bc=="01")
+            tbx = cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd);
+        else
+            tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_khu, ky_hd);
+
+        double san_luong = 0;
+        double tong_tien_truoc_thue = 0;
+        double thue_gtgt = 0;
+        double tong_tien_sau_thue = 0;
+
+        string dien_nang_tt = "";
+        for (int i = 0; i < tbx.Rows.Count; i++)
+        {
+            dien_nang_tt = tbx.Rows[i]["dien_nang_tt"].ToString().Trim();
+            if (dien_nang_tt != "")
+            {
+                    san_luong += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
+                    tong_tien_truoc_thue += double.Parse(tbx.Rows[i]["tong_tien_truoc_thue"].ToString());
+                    thue_gtgt += double.Parse(tbx.Rows[i]["thue_gtgt"].ToString());
+                    tong_tien_sau_thue += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
+            }
+        }
+
+        DataRow newRow4 = tbx.NewRow();
+        //newRow4[0] = "Tổng";
+        newRow4[2] = "Tổng";
+        newRow4[3] = san_luong;
+        newRow4[4] = tong_tien_truoc_thue;
+        newRow4[5] = thue_gtgt;
+        newRow4[6] = tong_tien_sau_thue;
+        
+        tbx.Rows.InsertAt(newRow4, 0);
+
+        GridView1.DataSource = tbx;
+        GridView1.DataBind();
+        ViewState["DataTable"] = tbx;
+    }
+
+
+    protected void GridView1_DataBound(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            DisplayCurrentPage();
+        }
+    }
+    protected void GridView1_RowDataBound1(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes["style"] = "cursor:pointer";
+        }
+    }
+
+    protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            if (row.RowIndex == GridView1.SelectedIndex)
+            {
+                row.ToolTip = string.Empty;
+            }
+            else
+            {
+                row.ToolTip = "Bấm để chọn dữ liệu.";
+                Session["madonvi_chon"] = GridView1.SelectedRow.Cells[2].Text.ToString();
+            }
+        }
+
+    }
+   
+    
+}

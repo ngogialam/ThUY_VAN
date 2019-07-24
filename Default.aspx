@@ -40,10 +40,10 @@
                             <i class="fa fa-fw fa-cart-plus"></i>
                         </div>
                         <div class="mr-5">
-                            BÁN HÀNG                       
+                            NHẬP CHỈ SỐ                       
                         </div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="./BanHang.aspx">
+                    <a class="card-footer text-white clearfix small z-1" href="./NhapChiSo.aspx">
                          <span class="float-left">Xem chi tiết</span>
                         <span class="float-right">
                             <i class="fa fa-angle-right"></i>
@@ -62,7 +62,7 @@
                         <asp:Label ID="txtSW" runat="server" Font-Size="25px" Font-Bold="true"></asp:Label>
                     </div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="./BaoCaoThongKe.aspx">
+                <a class="card-footer text-white clearfix small z-1" href="./BAO_CAO/BaoCaoDSKhachHang.aspx">
                      <span class="float-left">Xem chi tiết</span>
                     <span class="float-right">
                         <i class="fa fa-angle-right"></i>

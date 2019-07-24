@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-sm-4 mb-1">
                     <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
-                    <asp:Button ID="btnCapNhat" runat="server" Text="Chốt số liệu" CssClass="btn btn-success" OnClick="btnChotSL_Click" />
+                    <asp:Button ID="btnCapNhat" runat="server" Text="Lập hóa đơn" CssClass="btn btn-success" OnClick="btnChotSL_Click" OnClientClick="return confirm('Sau khi lập hóa đơn sẽ không thể thay đổi dữ liệu. Bạn có chắc chắn thực hiện?')" />
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addKyModal">Thêm Kỳ HĐ</button>
                 </div>
             </div>
@@ -76,12 +76,12 @@
                                 <asp:Label ID="lblMaKH" runat="server" Text='<%# Eval("ma_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tên khách hàng" ControlStyle-Width="180px">
+                        <asp:TemplateField HeaderText="Tên khách hàng" >
                             <ItemTemplate>
                                 <asp:Label ID="lblTenKH" runat="server" Text='<%# Eval("ten_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Khu">
+                        <asp:TemplateField HeaderText="Khu" >
                             <ItemTemplate>
                                 <asp:Label ID="lblDB" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>
@@ -114,6 +114,21 @@
                         <asp:TemplateField HeaderText="ĐNTT">
                             <ItemTemplate>
                                 <asp:Label ID="lblDNTT" runat="server" Text='<%# Eval("san_luong") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Thành tiền">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("total") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Tiền thuế">
+                            <ItemTemplate>
+                                <asp:Label ID="lblVatAmount" runat="server" Text='<%# Eval("vatamount") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã CT">

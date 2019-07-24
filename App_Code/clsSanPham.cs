@@ -30,20 +30,20 @@ public class clsSanPham
 
     public DataTable get_danh_sach_dia_ban()
     {
-        clsConnect cnstr = new clsConnect();
-        SqlConnection myConn = cnstr.ConnectSQL();
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = myConn;
-        cmd.CommandText = "select id_dia_ban,ten_dia_ban,vung from dm_dia_ban";
-        cmd.CommandType = CommandType.Text;
-        SqlDataAdapter myData = new SqlDataAdapter(cmd);
+        //clsConnect cnstr = new clsConnect();
+        //SqlConnection myConn = cnstr.ConnectSQL();
+        //SqlCommand cmd = new SqlCommand();
+        //cmd.Connection = myConn;
+        //cmd.CommandText = "select id_dia_ban,ten_dia_ban,vung from dm_dia_ban";
+        //cmd.CommandType = CommandType.Text;
+        //SqlDataAdapter myData = new SqlDataAdapter(cmd);
         DataSet dts = new DataSet();
-        myConn.Open();
-        myData.Fill(dts);
-        myData.Dispose();
-        cmd.Parameters.Clear();
-        cmd.Connection.Close();
-        myConn.Close();
+        //myConn.Open();
+        //myData.Fill(dts);
+        //myData.Dispose();
+        //cmd.Parameters.Clear();
+        //cmd.Connection.Close();
+        //myConn.Close();
         return dts.Tables[0];
         // return dts;    
     }

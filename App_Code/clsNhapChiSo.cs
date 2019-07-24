@@ -19,13 +19,13 @@ public class clsNhapChiSo
         {
             sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e, dm_cong_to f ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to  and d.ky='" + ky + "'";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai=1  and d.ky='" + ky + "'";
         }
         else
         {
             sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and  a.id_tram_bien_ap='" + id_tramba + "' and d.trang_thai=1 and d.ky='" + ky + "'";
         }
         try
         {
@@ -67,13 +67,13 @@ public class clsNhapChiSo
         {
             sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,(d.cs_moi - d.cs_cu) san_luong,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e, dm_cong_to f ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to  and d.ky='" + ky + "'";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to  and d.trang_thai=1 and d.ky='" + ky + "'";
         }
         else
         {
             sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,(d.cs_moi - d.cs_cu) san_luong,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and  a.id_tram_bien_ap='" + id_tramba + "' and d.trang_thai=1 and d.ky='" + ky + "'";
         }
         try
         {
@@ -144,6 +144,55 @@ public class clsNhapChiSo
             }
         }
     }
+    public Double[] tinh_cs_6_muc(Double sanluong, int sh)
+    {
+        Double[] muc = new Double[] { };
+        if (sanluong > (400 * sh))
+        {
+            Double bac6 = sanluong - (400 * sh);
+            muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, 100 * sh, 100 * sh, bac6 };
+
+        }
+        else
+        {
+            if (sanluong > (300 * sh))
+            {
+                Double bac5 = sanluong - (300 * sh);
+                muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, 100 * sh, bac5 };
+            }
+            else
+            {
+                if (sanluong > (200 * sh))
+                {
+                    Double bac4 = sanluong - (200 * sh);
+                    muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, bac4 };
+                }
+                else
+                {
+                    if (sanluong > (100 * sh))
+                    {
+                        Double bac3 = sanluong - (100 * sh);
+                        muc = new Double[] { (50 * sh), (50 * sh), bac3 };
+                    }
+                    else
+                    {
+                        if (sanluong > (50 * sh))
+                        {
+                            Double bac2 = sanluong - (50 * sh);
+                            muc = new Double[] { (50 * sh), bac2 };
+                        }
+                        else
+                        {
+                            Double bac1 = sanluong - 0;
+                            muc = new Double[] { bac1 };
+                        }
+                    }
+                }
+            }
+        }
+        return muc;
+
+    }
     public DataTable lay_bang_gia(string id_bang_gia)
     {
         SqlConnection myConn = null;
@@ -163,12 +212,11 @@ public class clsNhapChiSo
             if (dts.Tables[0].Rows[0]["don_gia"].ToString() == "0")
             {
 
-                sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia;
+                sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia + "order by muc_thu";
                 cmd.CommandText = sql;
                 cmd.CommandType = CommandType.Text;
                 myData = new SqlDataAdapter(cmd);
                 dts = new DataSet();
-                myConn.Open();
                 myData.Fill(dts);
                 myData.Dispose();
                 cmd.Parameters.Clear();
@@ -198,7 +246,6 @@ public class clsNhapChiSo
             }
         }
     }
-
 
 
     //Trạng thái kỳ 1-Chưa chốt, 0-đã chốt
@@ -354,6 +401,102 @@ public class clsNhapChiSo
             }
         }
         return recordsAffected;
+    }
+
+    public int lay_idhd()
+    {
+        int sohd;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select case when max(id) is NULL then 0 else max(id) end sohd from hoa_don";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            sohd = Convert.ToInt32(dts.Tables[0].Rows[0]["sohd"].ToString()) + 1;
+            return sohd;              
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+    //Insert bang hoa_don
+    public void them_moi_hoa_don(string id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to)
+    {
+
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        string sql = "insert into hoa_don(id,ma_kh,ky_hd,tu_ngay,den_ngay,chi_so_cu,chi_so_moi,dien_nang_tt,tong_tien_truoc_thue,thue_gtgt,tong_tien_sau_thue,id_nguoi_nhap,id_bang_gia_dien,ngay_nhap,trang_thai,ma_cong_to) ";
+        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + "," + thue_gtgt + ","+tong_tien_sau_thue+",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "') ";
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;           
+            cmd.Parameters.Clear();
+            cmd.CommandText = sql;
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+    //Insert hoa_don_chi_tiet
+    //Insert bang hoa_don
+    public void them_moi_hoa_don_chi_tiet(string id, string so_hd, string ky_hd, string ma_kh, string id_bang_gia,string id_muc_thu, string san_luong, string don_gia, string thanh_tien, string ngay_nhap,  string ma_cong_to)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        string sql = "insert into hoa_don_chi_tiet(id,so_hd,ky_hd,ma_kh,id_bang_gia,id_muc_thu,san_luong,don_gia,thanh_tien,ngay_nhap,ma_cong_to) ";
+        sql = sql + " values(" + id + ",'" + so_hd + "','" + ky_hd + "','" + ma_kh + "','" + id_bang_gia + "', '" + id_muc_thu + "', '" + san_luong + "','" + don_gia + "','" + thanh_tien + "',CONVERT( Datetime, GETDATE() ,103)),1,'" + ma_cong_to + "') ";
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;           
+            cmd.Parameters.Clear();
+            cmd.CommandText = sql;
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
     }
 
 }
