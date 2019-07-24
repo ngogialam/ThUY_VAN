@@ -65,20 +65,15 @@ public partial class DanhMucNhanVien : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        /*int id_bang_gia = Convert.ToInt32(txtGiaBan.Text);
-        string log = "Sửa giá điện mã " + id_bang_gia;
-        string ten_bang_gia = txtTenBangGia.Text;
-        string ten_viet_tat = txtTenVietTat.Text;
-        double don_gia = Convert.ToDouble(txtDonGia.Text);
-        double tien_thue_vat = Convert.ToDouble(txtTienThue.Text);
-        double phan_tram_thue = Convert.ToDouble(txtPhanTramThue.Text);
-        double gia_ban = Convert.ToDouble(txtGiaBan.Text);
-        int kich_hoat = 0;
-        if (ckbTrangThai.Checked == true) kich_hoat = 1;
+        string maNV = txtMaNV.Text;
+        string tenNV = txtTeNV.Text;
+        string diaChi = txtDiaChi.Text;
+        string dienThoai  = txtDienThoai.Text;
+        string ghiChu = txtGhiChu.Text;
+        string log = "Sửa nhân viên mã"+ maNV;
 
-        myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
+        myCus.cap_nhat_nhan_vien(maNV, tenNV, diaChi, dienThoai, ghiChu);
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-        */
-        Response.Redirect("DanhMucTramBienAp.aspx");
+        Response.Redirect("DanhMucNhanVien.aspx");
     }
 }

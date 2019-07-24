@@ -70,7 +70,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>
+                        </div><!-- end modal header -->
                         <div class="modal-body m-xl-3">
                             <div class="row mx5">
                                 <label>Mã nhân viên</label>
@@ -97,14 +97,18 @@
                                 <asp:TextBox ID="txtGhiChu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
 
                             </div>
-                            </div>
-                        </div>
+                        </div><!-- end modal body -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa nhân viên" data-dismiss="modal" />
-                        </div>
+                            <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa nhân viên" data-dismiss="modal" />
+                        </div><!-- end modal footer -->
                     </div>
+                    <!--<div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                        <asp:Button ID="btn1Save" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa nhân viên" data-dismiss="modal" />
+                    </div>-->
                 </div>
+            </div>
             </div>
         </ContentTemplate>
         <Triggers>

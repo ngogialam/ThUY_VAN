@@ -78,7 +78,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        int id_bang_gia = Convert.ToInt32(txtGiaBan.Text);
+        int id_bang_gia = Convert.ToInt32(txtId.Text);
         string log = "Sửa giá điện mã " + id_bang_gia;
         string ten_bang_gia = txtTenBangGia.Text;
         string ten_viet_tat = txtTenVietTat.Text;
@@ -92,7 +92,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
 
-        Response.Redirect("DanhMucTramBienAp.aspx");
+        Response.Redirect("DanhMucBangGiaDien.aspx");
     }
 
     //validate

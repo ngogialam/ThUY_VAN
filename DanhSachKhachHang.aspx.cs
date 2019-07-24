@@ -22,17 +22,21 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         if (!IsPostBack)
         {
             gv_bind();
-           
+
         }
 
     }
     protected void gv_bind()
     {
         CusList = myCus.get_danh_sach_khach_hang();
-        GirdView.DataSource = CusList;
-        GirdView.DataBind();
+        if (CusList.Rows.Count > 0)
+        {
+
+            GirdView.DataSource = CusList;
+            GirdView.DataBind();
+        }
         GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
-    }   
+    }
     
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
     {
