@@ -87,7 +87,7 @@
                             </asp:DropDownList>
                             <asp:DropDownList ID="ddlNam"
                             runat="server" DataTextField="nam"
-                            DataValueField="nam" Width="135px" Height="26px">
+                            DataValueField="nam" Width="137px" Height="26px">
                         </asp:DropDownList>
                         </td>
                         
