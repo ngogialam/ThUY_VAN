@@ -56,7 +56,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             txtTenKh.Text = name.Text;
             txtDiaChi.Text = diachi.Text;
             txtSoDT.Text = dt.Text;
-            txtNamBH.Text = nambh.Text;
+            //txtNamBH.Text = nambh.Text;
 
             cbVung.DataSource = DiaBanList;            
             cbVung.SelectedValue = iddb.Text;
@@ -76,13 +76,13 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     {
         string ma = txtMaKH.Text;
         string log = "Sửa khách hàng mã " + ma;
-        string nambh = txtNamBH.Text;
+        //string nambh = txtNamBH.Text;
         //if (nambh == "")
         //{
         //    nambh = "2019";
         //}
-        myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        //myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
+        //myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
        
         Response.Redirect("DanhSachKhachHang.aspx");
     }
