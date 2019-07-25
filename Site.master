@@ -71,19 +71,19 @@
                             <a href='<%= ResolveUrl("DanhMucBangGiaDien.aspx")%>'>Danh mục bảng giá điện </a>
                         </li>
                         <li>
-                            <a href="./DanhMucTramBienAp.aspx">Danh mục trạm biến áp</a>
+                            <a href='<%= ResolveUrl("DanhMucTramBienAp.aspx")%>'>Danh mục trạm biến áp</a>
                         </li>
                         <li>
-                            <a href="./DanhSachKhachHang.aspx">DS khách hàng</a>
+                            <a href='<%= ResolveUrl("DanhSachKhachHang.aspx")%>'>DS khách hàng</a>
                         </li>
                         <li>
-                            <a href="./DanhMucKhu.aspx">DS khu</a>
+                            <a href='<%= ResolveUrl("DanhMucKhu.aspx")%>'>DS khu</a>
                         </li>
                         <li>
-                            <a href="./DanhSachDiaBan.aspx">Kỳ hóa đơn</a>
+                            <a href='<%= ResolveUrl("DanhSachDiaBan.aspx")%>'>Kỳ hóa đơn</a>
                         </li>
                         <li>
-                            <a href="./DanhMucNhanVien.aspx">DS nhân viên</a>
+                            <a href='<%= ResolveUrl("DanhMucNhanVien.aspx")%>'>DS nhân viên</a>
                         </li>
                     </ul>
                 </li>
@@ -96,26 +96,23 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
                         <li>
-                            <a href="./BAO_CAO/BaoCaoTongHop.aspx">A. Báo cáo tổng hợp</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoTongHop.aspx")%>'>A. Báo cáo tổng hợp</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BangKeTienDien.aspx">B. Bảng kê tiền điện</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BangKeTienDien.aspx")%>'>B. Bảng kê tiền điện</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoDSKhachHang.aspx">C. Danh sách khách hàng theo các mục đích
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoDSKhachHang.aspx")%>'>C. Danh sách khách hàng theo các mục đích
                             </a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/DSChotChiSo.aspx">D. Danh sách chốt chỉ số</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/DSChotChiSo.aspx")%>'>D. Danh sách chốt chỉ số</a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/DanhSachTieuThu.aspx">E. Danh sách tiêu thụ </a>
+                            <a href='<%= ResolveUrl("BAO_CAO/DanhSachTieuThu.aspx")%>'>E. Danh sách tiêu thụ </a>
                         </li>
                         <li>
-                            <a href="./BAO_CAO/BaoCaoLaiLo.aspx">P. Báo cáo lãi lỗ</a>
-                        </li>
-                        <li>
-                            <a href="./BAO_CAO/BaoCaoQuanTri.aspx">Q. Báo cáo quản trị</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoQuanTri.aspx")%>'>F. Báo cáo quản trị</a>
                         </li>
                     </ul>
                 </li>
@@ -168,8 +165,8 @@
         <footer class="sticky-footer">
             <div class="container">
                 <div class="text-center">
-                    <small>Địa chỉ: Khu 7, Phường Thanh Miếu, Thành phố Việt Trì, Phú Thọ, 02103862721,
-                        2600103843</small>
+                    <small>Phần mềm quản lý hóa đơn điện ,Hỗ trợ: 02103.846306,
+                        02103.846777</small>
                     <br />
                     <small style="color: white">Copyright &copy; VNPT Phú Thọ <%: DateTime.Now.Year %></small>
                 </div>

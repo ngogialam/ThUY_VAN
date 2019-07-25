@@ -22,17 +22,21 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         if (!IsPostBack)
         {
             gv_bind();
-           
+
         }
 
     }
     protected void gv_bind()
     {
         CusList = myCus.get_danh_sach_khach_hang();
-        GirdView.DataSource = CusList;
-        GirdView.DataBind();
+        if (CusList.Rows.Count > 0)
+        {
+
+            GirdView.DataSource = CusList;
+            GirdView.DataBind();
+        }
         GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
-    }   
+    }
     
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
     {
@@ -52,7 +56,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             txtTenKh.Text = name.Text;
             txtDiaChi.Text = diachi.Text;
             txtSoDT.Text = dt.Text;
-            txtNamBH.Text = nambh.Text;
+            //txtNamBH.Text = nambh.Text;
 
             cbVung.DataSource = DiaBanList;            
             cbVung.SelectedValue = iddb.Text;
@@ -72,13 +76,13 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     {
         string ma = txtMaKH.Text;
         string log = "Sửa khách hàng mã " + ma;
-        string nambh = txtNamBH.Text;
+        //string nambh = txtNamBH.Text;
         //if (nambh == "")
         //{
         //    nambh = "2019";
         //}
-        myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        //myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
+        //myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
        
         Response.Redirect("DanhSachKhachHang.aspx");
     }

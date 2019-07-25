@@ -121,17 +121,20 @@
                             </div>
                             <div class="row mx5">
                                 <label>Trạng thái</label>
-                                <div style="text-align: left;" class="auto-style2" id =" trangthai">
+                                <div style="text-align: left;" class="auto-style2" id=" trangthai">
                                     <asp:CheckBox ID="ckbTrangThai" runat="server" Text="Kích hoạt" Width="200px" TextAlign="right" />
                                 </div>
+                            </div>
                         </div>
+                        <!-- end modal body -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                            <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa bảng giá điện" data-dismiss="modal" />
+                        </div>
+                        <!-- end modal footer -->
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa giá điện" data-dismiss="modal" />
                     </div>
                 </div>
-            </div>
             </div>
         </ContentTemplate>
         <Triggers>
