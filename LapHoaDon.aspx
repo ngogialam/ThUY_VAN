@@ -28,15 +28,15 @@
            });
             $('#txtKyHD').datepicker(
             {
-              dateFormat: 'mm/yy',
-              changeMonth: true,
-              changeYear: true,
-              yearRange: '1950:2100',
-              onSelect: function () {
-                  var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));                  
-                  $("#strKyHD").val(date);
-              }
-          });
+                dateFormat: 'mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1950:2100',
+                onSelect: function () {
+                    var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));
+                    $("#strKyHD").val(date);
+                }
+            });
 
         })
     </script>
@@ -57,10 +57,18 @@
                 <div class="col-sm-3 mb-1">
                     <asp:DropDownList runat="server" ID="drpKy" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>
                 </div>
-                <div class="col-sm-4 mb-1">
+                <div class="col-sm-6 mb-1">
                     <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
                     <asp:Button ID="btnCapNhat" runat="server" Text="Lập hóa đơn" CssClass="btn btn-success" OnClick="btnChotSL_Click" OnClientClick="return confirm('Sau khi lập hóa đơn sẽ không thể thay đổi dữ liệu. Bạn có chắc chắn thực hiện?')" />
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addKyModal">Thêm Kỳ HĐ</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mb-1">
+                    Từ ngày                 
+                    <b><asp:Label ID="lblTuNgay" runat="server"></asp:Label></b>
+                    đến ngày                
+                    <b><asp:Label ID="lblDenNgay" runat="server"></asp:Label></b>
                 </div>
             </div>
             <div class="row">
@@ -76,22 +84,22 @@
                                 <asp:Label ID="lblMaKH" runat="server" Text='<%# Eval("ma_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tên khách hàng" >
+                        <asp:TemplateField HeaderText="Tên khách hàng">
                             <ItemTemplate>
                                 <asp:Label ID="lblTenKH" runat="server" Text='<%# Eval("ten_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Khu" >
+                        <asp:TemplateField HeaderText="Khu">
                             <ItemTemplate>
                                 <asp:Label ID="lblDB" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Trạm">
+                        <asp:TemplateField HeaderText="Trạm">
                             <ItemTemplate>
                                 <asp:Label ID="lblMaTram" runat="server" Text='<%# Eval("ten_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Bảng giá">
+                        <asp:TemplateField HeaderText="Bảng giá">
                             <ItemTemplate>
                                 <asp:Label ID="lblBangGia" runat="server" Text='<%# Eval("ten_bang_gia") %>'></asp:Label>
                             </ItemTemplate>
@@ -128,7 +136,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true">
                             <ItemTemplate>
-                                <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>' ></asp:Label>
+                                <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã CT">
