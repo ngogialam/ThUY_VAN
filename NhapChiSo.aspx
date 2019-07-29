@@ -111,6 +111,16 @@
                                 <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" Text='<%# Eval("cs_moi") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Trạng thái">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTenTT" runat="server" Text='<%# Eval("ten_trang_thai") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="idTrangThai" Visible="False">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTrangThaiID" runat="server" Text='<%# Eval("trang_thai") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="idkhu" Visible="False">
                             <ItemTemplate>
                                 <asp:Label ID="lblidKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>

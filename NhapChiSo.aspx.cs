@@ -26,14 +26,12 @@ public partial class NhapChiSo : System.Web.UI.Page
             drpTram.DataSource = myNCS.get_danh_sach_tba();
             drpTram.DataBind();
 
-            drpKy.DataSource = myNCS.get_danh_ky();
+            drpKy.DataSource = myNCS.get_danhsach_ky();
             drpKy.DataBind();
 
-            ddlKyCu.DataSource = myNCS.get_danh_ky();
+            ddlKyCu.DataSource = myNCS.get_danhsach_ky();
             ddlKyCu.DataBind();
             lblErr.Text = "";
-
-
         }
 
     }
@@ -43,6 +41,23 @@ public partial class NhapChiSo : System.Web.UI.Page
         CusList = myNCS.get_danh_sach_nhap_cs(id_tramba, kyhd);
         GridViewEman.DataSource = CusList;
         GridViewEman.DataBind();
+        for (int i = 0; i < CusList.Rows.Count; i++)
+        {
+            string status = CusList.Rows[i]["trang_thai"].ToString();
+             GridViewRow row = GridViewEman.Rows[i];
+            if (status == "0")
+            {
+                GridViewEman.Rows[i].Cells[8].CssClass = "label label-success";
+                TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
+                txtCSMoi.ReadOnly = true;
+
+                ///GirdView.Rows[i]..BackColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                GridViewEman.Rows[i].Cells[8].CssClass = "label label-danger";
+            }
+        }
         if (CusList.Rows.Count > 0)
         {
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
@@ -63,8 +78,6 @@ public partial class NhapChiSo : System.Web.UI.Page
         {
             GridViewRow row = GridViewEman.Rows[i];
             string ky = drpKy.SelectedItem.ToString();
-            // string kymoi = "08/2019";
-            // int index = row.RowIndex;
             Label lblmact = (Label)row.FindControl("lblMaCT");
             TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
             string mact = lblmact.Text.ToString();
@@ -76,14 +89,6 @@ public partial class NhapChiSo : System.Web.UI.Page
                 {
                     lblErr.Text = "Có lỗi xảy ra trong quá trình cập nhật mã công tơ " + mact;
                 }
-                //if (myNCS.check_cs_ct(mact, kymoi) < 1)
-                //{
-                //    result = myNCS.them_chi_so_ky_moi(mact, csmoi, kymoi);
-                //    if (result == 0)
-                //    {
-                //        lblErr.Text = "Có lỗi xảy ra trong quá trình khởi tạo dữ liệu kỳ sau mã công tơ " + mact;
-                //    }
-                //}
             }
 
         }
