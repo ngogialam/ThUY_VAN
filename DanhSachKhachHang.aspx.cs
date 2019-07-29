@@ -51,7 +51,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 
         if (e.CommandName == "suaKH")
         {
-            DataTable DiaBanList = myCus.get_dia_ban();
+            DataTable DiaBanList = myCus.get_danh_muc_khu();
             txtMaKH.Text = id.Text;
             txtTenKh.Text = name.Text;
             txtDiaChi.Text = diachi.Text;

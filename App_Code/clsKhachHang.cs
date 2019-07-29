@@ -8,6 +8,9 @@ using System.Data;
 /// </summary>
 public class clsKhachHang
 {
+
+    //lay danh sach khu
+
     //lay danh sách khach hang
     public DataTable get_danh_sach_khach_hang()
     {
@@ -252,7 +255,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "update tram_bien_ap set ten_tram_bien_ap='" + ten_tram_bien_ap + "',dia_chi='" + dia_chi + "',nguoi_phu_trach='" + nguoi_phu_trach + "',ma_so_cong_to='" + ma_so_cong_to + "',he_so_nhan='" + he_so_nhan + "',trang_thai='" + trang_thai + "' where id_tram_bien_ap='" + id_tram + "'";
+            cmd.CommandText = "update tram_bien_ap set ten_tram_bien_ap=N'" + ten_tram_bien_ap + "',dia_chi=N'" + dia_chi + "',nguoi_phu_trach=N'" + nguoi_phu_trach + "',ma_so_cong_to='" + ma_so_cong_to + "',he_so_nhan='" + he_so_nhan + "',trang_thai='" + trang_thai + "' where id_tram_bien_ap='" + id_tram + "'";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();
@@ -281,7 +284,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select * from dm_khu";
+            cmd.CommandText = "select id_khu, ten_khu from dm_khu";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -353,7 +356,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "insert into nhan_vien values('" + ma_nv + "',N'" + ten_nv + "',N'" + dia_chi + "','" + dien_thoai + "','" + ghi_chu + "') ";
+            cmd.CommandText = "insert into nhan_vien values('" + ma_nv + "',N'" + ten_nv + "',N'" + dia_chi + "','" + dien_thoai + "',N'" + ghi_chu + "') ";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
@@ -380,7 +383,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "update nhan_vien set ten_nv='" + ten_nv + "',dia_chi='" + dia_chi + "',dien_thoai='" + dien_thoai + "',ghi_chu='" + ghi_chu + "' where ma_nv='" + ma_nv + "'";
+            cmd.CommandText = "update nhan_vien set ten_nv=N'" + ten_nv + "',dia_chi=N'" + dia_chi + "',dien_thoai='" + dien_thoai + "',ghi_chu=N'" + ghi_chu + "' where ma_nv='" + ma_nv + "'";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();
