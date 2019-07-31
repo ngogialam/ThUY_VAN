@@ -11,7 +11,7 @@ using System.Configuration;
 using System.IO;
 using System.Data.SqlClient;
 
-public partial class DanhSachDiaBan : System.Web.UI.Page
+public partial class DanhSachKyHD : System.Web.UI.Page
 {
     clsSanPham myProduct = new clsSanPham();
     protected void Page_Load(object sender, EventArgs e)
@@ -23,11 +23,15 @@ public partial class DanhSachDiaBan : System.Web.UI.Page
         //        Response.Redirect("Login.aspx");
         //    else
         //    {
-                DataTable DiaBan_tList = myProduct.get_danh_sach_dia_ban();
-                DiaBan_tList.Columns["id_dia_ban"].ColumnName = "ID";
-                DiaBan_tList.Columns["ten_dia_ban"].ColumnName = "Tên địa bàn";
-                DiaBan_tList.Columns["vung"].ColumnName = "Vùng";
-                GirdView.DataSource = DiaBan_tList;
+            DataTable KyHD_tList = myProduct.get_danh_sach_ky_hd();
+                KyHD_tList.Columns["id"].ColumnName = "ID";
+                KyHD_tList.Columns["ky"].ColumnName = "Kỳ HĐ";
+                KyHD_tList.Columns["thang"].ColumnName = "Tháng";
+                KyHD_tList.Columns["nam"].ColumnName = "Năm";
+                KyHD_tList.Columns["tu_ngay"].ColumnName = "Từ ngày";
+                KyHD_tList.Columns["den_ngay"].ColumnName = "Đến ngày";
+
+                GirdView.DataSource = KyHD_tList;
                 GirdView.DataBind();
                 GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
         //    }

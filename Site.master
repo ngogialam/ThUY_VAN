@@ -80,7 +80,7 @@
                             <a href='<%= ResolveUrl("DanhMucKhu.aspx")%>'>DS khu</a>
                         </li>
                         <li>
-                            <a href='<%= ResolveUrl("DanhSachDiaBan.aspx")%>'>Kỳ hóa đơn</a>
+                            <a href='<%= ResolveUrl("DanhSachKyHD.aspx")%>'>Kỳ hóa đơn</a>
                         </li>
                         <li>
                             <a href='<%= ResolveUrl("DanhMucNhanVien.aspx")%>'>DS nhân viên</a>

@@ -33,11 +33,13 @@
                                 <asp:Label ID="lblTenKhu" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                       
                         <asp:TemplateField HeaderText="Id phường/xã">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdPhuongXa" runat="server" Text='<%# Eval("id_phuong_xa") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                       
                         <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px">
                             <ItemTemplate>
                                 <asp:Button CssClass="btn btn-success" ID="btnSua" runat="server" CommandName="suaDMKhu" Text="Sửa"></asp:Button>
@@ -78,7 +80,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa giá điện" data-dismiss="modal" />
+                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa khu" data-dismiss="modal" />
                     </div>
                 </div>
             </div>

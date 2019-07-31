@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Title="Danh sách địa bàn" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DanhSachDiaBan.aspx.cs" Inherits="DanhSachDiaBan" %>
+﻿<%@ Page Language="C#" Title="Danh sách kỳ HĐ" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DanhSachKyHD.aspx.cs" Inherits="DanhSachKyHD" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script>
@@ -15,7 +15,7 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            Danh sách địa bàn
+            Danh sách kỳ hóa đơn
         </div>
         <div class="card-body">
             <div class="table-responsive">

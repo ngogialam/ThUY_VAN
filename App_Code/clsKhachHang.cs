@@ -284,7 +284,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select id_khu, ten_khu from dm_khu";
+            cmd.CommandText = "select id_khu, ten_khu,id_phuong_xa from dm_khu order by id_khu";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -307,6 +307,34 @@ public class clsKhachHang
             {
                 myConn.Close();
             }
+        }
+    }
+
+    public void cap_nhat_khu(int id, string ten_khu,  int id_phuong_xa)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "update dm_khu set ten_khu=N'" + ten_khu + "',id_phuong_xa='" + id_phuong_xa + "' where id_khu='" + id + "'";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        catch (SqlException e)
+        {
+            // test loi
+            throw e;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
         }
     }
 

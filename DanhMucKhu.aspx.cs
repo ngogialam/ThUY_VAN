@@ -64,15 +64,15 @@ public partial class DanhMucKhu : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        int id_bang_gia = Convert.ToInt32(txtId.Text);
-        string log = "Sửa giá điện mã " + id_bang_gia;
+        int id_khu = Convert.ToInt32(txtId.Text);
+        string log = "Sửa khu mã " + id_khu;
         string ten_khu = txtTenKhu.Text;
         int id_phuong_xa = Convert.ToInt32(txtIdPhuongXa.Text);
 
-        //myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
-        //myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        myCus.cap_nhat_khu(id_khu,ten_khu, id_phuong_xa);
+        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
 
-        Response.Redirect("DanhMucTramBienAp.aspx");
+        Response.Redirect("DanhMucKhu.aspx");
     }
 
     //validate
