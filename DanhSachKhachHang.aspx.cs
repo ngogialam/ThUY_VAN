@@ -17,6 +17,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
 
+    clsBaocao myBC = new clsBaocao();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -36,6 +38,11 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             GirdView.DataBind();
         }
         GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+        //DataTable DiaBanList = myCus.get_danh_muc_khu();
+        //ddlKhu.DataSource = DiaBanList;
+        //ddlKhu.DataBind();
+
     }
     
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
@@ -46,21 +53,71 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         Label name = (Label)row.FindControl("lblTenKH");
         Label diachi = (Label)row.FindControl("lblDiaChi");
         Label dt = (Label)row.FindControl("lblDienThoai");
-        Label nambh = (Label)row.FindControl("lblNamBH");
-        Label iddb = (Label)row.FindControl("lblidDiaBan");
+        Label thutu = (Label)row.FindControl("lblThuTu");
+        Label iddb = (Label)row.FindControl("lblKhu");
+
+        Label idsoho = (Label)row.FindControl("lblsoHo");
+        Label idHeSoti = (Label)row.FindControl("lbldHeSoti");
+        Label idCotDienSo = (Label)row.FindControl("lblCotDienSo");
+        Label idSLDongHo = (Label)row.FindControl("lblSLDongHo");
+        Label idMaCongTo = (Label)row.FindControl("lblMaCongTo");
+        Label idtba = (Label)row.FindControl("lblIdBA");
+        Label idbg = (Label)row.FindControl("lblIdBangGia");
+        Label idMtsKHg = (Label)row.FindControl("lblMtsKH");
+
+        Label idPhuongXa = (Label)row.FindControl("lblIdPhuongXa");
+        Label idHuyen = (Label)row.FindControl("lblMIdHuyen");
+        
+            
+        
 
         if (e.CommandName == "suaKH")
         {
             DataTable DiaBanList = myCus.get_danh_muc_khu();
+            cbKhu.DataSource = DiaBanList;
+            cbKhu.DataBind();
+
+
+            DataTable HuyenList = myCus.get_danh_muc_huyen();
+            cbHuyen.DataSource = HuyenList;
+            cbHuyen.DataBind();
+
+            DataTable PhuongXaList = myCus.get_danh_muc_phuong_xa();
+            cbVung.DataSource = PhuongXaList;
+            cbVung.DataBind();
+
+
+            DataTable tram_bien_ap = myBC.get_tram_bien_ap();
+            cbTramBienAp.DataSource = tram_bien_ap;
+            cbTramBienAp.DataBind();
+
+            DataTable bang_gia_dien = myBC.get_bang_gia_dien();
+            cbBangGia.DataSource = bang_gia_dien;
+            cbBangGia.DataBind();
+
+
             txtMaKH.Text = id.Text;
             txtTenKh.Text = name.Text;
             txtDiaChi.Text = diachi.Text;
             txtSoDT.Text = dt.Text;
-            //txtNamBH.Text = nambh.Text;
+            txtSoHo.Text = idsoho.Text;
+            txtHSTi.Text = idHeSoti.Text;
+            txtSoCot.Text = idCotDienSo.Text;
+            txtSoDongHo.Text = idSLDongHo.Text;
+            txtMaCongTo.Text = idMaCongTo.Text;
+            txtThuTu.Text = thutu.Text;
+            txtMstKH.Text = idMtsKHg.Text;
 
-            cbVung.DataSource = DiaBanList;            
-            cbVung.SelectedValue = iddb.Text;
-            cbVung.DataBind();
+            //txtNamBH.Text = nambh.Text;
+            cbKhu.SelectedValue = iddb.Text;
+            cbVung.SelectedValue = idPhuongXa.Text;
+            cbHuyen.SelectedValue = idHuyen.Text;
+            cbTramBienAp.SelectedValue = idtba.Text;
+            cbBangGia.SelectedValue = idbg.Text;
+            
+            //cbVung.DataSource = DiaBanList;            
+            //cbVung.SelectedValue = iddb.Text;
+            //cbVung.DataBind();
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#EditModal').modal('show');");

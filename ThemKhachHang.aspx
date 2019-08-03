@@ -29,55 +29,131 @@
                   
 
                     <tr>
-                        <td class="auto-style2">
+                        <td class="auto-style6">
                             <span style="font-family: Arial">Tên KH (*):</span></span></td>
                            
-                        <td align="left" style="text-align: left;" class="auto-style4">
+                        <td align="left" style="text-align: left;" class="auto-style7">
                             <asp:TextBox ID="txtTenKh" runat="server" Width="200px" Font-Names="Arial" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="rqfTenPB" runat="server" ControlToValidate="txtTenKh"
-                                ErrorMessage="Bạn phải nhập tên KH">*</asp:RequiredFieldValidator></td>
+                            </td>
                         
-                            <td align="right" class="auto-style2" >
+                            <td align="right" class="auto-style6" >
                                 <span style="font-family: Arial">Địa chỉ (*):</span></span></td>
-                        <td style="text-align: left;" class="auto-style2">
+                        <td style="text-align: left;" class="auto-style6">
                             <asp:TextBox ID="txtDiaChi" runat="server" Width="292px" Font-Names="Arial"
-                                MaxLength="555"></asp:TextBox>&nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                                    runat="server" ControlToValidate="txtDiaChi" ErrorMessage="Bạn phải nhập địa chỉ">*</asp:RequiredFieldValidator></td>
+                                MaxLength="555"></asp:TextBox></td>
+                    </tr>
+
+                    <tr>
+                        <td class="auto-style6">
+                            <span style="font-family: Arial">Huyện (*):</span></span></td>
+                        <td style="text-align: left;" class="auto-style7">
+                            <asp:DropDownList ID="ddlHuyen" runat="server" DataTextField="ten_huyen" DataValueField="id_Huyen" Width="200px" Height="27px">
+                            </asp:DropDownList>
+                        </td>
+                        <td class="auto-style10">
+                            <span style="font-family: Arial">Phường/Xã (*):</span></span></td>
+                        <td style="text-align: left" class="auto-style6">
+                            <asp:DropDownList ID="ddlPhuongXa" runat="server" DataTextField="ten_phuong_xa" DataValueField="id_phuong_xa" Width="200px" Height="27px">
+                            </asp:DropDownList>
+                            </td>
                     </tr>
                     
+
+                    
                     <tr>
-                        <td class="auto-style2">
-                            <span style="font-family: Arial">Vùng (*):</span></span></td>
-                        <td style="text-align: left;" class="auto-style4">
-                            <asp:DropDownList ID="cbVung" runat="server" DataTextField="ten_dia_ban" DataValueField="id_dia_ban" Width="200px" Height="27px">
-                                       
+                        <td class="auto-style6">
+                            Khu<span style="font-family: Arial"> (*):</span></span></td>
+                        <td style="text-align: left;" class="auto-style7">
+                            <asp:DropDownList ID="cbKhu" runat="server" DataTextField="ten_khu" DataValueField="id_khu" Width="200px" Height="27px">
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="cbVung"
-                                Display="Dynamic" ErrorMessage="Chọn vùng">*</asp:RequiredFieldValidator>
                         </td>
-                        <td class="auto-style3">
+                        <td class="auto-style10">
                             Số<span style="font-family: Arial"> điện thoại (*):</span></span></td>
-                        <td style="text-align: left" class="auto-style2">
+                        <td style="text-align: left" class="auto-style6">
                             <asp:TextBox ID="txtSoDT" runat="server" Width="200px" Font-Names="Arial" 
                                 MaxLength="255"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtSoDT"
-                                ErrorMessage="Bạn phải nhập số điện thoại">*</asp:RequiredFieldValidator></td>
+                            </td>
                     </tr>
                     
                    
                     <tr style="font-size: 13px">
-                        <td class="auto-style2">
-                             </td></td>
-                        <td style="text-align: left;" class="auto-style4">
-                            </td>
-                        <td class="auto-style3">
-                            <span style="font-family: Arial">Năm bán hàng:</span></td>
-                        <td style="text-align: left" class="auto-style2">
-                            <asp:TextBox ID="txtNamBH" runat="server" Width="88px" Font-Names="Arial" 
-                                MaxLength="50">2019</asp:TextBox>
+                        <td class="auto-style6">
+                             Trạm biến áp</td></td>
+                        <td class="auto-style6"><asp:DropDownList ID="ddlTramBA"
+                            runat="server" DataTextField="ten_tram_bien_ap"
+                            DataValueField="id_tram_bien_ap" Width="200px" Height="27px">
+                        </asp:DropDownList>
+                        </td>
+                        <td class="auto-style10">
+                            Số hộ<span style="font-family: Arial">:</span></td>
+                        <td style="text-align: left" class="auto-style6">
+                            <asp:TextBox ID="txtSoHo" runat="server" Width="88px" Font-Names="Arial" 
+                                MaxLength="50">1</asp:TextBox>
                             </td>
                     </tr>
                     
+                    <tr style="font-size: 13px">
+                        <td class="auto-style6">
+                             Bảng giá điện</td></td>
+                        <td class="auto-style6"><asp:DropDownList ID="ddlBangGiaDien"
+                            runat="server" DataTextField="ten_bang_gia"
+                            DataValueField="id_bang_gia" Width="200px" Height="27px">
+                        </asp:DropDownList>
+                        </td>
+                        <td class="auto-style10">
+                            Hệ số TI<span style="font-family: Arial">:</span></td>
+                        <td style="text-align: left" class="auto-style6">
+                            <asp:TextBox ID="txtHesoTI" runat="server" Width="88px" Font-Names="Arial" 
+                                MaxLength="50">1</asp:TextBox>
+                            </td>
+                    </tr>
+
+                     <tr>
+                        <td class="auto-style6">
+                            <span style="font-family: Arial">Mã số thuế(*):</span></span></td>
+                           
+                        <td align="left" style="text-align: left;" class="auto-style7">
+                            <asp:TextBox ID="txtMST" runat="server" Width="200px" Font-Names="Arial" MaxLength="50"></asp:TextBox>
+                            </td>
+                        
+                            <td align="right" class="auto-style6" >
+                                <span style="font-family: Arial">Cột điện số(*):</span></span></td>
+                        <td style="text-align: left;" class="auto-style6">
+                            <asp:TextBox ID="txtCotDienSo" runat="server" Width="200px" Font-Names="Arial"
+                                MaxLength="555">0</asp:TextBox>&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td class="auto-style6">
+                            <span style="font-family: Arial">SL đồng hồ(*):</span></span></td>
+                           
+                        <td align="left" style="text-align: left;" class="auto-style7">
+                            <asp:TextBox ID="txtSLDH" runat="server" Width="200px" Font-Names="Arial" MaxLength="50">1</asp:TextBox>
+                            </td>
+                        
+                            <td align="right" class="auto-style6" >
+                                <span style="font-family: Arial">Mã công tơ(*):</span></span></td>
+                        <td style="text-align: left;" class="auto-style6">
+                            <asp:TextBox ID="txtMaCongTo" runat="server" Width="200px" Font-Names="Arial"
+                                MaxLength="555"></asp:TextBox>&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td class="auto-style6">
+                            <span style="font-family: Arial">Trạng thái(*):</span></span></td>
+                           
+                        <td align="left" style="text-align: left;" class="auto-style7">
+                            <asp:TextBox ID="txtTrangThai" runat="server" Width="200px" Font-Names="Arial" MaxLength="50">1</asp:TextBox>
+                            </td>
+                        
+                            <td align="right" class="auto-style6" >
+                                <span style="font-family: Arial">Thứ tự(*):</span></span></td>
+                        <td style="text-align: left;" class="auto-style6">
+                            <asp:TextBox ID="txtThuTu" runat="server" Width="200px" Font-Names="Arial"
+                                MaxLength="555"></asp:TextBox>&nbsp;</td>
+                    </tr>
+
+
                     <tr style="font-size: 13px">
                         <td >
                             &nbsp;</td>
@@ -110,23 +186,23 @@
 
 <asp:Content ID="Content1" runat="server" contentplaceholderid="head">
     <style type="text/css">
-        .auto-style2
-        {
-            height: 60px;
-        }
-        .auto-style3
-        {
-            width: 120px;
-            height: 60px;
-        }
-        .auto-style4
-        {
-            height: 60px;
-            width: 311px;
-        }
         .auto-style5
         {
             width: 311px;
+        }
+        .auto-style6
+        {
+            height: 35px;
+        }
+        .auto-style7
+        {
+            height: 35px;
+            width: 311px;
+        }
+        .auto-style10
+        {
+            width: 120px;
+            height: 35px;
         }
     </style>
 </asp:Content>

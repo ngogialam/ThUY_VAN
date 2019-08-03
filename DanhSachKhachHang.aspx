@@ -86,9 +86,9 @@
                                 <asp:Label ID="lblSLDongHo" runat="server" Text='<%# Eval("sl_dong_ho") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Người liên hệ" Visible="False">
+                        <asp:TemplateField HeaderText="Mã công tơ" Visible="False">
                             <ItemTemplate>
-                                <asp:Label ID="lblNguoiLH" runat="server" Text='<%# Eval("nguoi_lien_he") %>'></asp:Label>
+                                <asp:Label ID="lblMaCongTo" runat="server" Text='<%# Eval("ma_cong_to") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Trạng thái" Visible="False">
@@ -170,7 +170,7 @@
                                 </asp:DropDownList>
                             </div>
                             <div class="row mx5">
-                                <label>Trạm biến áp/label>
+                                <label>Trạm biến áp</label>
                                 <asp:DropDownList ID="cbTramBienAp" runat="server" CssClass="form-control input-lg" DataTextField="ten_tram_bien_ap" DataValueField="id_tram_bien_ap">
                                 </asp:DropDownList>
                             </div>
@@ -201,8 +201,8 @@
                                 <asp:TextBox ID="txtSoDongHo" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                             <div class="row mx5">
-                                <label>Người liên hệ/label>
-                                <asp:TextBox ID="txtNguoiLH" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <label>Mã công tơ</label>
+                                <asp:TextBox ID="txtMaCongTo" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                              <div class="row mx5">
                                 <label>Trạng thái</label>

@@ -175,7 +175,7 @@ public partial class BanHang : System.Web.UI.Page
 
         if (tenkh != "" && dia_chi != "")
         {
-            int i = myCus.them_moi_khach_hang(tenkh, dia_chi, so_dt, nam_bh, id_dia_ban);
+            int i = 0;// myCus.them_moi_khach_hang(tenkh, dia_chi, so_dt, nam_bh, id_dia_ban);
             if (i == 0)
             {
                 txtErr.Text = "Thêm mới thất bại!";

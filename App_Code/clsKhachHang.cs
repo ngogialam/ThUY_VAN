@@ -310,6 +310,76 @@ public class clsKhachHang
         }
     }
 
+    public DataTable get_danh_muc_huyen()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select id_huyen, ten_huyen from dm_huyen order by id_huyen";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    public DataTable get_danh_muc_phuong_xa()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select id_phuong_xa, ten_phuong_xa from dm_phuong_xa order by id_phuong_xa";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
     public void cap_nhat_khu(int id, string ten_khu,  int id_phuong_xa)
     {
         clsConnect cnstr = new clsConnect();
@@ -478,7 +548,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select id_dia_ban,ten_dia_ban from dm_dia_ban order by id_dia_ban asc";
+            cmd.CommandText = "select id_khu,ten_khu from dm_khu order by id_khu asc";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -562,7 +632,42 @@ public class clsKhachHang
         return customers;
         // return dts;    
     }
-    public int them_moi_khach_hang(string ten_kh, string dia_chi, string so_dt, int nam_bh, int id_dia_ban)
+
+    public string get_ma_kh_tu_sinh()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = " SELECT NEXT VALUE FOR  khachhang_seq ";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0].Rows[0][0].ToString();
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+    public int them_moi_khach_hang(string ma_kh,string ten_kh,int id_bang_gia,string dia_chi,int id_khu,string id_tram_bien_ap,int so_ho,float he_so_ti,string dien_thoai,string mst_kh,string cot_dien_so,int sl_dong_ho,string ma_cong_to,int trang_thai,int thu_tu,int id_phuong_xa,int id_huyen)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -571,7 +676,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "insert into khach_hang(ten_kh,dia_chi,so_dt,nam_bh,id_dia_ban) values(N'" + ten_kh + "',N'" + dia_chi + "','" + so_dt + "'," + nam_bh + "," + id_dia_ban + ") ";
+            cmd.CommandText = "insert into khach_hang(ma_kh,ten_kh,id_bang_gia,dia_chi,id_khu,id_tram_bien_ap,so_ho,he_so_ti,dien_thoai,mst_kh,cot_dien_so,sl_dong_ho,ma_cong_to,trang_thai,thu_tu,id_phuong_xa,id_huyen) values('" + ma_kh + "',N'" + ten_kh + "'," + id_bang_gia + ",N'" + dia_chi + "'," + id_khu + ",'" + id_tram_bien_ap + "'," + so_ho + "," + he_so_ti + ",'" + dien_thoai + "','" + mst_kh + "','" + cot_dien_so + "'," + sl_dong_ho + ",'" + ma_cong_to + "'," + trang_thai + "," + thu_tu + "," + id_phuong_xa + "," + id_huyen + ") ";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
