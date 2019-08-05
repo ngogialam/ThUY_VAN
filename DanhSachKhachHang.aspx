@@ -176,12 +176,12 @@
                             </div>
                             <div class="row mx5">
                                 <label>Số hộ</label>
-                                <asp:TextBox ID="txtSoHo" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <asp:TextBox ID="txtSoHo" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
 
                             </div>
                             <div class="row mx5">
                                 <label>Hệ số ti</label>
-                                <asp:TextBox ID="txtHSTi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <asp:TextBox ID="txtHSTi" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
 
                             </div>
                             <div class="row mx5">
@@ -194,11 +194,11 @@
                             </div>
                             <div class="row mx5">
                                 <label>Số cột</label>
-                                <asp:TextBox ID="txtSoCot" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <asp:TextBox ID="txtSoCot" runat="server" Text="0" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                             <div class="row mx5">
                                 <label>Số lượng đồng hồ</label>
-                                <asp:TextBox ID="txtSoDongHo" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <asp:TextBox ID="txtSoDongHo" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                             <div class="row mx5">
                                 <label>Mã công tơ</label>
@@ -207,7 +207,7 @@
                              <div class="row mx5">
                                 <label>Trạng thái</label>
                                 <div style="text-align: left;" class="auto-style2" id=" trangthai">
-                                    <asp:CheckBox ID="ckbTrangThai" runat="server" Text="Kích hoạt" Width="200px" TextAlign="right" />
+                                    <asp:CheckBox ID="ckbTrangThai" runat="server" Checked="true" Text="Kích hoạt" Width="200px" TextAlign="right" />
                                 </div>
                             </div>
                             <div class="row mx5">

@@ -131,15 +131,32 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        string ma = txtMaKH.Text;
-        string log = "Sửa khách hàng mã " + ma;
-        //string nambh = txtNamBH.Text;
-        //if (nambh == "")
-        //{
-        //    nambh = "2019";
-        //}
-        //myCus.cap_nhat_khach_hang(ma, txtTenKh.Text, txtDiaChi.Text, txtSoDT.Text, nambh, cbVung.SelectedValue.ToString());
-        //myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        string ma_kh=txtMaKH.Text;
+        string ten_kh=txtTenKh.Text;
+        int id_bang_gia=int.Parse(cbBangGia.SelectedValue.ToString());
+        string dia_chi=txtDiaChi.Text;
+        int id_khu=int.Parse(cbKhu.SelectedValue.ToString());
+        string id_tram_bien_ap=cbTramBienAp.SelectedValue.ToString();
+        int so_ho=int.Parse(txtSoHo.Text);
+        float he_so_ti=float.Parse(txtHSTi.Text);
+        string dien_thoai=txtSoDT.Text;
+        string mst_kh=txtMstKH.Text.ToString();
+        string cot_dien_so=txtSoCot.Text;
+        int sl_dong_ho=int.Parse(txtSoDongHo.Text);
+        string ma_cong_to=txtMaCongTo.Text;
+        int trang_thai = 0;
+        if(ckbTrangThai.Checked)
+         trang_thai=1;
+        int thu_tu=int.Parse(txtThuTu.Text);
+        int id_phuong_xa=int.Parse(cbVung.SelectedValue.ToString());
+        int id_huyen = int.Parse(cbHuyen.SelectedValue.ToString());
+
+
+        string log = "Sửa khách hàng mã " + ma_kh;
+       
+
+        myCus.cap_nhat_khach_hang( ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen);
+        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
        
         Response.Redirect("DanhSachKhachHang.aspx");
     }
