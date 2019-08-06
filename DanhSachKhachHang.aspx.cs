@@ -136,6 +136,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         int id_bang_gia=int.Parse(cbBangGia.SelectedValue.ToString());
         string dia_chi=txtDiaChi.Text;
         int id_khu=int.Parse(cbKhu.SelectedValue.ToString());
+
         string id_tram_bien_ap=cbTramBienAp.SelectedValue.ToString();
         int so_ho=int.Parse(txtSoHo.Text);
         float he_so_ti=float.Parse(txtHSTi.Text);

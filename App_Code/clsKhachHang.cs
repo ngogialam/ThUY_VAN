@@ -667,6 +667,42 @@ public class clsKhachHang
             }
         }
     }
+
+    public int check_ma_cong_to(string ma_cong_to)
+    {
+        int ma = 0;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = " SELECT * from dm_cong_to where ma_cong_to='" + ma_cong_to + "'  ";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ma=dts.Tables[0].Rows.Count;
+             return ma;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     public int them_moi_khach_hang(string ma_kh,string ten_kh,int id_bang_gia,string dia_chi,int id_khu,string id_tram_bien_ap,int so_ho,float he_so_ti,string dien_thoai,string mst_kh,string cot_dien_so,int sl_dong_ho,string ma_cong_to,int trang_thai,int thu_tu,int id_phuong_xa,int id_huyen)
     {
         int recordsAffected = 0;
