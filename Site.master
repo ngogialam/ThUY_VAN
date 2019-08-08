@@ -59,14 +59,36 @@
                         <span class="nav-link-text" style="font-size: 18px">Nhập chỉ số</span>
                     </a>
                 </li>
+              <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Hóa đơn">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#HoaDon"
+                        data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-address-book-o" style="font-size: 20px"></i>
+                        <span class="nav-link-text" style="font-size: 18px">Hóa đơn điện tử</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="HoaDon">
+                        <li>
+                            <a href='<%= ResolveUrl("LapHoaDon.aspx")%>'>Lập hóa đơn</a>
+                        </li>
+                        <li>
+                            <a href='<%= ResolveUrl("PhatHanhHD.aspx")%>'>Phát hành hóa đơn</a>
+                        </li>
+                        <li>
+                            <a href='<%= ResolveUrl("InChuyenDoiHoaDon.aspx")%>'>In chuyển đổi</a>
+                        </li>
+                        <li>
+                            <a href='<%= ResolveUrl("DanhSachHoaDon.aspx")%>'>Danh sách HDDT</a>
+                        </li>
+                      
+                    </ul>
+                </li>
 
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Danh mục">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#DanhMuc"
                         data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-address-book-o" style="font-size: 20px"></i>
                         <span class="nav-link-text" style="font-size: 18px">Danh mục</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                    <ul class="sidenav-second-level collapse" id="DanhMuc">
                         <li>
                             <a href='<%= ResolveUrl("DanhMucBangGiaDien.aspx")%>'>Danh mục bảng giá điện </a>
                         </li>

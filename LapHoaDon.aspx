@@ -77,7 +77,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False"  >
                     <Columns>
                         <asp:TemplateField HeaderText="Mã">
                             <ItemTemplate>
@@ -109,6 +109,11 @@
                                 <asp:Label ID="lblSoHo" runat="server" Text='<%# Eval("so_ho") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Mã CT">
+                            <ItemTemplate>
+                                <asp:Label ID="lblMaCT" runat="server" Text='<%# Eval("ma_cong_to") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="CS cũ">
                             <ItemTemplate>
                                 <asp:Label ID="lblCSCu" runat="server" Text='<%# Eval("cs_cu") %>'></asp:Label>
@@ -138,12 +143,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Mã CT">
-                            <ItemTemplate>
-                                <asp:Label ID="lblMaCT" runat="server" Text='<%# Eval("ma_cong_to") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>                        
                         <asp:TemplateField HeaderText="idkhu" Visible="False">
                             <ItemTemplate>
                                 <asp:Label ID="lblidKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>

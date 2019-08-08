@@ -34,7 +34,7 @@ public partial class LapHoaDon : System.Web.UI.Page
             lblErr.Text = "";
 
             string kyhd = drpKy.SelectedItem.ToString();
-            string tungay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["tu_ngay"].ToString().Substring(0, 10); 
+            string tungay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["tu_ngay"].ToString().Substring(0, 10);
             string denngay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["den_ngay"].ToString().Substring(0, 10);
             lblTuNgay.Text = tungay;
             lblDenNgay.Text = denngay;
@@ -44,59 +44,15 @@ public partial class LapHoaDon : System.Web.UI.Page
 
     }
 
-    protected void gv_bind(string id_tramba, string kyhd)
+    protected void gv_bind()
     {
-        CusList = myNCS.get_danh_sach_lap_hd(id_tramba, kyhd);
-        
-        int i = 0;
-        int j = 0;
-        CusList.Columns.Add("total", typeof(String));
-        CusList.Columns.Add("vatamount", typeof(String));
-        CusList.Columns.Add("amount", typeof(String));
+        string id_tramba = drpTram.SelectedValue.ToString();
+        string kyhd = drpKy.SelectedItem.ToString();
+        CusList = dtb_bind(id_tramba, kyhd);
+        GridViewEman.DataSource = CusList;
+        GridViewEman.DataBind();
         if (CusList.Rows.Count > 0)
         {
-            for (i = 0; i < CusList.Rows.Count; i++)
-            {
-                Double dntt = 0;
-                int sh = 0;
-                Double dongia = 0;
-                Double total = 0;
-                Double vatrate = 0;
-                Double vatamount = 0;
-                Double amount = 0; // amount = total + vatamount
-                DataTable BangGia = myNCS.lay_bang_gia(CusList.Rows[i]["id_bang_gia"].ToString());
-                dntt = Convert.ToDouble(CusList.Rows[i]["san_luong"].ToString());
-                sh = Convert.ToInt32(CusList.Rows[i]["so_ho"].ToString());
-                if (BangGia.Rows.Count == 1)
-                {
-                    vatrate = Convert.ToDouble(BangGia.Rows[0]["phan_tram_thue"].ToString());
-                    dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-                    total = dntt * dongia;
-                    vatamount = vatrate * total / 100;
-                    amount = total + vatamount;
-                }
-                else
-                {
-                    Double[] muc = myNCS.tinh_cs_6_muc(dntt, sh);
-                    Double[] dongiamuc = new Double[] { };
-
-                    for (j = 0; j < muc.Length; j++)
-                    {
-                        total = total + (muc[j] * Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString()));
-                        vatrate = Convert.ToDouble(BangGia.Rows[0]["phan_tram_thue"].ToString());
-
-                    }
-
-                }
-                vatamount = vatrate * total / 100;
-                amount = total + vatamount;
-                CusList.Rows[i]["total"] = total.ToString();
-                CusList.Rows[i]["vatamount"] = vatamount.ToString();
-                CusList.Rows[i]["amount"] = amount.ToString();
-            }
-
-            GridViewEman.DataSource = CusList;
-            GridViewEman.DataBind();
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
     }
@@ -105,62 +61,60 @@ public partial class LapHoaDon : System.Web.UI.Page
         CusList = myNCS.get_danh_sach_lap_hd(id_tramba, kyhd);
         int i = 0;
         int j = 0;
-        CusList.Columns.Add("don_gia", typeof(String));
+        CusList.Columns.Add("san_luong", typeof(String));
         CusList.Columns.Add("total", typeof(String));
         CusList.Columns.Add("vatamount", typeof(String));
         CusList.Columns.Add("amount", typeof(String));
+        CusList.Columns.Add("vatrate", typeof(String));
         if (CusList.Rows.Count > 0)
         {
-            for (i = 0; i < CusList.Rows.Count; i++)
+            do
             {
                 Double dntt = 0;
                 int sh = 0;
-                Double dongia = 0;
                 Double total = 0;
-                Double vatrate = 0;
                 Double vatamount = 0;
                 Double amount = 0; // amount = total + vatamount
-                DataTable BangGia = myNCS.lay_bang_gia(CusList.Rows[i]["id_bang_gia"].ToString());
-                dntt = Convert.ToDouble(CusList.Rows[i]["san_luong"].ToString());
+
+                string id_bg = CusList.Rows[i]["id_bang_gia"].ToString();
+                DataTable BangGia = myNCS.lay_bang_gia(id_bg);
+                Double vatrate = Convert.ToDouble(BangGia.Rows[0]["phan_tram_thue"].ToString());
+                Double cs_cu = 0;
+                Double cs_moi = 0;
+                j = i;
+                do
+                {
+                    cs_cu = cs_cu + Convert.ToDouble(CusList.Rows[j]["cs_cu"].ToString());
+                    cs_moi = cs_moi + Convert.ToDouble(CusList.Rows[j]["cs_moi"].ToString());
+                    j++;
+                } while (j < CusList.Rows.Count && string.Compare(CusList.Rows[j]["ma_kh"].ToString(), CusList.Rows[j - 1]["ma_kh"].ToString()) == 0);
+
+                dntt = cs_moi - cs_cu;
                 sh = Convert.ToInt32(CusList.Rows[i]["so_ho"].ToString());
-                if (BangGia.Rows.Count == 1)
-                {
-                    vatrate = Convert.ToDouble(BangGia.Rows[0]["phan_tram_thue"].ToString());
-                    dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-                    total = dntt * dongia;
-                    vatamount = vatrate * total / 100;
-                    amount = total + vatamount;
-                }
-                else
-                {
-                    Double[] muc = myNCS.tinh_cs_6_muc(dntt, sh);
-                    Double[] dongiamuc = new Double[] { };
-
-                    for (j = 0; j < muc.Length; j++)
-                    {
-                        total = total + (muc[j] * Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString()));
-                        vatrate = Convert.ToDouble(BangGia.Rows[0]["phan_tram_thue"].ToString());
-
-                    }
-
-                }
-
+                total = myNCS.tinh_tien_dien(dntt, sh, id_bg);
                 vatamount = vatrate * total / 100;
+                vatamount = Math.Round(vatamount, 0, MidpointRounding.AwayFromZero);
                 amount = total + vatamount;
-                CusList.Rows[i]["don_gia"] = dongia.ToString();
-                CusList.Rows[i]["total"] = total.ToString();
-                CusList.Rows[i]["vatamount"] = vatamount.ToString();
-                CusList.Rows[i]["amount"] = amount.ToString();
-            }
+                j = i;
+                do
+                {
+                    CusList.Rows[j]["san_luong"] = dntt.ToString();
+                    CusList.Rows[j]["total"] = total.ToString();
+                    CusList.Rows[j]["vatrate"] = vatrate.ToString();
+                    CusList.Rows[j]["vatamount"] = vatamount.ToString();
+                    CusList.Rows[j]["amount"] = amount.ToString();
+                    j++;
+                } while (j < CusList.Rows.Count && string.Compare(CusList.Rows[j]["ma_kh"].ToString(), CusList.Rows[j - 1]["ma_kh"].ToString()) == 0);
+                i = j;
+            } while (i < CusList.Rows.Count);
         }
         return CusList;
+
     }
 
     protected void btnLaySL_Click(object sender, EventArgs e)
     {
-        string id_tram = drpTram.SelectedValue.ToString();
-        string kyhd = drpKy.SelectedItem.ToString();
-        gv_bind(id_tram, kyhd);
+        gv_bind();
     }
 
     protected void btnChotSL_Click(object sender, EventArgs e)
@@ -176,13 +130,13 @@ public partial class LapHoaDon : System.Web.UI.Page
         {
             do
             {
-                //int j = i;
                 string makh = dtbInv.Rows[i]["ma_kh"].ToString();
                 string mact = "";
-                string soho = dtbInv.Rows[i]["so_ho"].ToString();
+                int soho = Convert.ToInt32(dtbInv.Rows[i]["so_ho"].ToString());
                 string cscu = dtbInv.Rows[i]["cs_cu"].ToString();
                 string csmoi = dtbInv.Rows[i]["cs_moi"].ToString();
-                string dongia = dtbInv.Rows[i]["don_gia"].ToString();
+                //string dongia = dtbInv.Rows[i]["don_gia"].ToString();
+                mact = dtbInv.Rows[i]["ma_cong_to"].ToString();
                 Double dntt = 0;
                 Double total = 0;
                 Double vatamount = 0;
@@ -190,12 +144,12 @@ public partial class LapHoaDon : System.Web.UI.Page
                 string idKhu = dtbInv.Rows[i]["id_khu"].ToString();
                 string idTram = dtbInv.Rows[i]["id_tram_bien_ap"].ToString();
                 string idBangGia = dtbInv.Rows[i]["id_bang_gia"].ToString();
-               
+                string vaterate = dtbInv.Rows[i]["vatrate"].ToString();
+
                 total = Convert.ToDouble(dtbInv.Rows[i]["total"].ToString());
                 vatamount = Convert.ToDouble(dtbInv.Rows[i]["vatamount"].ToString());
                 amount = Convert.ToDouble(dtbInv.Rows[i]["amount"].ToString());
                 dntt = Convert.ToDouble(dtbInv.Rows[i]["san_luong"].ToString());
-                mact = dtbInv.Rows[i]["ma_cong_to"].ToString();
 
                 Int64 idHD = myNCS.lay_idhd();
                 if (i > 0)
@@ -205,15 +159,26 @@ public partial class LapHoaDon : System.Web.UI.Page
                         idHD = idHD - 1;
                     }
                 }
-                i++;
-                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(),dongia, total, vatamount, amount, user, idBangGia, mact);
+                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact);
                 myNCS.chotchiso(mact, kyhd);
+                if (i < (dtbInv.Rows.Count - 1) && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i + 1]["ma_kh"].ToString()) != 0)
+                {
+                    myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                }
+                if (i == (dtbInv.Rows.Count - 1))
+                {
+                    myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                }
+
+                i++;
             } while (i < dtbInv.Rows.Count);
         }
+
         else
         {
             txtErr.Text = "Không có dữ liệu";
         }
+        gv_bind();
 
     }
 
