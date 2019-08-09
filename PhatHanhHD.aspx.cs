@@ -13,13 +13,13 @@ using System.Data.SqlClient;
 using System.Xml;
 public partial class PhatHanhHD : System.Web.UI.Page
 {
-    private static string urlService = "https://htxdvnndnkinhkeadmindemo.vnpt-invoice.com.vn/PublishService.asmx";
-    private static string adminName = "htxdvnndnkinhkeadmin";
+
+    private static string adminName = "htxthanhdinhadmin";
     private static string adminPass = "123456aA@";
-    private static string userName = "htxdvnndnkinhkeservice";
+    private static string userName = "htxthanhdinhservice";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "AD/18E";
+    private static string serial = "TV/19E";
 
     clsHoaDon myINV = new clsHoaDon();
     clsNguoiBan mySeller = new clsNguoiBan();

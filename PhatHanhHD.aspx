@@ -32,7 +32,7 @@
             </div>
             <div class="col-xl-3 col-sm-2 mb-2"> 
                 <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />               
-                <asp:Button ID="btnPhatHanh" runat="server" class="btn btn-danger" Text="Chốt ca" OnClick="btnPhatHanh_Click" OnClientClick="return confirm('Bạn có chắc chắn phát hành hóa đơn?')" />
+                <asp:Button ID="btnPhatHanh" runat="server" class="btn btn-danger" Text="Phát hành HD cả trạm" OnClick="btnPhatHanh_Click" OnClientClick="return confirm('Bạn có chắc chắn phát hành hóa đơn?')" />
             </div>
         </div>
         <div class="row">
@@ -48,8 +48,7 @@
         <div class="card-body-5">
             <div class="table-responsive">
                 <asp:GridView ID="GirdViewNoPaGE" ClientIDMode="Static" runat="server" CssClass="table table-responsive table-bordered" AutoGenerateColumns="false">
-                    <Columns>                         
-                                                   
+                    <Columns>                   
                         <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
                                 <asp:Label ID="lblIDHD" runat="server" Text='<%# Eval("id") %>'></asp:Label>

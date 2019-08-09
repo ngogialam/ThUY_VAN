@@ -131,7 +131,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thành tiền">
                             <ItemTemplate>
-                                <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("total") %>'></asp:Label>
+                                <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("total","{0:0,0}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tiền thuế">

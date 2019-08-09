@@ -11,16 +11,18 @@ using System.Configuration;
 using System.IO;
 using System.Data.SqlClient;
 using System.Xml;
+using IronPdf;
+using System.Text;
 public partial class InChuyenDoiHoaDon : System.Web.UI.Page
 {
-    private static string urlService = "https://htxdvnndnkinhkeadmindemo.vnpt-invoice.com.vn/PublishService.asmx";
-    private static string adminName = "htxdvnndnkinhkeadmin";
+    private static string adminName = "htxthanhdinhadmin";
     private static string adminPass = "123456aA@";
-    private static string userName = "htxdvnndnkinhkeservice";
+    private static string userName = "htxthanhdinhservice";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "AD/18E";
+    private static string serial = "TV/19E";
 
+    IronPdf.HtmlToPdf Renderer = new IronPdf.HtmlToPdf();
     clsHoaDon myINV = new clsHoaDon();
     clsNguoiBan mySeller = new clsNguoiBan();
     clsNhapChiSo myNCS = new clsNhapChiSo();
@@ -71,10 +73,20 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
         {
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
-        Literal txtPNL = new Literal();
-        txtPNL.Text = htmlInv;
-        pnlContents.Controls.Add(txtPNL);
-        Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "PrintPanel()", true);
+       
+       // Literal txtPNL = new Literal();
+      //  txtPNL.Text = htmlInv;
+       // pnlContents.Controls.Add(txtPNL);
+       // Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "PrintPanel()", true);
+        //var pdf = Renderer.RenderHtmlAsPdf(htmlInv);
+       // pdf.SaveAs("/Invoice.pdf");
+        using (FileStream fs = new FileStream(Server.MapPath("RepConvertInv\\test.htm"), FileMode.Create))
+        {
+            using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
+            {
+                w.WriteLine(htmlInv);               
+            }
+        } 
 
     }
 
