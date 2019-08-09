@@ -202,7 +202,7 @@
                             </div>
                             <div class="row mx5">
                                 <label>Mã công tơ</label>
-                                <asp:TextBox ID="txtMaCongTo" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <asp:TextBox ID="txtMaCongTo" runat="server" Enabled="false" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                              <div class="row mx5">
                                 <label>Trạng thái</label>

@@ -57,7 +57,7 @@ public partial class ThemKhachHang : System.Web.UI.Page
     {
         string ma_tu_sinh = myCus.get_ma_kh_tu_sinh();
         txtThuTu.Text = ma_tu_sinh;
-        string ma_kh=ma_tu_sinh + "."+ddlTramBA.SelectedValue.ToString();
+        string ma_kh=ma_tu_sinh + "."+ myCus.get_ten_viet_tat_TBA( ddlTramBA.SelectedValue.ToString());
         string ten_kh=txtTenKh.Text.ToString().Trim();
         int id_bang_gia=int.Parse(ddlBangGiaDien.SelectedValue.ToString());
         string dia_chi=txtDiaChi.Text.ToString().Trim();
@@ -78,6 +78,8 @@ public partial class ThemKhachHang : System.Web.UI.Page
         int thu_tu = int.Parse(txtThuTu.Text.Trim());
         int id_phuong_xa=int.Parse(ddlPhuongXa.SelectedValue.ToString());
         int id_huyen=int.Parse(ddlHuyen.SelectedValue.ToString());
+        string ky_hd = DateTime.Now.Month + "/" + DateTime.Now.Year;
+        if (DateTime.Now.Month < 10) ky_hd = "0" + ky_hd;
 
         int check_ma = myCus.check_ma_cong_to(ma_cong_to);
         if (check_ma >= 1)
@@ -90,7 +92,10 @@ public partial class ThemKhachHang : System.Web.UI.Page
             {
                 //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
                 int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen);
-                if (i == 0)
+                int j = myCus. them_moi_cong_to(ma_cong_to,ma_kh,he_so_ti);
+                int k = myCus.them_moi_chi_so_cong_to(ma_cong_to,ky_hd);
+
+                if (i == 0 || j ==0 || k==0)
                     txtErr.Text = "Thêm mới khách hàng thất bại!";
                 else
                     txtErr.Text = "Thêm mới khách hàng thành công!";

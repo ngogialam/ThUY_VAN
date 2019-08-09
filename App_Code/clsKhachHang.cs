@@ -703,6 +703,42 @@ public class clsKhachHang
             }
         }
     }
+
+    public string get_ten_viet_tat_TBA(string id_tram_bien_ap)
+    {
+        string ten_viet_tat = "";
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = " SELECT * from tram_bien_ap where id_tram_bien_ap='" + id_tram_bien_ap + "'  ";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ten_viet_tat = dts.Tables[0].Rows[0]["ten_viet_tat"].ToString();
+            return ten_viet_tat;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     public int them_moi_khach_hang(string ma_kh,string ten_kh,int id_bang_gia,string dia_chi,int id_khu,string id_tram_bien_ap,int so_ho,float he_so_ti,string dien_thoai,string mst_kh,string cot_dien_so,int sl_dong_ho,string ma_cong_to,int trang_thai,int thu_tu,int id_phuong_xa,int id_huyen)
     {
         int recordsAffected = 0;
@@ -713,6 +749,58 @@ public class clsKhachHang
         {
             cmd.Connection = myConn;
             cmd.CommandText = "insert into khach_hang(ma_kh,ten_kh,id_bang_gia,dia_chi,id_khu,id_tram_bien_ap,so_ho,he_so_ti,dien_thoai,mst_kh,cot_dien_so,sl_dong_ho,ma_cong_to,trang_thai,thu_tu,id_phuong_xa,id_huyen) values('" + ma_kh + "',N'" + ten_kh + "'," + id_bang_gia + ",N'" + dia_chi + "'," + id_khu + ",'" + id_tram_bien_ap + "'," + so_ho + "," + he_so_ti + ",'" + dien_thoai + "','" + mst_kh + "','" + cot_dien_so + "'," + sl_dong_ho + ",'" + ma_cong_to + "'," + trang_thai + "," + thu_tu + "," + id_phuong_xa + "," + id_huyen + ") ";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
+    public int them_moi_cong_to(string ma_cong_to,string ma_kh, float he_so_ti)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "insert into dm_cong_to(ma_cong_to,ma_kh,he_so_ti,trang_thai) values('" + ma_cong_to + "','" + ma_kh + "'," + he_so_ti + ",1)";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
+    public int them_moi_chi_so_cong_to(string ma_cong_to,string ky_hd)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to,cs_cu,cs_moi,ky,trang_thai) values('" + ma_cong_to + "',0,0,'" + ky_hd + "',1)";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
