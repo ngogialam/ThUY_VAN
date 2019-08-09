@@ -69,7 +69,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False">
+                <asp:GridView ID="GirdViewNoPaGE" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False">
                     <Columns>
                         <asp:TemplateField HeaderText="Mã">
                             <ItemTemplate>

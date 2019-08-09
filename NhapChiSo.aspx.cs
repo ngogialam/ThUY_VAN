@@ -39,15 +39,15 @@ public partial class NhapChiSo : System.Web.UI.Page
     protected void gv_bind(string id_tramba, string kyhd)
     {
         CusList = myNCS.get_danh_sach_nhap_cs(id_tramba, kyhd);
-        GridViewEman.DataSource = CusList;
-        GridViewEman.DataBind();
+        GirdViewNoPaGE.DataSource = CusList;
+        GirdViewNoPaGE.DataBind();
         for (int i = 0; i < CusList.Rows.Count; i++)
         {
             string status = CusList.Rows[i]["trang_thai"].ToString();
-             GridViewRow row = GridViewEman.Rows[i];
+             GridViewRow row = GirdViewNoPaGE.Rows[i];
             if (status == "0")
             {
-                GridViewEman.Rows[i].Cells[8].CssClass = "label label-success";
+                GirdViewNoPaGE.Rows[i].Cells[8].CssClass = "label label-success";
                 TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
                 txtCSMoi.ReadOnly = true;
 
@@ -55,12 +55,12 @@ public partial class NhapChiSo : System.Web.UI.Page
             }
             else
             {
-                GridViewEman.Rows[i].Cells[8].CssClass = "label label-danger";
+                GirdViewNoPaGE.Rows[i].Cells[8].CssClass = "label label-danger";
             }
         }
         if (CusList.Rows.Count > 0)
         {
-            GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
+            GirdViewNoPaGE.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
     }
 
@@ -74,9 +74,9 @@ public partial class NhapChiSo : System.Web.UI.Page
     protected void btnCapNhat_Click(object sender, EventArgs e)
     {
         int i = 0;
-        for (i = 0; i < GridViewEman.Rows.Count; i++)
+        for (i = 0; i < GirdViewNoPaGE.Rows.Count; i++)
         {
-            GridViewRow row = GridViewEman.Rows[i];
+            GridViewRow row = GirdViewNoPaGE.Rows[i];
             string ky = drpKy.SelectedItem.ToString();
             Label lblmact = (Label)row.FindControl("lblMaCT");
             TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
