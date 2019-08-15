@@ -87,17 +87,17 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                          
-                        <asp:TemplateField HeaderText="Thành tiền">
+                        <asp:TemplateField HeaderText="Thành tiền" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
                                 <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("tong_tien_truoc_thue") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tiền thuế">
+                        <asp:TemplateField HeaderText="Tiền thuế" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
                                 <asp:Label ID="lblVatAmount" runat="server" Text='<%# Eval("thue_gtgt") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true">
+                        <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
                                 <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("tong_tien_sau_thue") %>'></asp:Label>
                             </ItemTemplate>

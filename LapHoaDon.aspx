@@ -129,17 +129,17 @@
                                 <asp:Label ID="lblDNTT" runat="server" Text='<%# Eval("san_luong") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Thành tiền">
+                        <asp:TemplateField HeaderText="Thành tiền" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
                                 <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("total","{0:0,0}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tiền thuế">
+                        <asp:TemplateField HeaderText="Tiền thuế" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
                                 <asp:Label ID="lblVatAmount" runat="server" Text='<%# Eval("vatamount") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true">
+                        <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
                                 <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>'></asp:Label>
                             </ItemTemplate>

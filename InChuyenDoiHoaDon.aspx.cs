@@ -17,7 +17,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
 {
     private static string adminName = "htxthanhdinhadmin";
     private static string adminPass = "123456aA@";
-    private static string userName = "htxthanhdinhservice";
+    private static string userName = "thanhdinhws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
     private static string serial = "TV/19E";
@@ -78,8 +78,8 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
       //  txtPNL.Text = htmlInv;
        // pnlContents.Controls.Add(txtPNL);
        // Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "PrintPanel()", true);
-        //var pdf = Renderer.RenderHtmlAsPdf(htmlInv);
-       // pdf.SaveAs("/Invoice.pdf");
+        var pdf = Renderer.RenderHtmlAsPdf(htmlInv);
+        pdf.SaveAs(Server.MapPath("RepConvertInv\\inv.pdf"));
         using (FileStream fs = new FileStream(Server.MapPath("RepConvertInv\\test.htm"), FileMode.Create))
         {
             using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
