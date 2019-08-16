@@ -151,7 +151,7 @@
                                 </Columns>
                                  <Columns>
                                     <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Tổng tiền" />
+                                        HeaderText="Tổng tiền" DataFormatString="{0:0,0}"/>
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
@@ -160,11 +160,11 @@
 
                                  <Columns>
                                     <asp:BoundField DataField="chi_so_cu" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="CSĐK" />
+                                        HeaderText="CSĐK" DataFormatString="{0:0,0}"/>
                                 </Columns>
                                  <Columns>
                                     <asp:BoundField DataField="chi_so_moi" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="CSCK" />
+                                        HeaderText="CSCK" DataFormatString="{0:0,0}"/>
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="so_ho" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
@@ -172,7 +172,7 @@
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Tiêu thụ" />
+                                        HeaderText="Tiêu thụ" DataFormatString="{0:0,0}" />
                                 </Columns>
 
 

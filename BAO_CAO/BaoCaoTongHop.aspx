@@ -148,20 +148,21 @@
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Sản lượng" />
+                                        HeaderText="Sản lượng" DataFormatString="{0:0,0}" />
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="tong_tien_truoc_thue" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Trước thuế" />
+                                        HeaderText="Trước thuế" DataFormatString="{0:0,0}" />
                                 </Columns>
                                 <Columns>
                                     <asp:BoundField DataField="thue_gtgt" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Thuế VAT" />
+                                        HeaderText="Thuế VAT" DataFormatString="{0:0,0}" />
                                 </Columns>
                                 
                                  <Columns>
                                     <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                        HeaderText="Sau thuế" />
+                                        HeaderText="Sau thuế" DataFormatString="{0:0,0}" />
+                                       
                                 </Columns>
                                 <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
                                 <RowStyle BackColor="#EFF3FB" />

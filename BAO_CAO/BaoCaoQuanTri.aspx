@@ -175,22 +175,22 @@
                                         HeaderText="Loại hình" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="chi_so_cu" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="CSĐK" />
+                                    <asp:BoundField DataField="chi_so_cu" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="CSĐK" DataFormatString="{0:0,0}" />
                                 </Columns>
                                 <Columns>
-                                    <asp:BoundField DataField="chi_so_moi" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="CSCK" />
+                                    <asp:BoundField DataField="chi_so_moi" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="CSCK" DataFormatString="{0:0,0}" />
                                 </Columns>
 
                                 <Columns>
-                                    <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Tiêu thụ" />
+                                    <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="Tiêu thụ" DataFormatString="{0:0,0}" />
                                 </Columns>
                                 
                                  <Columns>
-                                    <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                        HeaderText="Sau thuế" />
+                                    <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Right"
+                                        HeaderText="Sau thuế" DataFormatString="{0:0,0}" />
                                 </Columns>
 
                                 <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
