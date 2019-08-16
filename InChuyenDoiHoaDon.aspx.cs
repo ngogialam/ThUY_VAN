@@ -13,11 +13,14 @@ using System.Data.SqlClient;
 using System.Xml;
 using IronPdf;
 using System.Text;
+using Ionic.Zip;
+using System.Text.RegularExpressions;
+
 public partial class InChuyenDoiHoaDon : System.Web.UI.Page
 {
     private static string adminName = "htxthanhdinhadmin";
     private static string adminPass = "123456aA@";
-    private static string userName = "htxthanhdinhservice";
+    private static string userName = "thanhdinhws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
     private static string serial = "TV/19E";
@@ -26,7 +29,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
     clsHoaDon myINV = new clsHoaDon();
     clsNguoiBan mySeller = new clsNguoiBan();
     clsNhapChiSo myNCS = new clsNhapChiSo();
-    DataTable invList = new DataTable(); 
+    DataTable invList = new DataTable();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -46,7 +49,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
     protected void gv_bind()
     {
         string id_tram = drpTram.SelectedValue.ToString();
-        string kyhd = drpKy.SelectedItem.ToString();       
+        string kyhd = drpKy.SelectedItem.ToString();
         invList = myINV.get_danh_sach_hddt(id_tram, kyhd, "2");
         GridViewEman.DataSource = invList;
         GridViewEman.DataBind();
@@ -60,6 +63,8 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
     {
         string id_tram = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
+        // Regex reg = new Regex("[*'\",_&#^@]");
+        
         invList = myINV.get_danh_sach_hddt(id_tram, kyhd, "2");
         int i;
         string fkey;
@@ -73,21 +78,22 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
         {
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
-       
-       // Literal txtPNL = new Literal();
-      //  txtPNL.Text = htmlInv;
-       // pnlContents.Controls.Add(txtPNL);
-       // Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "PrintPanel()", true);
-        //var pdf = Renderer.RenderHtmlAsPdf(htmlInv);
-       // pdf.SaveAs("/Invoice.pdf");
-        using (FileStream fs = new FileStream(Server.MapPath("RepConvertInv\\test.htm"), FileMode.Create))
-        {
-            using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
-            {
-                w.WriteLine(htmlInv);               
-            }
-        } 
 
+        var pdf = Renderer.RenderHtmlAsPdf(htmlInv);
+        string pdffilename = "RepConvertInv\\inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
+        //string pdfdownloadname = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
+        pdf.SaveAs(Server.MapPath(pdffilename));
+        string zipfilename = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".zip";
+
+        //using (ZipFile zip = new ZipFile())
+        //{
+        //    zip.AddFile(pdfdownloadname);//Zip file inside filename  
+        //    zip.Save(Response.OutputStream);//location and name for creating zip file  
+        //}
+
+        //Response.ContentType = "application/pdf";
+        //Response.AddHeader("Content-Disposition", @"attachment;filename=" + zipfilename);
+        Response.Redirect(pdffilename);
     }
 
     protected void drpTram_SelectedIndexChanged(object sender, EventArgs e)

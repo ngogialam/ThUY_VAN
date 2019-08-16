@@ -57,7 +57,7 @@
                 <div class="col-sm-3 mb-1">
                     <asp:DropDownList runat="server" ID="drpKy" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>
                 </div>
-                <div class="col-sm-4 mb-1">
+                <div class="col-sm-6 mb-1">
                     <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
                     <asp:Button ID="btnCapNhat" runat="server" Text="Cập nhật số liệu" CssClass="btn btn-success" OnClick="btnCapNhat_Click" />
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addKyModal">Thêm Kỳ HĐ</button>
