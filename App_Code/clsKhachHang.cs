@@ -47,6 +47,42 @@ public class clsKhachHang
         }
     }
 
+    //lay danh sách khach hang theo trạm biến áp
+    public DataTable get_danh_sach_khach_hang_thep_tram_bien_ap(String id_tramBAp)
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select a.* from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap and a.id_tram_bien_ap ='" + id_tramBAp + "' order by a.thu_tu";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
     //them moi khach hang
     public int them_moi_khach_hang(string ten_bang_gia, string ten_viet_tat, double don_gia, double tien_thue_vat, double phan_tram_thue, double gia_ban, int kich_hoat)
     {
@@ -228,7 +264,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "insert into tram_bien_ap values('" + id_tram_bien_ap + "',N'" + ten_tram_bien_ap + "',N'" + dia_chi + "',N'" + nguoi_phu_trach + "','" + ma_so_cong_to + "','" + he_so_nhan + "','" + trang_thai + "') ";
+            cmd.CommandText = "insert into tram_bien_ap (id_tram_bien_ap, ten_viet_tat, ten_tram_bien_ap, dia_chi, nguoi_phu_trach, ma_so_cong_to, he_so_nhan, trang_thai) values('" + id_tram_bien_ap + "', '', N'" + ten_tram_bien_ap + "',N'" + dia_chi + "',N'" + nguoi_phu_trach + "','" + ma_so_cong_to + "','" + he_so_nhan + "','" + trang_thai + "') ";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
@@ -703,6 +739,42 @@ public class clsKhachHang
             }
         }
     }
+    //Kiểm tra danh sách mã công tơ có bị trùng
+    public int check_list_ma_cong_to(string ma_cong_to)
+    {
+        int ma = 0;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = " SELECT * from dm_cong_to where ma_cong_to in (" + ma_cong_to + ")";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ma = dts.Tables[0].Rows.Count;
+            return ma;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
 
     public string get_ten_viet_tat_TBA(string id_tram_bien_ap)
     {
@@ -748,7 +820,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "insert into khach_hang(ma_kh,ten_kh,id_bang_gia,dia_chi,id_khu,id_tram_bien_ap,so_ho,he_so_ti,dien_thoai,mst_kh,cot_dien_so,sl_dong_ho,ma_cong_to,trang_thai,thu_tu,id_phuong_xa,id_huyen) values('" + ma_kh + "',N'" + ten_kh + "'," + id_bang_gia + ",N'" + dia_chi + "'," + id_khu + ",'" + id_tram_bien_ap + "'," + so_ho + "," + he_so_ti + ",'" + dien_thoai + "','" + mst_kh + "','" + cot_dien_so + "'," + sl_dong_ho + ",'" + ma_cong_to + "'," + trang_thai + "," + thu_tu + "," + id_phuong_xa + "," + id_huyen + ") ";
+            cmd.CommandText = string.Format("insert into khach_hang(ma_kh,ten_kh,id_bang_gia,dia_chi,id_khu,id_tram_bien_ap,so_ho,he_so_ti,dien_thoai,mst_kh,cot_dien_so,sl_dong_ho,ma_cong_to,trang_thai,thu_tu,id_phuong_xa,id_huyen) values('{0}', N'{1}', {2}, N'{3}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, '{12}', {13}, {14}, {15}, {16})", ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();

@@ -12,6 +12,11 @@
 
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <style>
+        .txtBox {
+            font-family:Arial;width:200px;
+        }
+    </style>
     <div class="row">
         <div class="col-12">
         </div>
@@ -31,7 +36,7 @@
 
                     <tr>
                         <td align="right" class="auto-style2">
-                            <span style="font-family: Arial">Id trạm biến áp (*):</span></span>
+                            <span style="font-family: Arial">Id trạm biến áp (*):</span>
                         </td>
                         <td style="text-align: left;" class="auto-style2">
                             <asp:textbox id="txtId" runat="server" width="200px" font-names="Arial"
@@ -42,7 +47,7 @@
                         </td>
 
                         <td class="auto-style2">
-                            <span style="font-family: Arial">Tên trạm biến áp (*):</span></span></td>
+                            <span style="font-family: Arial">Tên trạm biến áp (*):</span></td>
 
                         <td align="left" style="text-align: left;" class="auto-style4">
                             <asp:textbox id="txtTenTrạmBienAp" runat="server" width="200px" font-names="Arial" maxlength="50"></asp:textbox>
@@ -53,7 +58,7 @@
 
                     <tr>
                         <td align="right" class="auto-style2">
-                            <span style="font-family: Arial">Địa chỉ (*):</span></span></td>
+                            <span style="font-family: Arial">Địa chỉ (*):</span></td>
                         <td style="text-align: left;" class="auto-style2">
                             <asp:textbox id="txtDiaChi" runat="server" width="200px" font-names="Arial"
                                 maxlength="555"></asp:textbox>
@@ -61,18 +66,16 @@
                                 runat="server" controltovalidate="txtDiaChi" errormessage="Bạn phải nhập địa chỉ">*</asp:requiredfieldvalidator></td>
 
                         <td class="auto-style2">
-                            <span style="font-family: Arial">Người phụ trách (*):</span></span></td>
+                            <span style="font-family: Arial">Người phụ trách (*):</span></td>
 
                         <td align="left" style="text-align: left;" class="auto-style4">
-                            <asp:textbox id="txtNguoiPT" runat="server" width="200px" font-names="Arial" maxlength="50"></asp:textbox>
-                            <asp:requiredfieldvalidator id="RequiredFieldValidator3" runat="server" controltovalidate="txtNguoiPT"
-                                errormessage="Bạn phải nhập người phụ trách">*</asp:requiredfieldvalidator>
+                            <asp:DropDownList runat="server" ID="drpNguoiPhuTrach" DataValueField="ma_nv" DataTextField="ten_nv" Height="25px" width="200px" font-names="Arial" maxlength="50"></asp:DropDownList>
                         </td>
                     </tr>
 
                     <tr>
                         <td align="right" class="auto-style2">
-                            <span style="font-family: Arial">Mã số công tơ (*):</span></span></td>
+                            <span style="font-family: Arial">Mã số công tơ (*):</span></td>
                         <td style="text-align: left;" class="auto-style2">
                             <asp:textbox id="txtMaSoCT" runat="server" width="200px" font-names="Arial"
                                 maxlength="555"></asp:textbox>
@@ -82,10 +85,10 @@
                         </td>
 
                         <td class="auto-style2">
-                            <span style="font-family: Arial">Hệ số nhân (*):</span></span></td>
+                            <span style="font-family: Arial">Hệ số nhân (*):</span></td>
 
                         <td align="left" style="text-align: left;" class="auto-style4">
-                            <asp:TextBox ID="txtHeSoNhan" runat="server" onkeypress="return isNumberKey(event)"></asp:TextBox>
+                            <asp:TextBox ID="txtHeSoNhan" runat="server" onkeypress="return isNumberKey(event)" width="200px"></asp:TextBox>
                             <asp:requiredfieldvalidator id="RequiredFieldValidator5" runat="server" controltovalidate="txtHeSoNhan"
                                 errormessage="Bạn phải nhập hệ số nhân">*</asp:requiredfieldvalidator>
                         </td>
@@ -93,7 +96,7 @@
 
                     <tr>
                         <td align="right" class="auto-style2">
-                            <span style="font-family: Arial">Trạng thái (*):</span></span></td>
+                            <span style="font-family: Arial">Trạng thái (*):</span></td>
                         <td style="text-align: left;" class="auto-style2">
                             <asp:CheckBox ID="ckbTrangThai" runat="server" text ="Kích hoạt" width ="200px" TextAlign ="right"/>  
                         </td>

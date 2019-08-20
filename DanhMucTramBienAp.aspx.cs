@@ -16,11 +16,15 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
     clsKhachHang myCus = new clsKhachHang();
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
+    DataTable EmployList = new DataTable();
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            EmployList = myCus.get_danh_sach_nhan_vien();
+            drpNguoiPhuTrach.DataSource = EmployList;
+            drpNguoiPhuTrach.DataBind();
             gv_bind();
         }
 
@@ -51,14 +55,14 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
             txtId.Text = id.Text;
             txtTenTramBA.Text = tenTramBienAp.Text;
             txtDiaChi.Text = diaChi.Text;
-            txtNguoiPT.Text = nguoiPT.Text;
+            drpNguoiPhuTrach.SelectedValue = nguoiPT.Text;
             txtMaSoCT.Text = maCongTo.Text;
             txtHeSoNhan.Text = heSoNhan.Text;
-            
+
             //if (myCus.kt_trang_thai(Convert.ToInt32(id.Text)) == 1)
-                //ckbTrangThai.Checked = true;
+            //ckbTrangThai.Checked = true;
             //else
-               // ckbTrangThai.Checked = false;
+            // ckbTrangThai.Checked = false;
             //ckbTrangThai.Checked = trangThai.Text;
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -77,7 +81,7 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
         string idTramBA = txtId.Text;
         string tenTramBA = txtTenTramBA.Text;
         string diaChi = txtDiaChi.Text;
-        string nguoiPT = txtNguoiPT.Text;
+        string nguoiPT = drpNguoiPhuTrach.SelectedValue;
         string maSoCT = txtMaSoCT.Text;
         int heSoNhan = Convert.ToInt32(txtHeSoNhan.Text);
         string log = "Sửa trạm biến áp" + idTramBA;
@@ -86,7 +90,17 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
 
         myCus.cap_nhat_tram_bien_ap(idTramBA, tenTramBA, diaChi, nguoiPT, maSoCT, heSoNhan, trangThai);
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-        
+
         Response.Redirect("DanhMucTramBienAp.aspx");
+    }
+
+    protected string Convert_NguoiPhuTrach(object id_nguoiPT)
+    {
+        string result = "";
+        DataRow[] rowResult = EmployList.Select("ma_nv = '" + (string) id_nguoiPT + "'");
+        if (rowResult.Length > 0) {
+            result = rowResult[0].Field<string>("ten_nv");
+        }
+        return result;
     }
 }

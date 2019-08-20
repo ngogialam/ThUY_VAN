@@ -14,14 +14,22 @@ using System.Data.SqlClient;
 public partial class ThemTramBienAp : System.Web.UI.Page
 {
     clsKhachHang myCus = new clsKhachHang();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            drpNguoiPhuTrach.DataSource = myCus.get_danh_sach_nhan_vien();
+            drpNguoiPhuTrach.DataBind();
+        }
 
+    }
     protected void ThemTramBienAp_Click(object sender, EventArgs e)
     {
 
         string idTramBA = txtId.Text;
         string tenTramBA = txtTenTrạmBienAp.Text;
         string diaChi = txtDiaChi.Text;
-        string nguoiPT = txtNguoiPT.Text;
+        string nguoiPT = drpNguoiPhuTrach.SelectedValue;
         string maSoCT = txtMaSoCT.Text;
         int heSoNhan = Convert.ToInt32(txtHeSoNhan.Text);
         int kichHoat = 0;
@@ -40,7 +48,6 @@ public partial class ThemTramBienAp : System.Web.UI.Page
         txtId.Text = "";
         txtTenTrạmBienAp.Text = "";
         txtDiaChi.Text = "";
-        txtNguoiPT.Text = "";
         txtMaSoCT.Text ="";
         txtHeSoNhan.Text= "";
         ckbTrangThai.Checked = false;

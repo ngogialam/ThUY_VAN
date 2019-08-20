@@ -30,14 +30,14 @@
 
                     <tr>
                         <td class="auto-style6">
-                            <span style="font-family: Arial">Tên KH (*):</span></span></td>
+                            <span style="font-family: Arial">Tên KH (<span style="color: red">*</span>):</span></span></td>
                            
                         <td align="left" style="text-align: left;" class="auto-style7">
                             <asp:TextBox ID="txtTenKh" runat="server" Width="200px" Font-Names="Arial" MaxLength="50"></asp:TextBox>
                             </td>
                         
-                            <td align="right" class="auto-style6" >
-                                <span style="font-family: Arial">Địa chỉ (*):</span></span></td>
+                            <td align="left" class="auto-style6" >
+                                <span style="font-family: Arial">Địa chỉ (<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left;" class="auto-style6">
                             <asp:TextBox ID="txtDiaChi" runat="server" Width="292px" Font-Names="Arial"
                                 MaxLength="555"></asp:TextBox></td>
@@ -45,13 +45,13 @@
 
                     <tr>
                         <td class="auto-style6">
-                            <span style="font-family: Arial">Huyện (*):</span></span></td>
+                            <span style="font-family: Arial">Huyện (<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left;" class="auto-style7">
                             <asp:DropDownList ID="ddlHuyen" runat="server" DataTextField="ten_huyen" DataValueField="id_Huyen" Width="200px" Height="27px">
                             </asp:DropDownList>
                         </td>
-                        <td class="auto-style10">
-                            <span style="font-family: Arial">Phường/Xã (*):</span></span></td>
+                        <td class="auto-style6">
+                            <span style="font-family: Arial">Phường/Xã (<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left" class="auto-style6">
                             <asp:DropDownList ID="ddlPhuongXa" runat="server" DataTextField="ten_phuong_xa" DataValueField="id_phuong_xa" Width="200px" Height="27px">
                             </asp:DropDownList>
@@ -62,13 +62,13 @@
                     
                     <tr>
                         <td class="auto-style6">
-                            Khu<span style="font-family: Arial"> (*):</span></span></td>
+                            Khu<span style="font-family: Arial"> (<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left;" class="auto-style7">
                             <asp:DropDownList ID="cbKhu" runat="server" DataTextField="ten_khu" DataValueField="id_khu" Width="200px" Height="27px">
                             </asp:DropDownList>
                         </td>
-                        <td class="auto-style10">
-                            Số<span style="font-family: Arial"> điện thoại (*):</span></span></td>
+                        <td class="auto-style6">
+                            Số<span style="font-family: Arial"> điện thoại (<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left" class="auto-style6">
                             <asp:TextBox ID="txtSoDT" runat="server" Width="200px" Font-Names="Arial" 
                                 MaxLength="255"></asp:TextBox>
@@ -84,7 +84,7 @@
                             DataValueField="id_tram_bien_ap" Width="200px" Height="27px">
                         </asp:DropDownList>
                         </td>
-                        <td class="auto-style10">
+                        <td class="auto-style6">
                             Số hộ<span style="font-family: Arial">:</span></td>
                         <td style="text-align: left" class="auto-style6">
                             <asp:TextBox ID="txtSoHo" runat="server" Width="88px" Font-Names="Arial" 
@@ -100,7 +100,7 @@
                             DataValueField="id_bang_gia" Width="200px" Height="27px">
                         </asp:DropDownList>
                         </td>
-                        <td class="auto-style10">
+                        <td class="auto-style6">
                             Hệ số TI<span style="font-family: Arial">:</span></td>
                         <td style="text-align: left" class="auto-style6">
                             <asp:TextBox ID="txtHesoTI" runat="server" Width="88px" Font-Names="Arial" 
@@ -110,14 +110,14 @@
 
                      <tr>
                         <td class="auto-style6">
-                            <span style="font-family: Arial">Mã số thuế(*):</span></span></td>
+                            <span style="font-family: Arial">Mã số thuế(<span style="color: red">*</span>):</span></span></td>
                            
                         <td align="left" style="text-align: left;" class="auto-style7">
                             <asp:TextBox ID="txtMST" runat="server" Width="200px" Font-Names="Arial" MaxLength="50"></asp:TextBox>
                             </td>
                         
-                            <td align="right" class="auto-style6" >
-                                <span style="font-family: Arial">Cột điện số(*):</span></span></td>
+                            <td align="left" class="auto-style6" >
+                                <span style="font-family: Arial">Cột điện số(<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left;" class="auto-style6">
                             <asp:TextBox ID="txtCotDienSo" runat="server" Width="200px" Font-Names="Arial"
                                 MaxLength="555">0</asp:TextBox>&nbsp;</td>
@@ -125,14 +125,14 @@
 
                     <tr>
                         <td class="auto-style6">
-                            <span style="font-family: Arial">SL đồng hồ(*):</span></span></td>
+                            <span style="font-family: Arial">SL đồng hồ(<span style="color: red">*</span>):</span></span></td>
                            
                         <td align="left" style="text-align: left;" class="auto-style7">
                             <asp:TextBox ID="txtSLDH" runat="server" Width="200px" Font-Names="Arial" MaxLength="50">1</asp:TextBox>
                             </td>
                         
-                            <td align="right" class="auto-style6" >
-                                <span style="font-family: Arial">Mã công tơ(*):</span></span></td>
+                            <td align="left" class="auto-style6" >
+                                <span style="font-family: Arial">Mã công tơ (phân tách bởi dấu '|') (<span style="color: red">*</span>) :</span></span></td>
                         <td style="text-align: left;" class="auto-style6">
                             <asp:TextBox ID="txtMaCongTo" runat="server" Width="200px" Font-Names="Arial"
                                 MaxLength="555"></asp:TextBox>&nbsp;</td>
@@ -140,14 +140,14 @@
 
                     <tr>
                         <td class="auto-style6">
-                            <span style="font-family: Arial">Trạng thái(*):</span></span></td>
+                            <span style="font-family: Arial">Trạng thái(<span style="color: red">*</span>):</span></span></td>
                            
                         <td align="left" style="text-align: left;" class="auto-style7">
                             <asp:TextBox ID="txtTrangThai" runat="server" Width="200px" Font-Names="Arial" MaxLength="50">1</asp:TextBox>
                             </td>
                         
-                            <td align="right" class="auto-style6" >
-                                <span style="font-family: Arial">Thứ tự(*):</span></span></td>
+                            <td align="left" class="auto-style6" >
+                                <span style="font-family: Arial">Thứ tự(<span style="color: red">*</span>):</span></span></td>
                         <td style="text-align: left;" class="auto-style6">
                             <asp:TextBox ID="txtThuTu" runat="server" Width="200px" Font-Names="Arial"
                                 MaxLength="555"></asp:TextBox>&nbsp;</td>
@@ -199,7 +199,7 @@
             height: 35px;
             width: 311px;
         }
-        .auto-style10
+        .auto-style6
         {
             width: 120px;
             height: 35px;

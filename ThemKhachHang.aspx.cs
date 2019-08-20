@@ -69,7 +69,6 @@ public partial class ThemKhachHang : System.Web.UI.Page
         string mst_kh=txtMST.Text.Trim();
         string cot_dien_so=txtCotDienSo.Text.Trim();
         int sl_dong_ho=int.Parse(txtSLDH.Text.Trim());
-        string ma_cong_to=txtMaCongTo.Text.Trim();
         int trang_thai = 0;
         if(txtTrangThai.Text.Trim() !="0" || txtTrangThai.Text.Trim() !="1")
             trang_thai = 0;
@@ -80,8 +79,9 @@ public partial class ThemKhachHang : System.Web.UI.Page
         int id_huyen=int.Parse(ddlHuyen.SelectedValue.ToString());
         string ky_hd = DateTime.Now.Month + "/" + DateTime.Now.Year;
         if (DateTime.Now.Month < 10) ky_hd = "0" + ky_hd;
-
-        int check_ma = myCus.check_ma_cong_to(ma_cong_to);
+        string ma_cong_to = txtMaCongTo.Text.Trim();
+        string[] list_ma_cong_to = ma_cong_to.Split('|');
+        int check_ma = myCus.check_list_ma_cong_to(string.Join(", ", list_ma_cong_to));
         if (check_ma >= 1)
         {
             txtErr.Text = "Mã công tơ đã tồn tại, vui lòng kiểm tra lại !";
@@ -92,13 +92,22 @@ public partial class ThemKhachHang : System.Web.UI.Page
             {
                 //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
                 int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen);
-                int j = myCus. them_moi_cong_to(ma_cong_to,ma_kh,he_so_ti);
-                int k = myCus.them_moi_chi_so_cong_to(ma_cong_to,ky_hd);
-
-                if (i == 0 || j ==0 || k==0)
+                if (i == 0)
+                {
                     txtErr.Text = "Thêm mới khách hàng thất bại!";
+                }
                 else
+                {
                     txtErr.Text = "Thêm mới khách hàng thành công!";
+                }
+                foreach (string unique_ma_cto in list_ma_cong_to)
+                { 
+                    if (unique_ma_cto.Trim() != "" & i != 0)
+                    {
+                        int j = myCus.them_moi_cong_to(unique_ma_cto, ma_kh, he_so_ti);
+                        int k = myCus.them_moi_chi_so_cong_to(unique_ma_cto, ky_hd);
+                    }
+                }
             }
             else
             {

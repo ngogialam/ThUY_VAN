@@ -19,8 +19,18 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <asp:Button ID="btnThemMoi" runat="server" Text="Thêm mới" PostBackUrl="~/ThemKhachHang.aspx"
+            <div class="row">
+                <div class="col-sm-6 mb-1">
+                    <asp:Button ID="btnThemMoi" runat="server" Text="Thêm mới" PostBackUrl="~/ThemKhachHang.aspx"
                 CssClass="btn btn-primary" />
+                </div>
+                <div class="col-sm-3 mb-1">
+                    <asp:DropDownList runat="server" ID="drpTramBienAp" DataValueField="id_tram_bien_ap" DataTextField="ten_tram_bien_ap" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="col-sm-3 mb-1">
+                    <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click"/>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 
 public partial class DanhSachKhachHang : System.Web.UI.Page
 {
+    clsNhapChiSo myNCS = new clsNhapChiSo();
     clsKhachHang myCus = new clsKhachHang();
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
@@ -23,21 +24,25 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            gv_bind();
-
+            gv_bind("");
+            drpTramBienAp.DataSource = myNCS.get_danh_sach_tba();
+            drpTramBienAp.DataBind();
         }
 
     }
-    protected void gv_bind()
+    protected void gv_bind(string id_tramba)
     {
-        CusList = myCus.get_danh_sach_khach_hang();
+        CusList = myCus.get_danh_sach_khach_hang_thep_tram_bien_ap(id_tramba);
         if (CusList.Rows.Count > 0)
         {
 
             GirdView.DataSource = CusList;
             GirdView.DataBind();
         }
-        GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+        if (CusList.Rows.Count > 0)
+        {
+            GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
 
         //DataTable DiaBanList = myCus.get_danh_muc_khu();
         //ddlKhu.DataSource = DiaBanList;
@@ -161,5 +166,11 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
        
         Response.Redirect("DanhSachKhachHang.aspx");
     }
-   
+
+    protected void btnLaySL_Click(object sender, EventArgs e)
+    {
+        string id_tram = drpTramBienAp.SelectedValue.ToString();
+        gv_bind(id_tram);
+    }
+    
 }

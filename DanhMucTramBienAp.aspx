@@ -42,6 +42,11 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Người phụ trách">
                             <ItemTemplate>
+                                <asp:Label ID="lblTenNguoiPhuTrach" runat="server" Text='<%# Convert_NguoiPhuTrach(Eval("nguoi_phu_trach")) %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Mã người phụ trách"  Visible="false">
+                            <ItemTemplate>
                                 <asp:Label ID="lblNguoiPhuTrach" runat="server" Text='<%# Eval("nguoi_phu_trach") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -99,7 +104,7 @@
                             </div>
                             <div class="row mx5">
                                 <label>Người phụ trách</label>
-                                <asp:TextBox ID="txtNguoiPT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                <asp:DropDownList runat="server" ID="drpNguoiPhuTrach" DataValueField="ma_nv" DataTextField="ten_nv" CssClass="form-control input-lg"></asp:DropDownList>
 
                             </div>
                             <div class="row mx5">
