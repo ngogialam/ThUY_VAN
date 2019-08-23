@@ -54,12 +54,21 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bán hàng">
-                    <a class="nav-link" href='<%= ResolveUrl("NhapChiSo.aspx")%>'>
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#NhapChiSo"
+                        data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-cart-plus" style="font-size: 20px"></i>
                         <span class="nav-link-text" style="font-size: 18px">Nhập chỉ số</span>
                     </a>
+                    <ul class="sidenav-second-level collapse" id="NhapChiSo">
+                        <li>
+                            <a href='<%= ResolveUrl("NhapChiSo.aspx")%>'>Chỉ số công tơ</a>
+                        </li>
+                        <li>
+                            <a href='<%= ResolveUrl("ChiSoCongToTong.aspx")%>'>Chỉ số công tơ tổng</a>
+                        </li>
+                    </ul>
                 </li>
-              <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Hóa đơn">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Hóa đơn">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#HoaDon"
                         data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-address-book-o" style="font-size: 20px"></i>
@@ -78,7 +87,7 @@
                         <li>
                             <a href='<%= ResolveUrl("DanhSachHoaDon.aspx")%>'>Danh sách HDDT</a>
                         </li>
-                      
+
                     </ul>
                 </li>
 
@@ -96,16 +105,16 @@
                             <a href='<%= ResolveUrl("DanhMucTramBienAp.aspx")%>'>Danh mục trạm biến áp</a>
                         </li>
                         <li>
-                            <a href='<%= ResolveUrl("DanhSachKhachHang.aspx")%>'>DS khách hàng</a>
+                            <a href='<%= ResolveUrl("DanhSachKhachHang.aspx")%>'>Danh mục khách hàng</a>
                         </li>
                         <li>
-                            <a href='<%= ResolveUrl("DanhMucKhu.aspx")%>'>DS khu</a>
+                            <a href='<%= ResolveUrl("DanhMucNhanVien.aspx")%>'>Danh mục nhân viên</a>
+                        </li>
+                        <li>
+                            <a href='<%= ResolveUrl("DanhMucKhu.aspx")%>'>Danh mục khu</a>
                         </li>
                         <li>
                             <a href='<%= ResolveUrl("DanhSachKyHD.aspx")%>'>Kỳ hóa đơn</a>
-                        </li>
-                        <li>
-                            <a href='<%= ResolveUrl("DanhMucNhanVien.aspx")%>'>DS nhân viên</a>
                         </li>
                     </ul>
                 </li>

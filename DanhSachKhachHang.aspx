@@ -36,6 +36,11 @@
             <div class="table-responsive">
                 <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
+                        <asp:TemplateField HeaderText="STT">
+                            <ItemTemplate>
+                                <asp:Label ID="lblStt" runat="server" Text='<%# Eval("thu_tu") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã">
                             <ItemTemplate>
                                 <asp:Label ID="lblMaKH" runat="server" Text='<%# Eval("ma_kh") %>'></asp:Label>

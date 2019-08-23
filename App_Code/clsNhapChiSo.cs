@@ -59,6 +59,43 @@ public class clsNhapChiSo
         }
 
     }
+    public DataTable get_danh_sach_nhap_cs_tong(string ky)
+    {
+        SqlConnection myConn = null;
+        string sql = "";
+        sql = string.Format("select a.*, b.ten_tram_bien_ap, b.trang_thai, (a.cs_moi - a.cs_cu) as so_mua, e.so_ban from chi_so_cong_to_tong as a, tram_bien_ap as b, (select c.id_tram_bien_ap, sum(d.cs_moi - d.cs_cu) as so_ban from khach_hang as c, chi_so_cong_to as d where c.ma_cong_to like CONCAT('%', d.ma_cong_to, '%') and d.ky = '{0}' group by c.id_tram_bien_ap) as e where a.ma_cong_to = b.ma_so_cong_to and a.ky = '{0}' and b.trang_thai = 1 and e.id_tram_bien_ap = b.id_tram_bien_ap", ky);
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+
+    }
     public DataTable get_danh_sach_lap_hd(string id_tramba, string ky)
     {
         SqlConnection myConn = null;
@@ -421,6 +458,41 @@ public class clsNhapChiSo
             }
         }
     }
+
+    public int check_cs_ct_tong(string mact, string ky)
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select * from chi_so_cong_to_tong where ma_cong_to = '" + mact + "' and ky='" + ky + "'";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0].Rows.Count;
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     public int cap_nhat_chi_so(string mact, string csmoi, string ky)
     {
         clsConnect cnstr = new clsConnect();
@@ -449,6 +521,34 @@ public class clsNhapChiSo
         }
         return recordsAffected;
     }
+    public int cap_nhat_chi_so_cong_to_tong(string mact, string csmoi, string ky)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        int recordsAffected = 0;
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            cmd.CommandText = string.Format("update chi_so_cong_to_tong set cs_moi = {1}, ngay_cap_nhat = CONVERT(Datetime, GETDATE(), 103) where ma_cong_to = '{0} ' and ky = '{2}'", mact, csmoi, ky);
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
     public int them_chi_so_ky_moi(string mact, string csmoi, string kymoi)
     {
         clsConnect cnstr = new clsConnect();
@@ -461,6 +561,34 @@ public class clsNhapChiSo
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
             cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to,cs_cu,ky,ngay_capnhat) values ('" + mact + "'," + csmoi + ",'" + kymoi + "',CONVERT( Datetime, GETDATE() ,103))";
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
+    public int them_chi_so_cong_to_tong_ky_moi(string mact, string csmoi, string kymoi)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        int recordsAffected = 0;
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            cmd.CommandText = string.Format("insert into chi_so_cong_to_tong (ma_cong_to, cs_cu, cs_moi, ky, ngay_cap_nhat) values ('{0}', {1}, {1}, '{2}',CONVERT( Datetime, GETDATE() ,103))", mact, csmoi, kymoi);
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
