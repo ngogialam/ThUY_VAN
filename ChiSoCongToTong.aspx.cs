@@ -11,6 +11,11 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Web.Services;
 using System.Web.UI.HtmlControls;
+using NPOI.HSSF.UserModel;
+using NPOI.HPSF;
+using NPOI.POIFS.FileSystem;
+using NPOI.HSSF.Util;
+
 public partial class ChiSoCongToTong : System.Web.UI.Page
 {
     clsKhachHang myCus = new clsKhachHang();
@@ -144,108 +149,242 @@ public partial class ChiSoCongToTong : System.Web.UI.Page
         int colNo;
 
         FileStream file = new FileStream(Server.MapPath("xls/ChiSoCongToTong.xls"), FileMode.Open, FileAccess.Read);
-        //HSSFWorkbook hwbook = new HSSFWorkbook(file);
-        //HSSFRow row;
-        //HSSFCell cell;
-        //HSSFSheet hsheet;
+        // Khởi tạo workbook để đọc
+        HSSFWorkbook hwbook = new HSSFWorkbook(file);
+        HSSFRow row;
+        HSSFCell cell;
+        HSSFSheet hsheet;
 
-        //HSSFFont font;
-        //font = hwbook.CreateFont();
-        //font.FontName = "Times New Roman";
-        //font.Boldweight = HSSFFont.BOLDWEIGHT_BOLD;
-        //font.FontHeight = 220;
-        //hsheet = hwbook.GetSheet("Sheet1");
-        //HSSFCellStyle styleleftnoborder;
-        //styleleftnoborder = hwbook.CreateCellStyle();
-        //styleleftnoborder.Alignment = HSSFCellStyle.ALIGN_LEFT;
-        //styleleftnoborder.SetFont(font);
-        //HSSFCellStyle stylecenternoborder;
-        //stylecenternoborder = hwbook.CreateCellStyle();
-        //stylecenternoborder.Alignment = HSSFCellStyle.ALIGN_CENTER;
-        //stylecenternoborder.SetFont(font);
-        //rowNo = 0;
-        //colNo = 0;
-        //row = hsheet.CreateRow(rowNo);
-        //cell = row.CreateCell(colNo);
-        //cell.SetCellValue(mConfig.cfg_ten_ban_nganh);
-        //cell.CellStyle = styleleftnoborder;
-        //rowNo = 1;
-        //colNo = 0;
-        //row = hsheet.CreateRow(rowNo);
-        //cell = row.CreateCell(colNo);
-        //cell.SetCellValue("ĐƠN VỊ: " + UCase(Session("VAN_BAN_TEN_DON_VI")));
-        //cell.CellStyle = styleleftnoborder;
+        HSSFFont font;
+        font = hwbook.CreateFont();
+        font.FontName = "Times New Roman";
+        font.Boldweight = HSSFFont.BOLDWEIGHT_BOLD;
+        font.FontHeight = 220;
+        font.FontHeightInPoints = 13;
+        hsheet = hwbook.GetSheet("Sheet1");
+        HSSFCellStyle styleleftnoborder;
+        styleleftnoborder = hwbook.CreateCellStyle();
+        styleleftnoborder.Alignment = HSSFCellStyle.ALIGN_LEFT;
+        styleleftnoborder.SetFont(font);
+        HSSFCellStyle stylecenternoborder;
+        stylecenternoborder = hwbook.CreateCellStyle();
+        stylecenternoborder.Alignment = HSSFCellStyle.ALIGN_CENTER;
+        stylecenternoborder.SetFont(font);
 
-        //// CÁN BỘ
-        //font = hwbook.CreateFont();
-        //font.FontName = "Times New Roman";
-        //font.FontHeight = 220;
-        //HSSFCellStyle stylecenter;
-        //stylecenter = hwbook.CreateCellStyle();
-        //stylecenter.BorderTop = HSSFCellStyle.BORDER_THIN;
-        //stylecenter.BorderLeft = HSSFCellStyle.BORDER_THIN;
-        //stylecenter.BorderRight = HSSFCellStyle.BORDER_THIN;
-        //stylecenter.BorderBottom = HSSFCellStyle.BORDER_THIN;
-        //stylecenter.Alignment = HSSFCellStyle.ALIGN_CENTER;
-        //stylecenter.SetFont(font);
-        //HSSFCellStyle styleleft;
-        //styleleft = hwbook.CreateCellStyle();
-        //styleleft.BorderTop = HSSFCellStyle.BORDER_THIN;
-        //styleleft.BorderLeft = HSSFCellStyle.BORDER_THIN;
-        //styleleft.BorderRight = HSSFCellStyle.BORDER_THIN;
-        //styleleft.BorderBottom = HSSFCellStyle.BORDER_THIN;
-        //styleleft.Alignment = HSSFCellStyle.ALIGN_LEFT;
-        //styleleft.SetFont(font);
-        //rowNo = 10;
-        //colNo = 0;
-        //int stt = 0;
-        //DataSet dts;
-        //dts = myMain.getDataSet("DANHMUC.SELECT_DM_LOAI");
-        //for (j = 0; j <= dts.Tables(0).Rows.Count - 1; j++)
-        //{
-        //    row = hsheet.CreateRow(rowNo);
-        //    cell = row.CreateCell(colNo);
-        //    stt = stt + 1;
-        //    cell.SetCellValue(stt);
-        //    cell.CellStyle = stylecenter;
-        //    colNo += 1;
-        //    string tenloai = dts.Tables(0).Rows(j).Item("TEN_LOAI").ToString;
-        //    row = hsheet.CreateRow(rowNo);
-        //    cell = row.CreateCell(colNo);
-        //    cell.SetCellValue(tenloai);
-        //    cell.CellStyle = styleleft;
-        //    colNo += 1;
-        //    string tenlinhvuc = dts.Tables(0).Rows(j).Item("TEN_LINH_VUC").ToString;
-        //    row = hsheet.CreateRow(rowNo);
-        //    cell = row.CreateCell(colNo);
-        //    cell.SetCellValue(tenlinhvuc);
-        //    cell.CellStyle = styleleft;
-        //    rowNo += 1;
-        //    colNo = 0;
-        //}
-        //rowNo += 1;
-        //colNo = 2;
+        //Kỳ hợp đồng
+        try
+        {
+            string kyhd = "Tháng " + drpKy.SelectedItem.ToString().Split('/')[0] + " năm " + drpKy.SelectedItem.ToString().Split('/')[1];
+            rowNo = 3;
+            colNo = 3;
+            row = hsheet.CreateRow(rowNo);
+            cell = row.CreateCell(colNo);
+            cell.SetCellValue(kyhd);
+            cell.CellStyle = stylecenternoborder;
+        }
+        catch (Exception)
+        {
+
+        }
+
+        font = hwbook.CreateFont();
+        font.FontName = "Times New Roman";
+        font.FontHeight = 220;
+        font.FontHeightInPoints = 13;
+        HSSFCellStyle stylecenter;
+        stylecenter = hwbook.CreateCellStyle();
+        stylecenter.BorderTop = HSSFCellStyle.BORDER_THIN;
+        stylecenter.BorderLeft = HSSFCellStyle.BORDER_THIN;
+        stylecenter.BorderRight = HSSFCellStyle.BORDER_THIN;
+        stylecenter.BorderBottom = HSSFCellStyle.BORDER_THIN;
+        stylecenter.Alignment = HSSFCellStyle.ALIGN_CENTER;
+        stylecenter.SetFont(font);
+        HSSFCellStyle styleleft;
+        styleleft = hwbook.CreateCellStyle();
+        styleleft.BorderTop = HSSFCellStyle.BORDER_THIN;
+        styleleft.BorderLeft = HSSFCellStyle.BORDER_THIN;
+        styleleft.BorderRight = HSSFCellStyle.BORDER_THIN;
+        styleleft.BorderBottom = HSSFCellStyle.BORDER_THIN;
+        styleleft.Alignment = HSSFCellStyle.ALIGN_LEFT;
+        styleleft.SetFont(font);
+        HSSFCellStyle styleright;
+        styleright = hwbook.CreateCellStyle();
+        styleright.BorderTop = HSSFCellStyle.BORDER_THIN;
+        styleright.BorderLeft = HSSFCellStyle.BORDER_THIN;
+        styleright.BorderRight = HSSFCellStyle.BORDER_THIN;
+        styleright.BorderBottom = HSSFCellStyle.BORDER_THIN;
+        styleright.Alignment = HSSFCellStyle.ALIGN_RIGHT;
+        styleright.SetFont(font);
+        rowNo = 7;
+        colNo = 0;
+        int stt = 0;
+        float tong_so_mua = 0, tong_so_ban = 0;
+        DataTable dtb;
+        dtb = myNCS.get_danh_sach_nhap_cs_tong(drpKy.SelectedItem.ToString());
+        for (j = 0; j <= dtb.Rows.Count - 1; j++)
+        {
+            // STT
+            row = hsheet.CreateRow(rowNo);
+            cell = row.CreateCell(colNo);
+            stt = stt + 1;
+            cell.SetCellValue(stt);
+            cell.CellStyle = stylecenter;
+            colNo += 1;
+
+            // Mã trạm
+            string maTram = dtb.Rows[j]["ten_viet_tat"].ToString();
+            cell = row.CreateCell(colNo);
+            cell.SetCellValue(maTram);
+            cell.CellStyle = stylecenter;
+            colNo += 1;
+
+            // Tên trạm
+            string tenTram = dtb.Rows[j]["ten_tram_bien_ap"].ToString();
+            cell = row.CreateCell(colNo);
+            cell.SetCellValue(tenTram);
+            cell.CellStyle = styleleft;
+            colNo += 1;
+
+            // Sản lượng mua vào
+            float so_mua = float.Parse(dtb.Rows[j]["so_mua"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            cell = row.CreateCell(colNo);
+            if (so_mua > 0)
+            {
+                cell.SetCellValue(so_mua);
+                tong_so_mua += so_mua;
+            }
+            cell.CellStyle = styleright;
+            colNo += 1;
+
+            // Sản lượng bán ra
+            float so_ban = float.Parse(dtb.Rows[j]["so_ban"].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            cell = row.CreateCell(colNo);
+            if (so_ban > 0)
+            {
+                cell.SetCellValue(so_ban);
+                tong_so_ban += so_ban;
+            }
+            cell.CellStyle = styleright;
+            colNo += 1;
+
+            // KWh
+            cell = row.CreateCell(colNo);
+            if (so_mua >= so_ban)
+            {
+                cell.SetCellValue(so_mua - so_ban);
+            }
+            cell.CellStyle = styleright;
+            colNo += 1;
+
+            // % tổn thất
+            float percent = 0;
+            string tonThatPercent = "";
+            try
+            {
+                percent = 100 * (so_mua - so_ban) / so_mua;
+                if (percent > 0)
+                {
+                    tonThatPercent = percent.ToString("0.00") + " %";
+                }
+            }
+            catch
+            {
+                tonThatPercent = "%";
+            }
+            cell = row.CreateCell(colNo);
+            cell.SetCellValue(tonThatPercent);
+            cell.CellStyle = styleright;
+            colNo += 1;
+
+            // Ghi chú
+            string ghiChu = "";
+            cell = row.CreateCell(colNo);
+            cell.SetCellValue(ghiChu);
+            cell.CellStyle = styleright;
+
+            rowNo += 1;
+            colNo = 0;
+
+        }
+
+        // Tổng
+        colNo = 2;
+        string tong = "Tổng:";
+        row = hsheet.CreateRow(rowNo);
+        cell = row.CreateCell(colNo);
+        cell.SetCellValue(tong);
+        cell.CellStyle = styleright;
+        colNo += 1;
+
+        // Tổng sản lượng mua vào
+        cell = row.CreateCell(colNo);
+        if (tong_so_mua > 0)
+        {
+            cell.SetCellValue(tong_so_mua);
+        }
+        cell.CellStyle = styleright;
+        colNo += 1;
+
+        // Tổng sản lượng bán ra
+        cell = row.CreateCell(colNo);
+        cell.SetCellValue(tong_so_ban);
+        cell.CellStyle = styleright;
+        colNo += 1;
+
+        // Tổng KWh
+        cell = row.CreateCell(colNo);
+        if (tong_so_mua >= tong_so_ban)
+        {
+            cell.SetCellValue(tong_so_mua - tong_so_ban);
+        }
+        cell.CellStyle = styleright;
+        colNo += 1;
+
+        // Tổng % tổn thất
+        float tong_percent = 0;
+        string tong_tonThatPercent = "";
+        try
+        {
+            tong_percent = 100 * (tong_so_mua - tong_so_ban) / tong_so_mua;
+            if (tong_percent > 0)
+            {
+                tong_tonThatPercent = tong_percent.ToString("0.00") + " %";
+            }
+        }
+        catch
+        {
+            tong_tonThatPercent = "%";
+        }
+        cell = row.CreateCell(colNo);
+        cell.SetCellValue(tong_tonThatPercent);
+        cell.CellStyle = styleright;
+        colNo += 1;
+
+
+        // Người lập hóa đơn
+        //rowNo += 2;
+        //colNo = 6;
         //row = hsheet.CreateRow(rowNo);
         //cell = row.CreateCell(colNo);
         //cell.SetCellValue("Ngày.... tháng..... năm.....");
         //cell.CellStyle = stylecenternoborder;
         //rowNo += 1;
-        //colNo = 2;
+        //colNo = 6;
         //row = hsheet.CreateRow(rowNo);
         //cell = row.CreateCell(colNo);
-        //cell.SetCellValue("Nhân viên lập");
+        //cell.SetCellValue("Nhân viên xuất");
         //cell.CellStyle = stylecenternoborder;
         //rowNo += 4;
-        //colNo = 2;
+        //colNo = 6;
         //row = hsheet.CreateRow(rowNo);
         //cell = row.CreateCell(colNo);
-        //cell.SetCellValue(Session("VAN_BAN_HO_TEN"));
+        //cell.SetCellValue("Họ tên");
         //cell.CellStyle = stylecenternoborder;
-        //hwbook.Write(mem);
-        //Response.ContentType = "application/vnd.ms-excel";
-        //Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "LoaiVanBan.xls"));
-        //Response.Clear();
-        //Response.BinaryWrite(mem.GetBuffer());
-        //Response.End();
+        hwbook.Write(mem);
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "LoaiVanBan.xls"));
+        Response.Clear();
+        Response.BinaryWrite(mem.GetBuffer());
+        Response.End();
     }
 }

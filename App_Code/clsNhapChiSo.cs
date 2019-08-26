@@ -63,7 +63,7 @@ public class clsNhapChiSo
     {
         SqlConnection myConn = null;
         string sql = "";
-        sql = string.Format("select a.*, b.ten_tram_bien_ap, b.trang_thai, (a.cs_moi - a.cs_cu) as so_mua, e.so_ban from chi_so_cong_to_tong as a, tram_bien_ap as b, (select c.id_tram_bien_ap, sum(d.cs_moi - d.cs_cu) as so_ban from khach_hang as c, chi_so_cong_to as d where c.ma_cong_to like CONCAT('%', d.ma_cong_to, '%') and d.ky = '{0}' group by c.id_tram_bien_ap) as e where a.ma_cong_to = b.ma_so_cong_to and a.ky = '{0}' and b.trang_thai = 1 and e.id_tram_bien_ap = b.id_tram_bien_ap", ky);
+        sql = string.Format("select a.*, b.*, (a.cs_moi - a.cs_cu) as so_mua, e.so_ban from chi_so_cong_to_tong as a, tram_bien_ap as b, (select c.id_tram_bien_ap, sum(d.cs_moi - d.cs_cu) as so_ban from khach_hang as c, chi_so_cong_to as d where c.ma_cong_to like CONCAT('%', d.ma_cong_to, '%') and d.ky = '{0}' group by c.id_tram_bien_ap) as e where a.ma_cong_to = b.ma_so_cong_to and a.ky = '{0}' and b.trang_thai = 1 and e.id_tram_bien_ap = b.id_tram_bien_ap", ky);
         try
         {
             clsConnect cnstr = new clsConnect();
