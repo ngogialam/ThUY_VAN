@@ -153,7 +153,11 @@
                                 MaxLength="555"></asp:TextBox>&nbsp;</td>
                     </tr>
 
-
+                    <tr>
+                        <td class="auto-style6">
+                            <input type="checkbox" runat="server" id="ckSms" /> Gửi sms khi xuất hóa đơn
+                        </td>
+                    </tr>
                     <tr style="font-size: 13px">
                         <td >
                             &nbsp;</td>

@@ -58,6 +58,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         Label name = (Label)row.FindControl("lblTenKH");
         Label diachi = (Label)row.FindControl("lblDiaChi");
         Label dt = (Label)row.FindControl("lblDienThoai");
+        Label sms = (Label)row.FindControl("lblNumSms");
         Label thutu = (Label)row.FindControl("lblThuTu");
         Label iddb = (Label)row.FindControl("lblKhu");
 
@@ -99,6 +100,17 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             DataTable bang_gia_dien = myBC.get_bang_gia_dien();
             cbBangGia.DataSource = bang_gia_dien;
             cbBangGia.DataBind();
+
+            DataTable tblSms = new DataTable();
+            tblSms.Columns.Add(new DataColumn("trang_thai", typeof(int)));
+            tblSms.Columns.Add(new DataColumn("ten", typeof(String)));
+
+            // Thêm row trạng thái sms
+            tblSms.Rows.Add(1, "Có");
+            tblSms.Rows.Add(0, "Không");
+            drpSms.DataSource = tblSms;
+            drpSms.DataBind();
+            drpSms.SelectedValue = sms.Text;
 
 
             txtMaKH.Text = id.Text;
@@ -146,6 +158,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         int so_ho=int.Parse(txtSoHo.Text);
         float he_so_ti=float.Parse(txtHSTi.Text);
         string dien_thoai=txtSoDT.Text;
+        int sms = int.Parse(drpSms.SelectedValue);
         string mst_kh=txtMstKH.Text.ToString();
         string cot_dien_so=txtSoCot.Text;
         int sl_dong_ho=int.Parse(txtSoDongHo.Text);
@@ -161,7 +174,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string log = "Sửa khách hàng mã " + ma_kh;
        
 
-        myCus.cap_nhat_khach_hang( ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen);
+        myCus.cap_nhat_khach_hang( ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
        
         Response.Redirect("DanhSachKhachHang.aspx");

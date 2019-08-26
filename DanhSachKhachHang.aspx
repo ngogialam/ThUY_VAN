@@ -1,12 +1,11 @@
-﻿
-<%--<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ThongKeBangThong.aspx.cs" Inherits="BaoCao_ThongKeBangThong" %>--%>
+﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ThongKeBangThong.aspx.cs" Inherits="BaoCao_ThongKeBangThong" %>--%>
 
 <%@ Page Language="C#" Title="Danh mục khách hàng" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DanhSachKhachHang.aspx.cs" Inherits="DanhSachKhachHang" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script>
 
-    </script>
+</script>
 
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
@@ -22,13 +21,13 @@
             <div class="row">
                 <div class="col-sm-6 mb-1">
                     <asp:Button ID="btnThemMoi" runat="server" Text="Thêm mới" PostBackUrl="~/ThemKhachHang.aspx"
-                CssClass="btn btn-primary" />
+                        CssClass="btn btn-primary" />
                 </div>
                 <div class="col-sm-3 mb-1">
                     <asp:DropDownList runat="server" ID="drpTramBienAp" DataValueField="id_tram_bien_ap" DataTextField="ten_tram_bien_ap" CssClass="form-control"></asp:DropDownList>
                 </div>
                 <div class="col-sm-3 mb-1">
-                    <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click"/>
+                    <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
                 </div>
             </div>
         </div>
@@ -51,7 +50,7 @@
                                 <asp:Label ID="lblTenKH" runat="server" Text='<%# Eval("ten_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Id bảng giá">
+                        <asp:TemplateField HeaderText="Id bảng giá">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdBangGia" runat="server" Text='<%# Eval("id_bang_gia") %>'></asp:Label>
                             </ItemTemplate>
@@ -66,7 +65,7 @@
                                 <asp:Label ID="lblKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Id trạm biến áp">
+                        <asp:TemplateField HeaderText="Id trạm biến áp">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdBA" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
@@ -84,6 +83,16 @@
                         <asp:TemplateField HeaderText="Điện thoại">
                             <ItemTemplate>
                                 <asp:Label ID="lblDienThoai" runat="server" Text='<%# Eval("dien_thoai") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Gửi SMS">
+                            <ItemTemplate>
+                                <asp:Label ID="lblSms" runat="server" Text='<%# (int)Eval("sms") == 1 ? "Có": "Không" %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Trạng thái SMS" Visible="False">
+                            <ItemTemplate>
+                                <asp:Label ID="lblNumSms" runat="server" Text='<%# Eval("sms") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mst khách hàng" Visible="False">
@@ -158,7 +167,7 @@
                                 <asp:TextBox ID="txtTenKh" runat="server" CssClass="form-control input-lg"></asp:TextBox>
 
                             </div>
-                            
+
                             <div class="row mx5">
                                 <label>Địa chỉ</label>
                                 <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
@@ -204,6 +213,10 @@
                                 <asp:TextBox ID="txtSoDT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                             <div class="row mx5">
+                                <label>Gửi sms</label>
+                                <asp:DropDownList ID="drpSms" runat="server" CssClass="form-control input-lg" DataTextField="ten" DataValueField="trang_thai"></asp:DropDownList>
+                            </div>
+                            <div class="row mx5">
                                 <label>Mã Mst KH</label>
                                 <asp:TextBox ID="txtMstKH" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
@@ -219,7 +232,7 @@
                                 <label>Mã công tơ</label>
                                 <asp:TextBox ID="txtMaCongTo" runat="server" Enabled="false" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
-                             <div class="row mx5">
+                            <div class="row mx5">
                                 <label>Trạng thái</label>
                                 <div style="text-align: left;" class="auto-style2" id=" trangthai">
                                     <asp:CheckBox ID="ckbTrangThai" runat="server" Checked="true" Text="Kích hoạt" Width="200px" TextAlign="right" />

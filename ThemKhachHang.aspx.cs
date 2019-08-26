@@ -66,7 +66,8 @@ public partial class ThemKhachHang : System.Web.UI.Page
         int so_ho=int.Parse(txtSoHo.Text.Trim());
         float he_so_ti=float.Parse(txtSoHo.Text.Trim());
         string dien_thoai=txtSoDT.Text.ToString().Trim();
-        string mst_kh=txtMST.Text.Trim();
+        int sms = ckSms.Checked ? 1 : 0;
+        string mst_kh =txtMST.Text.Trim();
         string cot_dien_so=txtCotDienSo.Text.Trim();
         int sl_dong_ho=int.Parse(txtSLDH.Text.Trim());
         int trang_thai = 0;
@@ -91,7 +92,7 @@ public partial class ThemKhachHang : System.Web.UI.Page
             if (ten_kh != "" && dia_chi != "" && dien_thoai != "" && ma_cong_to != "" && cot_dien_so != "" && ma_kh != "" && thu_tu != 0 && sl_dong_ho != 0)
             {
                 //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
-                int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen);
+                int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
                 if (i == 0)
                 {
                     txtErr.Text = "Thêm mới khách hàng thất bại!";

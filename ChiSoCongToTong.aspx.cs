@@ -382,7 +382,7 @@ public partial class ChiSoCongToTong : System.Web.UI.Page
         //cell.CellStyle = stylecenternoborder;
         hwbook.Write(mem);
         Response.ContentType = "application/vnd.ms-excel";
-        Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "LoaiVanBan.xls"));
+        Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", "ChiSoCongToTong.xls"));
         Response.Clear();
         Response.BinaryWrite(mem.GetBuffer());
         Response.End();
