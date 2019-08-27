@@ -33,9 +33,9 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="false" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="STT">
+                        <asp:TemplateField HeaderText="STT" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblStt" runat="server" Text='<%# Eval("thu_tu") %>'></asp:Label>
                             </ItemTemplate>
@@ -145,6 +145,7 @@
             </div>
         </div>
     </div>
+
     <asp:UpdatePanel ID="upModal" runat="server">
         <ContentTemplate>
             <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
@@ -252,7 +253,7 @@
             </div>
         </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="GirdView" EventName="RowCommand" />
+            <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

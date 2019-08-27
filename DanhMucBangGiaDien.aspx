@@ -4,7 +4,7 @@
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script>
-    </script>
+</script>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -21,12 +21,13 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="Id">
+                        <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
                                 <asp:Label ID="lblId" runat="server" Text='<%# Eval("id_bang_gia") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tên bảng giá">
                             <ItemTemplate>
@@ -63,7 +64,7 @@
                                 <asp:Label ID="lblTrangThai" runat="server" Text='<%# Eval("kich_hoat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px">
+                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Button CssClass="btn btn-success" ID="btnSua" runat="server" CommandName="suaGiaDien" Text="Sửa"></asp:Button>
                             </ItemTemplate>
@@ -133,12 +134,12 @@
                         </div>
                         <!-- end modal footer -->
                     </div>
-                    </div>
                 </div>
+            </div>
             </div>
         </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="GirdView" EventName="RowCommand" />
+            <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

@@ -5,8 +5,8 @@
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
 
     <script type="text/javascript">
-     
-    </script>
+
+</script>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -23,9 +23,9 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="Id">
+                        <asp:TemplateField HeaderText="ID" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblId" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
@@ -45,7 +45,7 @@
                                 <asp:Label ID="lblTenNguoiPhuTrach" runat="server" Text='<%# Convert_NguoiPhuTrach(Eval("nguoi_phu_trach")) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Mã người phụ trách"  Visible="false">
+                        <asp:TemplateField HeaderText="Mã người phụ trách" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblNguoiPhuTrach" runat="server" Text='<%# Eval("nguoi_phu_trach") %>'></asp:Label>
                             </ItemTemplate>
@@ -65,7 +65,7 @@
                                 <asp:Label ID="lblTrangThai" runat="server" Text='<%# Eval("trang_thai") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px">
+                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Button CssClass="btn btn-success" ID="btnSua" runat="server" CommandName="suaTramBienAp" Text="Sửa"></asp:Button>
                             </ItemTemplate>
@@ -133,7 +133,7 @@
             </div>
         </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="GirdView" EventName="RowCommand" />
+            <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

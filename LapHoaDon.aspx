@@ -4,39 +4,39 @@
     <script type="text/javascript">
         $(function () {
             $('#txtTuNgay').datepicker(
-            {
-                dateFormat: 'dd/mm/yy',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '1950:2100',
-                onSelect: function () {
-                    var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
-                    $("#strTuNgay").val(date);
+                {
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2100',
+                    onSelect: function () {
+                        var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                        $("#strTuNgay").val(date);
 
-                }
-            });
+                    }
+                });
             $('#txtDenNgay').datepicker(
-           {
-               dateFormat: 'dd/mm/yy',
-               changeMonth: true,
-               changeYear: true,
-               yearRange: '1950:2100',
-               onSelect: function () {
-                   var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
-                   $("#strDenNgay").val(date);
-               }
-           });
+                {
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2100',
+                    onSelect: function () {
+                        var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                        $("#strDenNgay").val(date);
+                    }
+                });
             $('#txtKyHD').datepicker(
-            {
-                dateFormat: 'mm/yy',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '1950:2100',
-                onSelect: function () {
-                    var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));
-                    $("#strKyHD").val(date);
-                }
-            });
+                {
+                    dateFormat: 'mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2100',
+                    onSelect: function () {
+                        var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));
+                        $("#strKyHD").val(date);
+                    }
+                });
 
         })
     </script>
@@ -66,9 +66,11 @@
             <div class="row">
                 <div class="col-sm-12 mb-1">
                     Từ ngày                 
-                    <b><asp:Label ID="lblTuNgay" runat="server"></asp:Label></b>
+                    <b>
+                        <asp:Label ID="lblTuNgay" runat="server"></asp:Label></b>
                     đến ngày                
-                    <b><asp:Label ID="lblDenNgay" runat="server"></asp:Label></b>
+                    <b>
+                        <asp:Label ID="lblDenNgay" runat="server"></asp:Label></b>
                 </div>
             </div>
             <div class="row">
@@ -77,7 +79,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False"  >
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False">
                     <Columns>
                         <asp:TemplateField HeaderText="Mã">
                             <ItemTemplate>
@@ -143,7 +145,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>                        
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="idkhu" Visible="False">
                             <ItemTemplate>
                                 <asp:Label ID="lblidKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>

@@ -5,8 +5,8 @@
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
 
     <script type="text/javascript">
-     
-    </script>
+
+</script>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -23,9 +23,9 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
+                <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="Mã nhân viên">
+                        <asp:TemplateField HeaderText="Mã nhân viên" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblMaNV" runat="server" Text='<%# Eval("ma_nv") %>'></asp:Label>
                             </ItemTemplate>
@@ -50,7 +50,7 @@
                                 <asp:Label ID="lblGhiChu" runat="server" Text='<%# Eval("ghi_chu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px">
+                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Button CssClass="btn btn-success" ID="btnSua" runat="server" CommandName="suaNhanVien" Text="Sửa"></asp:Button>
                             </ItemTemplate>
@@ -70,7 +70,8 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div><!-- end modal header -->
+                        </div>
+                        <!-- end modal header -->
                         <div class="modal-body m-xl-3">
                             <div class="row mx5">
                                 <label>Mã nhân viên</label>
@@ -97,11 +98,13 @@
                                 <asp:TextBox ID="txtGhiChu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
 
                             </div>
-                        </div><!-- end modal body -->
+                        </div>
+                        <!-- end modal body -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                             <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa nhân viên" data-dismiss="modal" />
-                        </div><!-- end modal footer -->
+                        </div>
+                        <!-- end modal footer -->
                     </div>
                     <!--<div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
@@ -112,7 +115,7 @@
             </div>
         </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="GirdView" EventName="RowCommand" />
+            <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

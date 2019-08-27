@@ -33,15 +33,11 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     protected void gv_bind(string id_tramba)
     {
         CusList = myCus.get_danh_sach_khach_hang_thep_tram_bien_ap(id_tramba);
+        GridViewEman.DataSource = CusList;
+        GridViewEman.DataBind();
         if (CusList.Rows.Count > 0)
         {
-
-            GirdView.DataSource = CusList;
-            GirdView.DataBind();
-        }
-        if (CusList.Rows.Count > 0)
-        {
-            GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+            GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
 
         //DataTable DiaBanList = myCus.get_danh_muc_khu();

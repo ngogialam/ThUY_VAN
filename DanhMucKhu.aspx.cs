@@ -29,9 +29,12 @@ public partial class DanhMucKhu : System.Web.UI.Page
     protected void gv_bind()
     {
         CusList = myCus.get_danh_muc_khu();
-        GirdView.DataSource = CusList;
-        GirdView.DataBind();
-        GirdView.HeaderRow.TableSection = TableRowSection.TableHeader;
+        GridViewEman.DataSource = CusList;
+        GridViewEman.DataBind();
+        if (CusList.Rows.Count > 0)
+        {
+            GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
     }
 
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)

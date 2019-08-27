@@ -5,13 +5,12 @@
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script>
 
-    </script>
-   
+</script>
+
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
- <div class="row">
+    <div class="row">
         <div class="col-12">
-            
         </div>
     </div>
 
@@ -21,7 +20,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-bordered" >
+                <asp:GridView ID="GirdView" ClientIDMode="Static" runat="server" CssClass="table table-bordered">
                 </asp:GridView>
             </div>
         </div>
