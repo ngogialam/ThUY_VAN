@@ -74,6 +74,34 @@ public class clsConnect
         return loginSuccess;
     }
 
+    public DataTable getUser(string ten_dang_nhap)
+    {
+        DataTable tableUser = new DataTable();
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            SqlConnection myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select users.*, doanh_nghiep.ten_doanh_nghiep from users, doanh_nghiep where users.user_name='" + ten_dang_nhap + "'and users.status=1 and users.id_doanh_nghiep = doanh_nghiep.id_doanh_nghiep";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            myConn.Open();
+            myData.Fill(tableUser);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        catch (SqlException)
+        {
+
+        }
+
+        return tableUser;
+    }
+
+
     public int change_pass(string user_name,string passnew)
     {
         int recordsAffected = 0;

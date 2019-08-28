@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Data;
 
 public partial class Login : System.Web.UI.Page
 {
@@ -20,7 +21,7 @@ public partial class Login : System.Web.UI.Page
             if (Request.Cookies["USERNAME"] != null && Request.Cookies["PASSWORD"] != null)
                 chkSave.Checked = true;
         }
-         lblThongBao.Text = ""; 
+        lblThongBao.Text = "";
     }
     protected void btnDangNhap_Click(object sender, EventArgs e)
     {
@@ -30,36 +31,47 @@ public partial class Login : System.Web.UI.Page
             int loginSuccess = mUserInfo.Authenticate(mySert.noneInject(txtTenDangNhap.Text), txtMatKhau.Text);
 
             if (loginSuccess == 1)
-           {
-               Session["User"] = txtTenDangNhap.Text.Trim();
-               Session["loginSuccess"] = 1;
-               // Nếu chọn lưu thông tin, đưa vào cookie
-               if (chkSave.Checked == true)
-               {
-                   Response.Cookies["USERNAME"].Value = txtTenDangNhap.Text;
-                   Response.Cookies["USERNAME"].Expires = DateTime.Now.AddMonths(1);
-                   Response.Cookies["PASSWORD"].Value = txtMatKhau.Text;
-                   Response.Cookies["PASSWORD"].Expires = DateTime.Now.AddMonths(1);
-               }
-               // Nếu không chọn lưu thông tin, xóa cookie
-               else
-               {
-                   Response.Cookies["USERNAME"].Expires = DateTime.Now.AddMonths(-1);
-                   Response.Cookies["PASSWORD"].Expires = DateTime.Now.AddMonths(-1);
-               }
-               //chuyển đến trang chính của hệ thống
-               //Session.Add("userid", txtTenDangNhap.Text.ToString());
-               FormsAuthentication.RedirectFromLoginPage(txtTenDangNhap.Text.ToString(), false); 
-              // Response.Redirect("Default.aspx");
-               mUserInfo.save_log(txtTenDangNhap.Text, "Đăng nhập thành công!", "1");
-           }
-           else
-           {
-               lblThongBao.Text = "Đăng nhập thất bại !";
-               mUserInfo.save_log(txtTenDangNhap.Text, "Đăng nhập thất bại !","1");
-               //Response.Redirect("Login.aspx");
-               Session["loginSuccess"] = 0;
-           }
+            {
+                //Lưu thông tin doanh nghiệp
+                try
+                {
+                    DataTable tblUser = mUserInfo.getUser(txtTenDangNhap.Text);
+                    Session["TenDoanhNghiep"] = tblUser.Rows[0]["ten_doanh_nghiep"];
+
+                }
+                catch (Exception c) {
+                    Session["TenDoanhNghiep"] = "";
+                }
+
+                Session["User"] = txtTenDangNhap.Text.Trim();
+                Session["loginSuccess"] = 1;
+                // Nếu chọn lưu thông tin, đưa vào cookie
+                if (chkSave.Checked == true)
+                {
+                    Response.Cookies["USERNAME"].Value = txtTenDangNhap.Text;
+                    Response.Cookies["USERNAME"].Expires = DateTime.Now.AddMonths(1);
+                    Response.Cookies["PASSWORD"].Value = txtMatKhau.Text;
+                    Response.Cookies["PASSWORD"].Expires = DateTime.Now.AddMonths(1);
+                }
+                // Nếu không chọn lưu thông tin, xóa cookie
+                else
+                {
+                    Response.Cookies["USERNAME"].Expires = DateTime.Now.AddMonths(-1);
+                    Response.Cookies["PASSWORD"].Expires = DateTime.Now.AddMonths(-1);
+                }
+                //chuyển đến trang chính của hệ thống
+                //Session.Add("userid", txtTenDangNhap.Text.ToString());
+                FormsAuthentication.RedirectFromLoginPage(txtTenDangNhap.Text.ToString(), false);
+                // Response.Redirect("Default.aspx");
+                mUserInfo.save_log(txtTenDangNhap.Text, "Đăng nhập thành công!", "1");
+            }
+            else
+            {
+                lblThongBao.Text = "Đăng nhập thất bại !";
+                mUserInfo.save_log(txtTenDangNhap.Text, "Đăng nhập thất bại !", "1");
+                //Response.Redirect("Login.aspx");
+                Session["loginSuccess"] = 0;
+            }
         }
         catch (Exception ex)
         {

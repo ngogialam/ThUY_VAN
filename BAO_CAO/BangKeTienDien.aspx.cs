@@ -19,8 +19,6 @@ public partial class BangKeTienDien : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-           
-
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
             newRow[0] = 0;
@@ -385,6 +383,11 @@ public partial class BangKeTienDien : System.Web.UI.Page
         GridView1.DataSource = tbxView;
         GridView1.DataBind();
         ViewState["DataTable"] = tbxView;
+        Session["KeTienDienTable"] = tbxView;
+        Session["KeTienDienTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem;
+        Session["KeTienDienKyTramBA"] = "Kỳ " + ddlThang.SelectedItem;
+        Session["KeTienDienNgayThang"] = "THÁNG " + ddlThang.SelectedItem + " NĂM " + ddlNam.SelectedItem;
+        Session["KeTienDienNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
     }
 
 

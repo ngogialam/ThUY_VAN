@@ -97,6 +97,10 @@
                 <asp:Button ID="btnBaoCao" runat="server" Text="Xem" OnClick="XemBC"
                     CssClass="btn btn-primary" />
             </td>
+            <td>
+                <asp:Button ID="btnXuatExcel" runat="server" Text="Xuất excel" OnClick="XuatExcel"
+                    CssClass="btn btn-primary" />
+            </td>
         </div>
         <div class="form-group" style="clear: both;">
             <asp:Label ID="txtErr" runat="server" ForeColor="#FF3300"></asp:Label>
@@ -207,16 +211,6 @@
 
             </div>
         </div>
-
-        <div class="card-header">
-            <td>
-                <asp:Button ID="btnXuatExcel" runat="server" Text="Xuất excel" OnClick="XuatExcel"
-                    CssClass="btn btn-primary" />
-            </td>
-        </div>
-
-
-
     </div>
 </asp:Content>
 

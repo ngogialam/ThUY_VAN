@@ -41,12 +41,9 @@
     </div>
 
     <div class="card mb-3">
-
         <div>
             <fieldset style="width: 97%; font-family: Verdana; padding-top: 20px">
-                <table align="center" border="0" width="100%" style="font-size: 13px; font-family: Verdana;
-                    color: #000000; margin-top: 0px;">
-
+                <table align="center" border="0" width="100%" style="font-size: 13px; font-family: Verdana; color: #000000; margin-top: 0px;">
                     <tr>
                         <td class="auto-style8">Trạm biến áp<span> (*):</span><asp:DropDownList ID="ddlTramBA"
                             runat="server" DataTextField="ten_tram_bien_ap"
@@ -61,31 +58,23 @@
 
                     </tr>
                     <br />
-
                     <tr>
                         <td class="auto-style8"><span>Khoảng thời gian(*):</span><asp:DropDownList ID="ddlThoiGian"
                             runat="server" DataTextField="ten_bang_gia"
                             DataValueField="id_thoi_gian" Width="264px" Height="26px">
-                                <asp:ListItem Value="03">03 tháng</asp:ListItem>
-                                <asp:ListItem Value="06">06 tháng</asp:ListItem>
-                                <asp:ListItem Value="12">12 tháng</asp:ListItem>
+                            <asp:ListItem Value="03">03 tháng</asp:ListItem>
+                            <asp:ListItem Value="06">06 tháng</asp:ListItem>
+                            <asp:ListItem Value="12">12 tháng</asp:ListItem>
                         </asp:DropDownList>
                         </td>
-
-
                         <td style="text-align: left;" class="auto-style4">
                             <span>Chọn năm (*):</span>
                             <asp:DropDownList ID="ddlNam"
-                            runat="server" DataTextField="nam"
-                            DataValueField="nam" Width="135px" Height="26px">
-                        </asp:DropDownList>
+                                runat="server" DataTextField="nam"
+                                DataValueField="nam" Width="135px" Height="26px">
+                            </asp:DropDownList>
                         </td>
-                        
-
                     </tr>
-
-
-
                 </table>
             </fieldset>
 
@@ -95,6 +84,10 @@
         <div class="card-header">
             <td>
                 <asp:Button ID="btnBaoCao" runat="server" Text="Xem" OnClick="XemBC"
+                    CssClass="btn btn-primary" />
+            </td>
+            <td>
+                <asp:Button ID="btnXuatExcel" runat="server" Text="Xuất excel" OnClick="XuatExcel"
                     CssClass="btn btn-primary" />
             </td>
         </div>
@@ -207,30 +200,17 @@
 
             </div>
         </div>
-
-        <div class="card-header">
-            <td>
-                <asp:Button ID="btnXuatExcel" runat="server" Text="Xuất excel" OnClick="XuatExcel"
-                    CssClass="btn btn-primary" />
-            </td>
-        </div>
-
-
-
     </div>
 </asp:Content>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
     <style type="text/css">
-        
-        .auto-style4
-        {
+        .auto-style4 {
             height: 29px;
             width: 311px;
         }
 
-        .auto-style8
-        {
+        .auto-style8 {
             height: 29px;
             width: 268px;
         }
