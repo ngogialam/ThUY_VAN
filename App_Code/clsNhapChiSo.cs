@@ -265,7 +265,6 @@ public class clsNhapChiSo
             }
         }
         return muc;
-
     }
 
     //Tính tiền điện
@@ -311,7 +310,7 @@ public class clsNhapChiSo
             DataSet dts = new DataSet();
             myConn.Open();
             myData.Fill(dts);
-            if (dts.Tables[0].Rows[0]["don_gia"].ToString() == "0")
+            if (dts.Tables[0].Rows[0]["loai_bg"].ToString().Trim() != "MDK")
             {
 
                 sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia + " order by muc_thu";
@@ -348,7 +347,7 @@ public class clsNhapChiSo
             }
         }
     }
-
+    
 
     //Trạng thái kỳ 1-Chưa chốt, 0-đã chốt
     public DataTable get_danhsach_ky()
@@ -549,6 +548,7 @@ public class clsNhapChiSo
         }
         return recordsAffected;
     }
+
     public int them_chi_so_ky_moi(string mact, string csmoi, string kymoi)
     {
         clsConnect cnstr = new clsConnect();
