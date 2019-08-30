@@ -66,43 +66,48 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin nhân viên</h5>
+                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <!-- end modal header -->
                         <div class="modal-body m-xl-3">
-                            <div class="row mx5">
-                                <label>Mã nhân viên</label>
-                                <asp:TextBox ID="txtMaNV" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
-
+                            <div class="user-info-row" style="border: none">
+                                <label class="key">Mã nhân viên:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtMaNV" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Tên nhân viên</label>
-                                <asp:TextBox ID="txtTeNV" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Tên nhân viên:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtTeNV" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Địa chỉ</label>
-                                <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Địa chỉ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Điện thoại</label>
-                                <asp:TextBox ID="txtDienThoai" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Điện thoại:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtDienThoai" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Ghi chú</label>
-                                <asp:TextBox ID="txtGhiChu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Ghi chú:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtGhiChu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                         <!-- end modal body -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                            <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa nhân viên" data-dismiss="modal" />
+                            <asp:Button ID="Button1" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Cập nhật" data-dismiss="modal" />
                         </div>
                         <!-- end modal footer -->
                     </div>

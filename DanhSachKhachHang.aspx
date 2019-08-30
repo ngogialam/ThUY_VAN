@@ -152,101 +152,133 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin khách hàng</h5>
+                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body m-xl-3">
-                            <div class="row mx5">
-                                <label>Mã khách hàng</label>
-                                <asp:TextBox ID="txtMaKH" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
-
-                            </div>
-                            <div class="row mx5">
-                                <label>Tên khách hàng</label>
-                                <asp:TextBox ID="txtTenKh" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
-                            </div>
-
-                            <div class="row mx5">
-                                <label>Địa chỉ</label>
-                                <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
-                            </div>
-                            <div class="row mx5">
-                                <label>Khu</label>
-                                <asp:DropDownList ID="cbKhu" runat="server" CssClass="form-control input-lg" DataTextField="ten_khu" DataValueField="id_khu">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="row mx5">
-                                <label>Phường/Xã</label>
-                                <asp:DropDownList ID="cbVung" runat="server" CssClass="form-control input-lg" DataTextField="ten_phuong_xa" DataValueField="id_phuong_xa">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="row mx5">
-                                <label>Huyện</label>
-                                <asp:DropDownList ID="cbHuyen" runat="server" CssClass="form-control input-lg" DataTextField="ten_huyen" DataValueField="id_huyen">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="row mx5">
-                                <label>Bảng giá</label>
-                                <asp:DropDownList ID="cbBangGia" runat="server" CssClass="form-control input-lg" DataTextField="ten_bang_gia" DataValueField="id_bang_gia">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="row mx5">
-                                <label>Trạm biến áp</label>
-                                <asp:DropDownList ID="cbTramBienAp" runat="server" CssClass="form-control input-lg" DataTextField="ten_tram_bien_ap" DataValueField="id_tram_bien_ap">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="row mx5">
-                                <label>Số hộ</label>
-                                <asp:TextBox ID="txtSoHo" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
-
-                            </div>
-                            <div class="row mx5">
-                                <label>Hệ số ti</label>
-                                <asp:TextBox ID="txtHSTi" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
-
-                            </div>
-                            <div class="row mx5">
-                                <label>Điện thoại</label>
-                                <asp:TextBox ID="txtSoDT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                            </div>
-                            <div class="row mx5">
-                                <label>Gửi sms</label>
-                                <asp:DropDownList ID="drpSms" runat="server" CssClass="form-control input-lg" DataTextField="ten" DataValueField="trang_thai"></asp:DropDownList>
-                            </div>
-                            <div class="row mx5">
-                                <label>Mã Mst KH</label>
-                                <asp:TextBox ID="txtMstKH" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                            </div>
-                            <div class="row mx5">
-                                <label>Số cột</label>
-                                <asp:TextBox ID="txtSoCot" runat="server" Text="0" CssClass="form-control input-lg"></asp:TextBox>
-                            </div>
-                            <div class="row mx5">
-                                <label>Số lượng đồng hồ</label>
-                                <asp:TextBox ID="txtSoDongHo" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
-                            </div>
-                            <div class="row mx5">
-                                <label>Mã công tơ</label>
-                                <asp:TextBox ID="txtMaCongTo" runat="server" Enabled="false" CssClass="form-control input-lg"></asp:TextBox>
-                            </div>
-                            <div class="row mx5">
-                                <label>Trạng thái</label>
-                                <div style="text-align: left;" class="auto-style2" id=" trangthai">
-                                    <asp:CheckBox ID="ckbTrangThai" runat="server" Checked="true" Text="Kích hoạt" Width="200px" TextAlign="right" />
+                        <div class="modal-body">
+                            <div class="user-info-row" style="border: none">
+                                <label class="key">Mã khách hàng:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtMaKH" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Thứ tự</label>
-                                <asp:TextBox ID="txtThuTu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                            <div class="user-info-row">
+                                <label class="key">Tên khách hàng:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtTenKh" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="user-info-row">
+                                <label class="key">Địa chỉ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Khu:</label>
+                                <div class="value">
+                                    <asp:DropDownList ID="cbKhu" runat="server" CssClass="form-control input-lg" DataTextField="ten_khu" DataValueField="id_khu">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Phường/Xã:</label>
+                                <div class="value">
+                                    <asp:DropDownList ID="cbVung" runat="server" CssClass="form-control input-lg" DataTextField="ten_phuong_xa" DataValueField="id_phuong_xa">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Huyện:</label>
+                                <div class="value">
+                                    <asp:DropDownList ID="cbHuyen" runat="server" CssClass="form-control input-lg" DataTextField="ten_huyen" DataValueField="id_huyen">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Bảng giá:</label>
+                                <div class="value">
+                                    <asp:DropDownList ID="cbBangGia" runat="server" CssClass="form-control input-lg" DataTextField="ten_bang_gia" DataValueField="id_bang_gia">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Trạm biến áp:</label>
+                                <div class="value">
+                                    <asp:DropDownList ID="cbTramBienAp" runat="server" CssClass="form-control input-lg" DataTextField="ten_tram_bien_ap" DataValueField="id_tram_bien_ap">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Số hộ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtSoHo" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Hệ số ti:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtHSTi" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Điện thoại:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtSoDT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Gửi sms:</label>
+                                <div class="value">
+                                    <asp:DropDownList ID="drpSms" runat="server" CssClass="form-control input-lg" DataTextField="ten" DataValueField="trang_thai"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Mã Mst KH:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtMstKH" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Số cột:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtSoCot" runat="server" Text="0" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Số lượng đồng hồ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtSoDongHo" runat="server" Text="1" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Mã công tơ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtMaCongTo" runat="server" Enabled="false" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="user-info-row " style="display: block">
+                                <label class="key">Trạng thái:</label>
+                                <div class="value">
+                                    <asp:CheckBox ID="ckbTrangThai" runat="server" />
+                                    <label>Kích hoạt</label>
+                                </div>
+                            </div>
+                            <div class="user-info-row ">
+                                <label class="key">Thứ tự:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtThuTu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa khách hàng" data-dismiss="modal" />
+                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Cập nhật" data-dismiss="modal" />
                         </div>
                     </div>
                 </div>

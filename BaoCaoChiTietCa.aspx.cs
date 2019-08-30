@@ -14,7 +14,7 @@ using System.Data.SqlClient;
 public partial class BaoCaoChiTietCa : System.Web.UI.Page
 {
     clsKhachHang myCus = new clsKhachHang();
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -62,15 +62,15 @@ public partial class BaoCaoChiTietCa : System.Web.UI.Page
     {
         txtErr.Text = "";
         string tungay = Request.Form["strTuNgay"].ToString();
-        
+
         if (tungay != "-1")
         {
             int inttungay = Convert.ToInt32(tungay);
-            string tungay1=tungay.Substring(0,4)+"-"+tungay.Substring(4,2)+"-"+tungay.Substring(6,2);
+            string tungay1 = tungay.Substring(0, 4) + "-" + tungay.Substring(4, 2) + "-" + tungay.Substring(6, 2);
             int ca = int.Parse(ddlCa.SelectedValue.ToString());
 
-                bindGrid(tungay1,tungay1, ca);
-           
+            bindGrid(tungay1, tungay1, ca);
+
         }
     }
 
@@ -82,7 +82,7 @@ public partial class BaoCaoChiTietCa : System.Web.UI.Page
         {
             return;
         }
-        
+
         string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
         //calling create Excel File Method and ing dataTable   
         CreateExcelFile(dt, nameFile);
@@ -125,7 +125,7 @@ public partial class BaoCaoChiTietCa : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-       // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
+        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
     void bindGrid(string tu_ngay, string den_ngay, int ca_xem)
     {
@@ -148,7 +148,7 @@ public partial class BaoCaoChiTietCa : System.Web.UI.Page
         }
 
         lbl_solieu.Text = "Chi tiết bán hàng ngày: " + tu_ngay + " ";
-        
+
         lblTongBK.Text = soluong_bk1.ToString();
         lblTongBK2.Text = soluong_bk2.ToString();
         lblTongBC.Text = soluong_bc.ToString();
@@ -191,6 +191,6 @@ public partial class BaoCaoChiTietCa : System.Web.UI.Page
         }
 
     }
-   
-    
+
+
 }

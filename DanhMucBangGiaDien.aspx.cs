@@ -48,7 +48,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         Label thueVat = (Label)row.FindControl("lblThueVat");
         Label phanTramThue = (Label)row.FindControl("lblPhanTramThue");
         Label giaBan = (Label)row.FindControl("lblGiaBan");
-        Label trangThai = (Label)row.FindControl("lblTrangThai");
+        Label trangThai = (Label)row.FindControl("lblIDTrangThai");
 
         if (e.CommandName == "suaGiaDien")
         {
@@ -60,26 +60,27 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
             txtTienThue.Text = thueVat.Text;
             txtPhanTramThue.Text = phanTramThue.Text;
             txtGiaBan.Text = giaBan.Text;
-            if (myCus.kt_trang_thai(Convert.ToInt32(id.Text)) == 1)
+            if (Convert.ToInt32(trangThai.Text) == 1)
+            {
                 ckbTrangThai.Checked = true;
+            }
             else
                 ckbTrangThai.Checked = false;
-            //ckbTrangThai.Checked = trangThai.Text;
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#EditModal').modal('show');");
             sb.Append(@"</script>");
-
-
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal",
             sb.ToString(), false);
         }
+        else if (e.CommandName == "xoaGiaDien")
+        {
+        }
 
     }
-    //kiemtratrangthai
 
-    protected void btnSave_Click(object sender, EventArgs e)
+    protected void btnSave_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         int id_bang_gia = Convert.ToInt32(txtId.Text);
         string log = "Sửa giá điện mã " + id_bang_gia;
@@ -91,21 +92,26 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         double gia_ban = Convert.ToDouble(txtGiaBan.Text);
         int kich_hoat = 0;
         if (ckbTrangThai.Checked == true) kich_hoat = 1;
-
         myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
         myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-
-        Response.Redirect("DanhMucBangGiaDien.aspx");
+        DevExpress.Web.ASPxClasses.ASPxWebControl.RedirectOnCallback("DanhMucBangGiaDien.aspx");
     }
 
-    //validate
-    protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+    protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
-        int n = int.Parse(args.Value);
-        if ((n==0) || (n == 1))
-            args.IsValid = true;
-        else
-            args.IsValid = false;
+        string tenBangGia = txtTenBangGia_AddModal.Text;
+        string tenVietTat = txtTenVietTat_AddModal.Text;
+        double donGia = Convert.ToDouble(txtDonGia_AddModal.Text);
+        double tienThue = Convert.ToDouble(txtTienThue_AddModal.Text);
+        double phanTramThue = Convert.ToDouble(txtPhanTramThue_AddModal.Text);
+        double giaBan = Convert.ToDouble(txtGiaBan_AddModal.Text);
+        int kichHoat = 0;
+        if (ckbTrangThai_AddModal.Checked == true)
+            kichHoat = 1;
+        int i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, donGia, tienThue, phanTramThue, giaBan, kichHoat);
+        if (i != 0)
+        {
+            DevExpress.Web.ASPxClasses.ASPxWebControl.RedirectOnCallback("DanhMucBangGiaDien.aspx");
+        }
     }
-
 }

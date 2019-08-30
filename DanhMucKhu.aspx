@@ -23,7 +23,7 @@
             <div class="table-responsive">
                 <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="Id khu">
+                        <asp:TemplateField HeaderText="ID khu">
                             <ItemTemplate>
                                 <asp:Label ID="lblId" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
                             </ItemTemplate>
@@ -33,7 +33,7 @@
                                 <asp:Label ID="lblTenKhu" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Id phường/xã">
+                        <asp:TemplateField HeaderText="ID phường/xã">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdPhuongXa" runat="server" Text='<%# Eval("id_phuong_xa") %>'></asp:Label>
                             </ItemTemplate>
@@ -54,30 +54,36 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin khu</h5>
+                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body m-xl-3">
-                            <div class="row mx5">
-                                <label>Id</label>
-                                <asp:TextBox ID="txtId" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
+                            <div class="user-info-row">
+                                <label class="key">ID:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtId" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
 
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Tên khu</label>
-                                <asp:TextBox ID="txtTenKhu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                            <div class="user-info-row">
+                                <label class="key">Tên khu:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtTenKhu" runat="server" CssClass="form-control input-lg"></asp:TextBox>
 
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Id phường/xã</label>
-                                <asp:TextBox ID="txtIdPhuongXa" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                            <div class="user-info-row">
+                                <label class="key">ID phường/xã:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtIdPhuongXa" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa khu" data-dismiss="modal" />
+                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Cập nhật" data-dismiss="modal" />
                         </div>
                     </div>
                 </div>

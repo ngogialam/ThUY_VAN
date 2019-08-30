@@ -190,12 +190,12 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "update bang_gia_dien set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat='" + tien_thue_vat + "',phan_tram_thue='" + phan_tram_thue + "', gia_ban='" + gia_ban + "',kich_hoat='" + kich_hoat +"' where id_bang_gia='" + id + "'";
+            cmd.CommandText = "update bang_gia_dien set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat='" + tien_thue_vat + "',phan_tram_thue='" + phan_tram_thue + "', gia_ban='" + gia_ban + "',kich_hoat='" + kich_hoat + "' where id_bang_gia='" + id + "'";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
-            
+
         }
         catch (SqlException e)
         {
@@ -217,7 +217,7 @@ public class clsKhachHang
         SqlCommand cmd = new SqlCommand();
 
         cmd.Connection = myConn;
-        cmd.CommandText = "select kich_hoat from bang_gia_dien where id_bang_gia = '"+id+"'";
+        cmd.CommandText = "select kich_hoat from bang_gia_dien where id_bang_gia = '" + id + "'";
         cmd.CommandType = CommandType.Text;
         myConn.Open();
         recordsAffected = cmd.ExecuteNonQuery();
@@ -423,7 +423,7 @@ public class clsKhachHang
         }
     }
 
-    public void cap_nhat_khu(int id, string ten_khu,  int id_phuong_xa)
+    public void cap_nhat_khu(int id, string ten_khu, int id_phuong_xa)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -544,7 +544,7 @@ public class clsKhachHang
 
     //end 
 
-   
+
     public DataTable get_danh_sach_khach_hang_dia_ban(int id_dia_ban)
     {
         SqlConnection myConn = null;
@@ -731,8 +731,8 @@ public class clsKhachHang
             cmd.Parameters.Clear();
             cmd.Connection.Close();
             myConn.Close();
-            ma=dts.Tables[0].Rows.Count;
-             return ma;    
+            ma = dts.Tables[0].Rows.Count;
+            return ma;
         }
         catch (Exception ex)
         {
@@ -818,7 +818,7 @@ public class clsKhachHang
             }
         }
     }
-    public int them_moi_khach_hang(string ma_kh,string ten_kh,int id_bang_gia,string dia_chi,int id_khu,string id_tram_bien_ap,int so_ho,float he_so_ti,string dien_thoai,string mst_kh,string cot_dien_so,int sl_dong_ho,string ma_cong_to,int trang_thai,int thu_tu,int id_phuong_xa,int id_huyen, int sms)
+    public int them_moi_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -844,7 +844,7 @@ public class clsKhachHang
         return recordsAffected;
     }
 
-    public int them_moi_cong_to(string ma_cong_to,string ma_kh, float he_so_ti)
+    public int them_moi_cong_to(string ma_cong_to, string ma_kh, float he_so_ti)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -870,7 +870,7 @@ public class clsKhachHang
         return recordsAffected;
     }
 
-    public int them_moi_chi_so_cong_to(string ma_cong_to,string ky_hd)
+    public int them_moi_chi_so_cong_to(string ma_cong_to, string ky_hd)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -896,7 +896,7 @@ public class clsKhachHang
         return recordsAffected;
     }
 
-    public void cap_nhat_khach_hang(string ma_kh,string ten_kh,int id_bang_gia,string dia_chi,int id_khu,string id_tram_bien_ap,int so_ho,float he_so_ti,string dien_thoai,string mst_kh,string cot_dien_so,int sl_dong_ho,string ma_cong_to,int trang_thai,int thu_tu,int id_phuong_xa,int id_huyen, int sms)
+    public void cap_nhat_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();

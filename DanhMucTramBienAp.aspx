@@ -62,7 +62,12 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Trạng thái">
                             <ItemTemplate>
-                                <asp:Label ID="lblTrangThai" runat="server" Text='<%# Eval("trang_thai") %>'></asp:Label>
+                                <asp:Label ID="lblTrangThai" runat="server" Text='<%# (int)Eval("trang_thai") == 1 ? "Active": "Deactive" %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="ID Trạng thái" Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblIDTrangThai" runat="server" Text='<%# (int)Eval("trang_thai") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center">
@@ -86,50 +91,57 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body m-xl-3">
-                            <div class="row mx5">
-                                <label>Id</label>
-                                <asp:TextBox ID="txtId" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
-
+                        <div class="modal-body">
+                            <div class="user-info-row" style="border:none">
+                                <label class="key">ID:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtId" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Tên trạm biến áp</label>
-                                <asp:TextBox ID="txtTenTramBA" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Tên trạm biến áp:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtTenTramBA" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Địa chỉ</label>
-                                <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Địa chỉ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Người phụ trách</label>
-                                <asp:DropDownList runat="server" ID="drpNguoiPhuTrach" DataValueField="ma_nv" DataTextField="ten_nv" CssClass="form-control input-lg"></asp:DropDownList>
-
+                            <div class="user-info-row">
+                                <label class="key">Người phụ trách:</label>
+                                <div class="value">
+                                    <asp:DropDownList runat="server" ID="drpNguoiPhuTrach" DataValueField="ma_nv" DataTextField="ten_nv" CssClass="form-control input-lg"></asp:DropDownList>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Mã số công tơ</label>
-                                <asp:TextBox ID="txtMaSoCT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Mã số công tơ:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtMaSoCT" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Hệ số nhân</label>
-                                <asp:TextBox ID="txtHeSoNhan" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-
+                            <div class="user-info-row">
+                                <label class="key">Hệ số nhân:</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txtHeSoNhan" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="row mx5">
-                                <label>Trạng thái</label>
-                                <div style="text-align: left;" class="auto-style2" id=" trangthai">
-                                    <asp:CheckBox ID="ckbTrangThai" runat="server" Text="Kích hoạt" Width="200px" TextAlign="right" />
+                            <div class="user-info-row">
+                                <label class="key">Trạng thái:</label>
+                                <div class="value">
+                                    <asp:CheckBox ID="ckbTrangThai" runat="server" />
+                                    <label>Kích hoạt</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa trạm biến áp" data-dismiss="modal" />
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" CssClass="btn btn-success" UseSubmitBehavior="false" Text="Sửa trạm biến áp" data-dismiss="modal" />
                     </div>
                 </div>
+            </div>
             </div>
         </ContentTemplate>
         <Triggers>

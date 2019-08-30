@@ -50,7 +50,7 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
         Label nguoiPT = (Label)row.FindControl("lblNguoiPhuTrach");
         Label maCongTo = (Label)row.FindControl("lblMaCongTo");
         Label heSoNhan = (Label)row.FindControl("lblHeSoNhan");
-        Label trangThai = (Label)row.FindControl("lblTrangThai");
+        Label trangThai = (Label)row.FindControl("lblIDTrangThai");
 
         if (e.CommandName == "suaTramBienAp")
         {
@@ -62,11 +62,12 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
             txtMaSoCT.Text = maCongTo.Text;
             txtHeSoNhan.Text = heSoNhan.Text;
 
-            //if (myCus.kt_trang_thai(Convert.ToInt32(id.Text)) == 1)
-            //ckbTrangThai.Checked = true;
-            //else
-            // ckbTrangThai.Checked = false;
-            //ckbTrangThai.Checked = trangThai.Text;
+            if (Convert.ToInt32(trangThai.Text) == 1)
+            {
+                ckbTrangThai.Checked = true;
+            }
+            else
+                ckbTrangThai.Checked = false;
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
