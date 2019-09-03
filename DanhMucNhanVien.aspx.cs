@@ -50,7 +50,7 @@ public partial class DanhMucNhanVien : System.Web.UI.Page
         {
             //DataTable DiaBanList = myCus.get_dia_ban();
             txtMaNV.Text = maNV.Text;
-            txtTeNV.Text = tenNV.Text;
+            txtTenNV.Text = tenNV.Text;
             txtDiaChi.Text = diaChi.Text;
             txtDienThoai.Text = dienThoai.Text;
             txtGhiChu.Text = ghiChu.Text;
@@ -66,17 +66,37 @@ public partial class DanhMucNhanVien : System.Web.UI.Page
         }
 
     }
-    protected void btnSave_Click(object sender, EventArgs e)
+    
+    protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        string maNV = txtMaNV_AddModal.Text;
+        string tenNv = txtTenNV_AddModal.Text;
+        string diaChi = txtDiaChi_AddModal.Text;
+        string dienThoai = txtDienThoai_AddModal.Text;
+        string ghiChu = txtGhiChu_AddModal.Text;
+        int i = myCus.them_moi_nhan_vien(maNV, tenNv, diaChi, dienThoai, ghiChu);
+        if (i == 0)
+            e.Result = "0";
+        else
+            e.Result = "1";
+    }
+
+    protected void btnCapNhat_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         string maNV = txtMaNV.Text;
-        string tenNV = txtTeNV.Text;
+        string tenNV = txtTenNV.Text;
         string diaChi = txtDiaChi.Text;
-        string dienThoai  = txtDienThoai.Text;
+        string dienThoai = txtDienThoai.Text;
         string ghiChu = txtGhiChu.Text;
-        string log = "Sửa nhân viên mã"+ maNV;
-
-        myCus.cap_nhat_nhan_vien(maNV, tenNV, diaChi, dienThoai, ghiChu);
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-        Response.Redirect("DanhMucNhanVien.aspx");
+        string log = "Sửa nhân viên mã" + maNV;
+        try
+        {
+            myCus.cap_nhat_nhan_vien(maNV, tenNV, diaChi, dienThoai, ghiChu);
+            e.Result = "1";
+        }
+        catch
+        {
+            e.Result = "0";
+        }
     }
 }

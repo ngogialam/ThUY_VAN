@@ -4,79 +4,28 @@
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <script>
+        //Thêm mới
         function ThemMoi() {
             $('#AddModal').modal('show');
         }
-        function onClickCapNhat() {
-            var re = /d+/;
-            var txtTenBangGia = $('#txtTenBangGia').val()
-            var txtTenVietTat = $('#txtTenVietTat').val()
-            var txtDonGia = $('#txtDonGia').val()
-            var txtTienThue = $('#txtTienThue').val()
-            var txtPhanTramThue = $('#txtPhanTramThue').val()
-            var txtGiaBan = $('#txtGiaBan').val()
-
-            if (txtTenBangGia === "") {
-                alert("Vui lòng nhập tên bảng giá!")
-                $('#txtTenBangGia').focus()
-                return false
-            }
-            if (txtTenVietTat === "") {
-                alert("Vui lòng nhập tên viết tắt!")
-                $('#txtTenVietTat').focus()
-                return false
-            }
-
-            var isDonGia = re.test(txtDonGia);
-            if (isDonGia) {
-                alert("Bạn chỉ được nhập số!");
-                $('#txtDonGia').focus();
-                return false;
-            }
-
-            var isTienThue = re.test(txtTienThue);
-            if (isTienThue) {
-                alert("Bạn chỉ được nhập số!");
-                $('#txtTienThue').focus();
-                return false;
-            }
-
-            var isPhanTramThue = re.test(txtPhanTramThue);
-            if (isPhanTramThue) {
-                alert("Bạn chỉ được nhập số!");
-                $('#txtPhanTramThue').focus();
-                return false;
-            }
-
-            var isGiaBan = re.test(txtGiaBan);
-            if (isGiaBan) {
-                alert("Bạn chỉ được nhập số!");
-                $('#txtGiaBan').focus();
-                return false;
-            }
-
-            cbCapNhat.PerformCallback()
-        }
         function onClickThemMoi() {
             var re = /d+/;
-            var txtTenBangGia = $('#txtTenBangGia_AddModal').val()
-            var txtTenVietTat = $('#txtTenVietTat_AddModal').val()
-            var txtDonGia = $('#txtDonGia_AddModal').val()
-            var txtTienThue = $('#txtTienThue_AddModal').val()
-            var txtPhanTramThue = $('#txtPhanTramThue_AddModal').val()
-            var txtGiaBan = $('#txtGiaBan_AddModal').val()
-
+            var txtTenBangGia = $('#txtTenBangGia_AddModal').val();
+            var txtTenVietTat = $('#txtTenVietTat_AddModal').val();
+            var txtDonGia = $('#txtDonGia_AddModal').val();
+            var txtTienThue = $('#txtTienThue_AddModal').val();
+            var txtPhanTramThue = $('#txtPhanTramThue_AddModal').val();
+            var txtGiaBan = $('#txtGiaBan_AddModal').val();
             if (txtTenBangGia === "") {
-                alert("Vui lòng nhập tên bảng giá!")
-                $('#txtTenBangGia_AddModal').focus()
+                alert("Vui lòng nhập tên bảng giá!");
+                $('#txtTenBangGia_AddModal').focus();
                 return false
             }
             if (txtTenVietTat === "") {
-                alert("Vui lòng nhập tên viết tắt!")
-                $('#txtTenVietTat_AddModal').focus()
+                alert("Vui lòng nhập tên viết tắt!");
+                $('#txtTenVietTat_AddModal').focus();
                 return false
             }
-
             if (txtDonGia === "") {
                 alert("Vui lòng nhập đơn giá!");
                 $('#txtDonGia_AddModal').focus();
@@ -88,7 +37,6 @@
                 $('#txtDonGia_AddModal').focus();
                 return false;
             }
-
             if (txtTienThue === "") {
                 alert("Vui lòng nhập tiền thuế!");
                 $('#txtTienThue_AddModal').focus();
@@ -100,7 +48,6 @@
                 $('#txtTienThue_AddModal').focus();
                 return false;
             }
-
             if (txtPhanTramThue === "") {
                 alert("Vui lòng nhập phần trăm thuế!");
                 $('#txtPhanTramThue_AddModal').focus();
@@ -112,7 +59,6 @@
                 $('#txtPhanTramThue_AddModal').focus();
                 return false;
             }
-
             if (txtGiaBan === "") {
                 alert("Vui lòng nhập giá bán!");
                 $('#txtGiaBan_AddModal').focus();
@@ -124,8 +70,69 @@
                 $('#txtGiaBan_AddModal').focus();
                 return false;
             }
-
             cbThemMoi.PerformCallback()
+        }
+        function onClickThemMoiComplete(s, e) {
+            if (e.result == "1") {
+                alert("Thêm mới bảng giá điện thành công");
+                location.href = "./DanhMucBangGiaDien.aspx";
+            } else {
+                alert("Thêm mới thất bại. Vui lòng thử lại!");
+            }
+        }
+        //Sửa thông tin
+        function onClickCapNhat() {
+            var re = /d+/;
+            var txtTenBangGia = $('#txtTenBangGia').val();
+            var txtTenVietTat = $('#txtTenVietTat').val();
+            var txtDonGia = $('#txtDonGia').val();
+            var txtTienThue = $('#txtTienThue').val();
+            var txtPhanTramThue = $('#txtPhanTramThue').val();
+            var txtGiaBan = $('#txtGiaBan').val();
+
+            if (txtTenBangGia === "") {
+                alert("Vui lòng nhập tên bảng giá!");
+                $('#txtTenBangGia').focus();
+                return false
+            }
+            if (txtTenVietTat === "") {
+                alert("Vui lòng nhập tên viết tắt!");
+                $('#txtTenVietTat').focus();
+                return false
+            }
+            var isDonGia = re.test(txtDonGia);
+            if (isDonGia) {
+                alert("Bạn chỉ được nhập số!");
+                $('#txtDonGia').focus();
+                return false;
+            }
+            var isTienThue = re.test(txtTienThue);
+            if (isTienThue) {
+                alert("Bạn chỉ được nhập số!");
+                $('#txtTienThue').focus();
+                return false;
+            }
+            var isPhanTramThue = re.test(txtPhanTramThue);
+            if (isPhanTramThue) {
+                alert("Bạn chỉ được nhập số!");
+                $('#txtPhanTramThue').focus();
+                return false;
+            }
+            var isGiaBan = re.test(txtGiaBan);
+            if (isGiaBan) {
+                alert("Bạn chỉ được nhập số!");
+                $('#txtGiaBan').focus();
+                return false;
+            }
+            cbCapNhat.PerformCallback()
+        }
+        function onClickCapNhatComplete(s, e) {
+            if (e.result == "1") {
+                alert("Cập nhật thành công");
+                location.href = "./DanhMucBangGiaDien.aspx";
+            } else {
+                alert("Cập nhật thất bại. Vui lòng thử lại!");
+            }
         }
     </script>
 </asp:Content>
@@ -144,7 +151,7 @@
             <div class="table-responsive">
                 <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="ID">
+                        <asp:TemplateField HeaderText="ID" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblId" runat="server" Text='<%# Eval("id_bang_gia") %>'></asp:Label>
                             </ItemTemplate>
@@ -190,7 +197,7 @@
                                 <asp:Label ID="lblIDTrangThai" runat="server" Text='<%# (int)Eval("kich_hoat") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center">
+                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Button CssClass="btn btn-success" ID="btnSua" runat="server" CommandName="suaGiaDien" Text="Sửa"></asp:Button>
                                 <%--<asp:Button CssClass="btn btn-success" ID="btnXoa" runat="server" CommandName="xoaGiaDien" Text="Xóa"></asp:Button>--%>
@@ -201,136 +208,127 @@
             </div>
         </div>
     </div>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thêm bảng giá điện</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="user-info-row">
-                                <label class="key">Tên bảng giá:</label>
-                                <div class="value">
-                                    <asp:TextBox ID="txtTenBangGia_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
 
-                            </div>
-                            <div class="user-info-row">
-                                <label class="key">Tên viết tắt:</label>
-                                <div class="value">
-                                    <asp:TextBox ID="txtTenVietTat_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-
-                            </div>
-                            <div class="user-info-row">
-                                <label class="key">Đơn giá:</label>
-                                <div class="value">
-                                    <asp:TextBox ID="txtDonGia_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-
-                            </div>
-                            <div class="user-info-row">
-                                <label class="key">Tiền thuế VAT:</label>
-                                <div class="value">
-                                    <asp:TextBox ID="txtTienThue_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="user-info-row">
-                                <label class="key">Phần trăm thuế:</label>
-                                <div class="value">
-                                    <asp:TextBox ID="txtPhanTramThue_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="user-info-row">
-                                <label class="key">Giá bán:</label>
-                                <div class="value">
-                                    <asp:TextBox ID="txtGiaBan_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="user-info-row" style="display: block">
-                                <label class="key">Trạng thái:</label>
-                                <div class="value">
-                                    <asp:CheckBox ID="ckbTrangThai_AddModal" runat="server" />
-                                    <label>Kích hoạt</label>
-                                </div>
-                            </div>
+    <%--Thêm--%>
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm bảng giá điện</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="user-info-row" style="border: none">
+                        <label class="key">Tên bảng giá (<span style="color: red">*</span>):</label>
+                        <div class="value">
+                            <asp:TextBox ID="txtTenBangGia_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                         </div>
-                        <!-- end modal body -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                            <button type="button" id="btnThem_AddModal" class="btn btn-success" onclick="onClickThemMoi();">Thêm mới</button>
-                            <dx:aspxcallback id="cbThemMoi" clientinstancename="cbThemMoi" clientidmode="Static" runat="server" oncallback="btnThemMoi_Callback" />
+                    </div>
+                    <div class="user-info-row">
+                        <label class="key">Tên viết tắt (<span style="color: red">*</span>):</label>
+                        <div class="value">
+                            <asp:TextBox ID="txtTenVietTat_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                         </div>
-                        <!-- end modal footer -->
+                    </div>
+                    <div class="user-info-row">
+                        <label class="key">Đơn giá (<span style="color: red">*</span>):</label>
+                        <div class="value">
+                            <asp:TextBox ID="txtDonGia_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="user-info-row">
+                        <label class="key">Tiền thuế VAT (<span style="color: red">*</span>):</label>
+                        <div class="value">
+                            <asp:TextBox ID="txtTienThue_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="user-info-row">
+                        <label class="key">Phần trăm thuế (<span style="color: red">*</span>):</label>
+                        <div class="value">
+                            <asp:TextBox ID="txtPhanTramThue_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="user-info-row">
+                        <label class="key">Giá bán (<span style="color: red">*</span>):</label>
+                        <div class="value">
+                            <asp:TextBox ID="txtGiaBan_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="user-info-row" style="display: block">
+                        <label class="key">Trạng thái:</label>
+                        <div class="value">
+                            <asp:CheckBox ID="ckbTrangThai_AddModal" runat="server" />
+                            <label>Kích hoạt</label>
+                        </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnThem_AddModal" class="btn btn-success" onclick="onClickThemMoi();">Thêm mới</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                    <dx:aspxcallback id="cbThemMoi" clientinstancename="cbThemMoi" clientidmode="Static" runat="server" oncallback="btnThemMoi_Callback">
+                                  <ClientSideEvents CallbackComplete="onClickThemMoiComplete" />
+                            </dx:aspxcallback>
+                </div>
             </div>
-            </div>
-        </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
-        </Triggers>
+        </div>
+    </div>
 
-    </asp:UpdatePanel>
-
+    <%--Sửa--%>
     <asp:UpdatePanel ID="upModal" runat="server">
         <ContentTemplate>
             <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="huyModalLable">Sửa thông tin</h5>
+                            <h5 class="modal-title">Sửa thông tin</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="user-info-row" style="border: none">
-                                <label class="key">ID:</label>
+                                <label class="key">ID (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtId" runat="server" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Tên bảng giá:</label>
+                                <label class="key">Tên bảng giá (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtTenBangGia" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
 
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Tên viết tắt:</label>
+                                <label class="key">Tên viết tắt (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtTenVietTat" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
 
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Đơn giá:</label>
+                                <label class="key">Đơn giá (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtDonGia" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
 
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Tiền thuế VAT:</label>
+                                <label class="key">Tiền thuế VAT (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtTienThue" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Phần trăm thuế:</label>
+                                <label class="key">Phần trăm thuế (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtPhanTramThue" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Giá bán:</label>
+                                <label class="key">Giá bán (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtGiaBan" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
@@ -345,9 +343,11 @@
                         </div>
                         <!-- end modal body -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                             <button type="button" id="btnCapNhat" class="btn btn-success" onclick="onClickCapNhat();">Cập nhập</button>
-                            <dx:aspxcallback id="cbCapNhat" clientinstancename="cbCapNhat" clientidmode="Static" runat="server" oncallback="btnSave_Callback" />
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                            <dx:aspxcallback id="cbCapNhat" clientinstancename="cbCapNhat" clientidmode="Static" runat="server" oncallback="btnSave_Callback">
+                                <ClientSideEvents CallbackComplete="onClickCapNhatComplete" />
+                            </dx:aspxcallback>
                         </div>
                         <!-- end modal footer -->
                     </div>

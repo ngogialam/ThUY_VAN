@@ -25,6 +25,8 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
             EmployList = myCus.get_danh_sach_nhan_vien();
             drpNguoiPhuTrach.DataSource = EmployList;
             drpNguoiPhuTrach.DataBind();
+            drpNguoiPhuTrach_AddModal.DataSource = EmployList;
+            drpNguoiPhuTrach_AddModal.DataBind();
             gv_bind();
         }
 
@@ -80,7 +82,25 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
         }
 
     }
-    protected void btnSave_Click(object sender, EventArgs e)
+    protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        string idTramBA = txtId_AddModal.Text;
+        string tenTramBA = txtTenTramBA_AddModal.Text;
+        string diaChi = txtDiaChi_AddModal.Text;
+        string nguoiPT = drpNguoiPhuTrach_AddModal.SelectedValue;
+        string maSoCT = txtMaSoCT_AddModal.Text;
+        int heSoNhan = Convert.ToInt32(txtHeSoNhan_AddModal.Text);
+        int kichHoat = 0;
+        if (ckbTrangThai_AddModal.Checked == true)
+            kichHoat = 1;
+        int i = myCus.them_moi_tram_bien_ap(idTramBA, tenTramBA, diaChi, nguoiPT, maSoCT, heSoNhan, kichHoat);
+        if (i == 0)
+            e.Result = "0";
+        else
+            e.Result = "1";
+    }
+
+    protected void btnCapNhat_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         string idTramBA = txtId.Text;
         string tenTramBA = txtTenTramBA.Text;
@@ -91,13 +111,18 @@ public partial class DanhMucTramBienAp : System.Web.UI.Page
         string log = "Sửa trạm biến áp" + idTramBA;
         int trangThai = 0;
         if (ckbTrangThai.Checked == true) trangThai = 1;
-
-        myCus.cap_nhat_tram_bien_ap(idTramBA, tenTramBA, diaChi, nguoiPT, maSoCT, heSoNhan, trangThai);
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-
-        Response.Redirect("DanhMucTramBienAp.aspx");
+        try
+        {
+            myCus.cap_nhat_tram_bien_ap(idTramBA, tenTramBA, diaChi, nguoiPT, maSoCT, heSoNhan, trangThai);
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+            e.Result = "1";
+        }
+        catch
+        {
+            e.Result = "0";
+        }
     }
-
+   
     protected string Convert_NguoiPhuTrach(object id_nguoiPT)
     {
         string result = "";

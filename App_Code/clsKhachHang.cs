@@ -423,6 +423,36 @@ public class clsKhachHang
         }
     }
 
+    public int them_moi_khu(string ten_khu, int id_phuong_xa)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "insert into dm_khu values(N'" + ten_khu + "','" + id_phuong_xa + "') ";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        catch (SqlException e)
+        {
+            // test loi
+            throw e;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
     public void cap_nhat_khu(int id, string ten_khu, int id_phuong_xa)
     {
         clsConnect cnstr = new clsConnect();

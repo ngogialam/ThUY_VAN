@@ -92,9 +92,16 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         double gia_ban = Convert.ToDouble(txtGiaBan.Text);
         int kich_hoat = 0;
         if (ckbTrangThai.Checked == true) kich_hoat = 1;
-        myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-        DevExpress.Web.ASPxClasses.ASPxWebControl.RedirectOnCallback("DanhMucBangGiaDien.aspx");
+        try
+        {
+            myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+            e.Result = "1";
+        }
+        catch
+        {
+            e.Result = "0";
+        }
     }
 
     protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
@@ -109,9 +116,9 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         if (ckbTrangThai_AddModal.Checked == true)
             kichHoat = 1;
         int i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, donGia, tienThue, phanTramThue, giaBan, kichHoat);
-        if (i != 0)
-        {
-            DevExpress.Web.ASPxClasses.ASPxWebControl.RedirectOnCallback("DanhMucBangGiaDien.aspx");
-        }
+        if (i == 0)
+            e.Result = "0";
+        else
+            e.Result = "1";
     }
 }

@@ -63,29 +63,34 @@ public partial class DanhMucKhu : System.Web.UI.Page
         }
 
     }
-    //kiemtratrangthai
-
-    protected void btnSave_Click(object sender, EventArgs e)
+    
+    protected void btnCapNhat_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         int id_khu = Convert.ToInt32(txtId.Text);
         string log = "Sửa khu mã " + id_khu;
         string ten_khu = txtTenKhu.Text;
         int id_phuong_xa = Convert.ToInt32(txtIdPhuongXa.Text);
-
-        myCus.cap_nhat_khu(id_khu,ten_khu, id_phuong_xa);
-        myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
-
-        Response.Redirect("DanhMucKhu.aspx");
+        try
+        {
+            myCus.cap_nhat_khu(id_khu, ten_khu, id_phuong_xa);
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+            e.Result = "1";
+        }
+        catch
+        {
+            e.Result = "0";
+        }
     }
 
-    //validate
-    protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+    protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
-        int n = int.Parse(args.Value);
-        if ((n == 0) || (n == 1))
-            args.IsValid = true;
+        string tenKhu = txtTenKhu_AddModal.Text;
+        string IDPhuongXa = txtIdPhuongXa_AddModal.Text;
+        int i = myCus.them_moi_khu(tenKhu, Convert.ToInt32(IDPhuongXa));
+        if (i == 0)
+            e.Result = "0";
         else
-            args.IsValid = false;
+            e.Result = "1";
     }
 
 }
