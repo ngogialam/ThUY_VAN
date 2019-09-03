@@ -20,12 +20,14 @@ public class clsNhapChiSo
             sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai, tt.ten_trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e, dm_cong_to f,dm_trang_thai_cs tt";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and d.ky='" + ky + "'";
+            sql = sql + " order by a.thu_tu";
         }
         else
         {
             sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+            sql = sql + " order by a.thu_tu";
         }
         try
         {
@@ -102,17 +104,17 @@ public class clsNhapChiSo
         string sql = "";
         if (id_tramba == "0")
         {
-            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai";
+            sql = "select a.thu_tu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e, dm_cong_to f ";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai=1 and d.ky='" + ky + "'";
-            sql = sql + " order by a.ma_kh";
+            sql = sql + " order by a.thu_tu";
         }
         else
         {
-            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai";
+            sql = "select a.thu_tu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f ";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai=1 and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
-            sql = sql + " order by a.ma_kh";
+            sql = sql + " order by a.thu_tu";
         }
         try
         {
@@ -266,29 +268,80 @@ public class clsNhapChiSo
         }
         return muc;
     }
-
-    //Tính tiền điện
-    public Double tinh_tien_dien(Double dntt, int sh, string id_bang_gia)
+    //Tính tiền điện MDK
+    public Double tinh_tien_dien_MDK(Double dntt, int sh, string id_bang_gia)
     {
         Double dongia = 0;
         Double total = 0;
         DataTable BangGia = lay_bang_gia(id_bang_gia);
-        if (BangGia.Rows.Count == 1)
-        {
 
-            dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-            total = dntt * dongia;
-        }
-        else
+        dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+        total = dntt * dongia;
+
+        return total;
+
+    }
+    //Tính tiền điện MDK
+    public Double tinh_tien_dien_sh(Double dntt, int sh, string id_bang_gia)
+    {
+        Double total = 0;
+        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
+        Double[] muc = tinh_cs_6_muc(dntt, sh);
+        Double[] dongiamuc = new Double[] { };
+        int j = 0;
+        for (j = 0; j < muc.Length; j++)
         {
-            Double[] muc = tinh_cs_6_muc(dntt, sh);
-            Double[] dongiamuc = new Double[] { };
-            int j = 0;
-            for (j = 0; j < muc.Length; j++)
+            total = total + (muc[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString()));
+        }
+        return total;
+    }
+    //Tính tiền điện hỗn hợp
+    public Double tinh_tien_dien_HH(Double dntt, int sh, string id_bang_gia)
+    {
+        Double total = 0;
+        Double dn = 0;
+        DataTable BangGiaHH = lay_bang_gia_chi_tiet(id_bang_gia);
+        int i = 0;
+        for (i = 0; i < BangGiaHH.Rows.Count; i++)
+        {
+            DataTable dtbtemp = lay_bang_gia(BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            int tyle = Convert.ToInt32(BangGiaHH.Rows[i]["ty_le"].ToString().Trim());
+            if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
             {
-                total = total + (muc[j] * Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString()));
+                dn = dntt * tyle / 100;
+                total = total + tinh_tien_dien_MDK(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            }
+            if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+            {
+                dn = dntt * tyle / 100;
+                total = total + tinh_tien_dien_sh(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
             }
 
+        }
+
+        return total;
+    }
+    //Tính tiền điện
+    public Double tinh_tien_dien(Double dntt, int sh, string id_bang_gia)
+    {
+
+        Double total = 0;
+        DataTable BangGia = lay_bang_gia(id_bang_gia);
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+        {
+
+            // dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+            // total = dntt * dongia;
+            total = tinh_tien_dien_MDK(dntt, sh, id_bang_gia);
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+        {
+            total = tinh_tien_dien_sh(dntt, sh, id_bang_gia);
+
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
+        {
+            total = tinh_tien_dien_HH(dntt, sh, id_bang_gia);
         }
         return total;
     }
@@ -310,30 +363,7 @@ public class clsNhapChiSo
             DataSet dts = new DataSet();
             myConn.Open();
             myData.Fill(dts);
-            if (dts.Tables[0].Rows[0]["loai_bg"].ToString().Trim() != "MDK")
-            {
-
-                sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia + " order by muc_thu";
-                cmd.CommandText = sql;
-                cmd.CommandType = CommandType.Text;
-                myData = new SqlDataAdapter(cmd);
-                dts = new DataSet();
-                myData.Fill(dts);
-                myData.Dispose();
-                cmd.Parameters.Clear();
-                cmd.Connection.Close();
-                myConn.Close();
-                return dts.Tables[0];
-            }
-            else
-            {
-                myData.Dispose();
-                cmd.Parameters.Clear();
-                cmd.Connection.Close();
-                myConn.Close();
-                return dts.Tables[0];
-            }
-
+            return dts.Tables[0];
         }
         catch (Exception ex)
         {
@@ -347,8 +377,38 @@ public class clsNhapChiSo
             }
         }
     }
-    
 
+    //Lấy bảng giá chi tiết
+    public DataTable lay_bang_gia_chi_tiet(string id_bang_gia)
+    {
+        SqlConnection myConn = null;
+        string sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            return dts.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     //Trạng thái kỳ 1-Chưa chốt, 0-đã chốt
     public DataTable get_danhsach_ky()
     {
@@ -700,14 +760,14 @@ public class clsNhapChiSo
     }
 
     //Insert bang hoa_don
-    public void them_moi_hoa_don(Int64 id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue,string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to)
+    public void them_moi_hoa_don(Int64 id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to)
     {
 
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         string sql = "insert into hoa_don(id,ma_kh,ky_hd,tu_ngay,den_ngay,chi_so_cu,chi_so_moi,dien_nang_tt,tong_tien_truoc_thue,vat_rate,thue_gtgt,tong_tien_sau_thue,id_nguoi_nhap,id_bang_gia_dien,ngay_nhap,trang_thai,ma_cong_to) ";
-        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'"+vat_rate+"'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "') ";
+        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'" + vat_rate + "'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "') ";
         try
         {
             myConn.Open();
@@ -770,7 +830,7 @@ public class clsNhapChiSo
                     dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
                     total = muc[j] * dongia;
                     sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap)";
-                    sql = sql + " values(" + id_hd + "," + (j+1) + ",N'" + diengiai + "','" + muc[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103))";
+                    sql = sql + " values(" + id_hd + "," + (j + 1) + ",N'" + diengiai + "','" + muc[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103))";
                     cmd.CommandText = sql;
                     int recordsAffected = cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
