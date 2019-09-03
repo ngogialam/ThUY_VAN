@@ -900,6 +900,32 @@ public class clsKhachHang
         return recordsAffected;
     }
 
+    public int them_moi_full_field_cong_to(string ma_cong_to, string ma_kh, float he_so_ti)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = "insert into dm_cong_to(ma_cong_to,ma_kh,he_so_ti,trang_thai) values('" + ma_cong_to + "','" + ma_kh + "'," + he_so_ti + ",1)";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (SqlException)
+        {
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
     public int them_moi_chi_so_cong_to(string ma_cong_to, string ky_hd)
     {
         int recordsAffected = 0;
@@ -971,6 +997,41 @@ public class clsKhachHang
         {
             cmd.Connection.Close();
             myConn.Close();
+        }
+    }
+
+    public DataTable get_danh_muc_cong_to()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select * from dm_cong_to";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
         }
     }
 

@@ -111,6 +111,9 @@
                             <a href='<%= ResolveUrl("DanhMucNhanVien.aspx")%>'>Danh mục nhân viên</a>
                         </li>
                         <li>
+                            <a href='<%= ResolveUrl("DanhMucCongTo.aspx")%>'>Danh mục công tơ</a>
+                        </li>
+                        <li>
                             <a href='<%= ResolveUrl("DanhMucKhu.aspx")%>'>Danh mục khu</a>
                         </li>
                         <li>
@@ -221,7 +224,7 @@
                     <div class="modal-body">Chọn "Đăng xuất" để thoát phiên.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
-                        <a class="btn btn-primary" href="./Logout.aspx">Đăng xuất</a>
+                        <a class="btn btn-primary" href="../Logout.aspx">Đăng xuất</a>
                     </div>
                 </div>
             </div>
