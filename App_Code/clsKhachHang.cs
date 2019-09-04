@@ -741,6 +741,59 @@ public class clsKhachHang
         }
     }
 
+    public int cap_nhat_cong_to(string ma_cong_to, string chungLoai, string nhaSanXuat, string ngaySD, string ngayHetHan)
+    {
+        int ma = 0;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            string str_sql = "";
+            if (ngaySD.Trim() == "" & ngayHetHan.Trim() == "")
+            {
+                str_sql = string.Format("update dm_cong_to set chung_loai = N'{1}', nha_san_xuat = N'{2}' where ma_cong_to = '{0}'", ma_cong_to, chungLoai, nhaSanXuat, ngaySD, ngayHetHan);
+            }
+            else if (ngaySD.Trim() == "")
+            {
+                str_sql = string.Format("update dm_cong_to set chung_loai = N'{1}', nha_san_xuat = N'{2}', ngay_het_han = CONVERT(datetime, '{3}') where ma_cong_to = '{0}'", ma_cong_to, chungLoai, nhaSanXuat, ngayHetHan);
+            }
+            else if (ngayHetHan.Trim() == "")
+            {
+                str_sql = string.Format("update dm_cong_to set chung_loai = N'{1}', nha_san_xuat = N'{2}', ngay_sd = CONVERT(datetime, '{3}') where ma_cong_to = '{0}'", ma_cong_to, chungLoai, nhaSanXuat, ngaySD);
+            }
+            else
+            {
+                str_sql = string.Format("update dm_cong_to set chung_loai = N'{1}', nha_san_xuat = N'{2}', ngay_sd = CONVERT(datetime, '{3}'), ngay_het_han = CONVERT(datetime, '{4}') where ma_cong_to = '{0}'", ma_cong_to, chungLoai, nhaSanXuat, ngaySD, ngayHetHan);
+            }
+            cmd.CommandText = str_sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataTable dts = new DataTable();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ma = dts.Rows.Count;
+            return ma;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
     public int check_ma_cong_to(string ma_cong_to)
     {
         int ma = 0;
@@ -1009,7 +1062,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select * from dm_cong_to";
+            cmd.CommandText = "select ma_cong_to, ma_kh, chung_loai, nha_san_xuat, trang_thai, he_so_ti, REPLACE(ISNULL(CONVERT(DATE, ngay_sd), ''), '1900-01-01', '') AS ngay_sd, REPLACE(ISNULL(CONVERT(DATE, ngay_het_han), ''), '1900-01-01', '') AS ngay_het_han from dm_cong_to;";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
