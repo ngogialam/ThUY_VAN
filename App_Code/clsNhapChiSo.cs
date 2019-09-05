@@ -343,6 +343,8 @@ public class clsNhapChiSo
         {
             total = tinh_tien_dien_HH(dntt, sh, id_bang_gia);
         }
+        //Làm tròn
+        total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
         return total;
     }
 
@@ -791,7 +793,27 @@ public class clsNhapChiSo
     }
     //Insert hoa_don_chi_tiet
 
-    public void them_moi_hoa_don_chi_tiet(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    public int them_moi_hoa_don_chi_tiet(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+        int recordsAffected = 0;
+        DataTable BangGia = lay_bang_gia(id_bang_gia);
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+        {
+            recordsAffected = them_moi_hoa_don_chi_tiet_mdk(id_hd, dntt, sh, id_bang_gia);
+
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+        {
+            recordsAffected = them_moi_hoa_don_chi_tiet_sh(id_hd, dntt, sh, id_bang_gia);
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
+        {
+            recordsAffected = them_moi_hoa_don_chi_tiet_hh(id_hd, dntt, sh, id_bang_gia);
+        }
+        return recordsAffected;
+
+    }
+    public int them_moi_hoa_don_chi_tiet_mdk(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -800,42 +822,66 @@ public class clsNhapChiSo
         Double dongia = 0;
         Double total = 0;
         string diengiai = "";
-
+        int recordsAffected = 0;
         try
         {
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
             DataTable BangGia = lay_bang_gia(id_bang_gia);
-            if (BangGia.Rows.Count == 1)
-            {
-                diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString();
-                dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-                total = dntt * dongia;
-                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap)";
-                sql = sql + " values(" + id_hd + ",1,N'" + diengiai + "','" + dntt + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103))";
 
-                cmd.CommandText = sql;
-                int recordsAffected = cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
+            diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString();
+            dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+            total = dntt * dongia;
+            sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap)";
+            sql = sql + " values(" + id_hd + ",1,N'" + diengiai + "'," + dntt + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103))";
+
+            cmd.CommandText = sql;
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
             }
-            else
+        }
+        return recordsAffected;
+    }
+    public int them_moi_hoa_don_chi_tiet_sh(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        string sql = "";
+        Double dongia = 0;
+        Double total = 0;
+        string diengiai = "";
+        int recordsAffected = 0;
+        DataTable BangGia = lay_bang_gia_chi_tiet(id_bang_gia);
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            Double[] muc = tinh_cs_6_muc(dntt, sh);
+            Double[] dongiamuc = new Double[] { };
+            int j = 0;
+            for (j = 0; j < muc.Length; j++)
             {
-                Double[] muc = tinh_cs_6_muc(dntt, sh);
-                Double[] dongiamuc = new Double[] { };
-                int j = 0;
-                for (j = 0; j < muc.Length; j++)
-                {
-                    diengiai = BangGia.Rows[j]["muc_thu"].ToString();
-                    dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
-                    total = muc[j] * dongia;
-                    sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap)";
-                    sql = sql + " values(" + id_hd + "," + (j + 1) + ",N'" + diengiai + "','" + muc[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103))";
-                    cmd.CommandText = sql;
-                    int recordsAffected = cmd.ExecuteNonQuery();
-                    cmd.Parameters.Clear();
-                }
-
+                diengiai = BangGia.Rows[j]["muc_thu"].ToString();
+                dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
+                total = muc[j] * dongia;
+                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap)";
+                sql = sql + " values(" + id_hd + "," + (j + 1) + ",N'" + diengiai + "','" + muc[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103))";
+                cmd.CommandText = sql;
+                recordsAffected = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
             }
         }
         catch (Exception ex)
@@ -849,7 +895,34 @@ public class clsNhapChiSo
                 myConn.Close();
             }
         }
+        return recordsAffected;
     }
 
+    public int them_moi_hoa_don_chi_tiet_hh(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+
+        Double dn = 0;
+        DataTable BangGiaHH = lay_bang_gia_chi_tiet(id_bang_gia);
+        int i = 0;
+        int recordsAffected = 0;
+        for (i = 0; i < BangGiaHH.Rows.Count; i++)
+        {
+            DataTable dtbtemp = lay_bang_gia(BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            int tyle = Convert.ToInt32(BangGiaHH.Rows[i]["ty_le"].ToString().Trim());
+            if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+            {
+                dn = dntt * tyle / 100;
+                recordsAffected = them_moi_hoa_don_chi_tiet_mdk(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            }
+            if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+            {
+                dn = dntt * tyle / 100;
+                recordsAffected = them_moi_hoa_don_chi_tiet_sh(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            }
+        }
+        return recordsAffected;
+
+
+    }
 
 }
