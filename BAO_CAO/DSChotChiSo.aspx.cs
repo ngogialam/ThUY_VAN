@@ -14,12 +14,15 @@ using System.Data.SqlClient;
 public partial class DSChotChiSo : System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
-    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
-           
+            Session.Remove("DSChotChiSoCtoTable");
+            Session.Remove("DSChotChiSoCtoTenXomKhu");
+            Session.Remove("DSChotChiSoCtoTenTramBA");
+            Session.Remove("DSChotChiSoCtoQuyNam");
+            Session.Remove("DSChotChiSoCtoNgayIn");
 
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
@@ -29,7 +32,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
             ddlTramBA.DataSource = tram_bien_ap;
             ddlTramBA.DataBind();
 
-           
+
 
             DataTable khu = myCus.get_khu();
             //DataRow newRow1 = bang_gia_dien.NewRow();
@@ -53,58 +56,20 @@ public partial class DSChotChiSo : System.Web.UI.Page
     protected void XemBC(object sender, EventArgs e)
     {
         txtErr.Text = "";
-      //  string thang = ddlThang.SelectedValue.ToString();
+        //  string thang = ddlThang.SelectedValue.ToString();
 
         string nam = ddlNam.SelectedValue.ToString();
-        
+
         if (nam != "")
         {
-                int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
-                string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
-                string id_thoi_gian = ddlThoiGian.SelectedValue.ToString();
-                bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
+            int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+            string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
+            string id_thoi_gian = ddlThoiGian.SelectedValue.ToString();
+            bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
         }
         else
         {
             txtErr.Text = "Bạn phải nhập tháng, năm để tính được kì hóa đơn ";
-        }
-    }
-
-    protected void XuatExcel(object sender, EventArgs e)
-    {
-        ////getting datatable from viewstate  
-        DataTable dt = (DataTable)ViewState["DataTable"];
-        if (dt.Rows.Count == 0)
-        {
-            return;
-        }
-        
-        string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
-        //calling create Excel File Method and ing dataTable   
-        CreateExcelFile(dt, nameFile);
-    }
-
-    public void CreateExcelFile(DataTable baocao, string FileName)
-    {
-        using (baocao)
-        {
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(baocao, "Sheet1");
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
-                using (MemoryStream MyMemoryStream = new MemoryStream())
-                {
-                    wb.SaveAs(MyMemoryStream);
-                    MyMemoryStream.WriteTo(Response.OutputStream);
-                    Response.Flush();
-                    Response.End();
-                }
-
-            }
         }
     }
 
@@ -121,14 +86,14 @@ public partial class DSChotChiSo : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-       // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
+        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
     void bindGrid(string id_tram_bien_ap, int id_khu, string id_thoi_gian)
     {
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-     //   string thoi_gian_xem = ddlThoiGian.SelectedValue.ToString();
+        //   string thoi_gian_xem = ddlThoiGian.SelectedValue.ToString();
         string nam = ddlNam.SelectedValue.ToString();
         //if(thoi_gian_xem == "01")
         //    tbx = cslBC.SELECT_CHOT_CONG_TO(id_tram_bien_ap, id_khu, id_thoi_gian, ky_hd);
@@ -154,10 +119,10 @@ public partial class DSChotChiSo : System.Web.UI.Page
         tbxView.Columns.Add("t10");
         tbxView.Columns.Add("t11");
         tbxView.Columns.Add("t12");
-        
+
         dr = tbxView.NewRow();
 
-   
+
         double tong_thang_1 = 0;
         double tong_thang_2 = 0;
         double tong_thang_3 = 0;
@@ -171,12 +136,12 @@ public partial class DSChotChiSo : System.Web.UI.Page
         double tong_thang_11 = 0;
         double tong_thang_12 = 0;
 
-        
+
 
         for (int i = 0; i < tbx.Rows.Count; i++)
         {
             DataRow newRowTong = tbxView.NewRow();
-            newRowTong[0] = (i+1).ToString();
+            newRowTong[0] = (i + 1).ToString();
             newRowTong[1] = tbx.Rows[i]["ma_kh"].ToString();
             newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
             newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
@@ -184,7 +149,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
 
             if (id_thoi_gian == "03")
             {
-                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(),"01", nam);
+                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
                 tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
                 tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
             }
@@ -212,7 +177,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
                 tong_thang_11 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "11", nam);
                 tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "12", nam);
             }
-            
+
             newRowTong[5] = tong_thang_1;
             newRowTong[6] = tong_thang_2;
             newRowTong[7] = tong_thang_3;
@@ -237,8 +202,12 @@ public partial class DSChotChiSo : System.Web.UI.Page
         GridView1.DataSource = tbxView;
         GridView1.DataBind();
         ViewState["DataTable"] = tbxView;
+        Session["DSChotChiSoCtoTable"] = tbx;
+        Session["DSChotChiSoCtoTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
+        Session["DSChotChiSoCtoTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
+        Session["DSChotChiSoCtoQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;
+        Session["DSChotChiSoCtoNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
     }
-
 
     protected void GridView1_DataBound(object sender, EventArgs e)
     {
@@ -271,6 +240,6 @@ public partial class DSChotChiSo : System.Web.UI.Page
         }
 
     }
-   
-    
+
+
 }

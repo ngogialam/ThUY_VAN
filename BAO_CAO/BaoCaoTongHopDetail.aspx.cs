@@ -2,7 +2,7 @@
 using System.Data;
 using System;
 
-public partial class KeTienDienDetail : System.Web.UI.Page
+public partial class BaoCaoTongHopDetail : System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
 
@@ -13,14 +13,14 @@ public partial class KeTienDienDetail : System.Web.UI.Page
     }
     public XtraReport createReport()
     {
-        KeTienDienReport rpt = new KeTienDienReport(); // đối tượng này là report
+        TongHopReport rpt = new TongHopReport(); // đối tượng này là report
         DataTable fixDs = new DataTable();
         DataTable ds = new DataTable();
         try
         {
-            fixDs = (DataTable)Session["KeTienDienTable"];
+            fixDs = (DataTable)Session["BaoCaoTongHopTable"];
             ds = fixDs.Copy();
-            rpt.AddBindings(Session["KeTienDienTenTramBA"].ToString(), Session["KeTienDienKyTramBA"].ToString(), Session["KeTienDienNgayThang"].ToString(), Session["KeTienDienNgayIn"].ToString(), Session["TenDoanhNghiep"].ToString());
+            rpt.AddBindings(Session["BaoCaoTongHopTenXomKhu"].ToString(), Session["BaoCaoTongHopLoaiBaoCao"].ToString(), Session["BaoCaoTongHopThangNam"].ToString(), Session["BaoCaoTongHopNgayIn"].ToString(), Session["TenDoanhNghiep"].ToString());
             DataRow newRow = ds.NewRow();
             newRow.ItemArray = ds.Rows[0].ItemArray; // copy data
             ds.Rows.Remove(ds.Rows[0]);

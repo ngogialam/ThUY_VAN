@@ -2,7 +2,7 @@
 using System.Data;
 using System;
 
-public partial class KeTienDienDetail : System.Web.UI.Page
+public partial class BangKeTienDienDetail: System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
 

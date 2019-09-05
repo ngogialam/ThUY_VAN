@@ -19,7 +19,12 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-           
+
+            Session.Remove("DanhSachTieuThuTable");
+            Session.Remove("DanhSachTieuThuTenXomKhu");
+            Session.Remove("DanhSachTieuThuTenTramBA");
+            Session.Remove("DanhSachTieuThuQuyNam");
+            Session.Remove("DanhSachTieuThuNgayIn");
 
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
@@ -67,44 +72,6 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
         else
         {
             txtErr.Text = "Bạn phải nhập tháng, năm để tính được kì hóa đơn ";
-        }
-    }
-
-    protected void XuatExcel(object sender, EventArgs e)
-    {
-        ////getting datatable from viewstate  
-        DataTable dt = (DataTable)ViewState["DataTable"];
-        if (dt.Rows.Count == 0)
-        {
-            return;
-        }
-        
-        string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
-        //calling create Excel File Method and ing dataTable   
-        CreateExcelFile(dt, nameFile);
-    }
-
-    public void CreateExcelFile(DataTable baocao, string FileName)
-    {
-        using (baocao)
-        {
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(baocao, "Sheet1");
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
-                using (MemoryStream MyMemoryStream = new MemoryStream())
-                {
-                    wb.SaveAs(MyMemoryStream);
-                    MyMemoryStream.WriteTo(Response.OutputStream);
-                    Response.Flush();
-                    Response.End();
-                }
-
-            }
         }
     }
 
@@ -237,6 +204,11 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
         GridView1.DataSource = tbxView;
         GridView1.DataBind();
         ViewState["DataTable"] = tbxView;
+        Session["DanhSachTieuThuTable"] = tbx;
+        Session["DanhSachTieuThuTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
+        Session["DanhSachTieuThuTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
+        Session["DanhSachTieuThuQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;
+        Session["DanhSachTieuThuNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
     }
 
 

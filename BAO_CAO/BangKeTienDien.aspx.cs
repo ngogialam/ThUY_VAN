@@ -19,6 +19,12 @@ public partial class BangKeTienDien : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
+            Session.Remove("KeTienDienTable");
+            Session.Remove("KeTienDienTenTramBA");
+            Session.Remove("KeTienDienKyTramBA");
+            Session.Remove("KeTienDienNgayThang");
+            Session.Remove("KeTienDienNgayIn");
+            
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
             newRow[0] = 0;
@@ -68,44 +74,6 @@ public partial class BangKeTienDien : System.Web.UI.Page
         else
         {
             txtErr.Text = "Bạn phải nhập tháng, năm để tính được kì hóa đơn ";
-        }
-    }
-
-    protected void XuatExcel(object sender, EventArgs e)
-    {
-        ////getting datatable from viewstate  
-        DataTable dt = (DataTable)ViewState["DataTable"];
-        if (dt.Rows.Count == 0)
-        {
-            return;
-        }
-        
-        string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
-        //calling create Excel File Method and ing dataTable   
-        CreateExcelFile(dt, nameFile);
-    }
-
-    public void CreateExcelFile(DataTable baocao, string FileName)
-    {
-        using (baocao)
-        {
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(baocao, "Sheet1");
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
-                using (MemoryStream MyMemoryStream = new MemoryStream())
-                {
-                    wb.SaveAs(MyMemoryStream);
-                    MyMemoryStream.WriteTo(Response.OutputStream);
-                    Response.Flush();
-                    Response.End();
-                }
-
-            }
         }
     }
 

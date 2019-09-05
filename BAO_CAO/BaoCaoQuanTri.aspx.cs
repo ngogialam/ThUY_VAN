@@ -19,7 +19,13 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-           
+            Session.Remove("BaoCaoQuanTriTable");
+            Session.Remove("BaoCaoQuanTriXomKhu");
+            Session.Remove("BaoCaoQuanTriTramBA");
+            Session.Remove("BaoCaoQuanTriThangNam");
+            Session.Remove("BaoCaoQuanTriNgayIn");
+            Session.Remove("BaoCaoQuanTriThamSo");
+            Session.Remove("BaoCaoQuanTriLoaiBaoCao");
 
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
@@ -202,6 +208,13 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
         GridView1.DataSource = tbx;
         GridView1.DataBind();
         ViewState["DataTable"] = tbx;
+        Session["BaoCaoQuanTriTable"] = tbx;
+        Session["BaoCaoQuanTriXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
+        Session["BaoCaoQuanTriTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
+        Session["BaoCaoQuanTriThangNam"] = "Tháng " + ddlThang.SelectedItem + ", năm " + ddlNam.SelectedItem;
+        Session["BaoCaoQuanTriNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
+        Session["BaoCaoQuanTriThamSo"] = "Tham số:  " + txtThamSo.Text;
+        Session["BaoCaoQuanTriLoaiBaoCao"] = ddlChonBC.SelectedItem.ToString().ToUpper();
     }
 
 

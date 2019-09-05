@@ -14,6 +14,7 @@ public partial class Logout : System.Web.UI.Page
     {
         FormsAuthentication.SignOut();
         Session.Abandon();
+        Session.RemoveAll();
 
         HttpCookie aCookie;
         string cookieName;

@@ -14,13 +14,16 @@ using System.Data.SqlClient;
 public partial class BaoCaoTongHop : System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
-           
-
+            Session.Remove("BaoCaoTongHopTable");
+            Session.Remove("BaoCaoTongHopTenXomKhu");
+            Session.Remove("BaoCaoTongHopLoaiBaoCao");
+            Session.Remove("BaoCaoTongHopThangNam");
+            Session.Remove("BaoCaoTongHopNgayIn");
             //DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             //DataRow newRow = tram_bien_ap.NewRow();
             //newRow[0] = 0;
@@ -62,59 +65,21 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         string thang = ddlThang.SelectedValue.ToString();
 
         string nam = ddlNam.SelectedValue.ToString();
-        
+
         if (thang != "" && nam != "")
         {
 
             string ky_hd = thang + "/" + nam;
-                int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
-                string loai_bc = ddlChonBC.SelectedValue.ToString();
-                
-                bindGrid(loai_bc, id_dia_ban,  ky_hd);
-           //     bindGrid(tungay1, denngay1, id_dia_ban);
-            
+            int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+            string loai_bc = ddlChonBC.SelectedValue.ToString();
+
+            bindGrid(loai_bc, id_dia_ban, ky_hd);
+            //     bindGrid(tungay1, denngay1, id_dia_ban);
+
         }
         else
         {
             txtErr.Text = "Bạn phải nhập tháng, năm để tính được kì hóa đơn ";
-        }
-    }
-
-    protected void XuatExcel(object sender, EventArgs e)
-    {
-        ////getting datatable from viewstate  
-        DataTable dt = (DataTable)ViewState["DataTable"];
-        if (dt.Rows.Count == 0)
-        {
-            return;
-        }
-        
-        string nameFile = "BaoCaoSanLuong_" + DateTime.Now.Year + ".xlsx";
-        //calling create Excel File Method and ing dataTable   
-        CreateExcelFile(dt, nameFile);
-    }
-
-    public void CreateExcelFile(DataTable baocao, string FileName)
-    {
-        using (baocao)
-        {
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(baocao, "Sheet1");
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
-                using (MemoryStream MyMemoryStream = new MemoryStream())
-                {
-                    wb.SaveAs(MyMemoryStream);
-                    MyMemoryStream.WriteTo(Response.OutputStream);
-                    Response.Flush();
-                    Response.End();
-                }
-
-            }
         }
     }
 
@@ -131,15 +96,15 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-       // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
+        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
-    void bindGrid(string loai_bc, int id_khu,  string ky_hd)
+    void bindGrid(string loai_bc, int id_khu, string ky_hd)
     {
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
 
-        if(loai_bc=="01")
+        if (loai_bc == "01")
             tbx = cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd);
         else
             tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_khu, ky_hd);
@@ -155,10 +120,10 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
             dien_nang_tt = tbx.Rows[i]["dien_nang_tt"].ToString().Trim();
             if (dien_nang_tt != "")
             {
-                    san_luong += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                    tong_tien_truoc_thue += double.Parse(tbx.Rows[i]["tong_tien_truoc_thue"].ToString());
-                    thue_gtgt += double.Parse(tbx.Rows[i]["thue_gtgt"].ToString());
-                    tong_tien_sau_thue += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
+                san_luong += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
+                tong_tien_truoc_thue += double.Parse(tbx.Rows[i]["tong_tien_truoc_thue"].ToString());
+                thue_gtgt += double.Parse(tbx.Rows[i]["thue_gtgt"].ToString());
+                tong_tien_sau_thue += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
             }
         }
 
@@ -169,12 +134,17 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         newRow4[4] = tong_tien_truoc_thue;
         newRow4[5] = thue_gtgt;
         newRow4[6] = tong_tien_sau_thue;
-        
+
         tbx.Rows.InsertAt(newRow4, 0);
 
         GridView1.DataSource = tbx;
         GridView1.DataBind();
         ViewState["DataTable"] = tbx;
+        Session["BaoCaoTongHopTable"] = tbx;
+        Session["BaoCaoTongHopTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
+        Session["BaoCaoTongHopLoaiBaoCao"] = ddlChonBC.SelectedItem.ToString().ToUpper();
+        Session["BaoCaoTongHopThangNam"] = "THÁNG " + ddlThang.SelectedItem + " NĂM " + ddlNam.SelectedItem;
+        Session["BaoCaoTongHopNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
     }
 
 
@@ -209,6 +179,6 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         }
 
     }
-   
-    
+
+
 }

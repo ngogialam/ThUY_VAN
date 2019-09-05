@@ -120,7 +120,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
 	/// the contents of this method with the code editor.
 	/// </summary>
 	private void InitializeComponent() {
-            string resourceFileName = "KeTienDienReport.resx";
             this.lblMaKh = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblDiaChi = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblChiSoCu = new DevExpress.XtraReports.UI.XRTableCell();
@@ -475,13 +474,13 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTable3,
             this.xrLabel5,
             this.xrLabel3});
-            this.PageHeader.HeightF = 263.75F;
+            this.PageHeader.HeightF = 259.4916F;
             this.PageHeader.Name = "PageHeader";
             // 
             // lblNgayIn
             // 
             this.lblNgayIn.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.lblNgayIn.LocationFloat = new DevExpress.Utils.PointFloat(817.3781F, 44.79163F);
+            this.lblNgayIn.LocationFloat = new DevExpress.Utils.PointFloat(1021.749F, 98.19073F);
             this.lblNgayIn.Name = "lblNgayIn";
             this.lblNgayIn.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.lblNgayIn.SizeF = new System.Drawing.SizeF(219.7917F, 23F);
@@ -492,7 +491,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // lblThangNam
             // 
             this.lblThangNam.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.lblThangNam.LocationFloat = new DevExpress.Utils.PointFloat(542.4749F, 44.79163F);
+            this.lblThangNam.LocationFloat = new DevExpress.Utils.PointFloat(458.6209F, 98.19073F);
             this.lblThangNam.Name = "lblThangNam";
             this.lblThangNam.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.lblThangNam.SizeF = new System.Drawing.SizeF(219.7917F, 23F);
@@ -516,18 +515,18 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // lblKyTramBA
             // 
             this.lblKyTramBA.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.lblKyTramBA.LocationFloat = new DevExpress.Utils.PointFloat(1587.17F, 44.79163F);
+            this.lblKyTramBA.LocationFloat = new DevExpress.Utils.PointFloat(1552.9F, 96.98238F);
             this.lblKyTramBA.Name = "lblKyTramBA";
             this.lblKyTramBA.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblKyTramBA.SizeF = new System.Drawing.SizeF(139.8303F, 23F);
+            this.lblKyTramBA.SizeF = new System.Drawing.SizeF(173.1637F, 23F);
             this.lblKyTramBA.StylePriority.UseFont = false;
             this.lblKyTramBA.StylePriority.UseTextAlignment = false;
-            this.lblKyTramBA.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.lblKyTramBA.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
             // lblTenTramBA
             // 
             this.lblTenTramBA.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.lblTenTramBA.LocationFloat = new DevExpress.Utils.PointFloat(1052.894F, 44.79163F);
+            this.lblTenTramBA.LocationFloat = new DevExpress.Utils.PointFloat(0.0001179803F, 98.19073F);
             this.lblTenTramBA.Name = "lblTenTramBA";
             this.lblTenTramBA.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.lblTenTramBA.SizeF = new System.Drawing.SizeF(220.7286F, 23F);
@@ -541,7 +540,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTable3.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom;
             this.xrTable3.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right)));
-            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 143.75F);
+            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 139.4916F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3,
@@ -1016,7 +1015,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // xrLabel5
             // 
             this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Bold);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(461.4583F, 0F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(460.5212F, 55.57928F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -1070,7 +1069,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(37.23927F, 14.83339F);
             this.xrLabel2.Name = "xrLabel2";
             this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(209.5677F, 23F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(608.7054F, 23F);
             this.xrLabel2.StylePriority.UseFont = false;
             this.xrLabel2.StylePriority.UseTextAlignment = false;
             this.xrLabel2.Text = "Người lập biểu";

@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" Title="Bảng kê tiền điện" AutoEventWireup="true" CodeFile="KeTienDienDetail.aspx.cs" Inherits="KeTienDienDetail" %>
+﻿<%@ Page Language="C#" Title="Danh sách tiêu thụ" AutoEventWireup="true" CodeFile="DanhSachTieuThuDetail.aspx.cs" Inherits="DanhSachTieuThuDetail" %>
+
 <%@ Register Assembly="DevExpress.XtraReports.v12.1.Web, Version=12.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraReports.Web" TagPrefix="dx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,8 +10,8 @@
     <span id="hello" runat="server"></span>
     <form id="form1" runat="server">
         <div style="padding: 10px 5px 5px 10%">
-            <dx:ReportToolbar Theme="Glass" ID="ReportToolbar1" runat='server' ShowDefaultButtons='False'
-                Width="60%" ReportViewer="<%# reportSo %>">
+            <dx:reporttoolbar theme="Glass" id="ReportToolbar1" runat='server' showdefaultbuttons='False'
+                width="60%" reportviewer="<%# reportSo %>">
                 <Items>
                     <dx:ReportToolbarButton ItemKind='PrintReport' />
                     <dx:ReportToolbarButton ItemKind='PrintPage' />
@@ -41,10 +42,10 @@
                         <Margins MarginLeft='3px' MarginRight='3px' />
                     </LabelStyle>
                 </Styles>
-            </dx:ReportToolbar>
+            </dx:reporttoolbar>
             <br />
-            <dx:ReportViewer Theme="Glass" ID="reportSo" runat="server" ClientInstanceName="reportSo" Width="100%">
-            </dx:ReportViewer>
+            <dx:reportviewer theme="Glass" id="reportSo" runat="server" clientinstancename="reportSo" width="100%">
+            </dx:reportviewer>
         </div>
     </form>
 </body>
