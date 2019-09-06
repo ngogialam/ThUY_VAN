@@ -129,32 +129,99 @@
         //Sửa thông tin
         function onClickCapNhat() {
             var re = /d+/;
-            var txtTenNV = $('#txtTeNV').val();
+            var txtTenKH = $('#txtTenKh').val();
             var txtDiaChi = $('#txtDiaChi').val();
-            var txtDienThoai = $('#txtDienThoai').val();
-            var txtChiChu = $('#txtGhiChu').val();
-            if (txtTenNV === "") {
-                alert("Vui lòng nhập tên nhân viên!");
-                $('#txtTeNV').focus();
+            var txtSoHo = $('#txtSoHo').val();
+            var txtHeSoTi = $('#txtHSTi').val();
+            var txtSDT = $('#txtSoDT').val();
+            var txtMaSoThue = $('#txtMstKH').val();
+            var txtSoCot = $('#txtSoCot').val();
+            var txtMaCongTo = $('#txtMaCongTo').val();
+            var txtSoDongHo = $('#txtSoDongHo').val();
+            var txtThuTu = $('#txtThuTu').val();
+
+            if (txtTenKH === "") {
+                alert("Vui lòng nhập tên khách hàng!");
+                $('#txtTenKh').focus();
                 return false
             }
-
             if (txtDiaChi === "") {
                 alert("Vui lòng nhập địa chỉ!");
                 $('#txtDiaChi').focus();
                 return false
             }
-
-            if (txtDienThoai === "") {
-                alert("Vui lòng nhập số điện thoại!");
-                $('#txtDienThoai').focus();
+            if (txtSoHo === "") {
+                alert("Vui lòng nhập số hộ!");
+                $('#txtSoHo').focus();
                 return false
             }
-            var isDienThoai = re.test(txtDienThoai);
+            if (txtSoHo <= 0) {
+                alert("Số hộ phải lớn hơn không!");
+                $('#txtSoHo').focus();
+                return false
+            }
+            if (txtHeSoTi === "") {
+                alert("Vui lòng nhập hệ số ti!");
+                $('#txtHSTi').focus();
+                return false
+            }
+            if (txtHeSoTi <= 0) {
+                alert("Hệ số ti phải lớn hơn không!");
+                $('#txtHSTi').focus();
+                return false
+            }
+            if (txtSDT === "") {
+                alert("Vui lòng nhập số điện thoại!");
+                $('#txtSoDT').focus();
+                return false
+            }
+            var isDienThoai = re.test(txtSDT);
             if (isDienThoai) {
                 alert("Bạn chỉ được nhập số!");
-                $('#txtDienThoai').focus();
+                $('#txtSoDT').focus();
                 return false;
+            }
+            if (txtMaSoThue === "") {
+                alert("Vui lòng nhập mã số thuế!");
+                $('#txtMstKH').focus();
+                return false
+            }
+            var isMaSoThue = re.test(txtMaSoThue);
+            if (isMaSoThue) {
+                alert("Bạn chỉ được nhập số!");
+                $('#txtMstKH').focus();
+                return false;
+            }
+            if (txtSoCot === "") {
+                alert("Vui lòng nhập số cột!");
+                $('#txtSoCot').focus();
+                return false
+            }
+            var isSoCot = re.test(txtSoCot);
+            if (isSoCot) {
+                alert("Bạn chỉ được nhập số!");
+                $('#txtSoCot').focus();
+                return false;
+            }
+            if (txtSoDongHo === "") {
+                alert("Vui lòng nhập số đồng hồ!");
+                $('#txtSoDongHo').focus();
+                return false
+            }
+            if (txtSoDongHo <= 0) {
+                alert("Số đồng hồ phải lớn hơn 0!");
+                $('#txtSoDongHo').focus();
+                return false
+            }
+            if (txtThuTu === "") {
+                alert("Vui lòng nhập thứ tự!");
+                $('#txtThuTu').focus();
+                return false
+            }
+            if (txtThuTu <= 0) {
+                alert("Thứ tự phải lớn hơn 0!");
+                $('#txtThuTu').focus();
+                return false
             }
 
             cbCapNhat.PerformCallback()
