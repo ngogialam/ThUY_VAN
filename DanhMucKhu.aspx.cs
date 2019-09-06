@@ -21,8 +21,12 @@ public partial class DanhMucKhu : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            DataTable DiaBanList = myCus.get_danh_muc_phuong_xa();
+            drpPhuongXa_AddModal.DataSource = DiaBanList;
+            drpPhuongXa_AddModal.DataBind();
+            drpPhuongXa_EditModal.DataSource = DiaBanList;
+            drpPhuongXa_EditModal.DataBind();
             gv_bind();
-
         }
 
     }
@@ -50,8 +54,11 @@ public partial class DanhMucKhu : System.Web.UI.Page
             //DataTable DiaBanList = myCus.get_dia_ban();
             txtId.Text = id.Text;
             txtTenKhu.Text = tenKhu.Text;
-            txtIdPhuongXa.Text = idPhuongXa.Text;
-
+            try
+            {
+                drpPhuongXa_EditModal.SelectedValue = idPhuongXa.Text;
+            }
+            catch { }
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#EditModal').modal('show');");
@@ -69,7 +76,7 @@ public partial class DanhMucKhu : System.Web.UI.Page
         int id_khu = Convert.ToInt32(txtId.Text);
         string log = "Sửa khu mã " + id_khu;
         string ten_khu = txtTenKhu.Text;
-        int id_phuong_xa = Convert.ToInt32(txtIdPhuongXa.Text);
+        int id_phuong_xa = Convert.ToInt32(drpPhuongXa_EditModal.SelectedValue);
         try
         {
             myCus.cap_nhat_khu(id_khu, ten_khu, id_phuong_xa);
@@ -85,7 +92,7 @@ public partial class DanhMucKhu : System.Web.UI.Page
     protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         string tenKhu = txtTenKhu_AddModal.Text;
-        string IDPhuongXa = txtIdPhuongXa_AddModal.Text;
+        string IDPhuongXa = drpPhuongXa_AddModal.SelectedValue;
         int i = myCus.them_moi_khu(tenKhu, Convert.ToInt32(IDPhuongXa));
         if (i == 0)
             e.Result = "0";

@@ -20,7 +20,7 @@
             var txtMaCongTo = $('#txtMaCongTo_AddModal').val();
             var txtSoDongHo = $('#txtSoDongHo_AddModal').val();
             var txtThuTu = $('#txtThuTu_AddModal').val();
-            
+
             if (txtTenKH === "") {
                 alert("Vui lòng nhập tên khách hàng!");
                 $('#txtTenKh_AddModal').focus();
@@ -231,9 +231,14 @@
                                 <asp:Label ID="lblTenKH" runat="server" Text='<%# Eval("ten_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Id bảng giá">
+                        <asp:TemplateField HeaderText="Id bảng giá" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdBangGia" runat="server" Text='<%# Eval("id_bang_gia") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Bảng giá">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTenBangGia" runat="server" Text='<%# convertTenBangGia(Eval("id_bang_gia")) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Địa chỉ">
@@ -241,20 +246,31 @@
                                 <asp:Label ID="lblDiaChi" runat="server" Text='<%# Eval("dia_chi") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Id khu">
+                        <asp:TemplateField HeaderText="Id khu" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Id trạm biến áp">
+                        <asp:TemplateField HeaderText="Khu">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTenKhu" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Id trạm biến áp" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdBA" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <%--<asp:TemplateField HeaderText="Trạm biến áp">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTenTramBA" runat="server" Text='<%# Eval("ten_tram_bien_ap") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>--%>
                         <asp:TemplateField HeaderText="Số hộ">
                             <ItemTemplate>
                                 <asp:Label ID="lblsoHo" runat="server" Text='<%# Eval("so_ho") %>'></asp:Label>
-                            </ItemTemplate>
+                            </ItemTemplate>                  
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Hệ số ti" Visible="False">
                             <ItemTemplate>
@@ -265,6 +281,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblDienThoai" runat="server" Text='<%# Eval("dien_thoai") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Gửi SMS">
                             <ItemTemplate>
@@ -447,7 +464,7 @@
                         <div class="user-info-row " style="display: block">
                             <label class="key">Trạng thái:</label>
                             <div class="value">
-                                <asp:CheckBox ID="ckbTrangThai_AddModal" runat="server" ClientIDMode="Static"/>
+                                <asp:CheckBox ID="ckbTrangThai_AddModal" runat="server" ClientIDMode="Static" />
                                 <label>Kích hoạt</label>
                             </div>
                         </div>

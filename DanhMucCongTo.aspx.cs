@@ -8,18 +8,21 @@ public partial class DanhMucCongTo : System.Web.UI.Page
     clsKhachHang myCus = new clsKhachHang();
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
+    clsNhapChiSo myNCS = new clsNhapChiSo();
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            gv_bind();
+            gv_bind(-1);
+            drpTramBienAp_1.DataSource = myNCS.get_danh_sach_tba();
+            drpTramBienAp_1.DataBind();
         }
 
     }
-    protected void gv_bind()
+    protected void gv_bind(int id_tramba)
     {
-        CusList = myCus.get_danh_muc_cong_to();
+        CusList = myCus.get_danh_muc_cong_to_theo_tram_BA(id_tramba);
         GridViewEman.DataSource = CusList;
         GridViewEman.DataBind();
         if (CusList.Rows.Count > 0)
@@ -88,5 +91,9 @@ public partial class DanhMucCongTo : System.Web.UI.Page
             e.Result = "0";
         }
     }
-    
+    protected void btnLaySL_Click(object sender, EventArgs e)
+    {
+        int id_tram = Int32.Parse(drpTramBienAp_1.SelectedValue.ToString());
+        gv_bind(id_tram);
+    }
 }

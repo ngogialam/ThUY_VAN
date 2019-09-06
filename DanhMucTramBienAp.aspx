@@ -160,16 +160,20 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblMaCongTo" runat="server" Text='<%# Eval("ma_so_cong_to") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Hệ só nhân">
                             <ItemTemplate>
                                 <asp:Label ID="lblHeSoNhan" runat="server" Text='<%# Eval("he_so_nhan") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
+
                         <asp:TemplateField HeaderText="Trạng thái">
                             <ItemTemplate>
                                 <asp:Label ID="lblTrangThai" runat="server" Text='<%# (int)Eval("trang_thai") == 1 ? "Active": "Deactive" %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ID Trạng thái" Visible="false">
                             <ItemTemplate>

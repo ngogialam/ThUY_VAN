@@ -9,9 +9,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     clsKhachHang myCus = new clsKhachHang();
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
-
     clsBaocao myBC = new clsBaocao();
-
+    public static DataTable bang_gia_dien = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -39,7 +38,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             drpTramBienAp.DataBind();
             drpTramBienAp_AddModal.DataSource = tram_bien_ap;
             drpTramBienAp_AddModal.DataBind();
-            DataTable bang_gia_dien = myBC.get_bang_gia_dien();
+            bang_gia_dien = myBC.get_bang_gia_dien();
             drpBangGia.DataSource = bang_gia_dien;
             drpBangGia.DataBind();
             drpBangGia_AddModal.DataSource = bang_gia_dien;
@@ -60,7 +59,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 
     protected void gv_bind(string id_tramba)
     {
-        CusList = myCus.get_danh_sach_khach_hang_thep_tram_bien_ap(id_tramba);
+        CusList = myCus.get_danh_sach_khach_hang_theo_tram_bien_ap(id_tramba);
         GridViewEman.DataSource = CusList;
         GridViewEman.DataBind();
         if (CusList.Rows.Count > 0)
@@ -73,7 +72,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         //ddlKhu.DataBind();
 
     }
-    
+
     protected void GridView_OnRowCommand(object sender, GridViewCommandEventArgs e)
     {
         GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
@@ -97,9 +96,9 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 
         Label idPhuongXa = (Label)row.FindControl("lblIdPhuongXa");
         Label idHuyen = (Label)row.FindControl("lblMIdHuyen");
-        
-            
-        
+
+
+
 
         if (e.CommandName == "suaKH")
         {
@@ -158,7 +157,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string mst_kh = txtMstKH_AddModal.Text.Trim();
         string cot_dien_so = txtSoCot_AddModal.Text.Trim();
         int sl_dong_ho = int.Parse(txtSoDongHo_AddModal.Text.Trim());
-        int trang_thai = ckbTrangThai_AddModal.Checked ? 1 : 0; 
+        int trang_thai = ckbTrangThai_AddModal.Checked ? 1 : 0;
         int thu_tu = int.Parse(txtThuTu_AddModal.Text.Trim());
         int id_phuong_xa = int.Parse(drpPhuongXa_AddModal.SelectedValue.ToString());
         int id_huyen = int.Parse(drpHuyen_AddModal.SelectedValue.ToString());
@@ -179,7 +178,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
                 int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
                 if (i == 0)
                 {
-                    e.Result = "0" ;
+                    e.Result = "0";
                 }
                 else
                 {
@@ -236,4 +235,17 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         }
     }
 
+    protected string convertTenBangGia(object idBangGia)
+    {
+        string result = "";
+        bang_gia_dien = myBC.get_bang_gia_dien();
+        try
+        {
+            string expression = "id_bang_gia = " + idBangGia;
+            DataRow[] foundRows = bang_gia_dien.Select(expression);
+            result = foundRows[0][1].ToString();
+        }
+        catch { }
+        return result;
+    }
 }

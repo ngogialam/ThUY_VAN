@@ -9,9 +9,6 @@
         </div>
     </div>
     <div class="card mb-3">
-        <div class="card-header">
-            Danh sách kỳ hóa đơn
-        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-bordered">

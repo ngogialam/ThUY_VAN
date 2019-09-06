@@ -9,23 +9,11 @@
         function onClickThemMoi() {
             var re = /d+/;
             var txtTenKhu = $('#txtTenKhu_AddModal').val();
-            var txtIDPhuongXa = $('#txtIdPhuongXa_AddModal').val();
 
             if (txtTenKhu === "") {
                 alert("Vui lòng nhập tên bảng giá!");
                 $('#txtTenKhu_AddModal').focus();
                 return false
-            }
-            if (txtIDPhuongXa === "") {
-                alert("Vui lòng nhập tên viết tắt!");
-                $('#txtIdPhuongXa_AddModal').focus();
-                return false
-            }
-            var isIDPhuongXa = re.test(txtIDPhuongXa);
-            if (isIDPhuongXa) {
-                alert("Bạn chỉ được nhập số!");
-                $('#txtIdPhuongXa_AddModal').focus();
-                return false;
             }
             cbThemMoi.PerformCallback()
         }
@@ -42,23 +30,11 @@
         function onClickCapNhat() {
             var re = /d+/;
             var txtTenKhu = $('#txtTenKhu').val();
-            var txtIDPhuongXa = $('#txtIdPhuongXa').val();
 
             if (txtTenKhu === "") {
                 alert("Vui lòng nhập tên bảng giá!");
                 $('#txtTenKhu').focus();
                 return false
-            }
-            if (txtIDPhuongXa === "") {
-                alert("Vui lòng nhập tên viết tắt!");
-                $('#txtIdPhuongXa').focus();
-                return false
-            }
-            var isIDPhuongXa = re.test(txtIDPhuongXa);
-            if (isIDPhuongXa) {
-                alert("Bạn chỉ được nhập số!");
-                $('#txtIdPhuongXa').focus();
-                return false;
             }
             cbCapNhat.PerformCallback();
         }
@@ -98,9 +74,14 @@
                                 <asp:Label ID="lblTenKhu" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="ID phường/xã">
+                        <asp:TemplateField HeaderText="ID phường/xã" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdPhuongXa" runat="server" Text='<%# Eval("id_phuong_xa") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Phường/xã">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTenPhuongXa" runat="server" Text='<%# Eval("ten_phuong_xa") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center">
@@ -135,7 +116,7 @@
                     <div class="user-info-row">
                         <label class="key">ID phường/xã (<span style="color: red">*</span>):</label>
                         <div class="value">
-                            <asp:TextBox ID="txtIdPhuongXa_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                            <asp:DropDownList runat="server" ID="drpPhuongXa_AddModal" DataValueField="id_phuong_xa" DataTextField="ten_phuong_xa" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -180,7 +161,7 @@
                             <div class="user-info-row">
                                 <label class="key">ID phường/xã (<span style="color: red">*</span>):</label>
                                 <div class="value">
-                                    <asp:TextBox ID="txtIdPhuongXa" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                                    <asp:DropDownList runat="server" ID="drpPhuongXa_EditModal" DataValueField="id_phuong_xa" DataTextField="ten_phuong_xa" CssClass="form-control"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

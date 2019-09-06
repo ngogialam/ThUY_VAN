@@ -171,26 +171,31 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblDonGia" runat="server" Text='<%# Eval("don_gia") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tiền thuế VAT">
                             <ItemTemplate>
                                 <asp:Label ID="lblThueVat" runat="server" Text='<%# Eval("tien_thue_vat") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Phần trăm thuế">
                             <ItemTemplate>
                                 <asp:Label ID="lblPhanTramThue" runat="server" Text='<%# Eval("phan_tram_thue") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Giá bán">
                             <ItemTemplate>
                                 <asp:Label ID="lblGiaBan" runat="server" Text='<%# Eval("gia_ban") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Trạng thái">
                             <ItemTemplate>
                                 <asp:Label ID="lblTrangThai" runat="server" Text='<%# (int)Eval("kich_hoat") == 1 ? "Active": "Deactive" %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ID Trạng thái" Visible="false">
                             <ItemTemplate>

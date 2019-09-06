@@ -48,7 +48,7 @@ public class clsKhachHang
     }
 
     //lay danh sách khach hang theo trạm biến áp
-    public DataTable get_danh_sach_khach_hang_thep_tram_bien_ap(String id_tramBAp)
+    public DataTable get_danh_sach_khach_hang_theo_tram_bien_ap(String id_tramBAp)
     {
         SqlConnection myConn = null;
         try
@@ -59,11 +59,11 @@ public class clsKhachHang
             cmd.Connection = myConn;
             if (id_tramBAp == "0")
             {
-                cmd.CommandText = "select a.* from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap order by a.thu_tu";
+                cmd.CommandText = "select a.*, b.ten_khu, d.ten_phuong_xa, e.ten_tram_bien_ap from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap order by a.thu_tu";
             }
             else
             {
-                cmd.CommandText = "select a.* from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap and a.id_tram_bien_ap ='" + id_tramBAp + "' order by a.thu_tu";
+                cmd.CommandText = "select a.*, b.ten_khu, d.ten_phuong_xa, e.ten_tram_bien_ap from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap and a.id_tram_bien_ap ='" + id_tramBAp + "' order by a.thu_tu";
             }
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
@@ -327,7 +327,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select id_khu, ten_khu,id_phuong_xa from dm_khu order by id_khu";
+            cmd.CommandText = "select a.*, b.ten_phuong_xa from dm_khu as a LEFT JOIN dm_phuong_xa as b ON a.id_phuong_xa = b.id_phuong_xa order by id_khu;";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -352,7 +352,7 @@ public class clsKhachHang
             }
         }
     }
-
+    
     public DataTable get_danh_muc_huyen()
     {
         SqlConnection myConn = null;
@@ -1053,7 +1053,7 @@ public class clsKhachHang
         }
     }
 
-    public DataTable get_danh_muc_cong_to()
+    public DataTable get_danh_muc_cong_to_theo_tram_BA(int idTramBA)
     {
         SqlConnection myConn = null;
         try
@@ -1062,7 +1062,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select ma_cong_to, ma_kh, chung_loai, nha_san_xuat, trang_thai, he_so_ti, REPLACE(ISNULL(CONVERT(DATE, ngay_sd), ''), '1900-01-01', '') AS ngay_sd, REPLACE(ISNULL(CONVERT(DATE, ngay_het_han), ''), '1900-01-01', '') AS ngay_het_han from dm_cong_to;";
+            cmd.CommandText = string.Format("select a.ma_cong_to, a.ma_kh, a.chung_loai, a.nha_san_xuat, a.trang_thai, a.he_so_ti, REPLACE(ISNULL(CONVERT(DATE, a.ngay_sd), ''), '1900-01-01', '') AS ngay_sd, REPLACE(ISNULL(CONVERT(DATE, a.ngay_het_han), ''), '1900-01-01', '') AS ngay_het_han from dm_cong_to as a, khach_hang as b, tram_bien_ap as c where a.ma_kh = b.ma_kh and b.id_tram_bien_ap = c.id_tram_bien_ap and c.id_tram_bien_ap = {0}", idTramBA);
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();

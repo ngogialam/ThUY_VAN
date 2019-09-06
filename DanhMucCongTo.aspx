@@ -34,6 +34,16 @@
         </div>
     </div>
     <div class="card mb-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-3 mb-1">
+                    <asp:DropDownList runat="server" ID="drpTramBienAp_1" DataValueField="id_tram_bien_ap" DataTextField="ten_tram_bien_ap" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="col-sm-3 mb-1">
+                    <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
+                </div>
+            </div>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
