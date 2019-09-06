@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Drawing;
-using ClosedXML.Excel;
-using System.Configuration;
 using System.IO;
-using System.Data.SqlClient;
+using System.Data;
+using System.Web.UI;
+using ClosedXML.Excel;
+using System.Web.UI.WebControls;
 
 public partial class BaoCaoQuanTri : System.Web.UI.Page
 {

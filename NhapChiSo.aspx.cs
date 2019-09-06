@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Drawing;
-using ClosedXML.Excel;
-using System.Configuration;
-using System.IO;
-using System.Data.SqlClient;
-using System.Web.Services;
-using System.Web.UI.HtmlControls;
 
 public partial class NhapChiSo : System.Web.UI.Page
 {
@@ -85,10 +75,7 @@ public partial class NhapChiSo : System.Web.UI.Page
             if (csmoi != "")
             {
                 int result = myNCS.cap_nhat_chi_so(mact, csmoi, ky);
-                if (result == 0)
-                {
-                    lblErr.Text = "Có lỗi xảy ra trong quá trình cập nhật mã công tơ " + mact;
-                }
+                
             }
 
         }
@@ -102,17 +89,14 @@ public partial class NhapChiSo : System.Web.UI.Page
         int i = 0;
         if (tungay != "-1" && denngay != "-1")
         {
-
             int inttungay = Convert.ToInt32(tungay);
             int intdenngay = Convert.ToInt32(denngay);
             if (inttungay > intdenngay)
             {
                 txtErr.Text = "Thời gian từ ngày phải nhỏ hơn đến ngày";
-
             }
             else
             {
-
                 string tungay1 = tungay.Substring(0, 4) + "-" + tungay.Substring(4, 2) + "-" + tungay.Substring(6, 2);
                 string denngay1 = denngay.Substring(0, 4) + "-" + denngay.Substring(4, 2) + "-" + denngay.Substring(6, 2);
                 string thang = kyhd.Substring(0, 2);
@@ -130,7 +114,6 @@ public partial class NhapChiSo : System.Web.UI.Page
                     CusList = myNCS.get_danh_sach_nhap_cs("0", kycu);
                     for (i = 0; i < CusList.Rows.Count; i++)
                     {
-
                         string mact = CusList.Rows[i]["ma_cong_to"].ToString();
                         string csmoi = CusList.Rows[i]["cs_moi"].ToString();
                         if (csmoi != "")
@@ -145,16 +128,23 @@ public partial class NhapChiSo : System.Web.UI.Page
                                 }
                             }
                         }
-
                     }
                 }
                 if (result == 1)
                 {
                     Response.Redirect("NhapChiSo.aspx");
                 }
-                
             }
         }
+    }
 
+    protected void btnCapNhat_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        String [] arrData = e.Parameter.Split('|');
+        string ky = drpKy.SelectedItem.ToString();
+        if (arrData[1].Trim() != "")
+        {
+            int result = myNCS.cap_nhat_chi_so(arrData[0].Trim(), arrData[1].Trim(), ky);
+        }
     }
 }

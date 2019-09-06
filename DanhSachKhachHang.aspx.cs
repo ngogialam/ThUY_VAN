@@ -97,9 +97,6 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         Label idPhuongXa = (Label)row.FindControl("lblIdPhuongXa");
         Label idHuyen = (Label)row.FindControl("lblMIdHuyen");
 
-
-
-
         if (e.CommandName == "suaKH")
         {
             drpSms.SelectedValue = sms.Text;
