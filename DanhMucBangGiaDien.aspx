@@ -37,6 +37,7 @@
                 $('#txtDonGia_AddModal').focus();
                 return false;
             }
+
             if (txtTienThue === "") {
                 alert("Vui lòng nhập tiền thuế!");
                 $('#txtTienThue_AddModal').focus();
@@ -48,6 +49,7 @@
                 $('#txtTienThue_AddModal').focus();
                 return false;
             }
+
             if (txtPhanTramThue === "") {
                 alert("Vui lòng nhập phần trăm thuế!");
                 $('#txtPhanTramThue_AddModal').focus();
@@ -59,6 +61,7 @@
                 $('#txtPhanTramThue_AddModal').focus();
                 return false;
             }
+
             if (txtGiaBan === "") {
                 alert("Vui lòng nhập giá bán!");
                 $('#txtGiaBan_AddModal').focus();
@@ -146,6 +149,7 @@
     <div class="card mb-3">
         <div class="card-header">
             <button id="btnThemMoiBGD" class="btn btn-primary" type="button" onclick="ThemMoi()">Thêm mới</button>
+            <a href="DanhMucBangGiaDienChiTiet.aspx" class="btn btn-primary">Bảng giá chi tiết</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -196,6 +200,11 @@
                                 <asp:Label ID="lblTrangThai" runat="server" Text='<%# (int)Eval("kich_hoat") == 1 ? "Active": "Deactive" %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Loại bảng giá" Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblLoaiBangGia" runat="server" Text='<%# Eval("loai_bg") %>'></asp:Label>
+                            </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ID Trạng thái" Visible="false">
                             <ItemTemplate>
@@ -259,6 +268,16 @@
                         <label class="key">Giá bán (<span style="color: red">*</span>):</label>
                         <div class="value">
                             <asp:TextBox ID="txtGiaBan_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="user-info-row">
+                        <label class="key">Loại bảng giá: </label>
+                        <div class="value">
+                            <asp:DropDownList ID="drpLoaiBg_AddModal" runat="server" CssClass="form-control">
+                                <asp:ListItem Value="MDK">Mục đích khác</asp:ListItem>
+                                <asp:ListItem Value="HH">Hỗn hợp</asp:ListItem>
+                                <asp:ListItem Value="BT">Bậc thang</asp:ListItem>
+                            </asp:DropDownList>
                         </div>
                     </div>
                     <div class="user-info-row" style="display: block">
@@ -338,6 +357,16 @@
                                     <asp:TextBox ID="txtGiaBan" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="user-info-row">
+                                <label class="key">Loại bảng giá: </label>
+                                <div class="value">
+                                    <asp:DropDownList ID="drpLoaiBg_EditModal" runat="server" CssClass="form-control">
+                                        <asp:ListItem Value="MDK">Mục đích khác</asp:ListItem>
+                                        <asp:ListItem Value="HH">Hỗn hợp</asp:ListItem>
+                                        <asp:ListItem Value="BT">Bậc thang</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
                             <div class="user-info-row" style="display: block">
                                 <label class="key">Trạng thái:</label>
                                 <div class="value">
@@ -346,7 +375,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end modal body -->
                         <div class="modal-footer">
                             <button type="button" id="btnCapNhat" class="btn btn-success" onclick="onClickCapNhat();">Cập nhập</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
@@ -354,7 +382,6 @@
                                 <ClientSideEvents CallbackComplete="onClickCapNhatComplete" />
                             </dx:aspxcallback>
                         </div>
-                        <!-- end modal footer -->
                     </div>
                 </div>
             </div>
@@ -363,6 +390,5 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
         </Triggers>
-
     </asp:UpdatePanel>
 </asp:Content>

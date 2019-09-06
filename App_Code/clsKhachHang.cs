@@ -127,7 +127,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select id_bang_gia,ten_bang_gia,ten_viet_tat,don_gia,tien_thue_vat,phan_tram_thue,gia_ban,kich_hoat from bang_gia_dien";
+            cmd.CommandText = "select * from bang_gia_dien";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -152,9 +152,42 @@ public class clsKhachHang
             }
         }
     }
-
+    public DataTable get_danh_muc_bang_gia_dien_chi_tiet()
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select a.*, b.ten_bang_gia, c.ten_bang_gia as ten_bang_gia_ty_le from bang_gia_dien_chi_tiet as a left join bang_gia_dien as c on a.id_bang_gia_ty_le = c.id_bang_gia inner join bang_gia_dien as b on a.id_bang_gia = b.id_bang_gia";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     //Them moi gia dien
-    public int them_moi_gia_dien(string ten_bang_gia, string ten_viet_tat, double don_gia, double tien_thue_vat, double phan_tram_thue, double gia_ban, int kich_hoat)
+    public int them_moi_gia_dien(string ten_bang_gia, string ten_viet_tat, double don_gia, double tien_thue_vat, double phan_tram_thue, double gia_ban, int kich_hoat, string loaiBG)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -163,14 +196,42 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "insert into bang_gia_dien(ten_bang_gia,ten_viet_tat,don_gia,tien_thue_vat,phan_tram_thue,gia_ban,kich_hoat) values(N'" + ten_bang_gia + "','" + ten_viet_tat + "','" + don_gia + "','" + tien_thue_vat + "','" + phan_tram_thue + "','" + gia_ban + "','" + kich_hoat + "') ";
+            cmd.CommandText = string.Format("insert into bang_gia_dien (ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat, loai_bg) values(N'{0}', '{1}', {2}, {3}, {4}, {5}, {6}, '{7}')", ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat, loaiBG);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
-        catch (SqlException)
+        catch (Exception ex)
         {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+        return recordsAffected;
+    }
+
+    public int them_moi_gia_dien_chi_tiet(int id_bang_gia, double tu_so, double den_so, double gia_khong_vat, string muc_thu, double phan_tram_thue, int id_bang_gia_ty_le, double ty_le, string mo_ta)
+    {
+        int recordsAffected = 0;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("insert into bang_gia_dien_chi_tiet (id_bang_gia, tu_so, den_so, gia_ko_vat, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le) values({0}, {1}, {2}, {3}, N'{4}', N'{5}', {6}, {7}, {8})", id_bang_gia, tu_so, den_so, gia_khong_vat, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le);
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
         }
         finally
         {
@@ -181,7 +242,8 @@ public class clsKhachHang
     }
 
     //Sua gia dien
-    public void cap_nhat_gia_dien(int id, string ten_bang_gia, string ten_viet_tat, double don_gia, double tien_thue_vat, double phan_tram_thue, double gia_ban, int kich_hoat)
+    
+    public void cap_nhat_gia_dien(int id, string ten_bang_gia, string ten_viet_tat, double don_gia, double tien_thue_vat, double phan_tram_thue, double gia_ban, int kich_hoat, string loaiBG)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -190,7 +252,62 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "update bang_gia_dien set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat='" + tien_thue_vat + "',phan_tram_thue='" + phan_tram_thue + "', gia_ban='" + gia_ban + "',kich_hoat='" + kich_hoat + "' where id_bang_gia='" + id + "'";
+            cmd.CommandText = "update bang_gia_dien set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat='" + tien_thue_vat + "',phan_tram_thue='" + phan_tram_thue + "', gia_ban='" + gia_ban + "',kich_hoat='" + kich_hoat + "',loai_bg='" + loaiBG + "' where id_bang_gia='" + id + "'";
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        catch (SqlException e)
+        {
+            // test loi
+            throw e;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+    }
+    public void cap_nhat_gia_dien_chi_tiet(int id, double tu_so, double den_so, double gia_khong_vat, string muc_thu, double phan_tram_thue, int id_bang_gia_ty_le, double ty_le, string mo_ta)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("update bang_gia_dien_chi_tiet set tu_so = {1}, den_so = {2}, gia_ko_vat = {3}, mo_ta = N'{4}', muc_thu = N'{5}', phan_tram_thue = {6}, id_bang_gia_ty_le = {7}, ty_le = {8} where id = {0}", id, tu_so, den_so, gia_khong_vat, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le);
+            cmd.CommandType = CommandType.Text;
+            myConn.Open();
+            int recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+        }
+        catch (SqlException e)
+        {
+            // test loi
+            throw e;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            myConn.Close();
+        }
+    }
+
+    public void xoa_gia_dien_chi_tiet(int id)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+
+        try
+        {
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("delete from bang_gia_dien_chi_tiet where id = {0}", id);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();
@@ -352,7 +469,7 @@ public class clsKhachHang
             }
         }
     }
-    
+
     public DataTable get_danh_muc_huyen()
     {
         SqlConnection myConn = null;

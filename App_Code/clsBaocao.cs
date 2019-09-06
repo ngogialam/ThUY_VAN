@@ -130,7 +130,77 @@ public class clsBaocao
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select id_bang_gia,ten_bang_gia from bang_gia_dien where kich_hoat=1 order by id_bang_gia ";
+            cmd.CommandText = "select id_bang_gia,ten_bang_gia from bang_gia_dien where kich_hoat = 1 order by id_bang_gia ";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    public DataTable get_bang_gia_dien_theo_loai_bang_gia(string loaiBG)
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("select id_bang_gia, ten_bang_gia from bang_gia_dien where kich_hoat = 1 and loai_bg = '{0}' order by id_bang_gia", loaiBG);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    public DataTable get_bang_gia_dien_theo_loai_bang_gia_with_none(string loaiBG)
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("select '0' as id_bang_gia, N'-- None --' as ten_bang_gia union all select id_bang_gia, ten_bang_gia from bang_gia_dien where kich_hoat = 1 and loai_bg = '{0}' order by id_bang_gia", loaiBG);
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();

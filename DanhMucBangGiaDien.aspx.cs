@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Drawing;
-using ClosedXML.Excel;
-using System.Configuration;
-using System.IO;
-using System.Data.SqlClient;
 
 public partial class DanhMucBangGiaDien : System.Web.UI.Page
 {
@@ -22,7 +14,6 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         if (!IsPostBack)
         {
             gv_bind();
-
         }
 
     }
@@ -49,17 +40,18 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         Label phanTramThue = (Label)row.FindControl("lblPhanTramThue");
         Label giaBan = (Label)row.FindControl("lblGiaBan");
         Label trangThai = (Label)row.FindControl("lblIDTrangThai");
+        Label loaiBangGia = (Label)row.FindControl("lblLoaiBangGia");
 
         if (e.CommandName == "suaGiaDien")
         {
-            //DataTable DiaBanList = myCus.get_dia_ban();
-            txtId.Text = id.Text;
-            txtTenBangGia.Text = tenBangGia.Text;
-            txtTenVietTat.Text = tenVietTat.Text;
-            txtDonGia.Text = donGia.Text;
-            txtTienThue.Text = thueVat.Text;
-            txtPhanTramThue.Text = phanTramThue.Text;
-            txtGiaBan.Text = giaBan.Text;
+            txtId.Text = id.Text.Trim();
+            txtTenBangGia.Text = tenBangGia.Text.Trim();
+            txtTenVietTat.Text = tenVietTat.Text.Trim();
+            txtDonGia.Text = donGia.Text.Trim();
+            txtTienThue.Text = thueVat.Text.Trim();
+            txtPhanTramThue.Text = phanTramThue.Text.Trim();
+            txtGiaBan.Text = giaBan.Text.Trim();
+            drpLoaiBg_EditModal.SelectedValue = loaiBangGia.Text.Trim();
             if (Convert.ToInt32(trangThai.Text) == 1)
             {
                 ckbTrangThai.Checked = true;
@@ -74,10 +66,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal",
             sb.ToString(), false);
         }
-        else if (e.CommandName == "xoaGiaDien")
-        {
-        }
-
+        else if (e.CommandName == "xoaGiaDien") { }
     }
 
     protected void btnSave_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
@@ -90,11 +79,19 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         double tien_thue_vat = Convert.ToDouble(txtTienThue.Text);
         double phan_tram_thue = Convert.ToDouble(txtPhanTramThue.Text);
         double gia_ban = Convert.ToDouble(txtGiaBan.Text);
+        string loaiBG = drpLoaiBg_EditModal.SelectedValue.Trim();
         int kich_hoat = 0;
         if (ckbTrangThai.Checked == true) kich_hoat = 1;
         try
         {
-            myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat);
+            if (loaiBG == "BT" | loaiBG == "HH")
+            {
+                myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, 0, 0, 0, 0, kich_hoat, loaiBG);
+            }
+            else
+            {
+                myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat, loaiBG);
+            }
             myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
             e.Result = "1";
         }
@@ -112,10 +109,19 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         double tienThue = Convert.ToDouble(txtTienThue_AddModal.Text);
         double phanTramThue = Convert.ToDouble(txtPhanTramThue_AddModal.Text);
         double giaBan = Convert.ToDouble(txtGiaBan_AddModal.Text);
+        string loaiBG = drpLoaiBg_AddModal.SelectedValue.Trim();
         int kichHoat = 0;
+        int i = 0;
         if (ckbTrangThai_AddModal.Checked == true)
             kichHoat = 1;
-        int i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, donGia, tienThue, phanTramThue, giaBan, kichHoat);
+        if (loaiBG == "BT" | loaiBG == "HH")
+        {
+            i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, 0, 0, 0, 0, kichHoat, loaiBG);
+        }
+        else
+        {
+            i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, donGia, tienThue, phanTramThue, giaBan, kichHoat, loaiBG);
+        }
         if (i == 0)
             e.Result = "0";
         else
