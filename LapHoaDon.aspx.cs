@@ -82,8 +82,7 @@ public partial class LapHoaDon : System.Web.UI.Page
                 dntt = cs_moi - cs_cu;
                 sh = Convert.ToInt32(CusList.Rows[i]["so_ho"].ToString());
                 total = myNCS.tinh_tien_dien(dntt, sh, id_bg);
-                //Làm tròn
-                total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
+                
                 vatamount = vatrate * total / 100;
                 //Làm tròn
                 vatamount = Math.Round(vatamount, 0, MidpointRounding.AwayFromZero);
