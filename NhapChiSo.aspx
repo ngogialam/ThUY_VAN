@@ -1,44 +1,102 @@
 ﻿<%@ Page Language="C#" Title="Nhập chỉ số" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="NhapChiSo.aspx.cs" Inherits="NhapChiSo" %>
 
+<%@ Register Assembly="DevExpress.Web.v12.1, Version=12.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxCallback" TagPrefix="dx" %>
+
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
     <script type="text/javascript">
         $(function () {
-            $('#txtTuNgay').datepicker(
-            {
-                dateFormat: 'dd/mm/yy',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: '1950:2100',
-                onSelect: function () {
-                    var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
-                    $("#strTuNgay").val(date);
-
+            $("#GirdViewNoPaGE tbody tr td input").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    // Báo chỉ số mới không thỏa mãn
+                    let chiSoCu = $(this).parent().parent().find("span[id='lblCSCu']").text();
+                    let chiSoMoi = $(this).val();
+                    if (parseInt(chiSoMoi, 10) < parseInt(chiSoCu, 10)) {
+                        alert('Chỉ số mới nhỏ hơn chỉ số cũ');
+                    }
+                    else {
+                        let maCto = $(this).parent().parent().find("span[id='lblMaCT']").text();
+                        var data = maCto + "|" + chiSoMoi;
+                        cbCapNhat.PerformCallback(data);
+                        $(this).parent().parent().next("tr").find("input").focus();
+                    }
                 }
-            });
+                if (e.keyCode == 40) {
+                    e.preventDefault();
+                    // Báo chỉ số mới không thỏa mãn
+                    let chiSoCu = $(this).parent().parent().find("span[id='lblCSCu']").text();
+                    let chiSoMoi = $(this).val();
+                    if (parseInt(chiSoMoi, 10) < parseInt(chiSoCu, 10)) {
+                        alert('Chỉ số mới nhỏ hơn chỉ số cũ');
+                    }
+                    else {
+                        $(this).parent().parent().next("tr").find("input").focus();
+                    }
+                }
+                if (e.keyCode == 38) {
+                    e.preventDefault();
+                    let chiSoCu = $(this).parent().parent().find("span[id='lblCSCu']").text();
+                    let chiSoMoi = $(this).val();
+                    if (parseInt(chiSoMoi, 10) < parseInt(chiSoCu, 10)) {
+                        alert('Chỉ số mới nhỏ hơn chỉ số cũ');
+                    }
+                    else {
+                        $(this).parent().parent().prev("tr").find("input").focus();
+                    }
+                }
+                if (e.keyCode == 9) {
+                    e.preventDefault();
+                    if (parseInt(chiSoMoi, 10) < parseInt(chiSoCu, 10)) {
+                        alert('Chỉ số mới nhỏ hơn chỉ số cũ');
+                    }
+                    else {
+                        $(this).parent().parent().next("tr").find("input").focus();
+                    }
+                }
+            })
+            $('#txtTuNgay').datepicker(
+                {
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2100',
+                    onSelect: function () {
+                        var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                        $("#strTuNgay").val(date);
+
+                    }
+                });
             $('#txtDenNgay').datepicker(
-           {
-               dateFormat: 'dd/mm/yy',
-               changeMonth: true,
-               changeYear: true,
-               yearRange: '1950:2100',
-               onSelect: function () {
-                   var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
-                   $("#strDenNgay").val(date);
-               }
-           });
+                {
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2100',
+                    onSelect: function () {
+                        var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                        $("#strDenNgay").val(date);
+                    }
+                });
             $('#txtKyHD').datepicker(
-            {
-              dateFormat: 'mm/yy',
-              changeMonth: true,
-              changeYear: true,
-              yearRange: '1950:2100',
-              onSelect: function () {
-                  var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));                  
-                  $("#strKyHD").val(date);
-              }
-          });
+                {
+                    dateFormat: 'mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1950:2100',
+                    onSelect: function () {
+                        var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));
+                        $("#strKyHD").val(date);
+                    }
+                });
 
         })
+
+        //Stop Form Submission of Enter Key Press
+        function stopRKey(evt) {
+            var evt = (evt) ? evt : ((event) ? event : null);
+            var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+            if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
+        }
     </script>
 </asp:Content>
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
@@ -178,4 +236,6 @@
             </div>
         </div>
     </div>
+    <dx:aspxcallback id="cbCapNhat" clientinstancename="cbCapNhat" clientidmode="Static" runat="server" oncallback="btnCapNhat_Callback" />
+
 </asp:Content>

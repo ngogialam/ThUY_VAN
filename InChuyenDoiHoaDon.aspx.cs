@@ -1,20 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Drawing;
-using ClosedXML.Excel;
-using System.Configuration;
-using System.IO;
-using System.Data.SqlClient;
-using System.Xml;
-using IronPdf;
-using System.Text;
-using Ionic.Zip;
-using System.Text.RegularExpressions;
 
 public partial class InChuyenDoiHoaDon : System.Web.UI.Page
 {

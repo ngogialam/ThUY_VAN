@@ -1,6 +1,6 @@
-﻿using DevExpress.XtraReports.UI;
+﻿using System;
 using System.Data;
-using System;
+using DevExpress.XtraReports.UI;
 
 public partial class BangKeTienDienDetail: System.Web.UI.Page
 {
