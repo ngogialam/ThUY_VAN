@@ -8,7 +8,7 @@ using System.Data;
 /// </summary>
 public class clsKhachHang
 {
-
+    clsConnect cnstr = new clsConnect();
     //lay danh sach khu
 
     //lay danh sách khach hang
@@ -691,6 +691,12 @@ public class clsKhachHang
 
     //end 
 
+    public DataTable get_khach_hang_theo_makh(string maKh)
+    {
+        string sqlQuery = string.Format("select * from khach_hang where ma_kh = '{0}'", maKh);
+        DataTable new_table = cnstr.GetDataTable(sqlQuery);
+        return new_table;
+    }
 
     public DataTable get_danh_sach_khach_hang_dia_ban(int id_dia_ban)
     {
@@ -921,7 +927,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = " SELECT * from dm_cong_to where ma_cong_to='" + ma_cong_to + "'  ";
+            cmd.CommandText = " SELECT * from dm_cong_to where ma_cong_to = '" + ma_cong_to + "'  ";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -1044,6 +1050,13 @@ public class clsKhachHang
         return recordsAffected;
     }
 
+    public DataTable get_cong_to_theo_maCTo(string maCTo)
+    {
+        string sqlQuery = string.Format("select * from dm_cong_to where ma_cong_to = '{0}'", maCTo);
+        DataTable new_table = cnstr.GetDataTable(sqlQuery);
+        return new_table;
+    }
+
     public int them_moi_cong_to(string ma_cong_to, string ma_kh, float he_so_ti)
     {
         int recordsAffected = 0;
@@ -1068,6 +1081,12 @@ public class clsKhachHang
             myConn.Close();
         }
         return recordsAffected;
+    }
+
+    public void cap_nhat_trang_thai_cong_to(string ma_cong_to, int trang_thai)
+    {
+        string sqlQuery = string.Format("update dm_cong_to set trang_thai = {1} where ma_cong_to = '{0}'", ma_cong_to, trang_thai);
+        cnstr.InsertUpdateDataTable(sqlQuery);
     }
 
     public int them_moi_full_field_cong_to(string ma_cong_to, string ma_kh, float he_so_ti)
@@ -1121,6 +1140,11 @@ public class clsKhachHang
         }
         return recordsAffected;
     }
+    public void cap_nhat_trang_thai_chi_so_cong_to(string ma_cong_to, string ky, int trang_thai)
+    {
+        string sqlQuery = string.Format("update chi_so_cong_to set trang_thai = {2} where ma_cong_to = '{0}' and ky = '{1}'", ma_cong_to, ky, trang_thai);
+        cnstr.InsertUpdateDataTable(sqlQuery);
+    }
 
     public void cap_nhat_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms)
     {
@@ -1147,6 +1171,13 @@ public class clsKhachHang
             myConn.Close();
         }
     }
+
+    public void cap_nhat_cong_to_khach_hang(string ma_kh, string ma_cong_to)
+    {
+        string sqlQuery = string.Format("update khach_hang set ma_cong_to = '{0}'where ma_kh = '{1}' ", ma_cong_to, ma_kh);
+        cnstr.InsertUpdateDataTable(sqlQuery);
+    }
+
     public void xoa_khach_hang(string ma_kh)
     {
         clsConnect cnstr = new clsConnect();

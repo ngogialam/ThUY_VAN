@@ -7,6 +7,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 {
     clsNhapChiSo myNCS = new clsNhapChiSo();
     clsKhachHang myCus = new clsKhachHang();
+    clsSanPham mySP = new clsSanPham();
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
     clsBaocao myBC = new clsBaocao();
@@ -125,8 +126,26 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#EditModal').modal('show');");
             sb.Append(@"</script>");
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal",
-            sb.ToString(), false);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal", sb.ToString(), false);
+        }
+        else if (e.CommandName == "doiCTo")
+        {
+            txt_swapModal_maKH.Text = id.Text;
+            txt_swapModal_tenKH.Text = id.Text + " - " + name.Text;
+            string cac_cong_to_hien_tai = idMaCongTo.Text;
+            string[] arrMaCTo = cac_cong_to_hien_tai.Split('|');
+            drp_swapModal_cTo.DataSource = arrMaCTo;
+            drp_swapModal_cTo.DataBind();
+            txt_swapModal_csCu.Text = "0";
+            txt_swapModal_csCuoiCu.Text = "0";
+            txt_swapModal_csDauMoi.Text = "0";
+            txt_swapModal_csCuoiMoi.Text = "0";
+            txt_swapModal_maCtoMoi.Text = "";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#SwapModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal", sb.ToString(), false);
         }
 
     }
@@ -229,6 +248,59 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         catch
         {
             e.Result = "0";
+        }
+    }
+
+    protected void btnDoiCTo_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        
+        string ma_kh = txt_swapModal_maKH.Text;
+        string ten_kh = txt_swapModal_tenKH.Text;
+        float csDau_CToCu = float.Parse(txt_swapModal_csCu.Text);
+        float csCuoi_CToCu = float.Parse(txt_swapModal_csCuoiCu.Text);
+        float csDau_CToMoi = float.Parse(txt_swapModal_csDauMoi.Text);
+        float csCuoi_CToMoi = float.Parse(txt_swapModal_csCuoiMoi.Text);
+        string ma_cto_cu = drp_swapModal_cTo.SelectedValue;
+        string ma_cto_moi = txt_swapModal_maCtoMoi.Text;
+
+        int check_ma = myCus.check_ma_cong_to(ma_cto_moi);
+        if (check_ma >= 1)
+        {
+            e.Result = "2"; //Mã công tơ đã tồn tại
+        }
+        else
+        {
+            try
+            {
+                DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
+                string maCtoKh = tblKH.Rows[0].Field<string>("ma_cong_to");
+                // Cập nhật mã công tơ mới trong bảng khach_hang
+                string maCtoMoiKh = maCtoKh.Replace(ma_cto_cu, ma_cto_moi);
+                myCus.cap_nhat_cong_to_khach_hang(ma_kh, maCtoMoiKh);
+
+                // Lấy kỳ hợp đồng hiện tại
+                DataTable tblKyHD = mySP.get_danh_sach_ky_hd();
+                string ky_hd = "";
+
+                // Cập nhật trạng thái công tơ cũ trong bảng chi_so_cong_to và dm_cong_to
+                myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
+                myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
+
+                // Thêm mã công tơ mới trong bảng dm_cong_to và chi_so_cong_to
+                DataTable tblCToCu = myCus.get_cong_to_theo_maCTo(ma_cto_cu);
+                float hSoTiCu = tblCToCu.Rows[0].Field<float>("he_so_ti");
+                myCus.them_moi_cong_to(ma_cto_moi, ma_kh, hSoTiCu);
+                myCus.them_moi_chi_so_cong_to(ma_cto_moi, ky_hd);
+
+                e.Result = "1";
+
+                string log = "Đổi công tơ của khách hàng có mã " + ten_kh + " mã công tơ cũ: " + ma_cto_cu + ", mã công tơ mới: " + ma_cto_moi;
+                myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+            }
+            catch
+            {
+                e.Result = "0";
+            }
         }
     }
 

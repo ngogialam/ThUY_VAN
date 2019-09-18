@@ -234,6 +234,57 @@
                 alert("Cập nhật thất bại. Vui lòng thử lại!");
             }
         }
+
+        //Đổi công tơ
+        function onClickDoiCTo() {
+            var re = /d+/;
+            var txtMaCTo = $('#txt_swapModal_maCtoMoi').val();
+            var txtCSCu = $('#txt_swapModal_csCu').val();
+            var txtCSCuoiCu = $('#txt_swapModal_csCuoiCu').val();
+            var txtCSDauMoi = $('#txt_swapModal_csDauMoi').val();
+            var txtCSCuoiMoi = $('#txt_swapModal_csCuoiMoi').val();
+
+            if (txtMaCTo === "") {
+                alert("Vui lòng nhập mã công tơ!");
+                $('#txt_swapModal_maCtoMoi').focus();
+                return false;
+            }
+            if (txtCSCu === "" || txtCSCu < 0) {
+                alert("Vui lòng nhập chỉ số cũ!");
+                $('#txt_swapModal_csCu').focus();
+                return false;
+            }
+            if (txtCSCuoiCu === "" || txtCSCuoiCu < 0) {
+                alert("Vui lòng nhập chỉ số cuối!");
+                $('#txt_swapModal_csCuoiCu').focus();
+                return false;
+            }
+            if (txtCSCuoiCu < txtCSCu) {
+                alert("Chỉ số cuối nhỏ hơn chỉ số đầu!");
+                $('#txt_swapModal_csCuoiCu').focus();
+                return false;
+            }
+            if (txtCSDauMoi === "" || txtCSDauMoi < 0) {
+                alert("Vui lòng nhập chỉ số đầu!");
+                $('#txt_swapModal_csDauMoi').focus();
+                return false;
+            }
+            if (txtCSCuoiMoi === "" || txtCSCuoiMoi < 0) {
+                alert("Vui lòng nhập chỉ số cuối!");
+                $('#txt_swapModal_csCuoiMoi').focus();
+                return false;
+            }
+            cbDoiCTo.PerformCallback()
+        }
+        function onClickDoiCToComplete(s, e) {
+            if (e.result == "1") {
+                alert("Cập nhật thành công");
+                location.href = "./DanhSachKhachHang.aspx";
+            } else {
+                alert("Cập nhật thất bại. Vui lòng thử lại!");
+            }
+        }
+
     </script>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
@@ -247,6 +298,7 @@
         @media screen and (max-width: 600px) {
             .column {
                 width: 100%;
+                margin-bottom: 10px;
             }
         }
 
@@ -336,7 +388,7 @@
                         <asp:TemplateField HeaderText="Số hộ">
                             <ItemTemplate>
                                 <asp:Label ID="lblsoHo" runat="server" Text='<%# Eval("so_ho") %>'></asp:Label>
-                            </ItemTemplate>                  
+                            </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Hệ số ti" Visible="False">
@@ -400,9 +452,10 @@
                                 <asp:Label ID="lblMIdHuyen" runat="server" Text='<%# Eval("id_huyen") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="100px" HeaderStyle-CssClass="text-center" ItemStyle-CssClass="text-center">
+                        <asp:TemplateField HeaderText="Thao tác" ItemStyle-Width="150px" HeaderStyle-CssClass="text-center" ItemStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:Button CssClass="btn btn-success" ID="btnHuy" runat="server" CommandName="suaKH" Text="Sửa"></asp:Button>
+                                <asp:LinkButton Text="Sửa" runat="server" CommandName="suaKH" CssClass="btn btn-success" />
+                                <asp:LinkButton Text="Đổi CT" runat="server" Title="Đổi công tơ" CommandName="doiCTo" CssClass="btn btn-success" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -688,6 +741,92 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                             <dx:aspxcallback id="cbCapNhat" clientinstancename="cbCapNhat" clientidmode="Static" runat="server" oncallback="btnCapNhat_Callback">
                                   <ClientSideEvents CallbackComplete="onClickCapNhatComplete" />
+                            </dx:aspxcallback>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="GridViewEman" EventName="RowCommand" />
+        </Triggers>
+    </asp:UpdatePanel>
+
+    <%--Đổi công tơ--%>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <div class="modal fade" id="SwapModal" tabindex="-1" role="dialog" aria-labelledby="SwapModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Đổi công tơ</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px;display: none">
+                                    <label class="key">Mã khách hàng (<span style="color: red">*</span>):</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txt_swapModal_maKH" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
+                                    </div>
+                                </div>
+                            <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px">
+                                <label class="key">Tên khách hàng (<span style="color: red">*</span>):</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txt_swapModal_tenKH" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="column">
+                                <h4>Thông tin công tơ cũ</h4>
+                                <div class="user-info-row ">
+                                    <label class="key">Mã công tơ :</label>
+                                    <div class="value">
+                                        <asp:DropDownList ID="drp_swapModal_cTo" runat="server" ClientIDMode="Static" CssClass="form-control input-lg">
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                                <div class="user-info-row" style="border: none">
+                                    <label class="key">Chỉ số cũ :</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txt_swapModal_csCu" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="user-info-row" style="border: none">
+                                    <label class="key">Chỉ số cuối :</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txt_swapModal_csCuoiCu" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column" style="border-right: 5px">
+                                <h4>Thông tin công tơ mới</h4>
+                                <div class="user-info-row">
+                                    <label class="key">Mã công tơ :</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txt_swapModal_maCtoMoi" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="user-info-row" style="border: none">
+                                    <label class="key">Chỉ số đầu :</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txt_swapModal_csDauMoi" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="user-info-row" style="border: none">
+                                    <label class="key">Chỉ số cuối :</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txt_swapModal_csCuoiMoi" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnDoiCTo" class="btn btn-success" onclick="onClickDoiCTo();">Cập nhật</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                            <dx:aspxcallback id="cbDoiCTo" clientinstancename="cbDoiCTo" clientidmode="Static" runat="server" oncallback="btnDoiCTo_Callback">
+                                  <ClientSideEvents CallbackComplete="onClickDoiCToComplete" />
                             </dx:aspxcallback>
                         </div>
                     </div>
