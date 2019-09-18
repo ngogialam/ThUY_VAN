@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Web.Security;
 using System.Data;
+using System.Web.Security;
 
 public partial class Login : System.Web.UI.Page
 {
     clsSert mySert = new clsSert();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -18,6 +19,7 @@ public partial class Login : System.Web.UI.Page
         }
         lblThongBao.Text = "";
     }
+
     protected void btnDangNhap_Click(object sender, EventArgs e)
     {
         clsConnect mUserInfo = new clsConnect();
@@ -33,7 +35,7 @@ public partial class Login : System.Web.UI.Page
                     DataTable tblUser = mUserInfo.getUser(txtTenDangNhap.Text);
                     Session["TenDoanhNghiep"] = tblUser.Rows[0]["ten_doanh_nghiep"];
                 }
-                catch (Exception c) {
+                catch (Exception) {
                     Session["TenDoanhNghiep"] = "";
                 }
 

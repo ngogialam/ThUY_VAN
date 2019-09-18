@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
-using System.Data;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-/// <summary>
-/// Summary description for GridDecorator
-/// </summary>
+
 public class GridDecorator
 {
     public static void MergeRows(GridView gridView)

@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web.Security;
-/// <summary>
-/// Summary description for clsBanHang
-/// </summary>
+using System.Collections.Generic;
+
 public class clsBanHang
 {
-    public void them_moi_don_hang(string ma_kh, string tongbh,string tongbk1,string tongbk2,string tongbc, string ngay_nhap, string nguoi_nhap_id)
+    public void them_moi_don_hang(string ma_kh, string tongbh, string tongbk1, string tongbk2, string tongbc, string ngay_nhap, string nguoi_nhap_id)
     {
-
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
@@ -20,8 +15,8 @@ public class clsBanHang
             myConn.Open();
             cmd.Connection = myConn;
             //cmd.CommandText = "SET IDENTITY_INSERT hoa_don ON";            
-           // cmd.CommandType = CommandType.Text;
-           // int recordsAffected = cmd.ExecuteNonQuery();
+            // cmd.CommandType = CommandType.Text;
+            // int recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
             cmd.CommandText = "insert into hoa_don(ma_kh,tong_bh,tong_bk1,tong_bk2,tong_bc,ngay_nhap,nguoi_nhap_id,trangthai_id,nam) values(" + ma_kh + ",'" + tongbh + "','" + tongbk1 + "','" + tongbk2 + "','" + tongbc + "', CONVERT( Datetime, '" + ngay_nhap + "' ,103),'" + nguoi_nhap_id + "',1,YEAR(getdate())) ";
             int recordsAffected = cmd.ExecuteNonQuery();
@@ -39,6 +34,7 @@ public class clsBanHang
             }
         }
     }
+
     public void them_moi_don_hang_chitiet(string ma_hd, string ma_kh, string ma_hang, string so_luong, string ngay_nhap)
     {
         clsConnect cnstr = new clsConnect();
@@ -65,6 +61,7 @@ public class clsBanHang
             }
         }
     }
+
     public List<string> get_sohd(string nam)
     {
         List<string> listSohd = new List<string>();
@@ -101,15 +98,16 @@ public class clsBanHang
         return listSohd;
         // return dts;    
     }
+
     public List<string> laysolieuTHca(string i)
     {
         string sql = "";
         string tongsl;
         sql = "select case when sum(a.so_luong) is null then 0 else sum(a.so_luong) end tong_sl from hoa_don_chi_tiet a,hoa_don c ";
         sql = sql + " where c.ma_hd=a.ma_hd and  c.trangthai_id=1 and c.ca is null and a.ngay_nhap  >= DATEADD(day,-1,CONVERT(datetime,GETDATE())) AND  a.ngay_nhap <= CONVERT(datetime,GETDATE()) ";
-        sql = sql + " and a.ma_hang= ";   
-        
-        List<string> solieu = new List<string>();        
+        sql = sql + " and a.ma_hang= ";
+
+        List<string> solieu = new List<string>();
         clsConnect cnstr = new clsConnect();
         using (SqlConnection myConn = cnstr.ConnectSQL())
         {
@@ -124,20 +122,15 @@ public class clsBanHang
                 {
                     tongsl = myData["tong_sl"].ToString();
                     solieu.Add(string.Format("{0}", tongsl));
-                    
                 }
-            
             }
-           
             cmd.Parameters.Clear();
             cmd.Connection.Close();
             myConn.Close();
-           
         }
         return solieu;
-
-  
     }
+
     public DataTable tracuugiaodich()
     {
         SqlConnection myConn = null;
@@ -181,7 +174,7 @@ public class clsBanHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select a.ma_hd,b.ten_kh,b.dia_chi,b.so_dt,e.ten_dia_ban,a.tong_bh,a.tong_bk1,a.tong_bk2,a.tong_bc,a.ngay_nhap as ngayban from hoa_don a,khach_hang b,dm_dia_ban e where a.ma_kh = b.ma_kh and b.id_dia_ban=e.id_dia_ban and a.ma_hd="+ ma_hd ;
+            cmd.CommandText = "select a.ma_hd,b.ten_kh,b.dia_chi,b.so_dt,e.ten_dia_ban,a.tong_bh,a.tong_bk1,a.tong_bk2,a.tong_bc,a.ngay_nhap as ngayban from hoa_don a,khach_hang b,dm_dia_ban e where a.ma_kh = b.ma_kh and b.id_dia_ban=e.id_dia_ban and a.ma_hd=" + ma_hd;
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -249,9 +242,9 @@ public class clsBanHang
         {
             myConn.Open();
             cmd.Connection = myConn;
-            cmd.CommandText = "update hoa_don set trangthai_id=0 where ma_hd="+ ma_hd;
+            cmd.CommandText = "update hoa_don set trangthai_id=0 where ma_hd=" + ma_hd;
             cmd.CommandType = CommandType.Text;
-            int recordsAffected = cmd.ExecuteNonQuery();           
+            int recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
             return recordsAffected;
         }
@@ -361,7 +354,7 @@ public class clsBanHang
                 rs += (rs == "" ? " " : ", ") + ch[n[i]];// đọc số
                 rs += " " + (i % 3 == 0 ? u[i] : u[i % 3]);// đọc đơn vị
             }
-           
+
 
             if (rs.Length > 2)
             {
@@ -377,6 +370,4 @@ public class clsBanHang
             return "";
         }
     }
-    
-
 }
