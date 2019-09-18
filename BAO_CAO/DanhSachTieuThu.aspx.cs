@@ -96,23 +96,23 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
 
 
         DataRow dr;
-        tbxView.Columns.Add("stt");
-        tbxView.Columns.Add("ma_kh");
-        tbxView.Columns.Add("ten_kh");
-        tbxView.Columns.Add("dia_chi");
-        tbxView.Columns.Add("ma_cong_to");
-        tbxView.Columns.Add("t1");
-        tbxView.Columns.Add("t2");
-        tbxView.Columns.Add("t3");
-        tbxView.Columns.Add("t4");
-        tbxView.Columns.Add("t5");
-        tbxView.Columns.Add("t6");
-        tbxView.Columns.Add("t7");
-        tbxView.Columns.Add("t8");
-        tbxView.Columns.Add("t9");
-        tbxView.Columns.Add("t10");
-        tbxView.Columns.Add("t11");
-        tbxView.Columns.Add("t12");
+        tbxView.Columns.Add("stt", typeof(String));
+        tbxView.Columns.Add("ma_kh", typeof(String));
+        tbxView.Columns.Add("ten_kh", typeof(String));
+        tbxView.Columns.Add("dia_chi", typeof(String));
+        tbxView.Columns.Add("ma_cong_to", typeof(Double));
+        tbxView.Columns.Add("t1", typeof(Double));
+        tbxView.Columns.Add("t2", typeof(Double));
+        tbxView.Columns.Add("t3", typeof(Double));
+        tbxView.Columns.Add("t4", typeof(Double));
+        tbxView.Columns.Add("t5", typeof(Double));
+        tbxView.Columns.Add("t6", typeof(Double));
+        tbxView.Columns.Add("t7", typeof(Double));
+        tbxView.Columns.Add("t8", typeof(Double));
+        tbxView.Columns.Add("t9", typeof(Double));
+        tbxView.Columns.Add("t10", typeof(Double));
+        tbxView.Columns.Add("t11", typeof(Double));
+        tbxView.Columns.Add("t12", typeof(Double));
         
         dr = tbxView.NewRow();
 

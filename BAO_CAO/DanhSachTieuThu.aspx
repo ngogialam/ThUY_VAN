@@ -104,27 +104,27 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T1" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T1" />
+                                    HeaderText="T1" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T2" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T2" />
+                                    HeaderText="T2" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T3" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T3" />
+                                    HeaderText="T3" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T4" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T4" />
+                                    HeaderText="T4" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T5" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T5" />
+                                    HeaderText="T5" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T6" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T6" />
+                                    HeaderText="T6" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T7" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
@@ -132,7 +132,7 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T8" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T8" />
+                                    HeaderText="T8" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T9" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
@@ -140,15 +140,15 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T10" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T10" />
+                                    HeaderText="T10" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T11" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T11" />
+                                    HeaderText="T11" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T12" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T12" />
+                                    HeaderText="T12" DataFormatString="{0:0,0}" />
                             </Columns>
                             <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />

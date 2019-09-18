@@ -111,9 +111,8 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="Mã công tơ" />
+                                    HeaderText="Mã công tơ" DataFormatString="{0:0,0}" />
                             </Columns>
-
                             <Columns>
                                 <asp:BoundField DataField="chi_so_cu" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
                                     HeaderText="CSĐK" DataFormatString="{0:0,0}" />
@@ -124,7 +123,7 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="so_ho" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="Số hộ" />
+                                    HeaderText="Số hộ" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="dien_nang_tt" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
@@ -132,53 +131,51 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="sh1" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="SH1" />
+                                    HeaderText="SH1" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="sh2" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="SH2" />
+                                    HeaderText="SH2" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="sh3" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="SH3" />
+                                    HeaderText="SH3" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="sh4" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="SH4" />
+                                    HeaderText="SH4" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="sh5" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="SH5" />
+                                    HeaderText="SH5" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="sh6" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="SH6" />
+                                    HeaderText="SH6" DataFormatString="{0:0,0}" />
                             </Columns>
-
-
                             <Columns>
                                 <asp:BoundField DataField="NT" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="NT" />
+                                    HeaderText="NT" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="BV" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="BV" />
+                                    HeaderText="BV" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="KD" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="KD" />
+                                    HeaderText="KD" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="CSCC" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="CSCC" />
+                                    HeaderText="CSCC" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="TH" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="TH" />
+                                    HeaderText="TH" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="HCSN" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="HCSN" />
+                                    HeaderText="HCSN" DataFormatString="{0:0,0}" />
                             </Columns>
                             <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />

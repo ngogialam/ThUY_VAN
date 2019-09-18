@@ -93,7 +93,6 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
     void bindGrid(string loai_bc, int id_khu, string ky_hd)
     {
         DataTable tbx = new DataTable();
-        DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
 
         if (loai_bc == "01")

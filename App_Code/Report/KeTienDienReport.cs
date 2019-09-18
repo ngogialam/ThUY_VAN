@@ -120,6 +120,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
 	/// the contents of this method with the code editor.
 	/// </summary>
 	private void InitializeComponent() {
+            string resourceFileName = "KeTienDienReport.resx";
             this.lblMaKh = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblDiaChi = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblChiSoCu = new DevExpress.XtraReports.UI.XRTableCell();
@@ -228,7 +229,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblChiSoCu.Name = "lblChiSoCu";
             this.lblChiSoCu.StylePriority.UseFont = false;
             this.lblChiSoCu.StylePriority.UseTextAlignment = false;
-            this.lblChiSoCu.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.lblChiSoCu.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblChiSoCu.Weight = 0.34942935185559659D;
             // 
             // xrTableRow1
@@ -296,7 +297,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblMaCT.StylePriority.UseFont = false;
             this.lblMaCT.StylePriority.UsePadding = false;
             this.lblMaCT.StylePriority.UseTextAlignment = false;
-            this.lblMaCT.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.lblMaCT.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblMaCT.Weight = 0.51282482659207074D;
             // 
             // lblChiSoMoi
@@ -304,6 +305,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblChiSoMoi.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblChiSoMoi.Name = "lblChiSoMoi";
             this.lblChiSoMoi.StylePriority.UseFont = false;
+            this.lblChiSoMoi.StylePriority.UseTextAlignment = false;
+            this.lblChiSoMoi.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblChiSoMoi.Weight = 0.34942935114732088D;
             // 
             // lblSoHo
@@ -311,6 +314,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSoHo.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSoHo.Name = "lblSoHo";
             this.lblSoHo.StylePriority.UseFont = false;
+            this.lblSoHo.StylePriority.UseTextAlignment = false;
+            this.lblSoHo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSoHo.Weight = 0.34942969514304045D;
             // 
             // lblDienNangTT
@@ -318,11 +323,15 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblDienNangTT.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblDienNangTT.Name = "lblDienNangTT";
             this.lblDienNangTT.StylePriority.UseFont = false;
+            this.lblDienNangTT.StylePriority.UseTextAlignment = false;
+            this.lblDienNangTT.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblDienNangTT.Weight = 0.34942970052000139D;
             // 
             // lblEmpty
             // 
             this.lblEmpty.Name = "lblEmpty";
+            this.lblEmpty.StylePriority.UseTextAlignment = false;
+            this.lblEmpty.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblEmpty.Weight = 0.31061904729833412D;
             // 
             // lblSh1
@@ -330,6 +339,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh1.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSh1.Name = "lblSh1";
             this.lblSh1.StylePriority.UseFont = false;
+            this.lblSh1.StylePriority.UseTextAlignment = false;
+            this.lblSh1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSh1.Weight = 0.29119110467887832D;
             // 
             // lblSh2
@@ -337,6 +348,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh2.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSh2.Name = "lblSh2";
             this.lblSh2.StylePriority.UseFont = false;
+            this.lblSh2.StylePriority.UseTextAlignment = false;
+            this.lblSh2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSh2.Weight = 0.29119109198962045D;
             // 
             // lblSh3
@@ -344,6 +357,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh3.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSh3.Name = "lblSh3";
             this.lblSh3.StylePriority.UseFont = false;
+            this.lblSh3.StylePriority.UseTextAlignment = false;
+            this.lblSh3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSh3.Weight = 0.29119109160722723D;
             // 
             // lblSh4
@@ -351,6 +366,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh4.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSh4.Name = "lblSh4";
             this.lblSh4.StylePriority.UseFont = false;
+            this.lblSh4.StylePriority.UseTextAlignment = false;
+            this.lblSh4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSh4.Weight = 0.29119109141603106D;
             // 
             // lblSh5
@@ -358,6 +375,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh5.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSh5.Name = "lblSh5";
             this.lblSh5.StylePriority.UseFont = false;
+            this.lblSh5.StylePriority.UseTextAlignment = false;
+            this.lblSh5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSh5.Weight = 0.29119109132038262D;
             // 
             // lblSh6
@@ -365,6 +384,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh6.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSh6.Name = "lblSh6";
             this.lblSh6.StylePriority.UseFont = false;
+            this.lblSh6.StylePriority.UseTextAlignment = false;
+            this.lblSh6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSh6.Weight = 0.29119109127260839D;
             // 
             // lblNT
@@ -372,6 +393,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblNT.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblNT.Name = "lblNT";
             this.lblNT.StylePriority.UseFont = false;
+            this.lblNT.StylePriority.UseTextAlignment = false;
+            this.lblNT.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblNT.Weight = 0.29119109124872145D;
             // 
             // lblBV
@@ -379,6 +402,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblBV.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblBV.Name = "lblBV";
             this.lblBV.StylePriority.UseFont = false;
+            this.lblBV.StylePriority.UseTextAlignment = false;
+            this.lblBV.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblBV.Weight = 0.29119109123678416D;
             // 
             // lblKD
@@ -386,6 +411,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblKD.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblKD.Name = "lblKD";
             this.lblKD.StylePriority.UseFont = false;
+            this.lblKD.StylePriority.UseTextAlignment = false;
+            this.lblKD.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblKD.Weight = 0.29119109122782194D;
             // 
             // lblCSCC
@@ -393,6 +420,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblCSCC.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblCSCC.Name = "lblCSCC";
             this.lblCSCC.StylePriority.UseFont = false;
+            this.lblCSCC.StylePriority.UseTextAlignment = false;
+            this.lblCSCC.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblCSCC.Weight = 0.29119109122782183D;
             // 
             // lblTH
@@ -400,6 +429,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblTH.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblTH.Name = "lblTH";
             this.lblTH.StylePriority.UseFont = false;
+            this.lblTH.StylePriority.UseTextAlignment = false;
+            this.lblTH.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblTH.Weight = 0.29119110233588213D;
             // 
             // lblHCSN
@@ -407,6 +438,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblHCSN.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblHCSN.Name = "lblHCSN";
             this.lblHCSN.StylePriority.UseFont = false;
+            this.lblHCSN.StylePriority.UseTextAlignment = false;
+            this.lblHCSN.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblHCSN.Weight = 0.29119108567219754D;
             // 
             // lblBN
@@ -414,6 +447,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblBN.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblBN.Name = "lblBN";
             this.lblBN.StylePriority.UseFont = false;
+            this.lblBN.StylePriority.UseTextAlignment = false;
+            this.lblBN.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblBN.Weight = 0.29119108844871067D;
             // 
             // lblSX
@@ -421,6 +456,8 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSX.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblSX.Name = "lblSX";
             this.lblSX.StylePriority.UseFont = false;
+            this.lblSX.StylePriority.UseTextAlignment = false;
+            this.lblSX.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSX.Weight = 0.291191089836672D;
             // 
             // lblGhiChu
@@ -1113,7 +1150,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
         lblMaCT.DataBindings.Add("Text", DataSource, "ma_cong_to", "{0:#,# ;(#,#);0}");
         lblChiSoCu.DataBindings.Add("Text", DataSource, "chi_so_cu", "{0:#,# ;(#,#);0}");
         lblChiSoMoi.DataBindings.Add("Text", DataSource, "chi_so_moi", "{0:#,# ;(#,#);0}");
-        lblSoHo.DataBindings.Add("Text", DataSource, "so_ho");
+        lblSoHo.DataBindings.Add("Text", DataSource, "so_ho", "{0:#,# ;(#,#);0}");
         lblDienNangTT.DataBindings.Add("Text", DataSource, "dien_nang_tt", "{0:#,# ;(#,#);0}");
         lblSh1.DataBindings.Add("Text", DataSource, "sh1", "{0:#,# ;(#,#);0}");
         lblSh2.DataBindings.Add("Text", DataSource, "sh2", "{0:#,# ;(#,#);0}");
