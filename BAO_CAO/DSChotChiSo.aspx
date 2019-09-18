@@ -75,11 +75,9 @@
                             CssClass="table table-striped table-bordered table-hover" OnPageIndexChanged="GridView1_PageIndexChanged"
                             OnPageIndexChanging="GridView1_PageIndexChanging" CellPadding="4" ForeColor="#333333"
                             GridLines="None">
-
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                             <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-
                             <PagerSettings Mode="Numeric" Position="Bottom" PageButtonCount="20" />
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
@@ -99,56 +97,56 @@
                                     HeaderText="Địa chỉ" />
                             </Columns>
                             <Columns>
-                                <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                    HeaderText="Mã công tơ" />
+                                <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                    HeaderText="Mã công tơ" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T1" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T1" />
+                                    HeaderText="T1" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T2" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T2" />
+                                    HeaderText="T2" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T3" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T3" />
+                                    HeaderText="T3" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T4" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T4" />
+                                    HeaderText="T4" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T5" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T5" />
+                                    HeaderText="T5" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T6" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T6" />
+                                    HeaderText="T6" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T7" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T7" />
+                                    HeaderText="T7" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T8" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T8" />
+                                    HeaderText="T8" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T9" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T9" />
+                                    HeaderText="T9" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T10" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T10" />
+                                    HeaderText="T10" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T11" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T11" />
+                                    HeaderText="T11" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T12" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T12" />
+                                    HeaderText="T12" DataFormatString="{0:0,0}" />
                             </Columns>
                             <PagerStyle BackColor="#2461BF" ForeColor="Black" HorizontalAlign="Center" />
                             <RowStyle BackColor="#EFF3FB" />

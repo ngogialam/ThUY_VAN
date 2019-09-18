@@ -768,19 +768,19 @@ public class TieuThuReport : DevExpress.XtraReports.UI.XtraReport
         lblMaKh.DataBindings.Add("Text", DataSource, "ma_kh");
         lblTenKh.DataBindings.Add("Text", DataSource, "ten_kh");
         lblDiaChi.DataBindings.Add("Text", DataSource, "dia_chi");
-        lblMaCto.DataBindings.Add("Text", DataSource, "ma_cong_to");
-        lblT1.DataBindings.Add("Text", DataSource, "t1");
-        lblT2.DataBindings.Add("Text", DataSource, "t2");
-        lblT3.DataBindings.Add("Text", DataSource, "t3");
-        lblT4.DataBindings.Add("Text", DataSource, "t4");
-        lblT5.DataBindings.Add("Text", DataSource, "t5");
-        lblT6.DataBindings.Add("Text", DataSource, "t6");
-        lblT7.DataBindings.Add("Text", DataSource, "t7");
-        lblT8.DataBindings.Add("Text", DataSource, "t8");
-        lblT9.DataBindings.Add("Text", DataSource, "t9");
-        lblT10.DataBindings.Add("Text", DataSource, "t10");
-        lblT11.DataBindings.Add("Text", DataSource, "t11");
-        lblT12.DataBindings.Add("Text", DataSource, "t12");
+        lblMaCto.DataBindings.Add("Text", DataSource, "ma_cong_to", "{0:#,# ;(#,#);0}");
+        lblT1.DataBindings.Add("Text", DataSource, "t1", "{0:#,# ;(#,#);0}");
+        lblT2.DataBindings.Add("Text", DataSource, "t2", "{0:#,# ;(#,#);0}");
+        lblT3.DataBindings.Add("Text", DataSource, "t3", "{0:#,# ;(#,#);0}");
+        lblT4.DataBindings.Add("Text", DataSource, "t4", "{0:#,# ;(#,#);0}");
+        lblT5.DataBindings.Add("Text", DataSource, "t5", "{0:#,# ;(#,#);0}");
+        lblT6.DataBindings.Add("Text", DataSource, "t6", "{0:#,# ;(#,#);0}");
+        lblT7.DataBindings.Add("Text", DataSource, "t7", "{0:#,# ;(#,#);0}");
+        lblT8.DataBindings.Add("Text", DataSource, "t8", "{0:#,# ;(#,#);0}");
+        lblT9.DataBindings.Add("Text", DataSource, "t9", "{0:#,# ;(#,#);0}");
+        lblT10.DataBindings.Add("Text", DataSource, "t10", "{0:#,# ;(#,#);0}");
+        lblT11.DataBindings.Add("Text", DataSource, "t11", "{0:#,# ;(#,#);0}");
+        lblT12.DataBindings.Add("Text", DataSource, "t12", "{0:#,# ;(#,#);0}");
 
     }
 }

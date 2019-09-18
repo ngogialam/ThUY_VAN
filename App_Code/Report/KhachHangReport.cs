@@ -569,9 +569,9 @@ public class KhachHangReport: DevExpress.XtraReports.UI.XtraReport
         lblDiaChi.DataBindings.Add("Text", DataSource, "dia_chi");
         lblSoHo.DataBindings.Add("Text", DataSource, "so_ho");
         lblLoaiHinh.DataBindings.Add("Text", DataSource, "ten_viet_tat");
-        lblCSDK.DataBindings.Add("Text", DataSource, "chi_so_cu");
-        lblCSCK.DataBindings.Add("Text", DataSource, "chi_so_moi");
-        lblTieuThu.DataBindings.Add("Text", DataSource, "dien_nang_tt");
-        lblSauThue.DataBindings.Add("Text", DataSource, "tong_tien_sau_thue");
+        lblCSDK.DataBindings.Add("Text", DataSource, "chi_so_cu", "{0:#,# ;(#,#);0}");
+        lblCSCK.DataBindings.Add("Text", DataSource, "chi_so_moi", "{0:#,# ;(#,#);0}");
+        lblTieuThu.DataBindings.Add("Text", DataSource, "dien_nang_tt", "{0:#,# ;(#,#);0}");
+        lblSauThue.DataBindings.Add("Text", DataSource, "tong_tien_sau_thue", "{0:#,# ;(#,#);0}");
     }
 }

@@ -137,7 +137,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
             newRowTong[1] = tbx.Rows[i]["ma_kh"].ToString();
             newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
             newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
-            newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
+            newRowTong[4] = double.Parse(tbx.Rows[i]["ma_cong_to"].ToString());
 
             if (id_thoi_gian == "03")
             {
@@ -172,13 +172,13 @@ public partial class DSChotChiSo : System.Web.UI.Page
 
             newRowTong[5] = tong_thang_1;
             newRowTong[6] = tong_thang_2;
-            newRowTong[7] = tong_thang_3;
+            newRowTong[7] = double.Parse(tong_thang_3.ToString());
             newRowTong[8] = tong_thang_4;
             newRowTong[9] = tong_thang_5;
             newRowTong[10] = tong_thang_6;
             newRowTong[11] = tong_thang_7;
             newRowTong[12] = tong_thang_8;
-            newRowTong[13] = tong_thang_9;
+            newRowTong[13] = double.Parse(tong_thang_9.ToString());
             newRowTong[14] = tong_thang_10;
             newRowTong[15] = tong_thang_11;
             newRowTong[16] = tong_thang_12;
@@ -194,7 +194,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
         GridView1.DataSource = tbxView;
         GridView1.DataBind();
         ViewState["DataTable"] = tbxView;
-        Session["DSChotChiSoCtoTable"] = tbx;
+        Session["DSChotChiSoCtoTable"] = tbxView;
         Session["DSChotChiSoCtoTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
         Session["DSChotChiSoCtoTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
         Session["DSChotChiSoCtoQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;

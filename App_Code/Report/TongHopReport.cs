@@ -74,6 +74,8 @@ public class TongHopReport : DevExpress.XtraReports.UI.XtraReport
     /// </summary>
     private void InitializeComponent()
     {
+            string resourceFileName = "TongHopReport.resx";
+            DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -208,12 +210,14 @@ public class TongHopReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSauThue.Name = "lblSauThue";
             this.lblSauThue.StylePriority.UseFont = false;
             this.lblSauThue.StylePriority.UseTextAlignment = false;
+            xrSummary1.FormatString = "{0:#,#.00}";
+            this.lblSauThue.Summary = xrSummary1;
             this.lblSauThue.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblSauThue.Weight = 2.1554195512651306D;
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 27F;
+            this.BottomMargin.HeightF = 27.00005F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -332,8 +336,9 @@ public class TongHopReport : DevExpress.XtraReports.UI.XtraReport
             // 
             // xrTableCell1
             // 
-            this.xrTableCell1.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right)));
+            this.xrTableCell1.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell1.CanGrow = false;
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
             this.xrTableCell1.Multiline = true;
@@ -358,8 +363,9 @@ public class TongHopReport : DevExpress.XtraReports.UI.XtraReport
             // 
             // xrTableCell3
             // 
-            this.xrTableCell3.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right)));
+            this.xrTableCell3.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell3.CanGrow = false;
             this.xrTableCell3.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
             this.xrTableCell3.Multiline = true;
@@ -486,9 +492,9 @@ public class TongHopReport : DevExpress.XtraReports.UI.XtraReport
         lblStt.DataBindings.Add("Text", DataSource, "stt");
         lblTenKh.DataBindings.Add("Text", DataSource, "ma");
         lblTenXomKhuTable.DataBindings.Add("Text", DataSource, "ten");
-        lblSanLuong.DataBindings.Add("Text", DataSource, "dien_nang_tt");
-        lblTruocThue.DataBindings.Add("Text", DataSource, "tong_tien_truoc_thue");
-        lblThueVAT.DataBindings.Add("Text", DataSource, "thue_gtgt");
-        lblSauThue.DataBindings.Add("Text", DataSource, "tong_tien_sau_thue");
+        lblSanLuong.DataBindings.Add("Text", DataSource, "dien_nang_tt", "{0:#,# ;(#,#);0}");
+        lblTruocThue.DataBindings.Add("Text", DataSource, "tong_tien_truoc_thue", "{0:#,# ;(#,#);0}");
+        lblThueVAT.DataBindings.Add("Text", DataSource, "thue_gtgt", "{0:#,# ;(#,#);0}");
+        lblSauThue.DataBindings.Add("Text", DataSource, "tong_tien_sau_thue", "{0:#,# ;(#,#);0}");
     }
 }

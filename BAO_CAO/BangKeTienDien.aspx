@@ -110,7 +110,7 @@
                                     HeaderText="Tổng tiền" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
-                                <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
                                     HeaderText="Mã công tơ" />
                             </Columns>
 

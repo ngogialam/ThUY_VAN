@@ -196,7 +196,7 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
         GridView1.DataSource = tbxView;
         GridView1.DataBind();
         ViewState["DataTable"] = tbxView;
-        Session["DanhSachTieuThuTable"] = tbx;
+        Session["DanhSachTieuThuTable"] = tbxView;
         Session["DanhSachTieuThuTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
         Session["DanhSachTieuThuTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
         Session["DanhSachTieuThuQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;

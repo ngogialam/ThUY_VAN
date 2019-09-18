@@ -99,8 +99,8 @@
                                     HeaderText="Địa chỉ" />
                             </Columns>
                             <Columns>
-                                <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                    HeaderText="Mã công tơ" />
+                                <asp:BoundField DataField="ma_cong_to" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
+                                    HeaderText="Mã công tơ" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T1" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
@@ -128,7 +128,7 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T7" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T7" />
+                                    HeaderText="T7" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T8" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
@@ -136,7 +136,7 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T9" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
-                                    HeaderText="T9" />
+                                    HeaderText="T9" DataFormatString="{0:0,0}" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="T10" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
