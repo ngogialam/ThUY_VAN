@@ -119,7 +119,7 @@ public class clsConnect
 
     public DataTable getUser(string ten_dang_nhap)
     {
-        string sqlquery = string.Format("select users.*, doanh_nghiep.ten_doanh_nghiep from users, doanh_nghiep where users.user_name='{0}'and users.status=1 and users.id_doanh_nghiep = doanh_nghiep.id_doanh_nghiep", ten_dang_nhap);
+        string sqlquery = string.Format("select users.*, doanh_nghiep.ten_doanh_nghiep,doanh_nghiep.id_doanh_nghiep from users, doanh_nghiep where users.user_name='{0}'and users.status=1 and users.id_doanh_nghiep = doanh_nghiep.id_doanh_nghiep", ten_dang_nhap);
         DataTable new_table = GetDataTable(sqlquery);
         return new_table;
     }

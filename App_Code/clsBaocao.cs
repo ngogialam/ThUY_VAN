@@ -376,7 +376,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_CHOT_CONG_TO_ALL(string id_tram_bien_ap, int id_khu, string nam)
+    public DataTable SELECT_CHOT_CONG_TO_ALL(string id_tram_bien_ap, int id_khu, string nam, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -390,6 +390,7 @@ public class clsBaocao
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -401,6 +402,7 @@ public class clsBaocao
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
@@ -496,7 +498,7 @@ public class clsBaocao
         return dien_nang_tt;
     }
 
-    public DataTable SELECT_KHACH_HANG_THEO_CAC_DK(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
+    public DataTable SELECT_KHACH_HANG_THEO_CAC_DK(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd,string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -511,6 +513,7 @@ public class clsBaocao
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
@@ -525,6 +528,7 @@ public class clsBaocao
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
@@ -546,7 +550,7 @@ public class clsBaocao
     }
 
 
-    public DataTable SELECT_KHACH_HANG_CSCK_LON(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd,double chi_so)
+    public DataTable SELECT_KHACH_HANG_CSCK_LON(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd,double chi_so, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -562,7 +566,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.chi_so_moi>='" + chi_so + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -577,7 +581,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.chi_so_moi>='" + chi_so + "'  ";
@@ -597,7 +601,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_KHACH_HANG_TIEU_THU_LON(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd, double chi_so)
+    public DataTable SELECT_KHACH_HANG_TIEU_THU_LON(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd, double chi_so, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -613,7 +617,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.dien_nang_tt>='" + chi_so + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -628,7 +632,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.dien_nang_tt>='" + chi_so + "'  ";
@@ -648,7 +652,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_KHACH_HANG_TIEU_THU_NHO(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd, double chi_so)
+    public DataTable SELECT_KHACH_HANG_TIEU_THU_NHO(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd, double chi_so, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -664,7 +668,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-       //     sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.dien_nang_tt<='" + chi_so + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -679,7 +683,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.dien_nang_tt<='" + chi_so + "'  ";
@@ -700,7 +704,7 @@ public class clsBaocao
     }
 
 
-    public DataTable SELECT_KHACH_HANG_KSD(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
+    public DataTable SELECT_KHACH_HANG_KSD(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd,string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -716,7 +720,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-        //    sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.chi_so_moi is null  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -731,7 +735,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.chi_so_moi is null  ";
@@ -751,7 +755,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_KHACH_HANG_KPH_HD(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd)
+    public DataTable SELECT_KHACH_HANG_KPH_HD(string id_tram_bien_ap, int id_khu, int id_bang_gia_dien, string ky_hd,string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -767,7 +771,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.so_hd is null  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -782,7 +786,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-         //   sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " and a.so_hd is null  ";
@@ -802,7 +806,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_BANG_KE_TIEN_DIEN(string id_tram_bien_ap, int id_khu, string ky_hd)
+    public DataTable SELECT_BANG_KE_TIEN_DIEN(string id_tram_bien_ap, int id_khu, string ky_hd,string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -818,7 +822,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-            //sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
 
@@ -832,7 +836,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien = d.id_bang_gia ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-            //  sql = sql + " and d.id_bang_gia=" + id_bang_gia_dien + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
@@ -852,7 +856,7 @@ public class clsBaocao
     }
 
 
-    public DataTable SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(int id_khu, string ky_hd)
+    public DataTable SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(int id_khu, string ky_hd, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -869,7 +873,7 @@ public class clsBaocao
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu  ";
             sql = sql + " and a.id_bang_gia_dien=d.id_bang_gia ";
-            // and c.id_khu=" + id_khu + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " group by d.id_bang_gia,d.ten_bang_gia,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
             sql = sql + " order by d.ten_bang_gia ";
@@ -884,6 +888,7 @@ public class clsBaocao
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu  ";
             sql = sql + " and a.id_bang_gia_dien=d.id_bang_gia ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " group by d.id_bang_gia,d.ten_bang_gia,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
@@ -903,7 +908,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_SAN_LUONG_THEO_TRAM_BA(int id_khu, string ky_hd)
+    public DataTable SELECT_SAN_LUONG_THEO_TRAM_BA(int id_khu, string ky_hd, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
@@ -919,7 +924,7 @@ public class clsBaocao
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu  ";
             sql = sql + " and b.id_tram_bien_ap=d.id_tram_bien_ap ";
-            //-- and c.id_khu=" + id_khu + "  ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + "  and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
             sql = sql + " order by d.ten_tram_bien_ap ";
@@ -933,6 +938,7 @@ public class clsBaocao
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu  ";
             sql = sql + " and b.id_tram_bien_ap=d.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + "  and c.id_khu=" + id_khu + "  ";
             sql = sql + "  and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";

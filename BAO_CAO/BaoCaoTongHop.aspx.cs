@@ -94,11 +94,11 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
     {
         DataTable tbx = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-
+        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
         if (loai_bc == "01")
-            tbx = cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd);
+            tbx = cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd, id_doanh_nghiep);
         else
-            tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_khu, ky_hd);
+            tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_khu, ky_hd, id_doanh_nghiep);
 
         double san_luong = 0;
         double tong_tien_truoc_thue = 0;

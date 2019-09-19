@@ -96,7 +96,8 @@ public partial class BaoCaoDSKhachHang : System.Web.UI.Page
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-        tbx = cslBC.SELECT_KHACH_HANG_THEO_CAC_DK( id_tram_bien_ap,  id_khu,  id_bang_gia_dien,  ky_hd);
+        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        tbx = cslBC.SELECT_KHACH_HANG_THEO_CAC_DK(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, id_doanh_nghiep);
 
         double san_luong_tt = 0;
         double tong_tien = 0;
