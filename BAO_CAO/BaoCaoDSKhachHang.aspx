@@ -72,7 +72,7 @@
             <button id="btnBaoCao" runat="server" onserverclick="XemBC" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Xem</button>
         </td>
         <td>
-            <a href="./BaoCaoDSKhachHangDetail.aspx" class="btn btn-primary" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Xuất excel</a>
+            <a href="./BaoCaoDSKhachHangDetail.aspx" class="btn btn-primary" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Xuất BC</a>
         </td>
     </div>
     <div class="form-group" style="clear: both;">
