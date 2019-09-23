@@ -1147,7 +1147,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
         lblMaKh.DataBindings.Add("Text", DataSource, "ma_kh");
         lblDiaChi.DataBindings.Add("Text", DataSource, "dia_chi");
         lblTienSauThue.DataBindings.Add("Text", DataSource, "tong_tien_sau_thue", "{0:#,# ;(#,#);0}");
-        lblMaCT.DataBindings.Add("Text", DataSource, "ma_cong_to", "{0:#,# ;(#,#);0}");
+        lblMaCT.DataBindings.Add("Text", DataSource, "ma_cong_to");
         lblChiSoCu.DataBindings.Add("Text", DataSource, "chi_so_cu", "{0:#,# ;(#,#);0}");
         lblChiSoMoi.DataBindings.Add("Text", DataSource, "chi_so_moi", "{0:#,# ;(#,#);0}");
         lblSoHo.DataBindings.Add("Text", DataSource, "so_ho", "{0:#,# ;(#,#);0}");
