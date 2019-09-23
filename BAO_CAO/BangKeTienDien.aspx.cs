@@ -89,7 +89,8 @@ public partial class BangKeTienDien : System.Web.UI.Page
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-        tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, id_khu, ky_hd);
+        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, id_khu, ky_hd, id_doanh_nghiep);
 
         DataRow dr;
         tbxView.Columns.Add("stt", typeof(String));

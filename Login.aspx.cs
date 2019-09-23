@@ -34,6 +34,7 @@ public partial class Login : System.Web.UI.Page
                 {
                     DataTable tblUser = mUserInfo.getUser(txtTenDangNhap.Text);
                     Session["TenDoanhNghiep"] = tblUser.Rows[0]["ten_doanh_nghiep"];
+                    Session["IDDoanhNghiep"] = tblUser.Rows[0]["id_doanh_nghiep"];
                 }
                 catch (Exception) {
                     Session["TenDoanhNghiep"] = "";

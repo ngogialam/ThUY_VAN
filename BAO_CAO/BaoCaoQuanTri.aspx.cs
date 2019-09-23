@@ -132,12 +132,13 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
         double tham_so = 0;
+        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
         if (ddlChonBC.SelectedValue == "01")//Danh sách KH có chỉ số đồng hồ lớn
         {
             //lblTenThamSo.Text = "Chỉ số đồng hồ lớn hơn hoặc bằng:";
             //txtThamSo.Text = "10000";
             tham_so = double.Parse(txtThamSo.Text.Trim());
-            tbx = cslBC.SELECT_KHACH_HANG_CSCK_LON(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, tham_so);
+            tbx = cslBC.SELECT_KHACH_HANG_CSCK_LON(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, tham_so, id_doanh_nghiep);
             
         }
         else if (ddlChonBC.SelectedValue == "02")//Danh sách KH có mức tiêu thụ lớn
@@ -145,7 +146,7 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
             //lblTenThamSo.Text = "Mức tiêu thụ lớn hơn hoặc bằng (kWh):";
             //txtThamSo.Text = "1000";
             tham_so = double.Parse(txtThamSo.Text.Trim());
-            tbx = cslBC.SELECT_KHACH_HANG_TIEU_THU_LON(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, tham_so);
+            tbx = cslBC.SELECT_KHACH_HANG_TIEU_THU_LON(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, tham_so, id_doanh_nghiep);
             
         }
         else if (ddlChonBC.SelectedValue == "03")//Danh sách KH có mức tiêu thụ nhỏ
@@ -153,7 +154,7 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
             //lblTenThamSo.Text = "Mức tiêu thụ nhỏ hơn hoặc bằng (kWh):";
             //txtThamSo.Text = "50";
             tham_so = double.Parse(txtThamSo.Text.Trim());
-            tbx = cslBC.SELECT_KHACH_HANG_TIEU_THU_NHO(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, tham_so);
+            tbx = cslBC.SELECT_KHACH_HANG_TIEU_THU_NHO(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, tham_so, id_doanh_nghiep);
             
         }
         else if (ddlChonBC.SelectedValue == "04")//Danh sách KH không sử dụng điện
@@ -161,7 +162,7 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
             //lblTenThamSo.Text = "Số tháng không sử dụng:";
             //txtThamSo.Text = "1";
             tham_so = double.Parse(txtThamSo.Text.Trim());
-            tbx = cslBC.SELECT_KHACH_HANG_KSD(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd);
+            tbx = cslBC.SELECT_KHACH_HANG_KSD(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, id_doanh_nghiep);
             
         }
         else //if (ddlChonBC.SelectedValue == "05")Danh sách KH không phát hành hóa đơn
@@ -169,7 +170,7 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
             //lblTenThamSo.Text = "Số tháng không phát hành hóa đơn:";
             //txtThamSo.Text = "1";
             tham_so = double.Parse(txtThamSo.Text.Trim());
-            tbx = cslBC.SELECT_KHACH_HANG_KPH_HD(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd);
+            tbx = cslBC.SELECT_KHACH_HANG_KPH_HD(id_tram_bien_ap, id_khu, id_bang_gia_dien, ky_hd, id_doanh_nghiep);
             
         }
         

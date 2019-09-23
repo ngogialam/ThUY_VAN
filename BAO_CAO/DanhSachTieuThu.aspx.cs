@@ -92,7 +92,8 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
         //if(thoi_gian_xem == "01")
         //    tbx = cslBC.SELECT_CHOT_CONG_TO(id_tram_bien_ap, id_khu, id_thoi_gian, ky_hd);
         //else
-        tbx = cslBC.SELECT_CHOT_CONG_TO_ALL(id_tram_bien_ap, id_khu, nam);
+        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        tbx = cslBC.SELECT_CHOT_CONG_TO_ALL(id_tram_bien_ap, id_khu, nam, id_doanh_nghiep);
 
 
         DataRow dr;
