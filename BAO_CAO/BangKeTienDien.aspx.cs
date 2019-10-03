@@ -156,7 +156,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 newRowTong[9] = tbx.Rows[i]["dien_nang_tt"].ToString();
 
                 //=================tinh san luong dien sinh hoat theo tung muc===============
-                if (tbx.Rows[i]["id_bang_gia_dien"].ToString() == "7" || tbx.Rows[i]["id_bang_gia_dien"].ToString() == "8")
+                if (tbx.Rows[i]["id_bang_gia_dien"].ToString() == "1" )
                 {
                     string[] muc = new string[] { };
                     muc = cslBC.TINH_BAC_DIEN_SH(double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString()), int.Parse(tbx.Rows[i]["so_ho"].ToString()));
