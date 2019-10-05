@@ -181,7 +181,12 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         if (DateTime.Now.Month < 10) ky_hd = "0" + ky_hd;
         string ma_cong_to = txtMaCongTo_AddModal.Text.Trim();
         string[] list_ma_cong_to = ma_cong_to.Split('|');
-        int check_ma = myCus.check_list_ma_cong_to(string.Join(", ", list_ma_cong_to));
+        string[] list_ma_cong_to_check = ma_cong_to.Split('|');
+                for (int i = 0; i < list_ma_cong_to.Length ; i++)
+        {
+            list_ma_cong_to_check[i] = string.Format("'{0}'", list_ma_cong_to_check[i]);
+        }
+        int check_ma = myCus.check_list_ma_cong_to(string.Join(", ", list_ma_cong_to_check));
         if (check_ma >= 1)
         {
             e.Result = "2"; //Mã công tơ đã tồn tại
