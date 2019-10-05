@@ -98,7 +98,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
         tbxView.Columns.Add("ma_kh", typeof(String));
         tbxView.Columns.Add("dia_chi", typeof(String));
         tbxView.Columns.Add("tong_tien_sau_thue", typeof(Double));
-        tbxView.Columns.Add("ma_cong_to", typeof(Double));
+        tbxView.Columns.Add("ma_cong_to", typeof(String));
         tbxView.Columns.Add("chi_so_cu", typeof(Double));
         tbxView.Columns.Add("chi_so_moi", typeof(Double));
         tbxView.Columns.Add("so_ho", typeof(Double));
