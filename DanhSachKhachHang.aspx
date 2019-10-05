@@ -427,7 +427,7 @@
                                 <asp:Label ID="lblSLDongHo" runat="server" Text='<%# Eval("sl_dong_ho") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Mã công tơ" Visible="False">
+                        <asp:TemplateField HeaderText="Mã công tơ">
                             <ItemTemplate>
                                 <asp:Label ID="lblMaCongTo" runat="server" Text='<%# Eval("ma_cong_to") %>'></asp:Label>
                             </ItemTemplate>
