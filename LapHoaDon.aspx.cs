@@ -145,6 +145,22 @@ public partial class LapHoaDon : System.Web.UI.Page
                 string idBangGia = dtbInv.Rows[i]["id_bang_gia"].ToString();
                 string vaterate = dtbInv.Rows[i]["vatrate"].ToString();
 
+                if (dtbInv.Rows[i]["total"].ToString() == ""){
+                    dtbInv.Rows[i]["total"] = "0";
+                }
+                if (dtbInv.Rows[i]["vatamount"].ToString() == "")
+                {
+                    dtbInv.Rows[i]["vatamount"] = "0";
+                }
+                if (dtbInv.Rows[i]["amount"].ToString() == "")
+                {
+                    dtbInv.Rows[i]["amount"] = "0";
+                }
+                if (dtbInv.Rows[i]["san_luong"].ToString() == "")
+                {
+                    dtbInv.Rows[i]["san_luong"] = "0";
+                }
+
                 total = Convert.ToDouble(dtbInv.Rows[i]["total"].ToString());
                 vatamount = Convert.ToDouble(dtbInv.Rows[i]["vatamount"].ToString());
                 amount = Convert.ToDouble(dtbInv.Rows[i]["amount"].ToString());
