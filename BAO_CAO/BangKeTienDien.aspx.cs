@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 public partial class BangKeTienDien : System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
+    clsConnect myCon = new clsConnect();
     
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -89,7 +90,8 @@ public partial class BangKeTienDien : System.Web.UI.Page
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
-        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        //string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
         tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, id_khu, ky_hd, id_doanh_nghiep);
 
         DataRow dr;
