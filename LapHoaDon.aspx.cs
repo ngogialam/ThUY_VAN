@@ -82,22 +82,27 @@ public partial class LapHoaDon : System.Web.UI.Page
                 dntt = cs_moi - cs_cu;
                 sh = Convert.ToInt32(CusList.Rows[i]["so_ho"].ToString());
                 total = myNCS.tinh_tien_dien(dntt, sh, id_bg);
-                
+
                 vatamount = vatrate * total / 100;
                 //Làm tròn
                 vatamount = Math.Round(vatamount, 0, MidpointRounding.AwayFromZero);
                 amount = total + vatamount;
-                j = i;
-                do
-                {
-                    CusList.Rows[j]["san_luong"] = dntt.ToString();
-                    CusList.Rows[j]["total"] = total.ToString();
-                    CusList.Rows[j]["vatrate"] = vatrate.ToString();
-                    CusList.Rows[j]["vatamount"] = vatamount.ToString();
-                    CusList.Rows[j]["amount"] = amount.ToString();
-                    j++;
-                } while (j < CusList.Rows.Count && string.Compare(CusList.Rows[j]["ma_kh"].ToString(), CusList.Rows[j - 1]["ma_kh"].ToString()) == 0);
-                i = j;
+              //  j = i;
+               // do
+                //{
+                    CusList.Rows[i]["san_luong"] = dntt.ToString();
+                    CusList.Rows[i]["total"] = total.ToString();
+                    CusList.Rows[i]["vatrate"] = vatrate.ToString();
+                    CusList.Rows[i]["vatamount"] = vatamount.ToString();
+                    CusList.Rows[i]["amount"] = amount.ToString();
+                    //CusList.Rows[j]["san_luong"] = null;
+                    //CusList.Rows[j]["total"] = null;
+                    //CusList.Rows[j]["vatrate"] = null;
+                    //CusList.Rows[j]["vatamount"] = null;
+                    //CusList.Rows[j]["amount"] = null;
+                   // j++;
+                //} while (j < CusList.Rows.Count && string.Compare(CusList.Rows[j]["ma_kh"].ToString(), CusList.Rows[j - 1]["ma_kh"].ToString()) == 0);
+                i =j;
             } while (i < CusList.Rows.Count);
         }
         return CusList;
@@ -129,7 +134,7 @@ public partial class LapHoaDon : System.Web.UI.Page
                 int soho = Convert.ToInt32(dtbInv.Rows[i]["so_ho"].ToString());
                 string cscu = dtbInv.Rows[i]["cs_cu"].ToString();
                 string csmoi = dtbInv.Rows[i]["cs_moi"].ToString();
-              
+
                 mact = dtbInv.Rows[i]["ma_cong_to"].ToString();
                 Double dntt = 0;
                 Double total = 0;
@@ -153,16 +158,16 @@ public partial class LapHoaDon : System.Web.UI.Page
                         idHD = idHD - 1;
                     }
                 }
-                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact);                
+                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact);
                 if (i < (dtbInv.Rows.Count - 1) && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i + 1]["ma_kh"].ToString()) != 0)
                 {
-                    recordsAffected=myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                    recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
                 }
                 if (i == (dtbInv.Rows.Count - 1))
                 {
-                   recordsAffected= myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                    recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
                 }
-                myNCS.chotchiso(mact, kyhd);              
+                myNCS.chotchiso(mact, kyhd);
                 i++;
             } while (i < dtbInv.Rows.Count);
         }

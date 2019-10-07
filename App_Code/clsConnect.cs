@@ -189,4 +189,37 @@ public class clsConnect
             }
         }
     }
+
+    public string get_iddoanhnghiep(string user_name)
+    {
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = "select id_doanh_nghiep from users where user_name='" + user_name + "'";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            return dts.Tables[0].Rows[0]["id_doanh_nghiep"].ToString();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
 }
