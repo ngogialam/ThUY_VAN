@@ -121,7 +121,10 @@
             if (e.result == "1") {
                 alert("Thêm mới khách hàng thành công");
                 location.href = "./DanhSachKhachHang.aspx";
-            } else {
+            } else if (e.result == "2") {
+                alert("Trùng mã công tơ!");
+            }
+            else {
                 alert("Thêm mới thất bại. Vui lòng thử lại!");
             }
         }
