@@ -104,7 +104,13 @@ public partial class DanhMucBangGiaDienChiTiet : System.Web.UI.Page
         string mucThu = txtMucThu.Text;
         double phanTramThue = Convert.ToDouble(txtPhanTramThue.Text);
         int idBangGiaTyLe = Convert.ToInt32(drpBangGiaTyLe.SelectedValue);
-        double tyLe = Convert.ToDouble(txtTyLe.Text);
+        double tyLe = 0;
+        try
+        {
+            tyLe = Convert.ToDouble(txtTyLe.Text);
+
+        }
+        catch (Exception) {}
         string moTa = txtMoTa.Text;
         try
         {
