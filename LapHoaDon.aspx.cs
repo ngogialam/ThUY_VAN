@@ -122,6 +122,7 @@ public partial class LapHoaDon : System.Web.UI.Page
         string tungay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["tu_ngay"].ToString().Substring(0, 10);
         string denngay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["den_ngay"].ToString().Substring(0, 10);
         string user = Context.User.Identity.Name.ToString();
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(user);
         DataTable dtbInv = dtb_bind(id_tram, kyhd);
         int i = 0;
         if (dtbInv.Rows.Count > 0)
@@ -193,7 +194,6 @@ public partial class LapHoaDon : System.Web.UI.Page
             txtErr.Text = "Không có dữ liệu";
         }
         gv_bind();
-
     }
 
     protected void ThemKyHD(object sender, EventArgs e)
