@@ -12,7 +12,7 @@
         function onClickCapNhatComplete(s, e) {
             if (e.result == "1") {
                 alert("Cập nhật thành công");
-                location.href = "./DanhMucCongTo.aspx";
+                location.reload();
             } else {
                 alert("Cập nhật thất bại. Vui lòng thử lại!");
             }

@@ -11,14 +11,23 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
     clsBaocao myBC = new clsBaocao();
+    public string id_tba = "";
     public static DataTable bang_gia_dien = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            gv_bind("");
             drpTramBienAp_1.DataSource = myNCS.get_danh_sach_tba();
             drpTramBienAp_1.DataBind();
+            try
+            {
+                if (id_tba == "")
+                {
+                    id_tba = drpTramBienAp_1.SelectedValue.ToString();
+                }
+                gv_bind(id_tba);
+            }
+            catch (Exception) { }
             DataTable DiaBanList = myCus.get_danh_muc_khu();
             cbKhu.DataSource = DiaBanList;
             cbKhu.DataBind();
@@ -55,7 +64,6 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             drpSms_AddModal.DataSource = tblSms;
             drpSms_AddModal.DataBind();
         }
-
     }
 
     protected void gv_bind(string id_tramba)
@@ -182,7 +190,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string ma_cong_to = txtMaCongTo_AddModal.Text.Trim();
         string[] list_ma_cong_to = ma_cong_to.Split('|');
         string[] list_ma_cong_to_check = ma_cong_to.Split('|');
-                for (int i = 0; i < list_ma_cong_to.Length ; i++)
+        for (int i = 0; i < list_ma_cong_to.Length; i++)
         {
             list_ma_cong_to_check[i] = string.Format("'{0}'", list_ma_cong_to_check[i]);
         }
@@ -258,7 +266,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 
     protected void btnDoiCTo_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
-        
+
         string ma_kh = txt_swapModal_maKH.Text;
         string ten_kh = txt_swapModal_tenKH.Text;
         float csDau_CToCu = float.Parse(txt_swapModal_csCu.Text);

@@ -9,14 +9,23 @@ public partial class DanhMucCongTo : System.Web.UI.Page
     clsConnect myCon = new clsConnect();
     DataTable CusList = new DataTable();
     clsNhapChiSo myNCS = new clsNhapChiSo();
-
+    public int id_tramba = -1;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            gv_bind(-1);
             drpTramBienAp_1.DataSource = myNCS.get_danh_sach_tba();
             drpTramBienAp_1.DataBind();
+            try
+            {
+                if (id_tramba == -1)
+                {
+                    id_tramba = Int32.Parse(drpTramBienAp_1.SelectedValue.ToString());
+                }
+            }
+            catch (Exception) { }
+            gv_bind(id_tramba);
+
         }
 
     }
@@ -55,7 +64,7 @@ public partial class DanhMucCongTo : System.Web.UI.Page
             txtNgaySD.Text = ngaySD.Text;
             txtNgayHetHan.Text = ngayHetHan.Text;
             txtTrangThai.Text = trangThai.Text;
-           
+
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#EditModal').modal('show');");
@@ -93,7 +102,7 @@ public partial class DanhMucCongTo : System.Web.UI.Page
     }
     protected void btnLaySL_Click(object sender, EventArgs e)
     {
-        int id_tram = Int32.Parse(drpTramBienAp_1.SelectedValue.ToString());
-        gv_bind(id_tram);
+        id_tramba = Int32.Parse(drpTramBienAp_1.SelectedValue.ToString());
+        gv_bind(id_tramba);
     }
 }

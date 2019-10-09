@@ -137,7 +137,7 @@ public class clsNhapChiSo
         SqlConnection myConn = null;
        // string sql = "select '0' id_tram_bien_ap, N'-- Tất cả trạm --' ten_tram_bien_ap ";
        // sql = sql + " union all ";
-        string sql = " select id_tram_bien_ap,ten_tram_bien_ap from tram_bien_ap where trang_thai=1 ";
+        string sql = " select id_tram_bien_ap,ten_tram_bien_ap from tram_bien_ap where trang_thai = 1 order by id_tram_bien_ap";
         try
         {
             clsConnect cnstr = new clsConnect();

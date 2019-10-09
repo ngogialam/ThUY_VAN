@@ -120,7 +120,7 @@
         function onClickThemMoiComplete(s, e) {
             if (e.result == "1") {
                 alert("Thêm mới khách hàng thành công");
-                location.href = "./DanhSachKhachHang.aspx";
+                location.reload();
             } else if (e.result == "2") {
                 alert("Trùng mã công tơ!");
             }
@@ -232,7 +232,7 @@
         function onClickCapNhatComplete(s, e) {
             if (e.result == "1") {
                 alert("Cập nhật thành công");
-                location.href = "./DanhSachKhachHang.aspx";
+                location.reload();
             } else {
                 alert("Cập nhật thất bại. Vui lòng thử lại!");
             }
@@ -282,7 +282,7 @@
         function onClickDoiCToComplete(s, e) {
             if (e.result == "1") {
                 alert("Cập nhật thành công");
-                location.href = "./DanhSachKhachHang.aspx";
+                location.reload();
             } else {
                 alert("Cập nhật thất bại. Vui lòng thử lại!");
             }
