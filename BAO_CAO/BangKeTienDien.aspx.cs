@@ -208,7 +208,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     }
                     else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "BV")
                     {
-                        newRowTong[16] = "";
+                        //newRowTong[16] = "";
                         newRowTong[17] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         BV = BV + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         //newRowTong[18] = "";
