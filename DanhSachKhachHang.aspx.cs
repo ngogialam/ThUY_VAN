@@ -13,6 +13,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     clsBaocao myBC = new clsBaocao();
     public string id_tba = "";
     public static DataTable bang_gia_dien = new DataTable();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -105,6 +106,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 
         Label idPhuongXa = (Label)row.FindControl("lblIdPhuongXa");
         Label idHuyen = (Label)row.FindControl("lblMIdHuyen");
+        Label trang_thai = (Label)row.FindControl("lblTrangThai");
 
         if (e.CommandName == "suaKH")
         {
@@ -127,6 +129,10 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             drpHuyen.SelectedValue = idHuyen.Text;
             drpTramBienAp.SelectedValue = idtba.Text;
             drpBangGia.SelectedValue = idbg.Text;
+            if (trang_thai.Text == "1")
+            {
+                ckbTrangThai.Checked = true;
+            }
             //cbVung.DataSource = DiaBanList;            
             //cbVung.SelectedValue = iddb.Text;
             //cbVung.DataBind();
@@ -203,24 +209,29 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         {
             if (ten_kh != "" && dia_chi != "" && dien_thoai != "" && ma_cong_to != "" && cot_dien_so != "" && ma_kh != "" && thu_tu != 0 && sl_dong_ho != 0)
             {
-                //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
-                int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
-                if (i == 0)
+                int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
+                try
                 {
-                    e.Result = "0";
-                }
-                else
-                {
-                    e.Result = "1";
-                }
-                foreach (string unique_ma_cto in list_ma_cong_to)
-                {
-                    if (unique_ma_cto.Trim() != "" & i != 0)
+                    //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
+                    int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_dn);
+                    if (i == 0)
                     {
-                        int j = myCus.them_moi_cong_to(unique_ma_cto, ma_kh, he_so_ti);
-                        int k = myCus.them_moi_chi_so_cong_to(unique_ma_cto, ky_hd);
+                        e.Result = "0";
+                    }
+                    else
+                    {
+                        e.Result = "1";
+                    }
+                    foreach (string unique_ma_cto in list_ma_cong_to)
+                    {
+                        if (unique_ma_cto.Trim() != "" & i != 0)
+                        {
+                            int j = myCus.them_moi_cong_to(unique_ma_cto, ma_kh, he_so_ti, id_dn, trang_thai);
+                            int k = myCus.them_moi_chi_so_cong_to(unique_ma_cto, ky_hd, id_dn);
+                        }
                     }
                 }
+                catch (Exception) {}
             }
             else
             {
@@ -232,6 +243,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     protected void btnCapNhat_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         string ma_kh = txtMaKH.Text;
+        DataTable selected_kh = myCus.get_khach_hang_theo_makh(ma_kh);
         string ten_kh = txtTenKh.Text;
         int id_bang_gia = int.Parse(drpBangGia.SelectedValue.ToString());
         string dia_chi = txtDiaChi.Text;
@@ -244,7 +256,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string mst_kh = txtMstKH.Text.ToString();
         string cot_dien_so = txtSoCot.Text;
         int sl_dong_ho = int.Parse(txtSoDongHo.Text);
-        string ma_cong_to = txtMaCongTo.Text;
+        string ma_cong_to = txtMaCongTo.Text.Trim();
         int trang_thai = 0;
         if (ckbTrangThai.Checked)
             trang_thai = 1;
@@ -255,6 +267,15 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         {
             string log = "Sửa khách hàng mã " + ma_kh;
             myCus.cap_nhat_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
+            if (selected_kh.Rows[0]["trang_thai"].ToString() != trang_thai.ToString())
+            {
+                string[] list_ma_cong_to = ma_cong_to.Split('|');
+                foreach (string unique_ma_cto in list_ma_cong_to)
+                {
+                    myCus.cap_nhat_trang_thai_cong_to(unique_ma_cto, trang_thai);
+                }
+            }
+
             myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
             e.Result = "1";
         }
@@ -283,34 +304,37 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         }
         else
         {
+            DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
+            // Lấy kỳ hợp đồng hiện tại
+            DataTable tblKyHD = mySP.get_danh_sach_ky_hd();
+            string ky_hd = "";
+
+            // Thêm mã công tơ mới trong bảng dm_cong_to và chi_so_cong_to
+            int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
+            DataTable tblCToCu = myCus.get_cong_to_theo_maCTo(ma_cto_cu.Trim());
+            int trang_thai = tblCToCu.Rows[0].Field<int>("trang_thai");
+            //float hSoTiCu = tblCToCu.Rows[0].Field<float>("he_so_ti");
+            //System.Windows.Forms.MessageBox.Show(trang_thai.ToString());
+            myCus.them_moi_cong_to(ma_cto_moi, ma_kh, 1, id_dn, trang_thai);
+            myCus.them_moi_chi_so_cong_to(ma_cto_moi, ky_hd, id_dn);
+
+            // Cập nhật trạng thái công tơ cũ trong bảng chi_so_cong_to và dm_cong_to
+            myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
+            myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
+
+            string maCtoKh = tblKH.Rows[0].Field<string>("ma_cong_to");
+            // Cập nhật mã công tơ mới trong bảng khach_hang
+            string maCtoMoiKh = maCtoKh.Replace(ma_cto_cu, ma_cto_moi);
+            myCus.cap_nhat_cong_to_khach_hang(ma_kh, maCtoMoiKh);
+
+            e.Result = "1";
+
+            string log = "Đổi công tơ của khách hàng có mã " + ten_kh + " mã công tơ cũ: " + ma_cto_cu + ", mã công tơ mới: " + ma_cto_moi;
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
             try
             {
-                DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
-                string maCtoKh = tblKH.Rows[0].Field<string>("ma_cong_to");
-                // Cập nhật mã công tơ mới trong bảng khach_hang
-                string maCtoMoiKh = maCtoKh.Replace(ma_cto_cu, ma_cto_moi);
-                myCus.cap_nhat_cong_to_khach_hang(ma_kh, maCtoMoiKh);
-
-                // Lấy kỳ hợp đồng hiện tại
-                DataTable tblKyHD = mySP.get_danh_sach_ky_hd();
-                string ky_hd = "";
-
-                // Cập nhật trạng thái công tơ cũ trong bảng chi_so_cong_to và dm_cong_to
-                myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
-                myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
-
-                // Thêm mã công tơ mới trong bảng dm_cong_to và chi_so_cong_to
-                DataTable tblCToCu = myCus.get_cong_to_theo_maCTo(ma_cto_cu);
-                float hSoTiCu = tblCToCu.Rows[0].Field<float>("he_so_ti");
-                myCus.them_moi_cong_to(ma_cto_moi, ma_kh, hSoTiCu);
-                myCus.them_moi_chi_so_cong_to(ma_cto_moi, ky_hd);
-
-                e.Result = "1";
-
-                string log = "Đổi công tơ của khách hàng có mã " + ten_kh + " mã công tơ cũ: " + ma_cto_cu + ", mã công tơ mới: " + ma_cto_moi;
-                myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
             }
-            catch
+            catch (Exception)
             {
                 e.Result = "0";
             }
