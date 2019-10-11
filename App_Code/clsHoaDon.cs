@@ -2,16 +2,20 @@
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Web.Security;
+using System.Web.UI;
+using System.Web;
 /// </summary>
 /// tuanbn.pto cls Phat Hanh Hoa Don 
 
 public class clsHoaDon
 {
+    clsConnect myCon = new clsConnect();
     //Danh sách hóa đơn mới lập
     public DataTable get_du_lieu_hd(string id_tramba, string ky, string trangthai)
     {
         SqlConnection myConn = null;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         string sql = "";
         if (id_tramba == "0")
         {
@@ -19,7 +23,8 @@ public class clsHoaDon
             sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and d.ky_hd='" + ky + "'";
-            sql = sql + " order by d.id";
+            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep;
+            sql = sql + " order by d.id,d.dien_nang_tt DESC";
         }
         else
         {
@@ -27,7 +32,8 @@ public class clsHoaDon
             sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky_hd='" + ky + "'";
-            sql = sql + " order by d.id";
+            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep;
+            sql = sql + " order by d.id,d.dien_nang_tt DESC";
         }
         try
         {
@@ -65,23 +71,16 @@ public class clsHoaDon
     public DataTable get_danh_sach_hddt(string id_tramba, string ky, string trangthai)
     {
         SqlConnection myConn = null;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         string sql = "";
-        if (id_tramba == "0")
-        {
-            sql = "select distinct d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,d.dien_nang_tt dien_nang_tt,";
-            sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt  ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and d.ky_hd='" + ky + "'";
-            sql = sql + " order by d.id";
-        }
-        else
-        {
-            sql = "select distinct d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,d.dien_nang_tt dien_nang_tt,";
-            sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt  ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky_hd='" + ky + "'";
-            sql = sql + " order by d.id";
-        }
+
+        sql = "select d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
+        sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+        sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv";
+        sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky_hd='" + ky + "'";
+        sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep;
+        sql = sql + " order by d.id,d.dien_nang_tt DESC";
+        
         try
         {
             clsConnect cnstr = new clsConnect();

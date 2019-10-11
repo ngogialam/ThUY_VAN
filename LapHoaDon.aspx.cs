@@ -29,7 +29,6 @@ public partial class LapHoaDon : System.Web.UI.Page
             lblTuNgay.Text = tungay;
             lblDenNgay.Text = denngay;
 
-
         }
 
     }
@@ -176,14 +175,21 @@ public partial class LapHoaDon : System.Web.UI.Page
                     }
                 }
                 myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact);
-                if (i < (dtbInv.Rows.Count - 1) && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i + 1]["ma_kh"].ToString()) != 0)
+                if (i > 0)
+                {
+                    if (i < dtbInv.Rows.Count && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i - 1]["ma_kh"].ToString()) != 0)
+                    {
+                        recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                    }
+                }
+                if (i == 0)
                 {
                     recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
                 }
-                if (i == (dtbInv.Rows.Count - 1))
-                {
-                    recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
-                }
+                //if (i == (dtbInv.Rows.Count - 1))
+                //{
+                //    recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                //}
                 myNCS.chotchiso(mact, kyhd);
                 i++;
             } while (i < dtbInv.Rows.Count);
