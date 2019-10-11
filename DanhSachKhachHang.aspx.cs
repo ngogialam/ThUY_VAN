@@ -209,9 +209,9 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         {
             if (ten_kh != "" && dia_chi != "" && dien_thoai != "" && ma_cong_to != "" && cot_dien_so != "" && ma_kh != "" && thu_tu != 0 && sl_dong_ho != 0)
             {
-                int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
                 try
                 {
+                    int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
                     //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
                     int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_dn);
                     if (i == 0)
