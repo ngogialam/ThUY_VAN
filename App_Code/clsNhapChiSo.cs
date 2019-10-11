@@ -15,12 +15,22 @@ public class clsNhapChiSo
         SqlConnection myConn = null;
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         string sql = "";
-        sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-        sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
-        sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
-        sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + " and f.trang_thai=1";
-        sql = sql + " order by a.thu_tu";
-
+        if (id_tramba == "0")
+        {
+            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and d.ky='" + ky + "'";
+            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + " and f.trang_thai=1";
+            sql = sql + " order by a.thu_tu";
+        }
+        else
+        {
+            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + " and f.trang_thai=1";
+            sql = sql + " order by a.thu_tu";
+        }
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -499,7 +509,7 @@ public class clsNhapChiSo
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select * from chi_so_cong_to where ma_cong_to = " + mact + " and ky='" + ky + "'";
+            cmd.CommandText = "select * from chi_so_cong_to where ma_cong_to = '" + mact + "' and ky='" + ky + "'";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -619,6 +629,7 @@ public class clsNhapChiSo
     public int them_chi_so_ky_moi(string mact, string csmoi, string kymoi)
     {
         clsConnect cnstr = new clsConnect();
+        string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         int recordsAffected = 0;
@@ -627,7 +638,7 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to,cs_cu,ky,ngay_capnhat) values ('" + mact + "'," + csmoi + ",'" + kymoi + "',CONVERT( Datetime, GETDATE() ,103))";
+            cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to,cs_cu,ky,ngay_capnhat,trang_thai,id_doanh_nghiep) values ('" + mact + "'," + csmoi + ",'" + kymoi + "',CONVERT( Datetime, GETDATE() ,103),1,"+ id_doanh_nghiep+")";
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
@@ -675,6 +686,7 @@ public class clsNhapChiSo
     public int them_kyhd(string ky, string thang, string nam, string tu_ngay, string den_ngay)
     {
         clsConnect cnstr = new clsConnect();
+        string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         int recordsAffected = 0;
@@ -683,7 +695,7 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            cmd.CommandText = "insert into ky(ky,thang,nam,tu_ngay,den_ngay,trang_thai) values ('" + ky + "'," + thang + "," + nam + ",CONVERT(date,'" + tu_ngay + "'),CONVERT(date,'" + den_ngay + "'),1)";
+            cmd.CommandText = "insert into ky(ky,thang,nam,tu_ngay,den_ngay,trang_thai,id_doanh_nghiep) values ('" + ky + "'," + thang + "," + nam + ",CONVERT(date,'" + tu_ngay + "'),CONVERT(date,'" + den_ngay + "'),1," + id_doanh_nghiep + ")";
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
