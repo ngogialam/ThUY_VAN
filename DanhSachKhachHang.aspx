@@ -283,7 +283,10 @@
             if (e.result == "1") {
                 alert("Cập nhật thành công");
                 location.reload();
-            } else {
+            } else if (e.result == "2") {
+                alert("Trùng mã công tơ!");
+            }
+            else {
                 alert("Cập nhật thất bại. Vui lòng thử lại!");
             }
         }
