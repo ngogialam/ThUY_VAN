@@ -22,18 +22,20 @@
                     changeYear: true,
                     yearRange: '1950:2100',
                     onSelect: function () {
+                        console.log("sfdsfdsfasfsdfasd");
                         var date = $.datepicker.formatDate('yymmdd', $(this).datepicker('getDate'));
+                        console.log(date);
                         $("#strDenNgay").val(date);
                     }
                 });
             $('#txtKyHD').datepicker(
                 {
-                    dateFormat: 'mm/yy',
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: '1950:2100',
+                    format: "mm/yyyy",
+                    viewMode: "months",
+                    minViewMode: "months",
+                    //yearRange: '1950:2100',
                     onSelect: function () {
-                        var date = $.datepicker.formatDate('mm/yy', $(this).datepicker('getDate'));
+                        var date = $.datepicker.formatDate('mm/yyyy', $(this).datepicker('getDate'));
                         $("#strKyHD").val(date);
                     }
                 });
@@ -134,17 +136,17 @@
                     </div>
                     <div class="row mx5">
                         <label>Kỳ</label>
-                        <input type="text" class="form-control input-lg" id="txtKyHD" autocomplete="off">
+                        <input type="text" class="form-control input-lg" id="txtKyHD" autocomplete="off" />
                         <input type="hidden" id="strKyHD" name="strKyHD" value="-1" />
                     </div>
                     <div class="row mx5">
                         <label>Từ ngày</label>
-                        <input type="text" class="form-control input-lg" id="txtTuNgay" autocomplete="off">
+                        <input type="text" class="form-control input-lg" id="txtTuNgay" autocomplete="off" />
                         <input type="hidden" id="strTuNgay" name="strTuNgay" value="-1" />
                     </div>
                     <div class="row mx5">
                         <label>Đến ngày</label>
-                        <input type="text" class="form-control input-lg" id="txtDenNgay" autocomplete="off">
+                        <input type="text" class="form-control input-lg" id="txtDenNgay" autocomplete="off" />
                         <input type="hidden" id="strDenNgay" name="strDenNgay" value="-1" />
                     </div>
 

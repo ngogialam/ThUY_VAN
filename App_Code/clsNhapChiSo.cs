@@ -644,7 +644,7 @@ public class clsNhapChiSo
         }
         return recordsAffected;
     }
-    public int them_chi_so_cong_to_tong_ky_moi(string mact, string csmoi, string kymoi)
+    public int them_chi_so_cong_to_tong_ky_moi(string mact, string csmoi, string kymoi, int id_doanh_nghiep)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -655,7 +655,7 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            cmd.CommandText = string.Format("insert into chi_so_cong_to_tong (ma_cong_to, cs_cu, cs_moi, ky, ngay_cap_nhat) values ('{0}', {1}, {1}, '{2}',CONVERT( Datetime, GETDATE() ,103))", mact, csmoi, kymoi);
+            cmd.CommandText = string.Format("insert into chi_so_cong_to_tong (ma_cong_to, cs_cu, cs_moi, ky, ngay_cap_nhat, id_doanh_nghiep) values ('{0}', {1}, {1}, '{2}',CONVERT( Datetime, GETDATE() ,103), {3})", mact, csmoi, kymoi, id_doanh_nghiep);
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
