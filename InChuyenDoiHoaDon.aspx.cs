@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using NReco.PdfGenerator;
+using System.IO;
 public partial class InChuyenDoiHoaDon : System.Web.UI.Page
 {
     private static string adminName = "htxthanhdinhadmin";
@@ -11,7 +12,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
     private static string pattern = "01GTKT0/001";
     private static string serial = "TV/19E";
 
-    IronPdf.HtmlToPdf Renderer = new IronPdf.HtmlToPdf();
+    HtmlToPdfConverter htmlToPdf = new HtmlToPdfConverter();    
     clsHoaDon myINV = new clsHoaDon();
     clsNguoiBan mySeller = new clsNguoiBan();
     clsNhapChiSo myNCS = new clsNhapChiSo();
@@ -64,22 +65,22 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
         {
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
-
-        var pdf = Renderer.RenderHtmlAsPdf(htmlInv);
+        htmlToPdf.Orientation = PageOrientation.Portrait;
+        //htmlToPdf.Zoom = 1.13f;
+        htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
+        var pdfBytes = htmlToPdf.GeneratePdf(htmlInv);
         string pdffilename = "RepConvertInv\\inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
-        //string pdfdownloadname = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
-        pdf.SaveAs(Server.MapPath(pdffilename));
-        string zipfilename = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".zip";
+        string pdfdownloadname = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
+       // string zipfilename = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".zip";
+        Response.Clear();
+        MemoryStream ms = new MemoryStream(pdfBytes);
+        Response.ContentType = "application/pdf";
+        Response.AddHeader("content-disposition", "attachment;filename=" + pdfdownloadname + ".pdf");
+        Response.Buffer = true;
+        ms.WriteTo(Response.OutputStream);
+        Response.End();
 
-        //using (ZipFile zip = new ZipFile())
-        //{
-        //    zip.AddFile(pdfdownloadname);//Zip file inside filename  
-        //    zip.Save(Response.OutputStream);//location and name for creating zip file  
-        //}
-
-        //Response.ContentType = "application/pdf";
-        //Response.AddHeader("Content-Disposition", @"attachment;filename=" + zipfilename);
-        Response.Redirect(pdffilename);
+       // Response.Redirect(pdffilename);
     }
 
     protected void drpTram_SelectedIndexChanged(object sender, EventArgs e)
