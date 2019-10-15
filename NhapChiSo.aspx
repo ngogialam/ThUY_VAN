@@ -18,7 +18,8 @@
                         let maCto = $(this).parent().parent().find("span[id='lblMaCT']").text();
                         var data = maCto + "|" + chiSoMoi;
                         cbCapNhat.PerformCallback(data);
-                        $(this).parent().parent().next("tr").find("input").focus();
+                        $(this).parent().parent().find("span[id='lblDienNangTT']").text(chiSoMoi - chiSoCu);
+                        $(this).parent().parent().next("tr").find("input").focus().select();
                     }
                 }
                 if (e.keyCode == 40) {
@@ -167,6 +168,11 @@
                         <asp:TemplateField HeaderText="CS mới">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" Text='<%# Eval("cs_moi") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Điện năng TT">
+                            <ItemTemplate>
+                                <asp:Label ID="lblDienNangTT" runat="server" Text='<%# dienNangTieuThu(Eval("cs_cu"), Eval("cs_moi")) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Trạng thái">

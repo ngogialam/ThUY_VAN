@@ -34,10 +34,10 @@ public partial class NhapChiSo : System.Web.UI.Page
         for (int i = 0; i < CusList.Rows.Count; i++)
         {
             string status = CusList.Rows[i]["trang_thai"].ToString();
-             GridViewRow row = GirdViewNoPaGE.Rows[i];
+            GridViewRow row = GirdViewNoPaGE.Rows[i];
             if (status == "0")
             {
-                GirdViewNoPaGE.Rows[i].Cells[8].CssClass = "label label-success";
+                GirdViewNoPaGE.Rows[i].Cells[9].CssClass = "label label-success";
                 TextBox txtCSMoi = (TextBox)row.FindControl("txtCSMoi");
                 txtCSMoi.ReadOnly = true;
 
@@ -45,7 +45,7 @@ public partial class NhapChiSo : System.Web.UI.Page
             }
             else
             {
-                GirdViewNoPaGE.Rows[i].Cells[8].CssClass = "label label-danger";
+                GirdViewNoPaGE.Rows[i].Cells[9].CssClass = "label label-danger";
             }
         }
         if (CusList.Rows.Count > 0)
@@ -75,7 +75,7 @@ public partial class NhapChiSo : System.Web.UI.Page
             if (csmoi != "")
             {
                 int result = myNCS.cap_nhat_chi_so(mact, csmoi, ky);
-                
+
             }
 
         }
@@ -121,8 +121,8 @@ public partial class NhapChiSo : System.Web.UI.Page
                             if (myNCS.check_cs_ct(mact, kyhd) < 1)
                             {
                                 result = myNCS.them_chi_so_ky_moi(mact, csmoi, kyhd);
-                                if (result ==0)
-                                {                                   
+                                if (result == 0)
+                                {
                                     lblErr.Text = "Có lỗi xảy ra trong quá trình khởi tạo dữ liệu kỳ sau mã công tơ " + mact;
                                     break;
                                 }
@@ -140,11 +140,22 @@ public partial class NhapChiSo : System.Web.UI.Page
 
     protected void btnCapNhat_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
-        String [] arrData = e.Parameter.Split('|');
+        String[] arrData = e.Parameter.Split('|');
         string ky = drpKy.SelectedItem.ToString();
         if (arrData[1].Trim() != "")
         {
             int result = myNCS.cap_nhat_chi_so(arrData[0].Trim(), arrData[1].Trim(), ky);
         }
+    }
+
+    protected int dienNangTieuThu(object csu, object csmoi)
+    {
+        int result = 0;
+        try
+        {
+            result = Int32.Parse(csmoi.ToString()) - Int32.Parse(csu.ToString());
+        }
+        catch (Exception) {}
+        return result;
     }
 }
