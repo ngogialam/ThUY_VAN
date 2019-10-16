@@ -109,7 +109,7 @@ public class clsNhapChiSo
         sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f ";
         sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai=1 and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
         sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + " and f.trang_thai=1";
-        sql = sql + " order by a.thu_tu";
+        sql = sql + " order by a.thu_tu,d.id";
         try
         {
             clsConnect cnstr = new clsConnect();
