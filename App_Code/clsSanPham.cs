@@ -17,6 +17,12 @@ public class clsSanPham
         DataTable new_table = cnstr.GetDataTable(sqlQuery);
         return new_table;
     }
+    public DataTable get_ky_hd_moi_nhat()
+    {
+        string sqlQuery = "SELECT top 1 * FROM ky ORDER BY id DESC";
+        DataTable new_table = cnstr.GetDataTable(sqlQuery);
+        return new_table;
+    }
 
     public DataTable get_danh_sach_nguoi_dung()
     {

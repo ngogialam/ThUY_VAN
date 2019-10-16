@@ -64,6 +64,11 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             drpSms.DataBind();
             drpSms_AddModal.DataSource = tblSms;
             drpSms_AddModal.DataBind();
+
+            // Modal đổi công tơ
+            DataTable tblKyHD = mySP.get_ky_hd_moi_nhat();
+            drp_swapModal_ky.DataSource = tblKyHD;
+            drp_swapModal_ky.DataBind();
         }
     }
 
@@ -150,8 +155,28 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             string[] arrMaCTo = cac_cong_to_hien_tai.Split('|');
             drp_swapModal_cTo.DataSource = arrMaCTo;
             drp_swapModal_cTo.DataBind();
-            txt_swapModal_csCu.Text = "0";
-            txt_swapModal_csCuoiCu.Text = "0";
+
+            DataTable tblcsCu = myCus.get_chi_so_cto_theo_ma_cong_to_va_ky(drp_swapModal_cTo.SelectedValue, drp_swapModal_ky.SelectedValue);
+            try
+            {
+                txt_swapModal_csCu.Text = tblcsCu.Rows[0]["cs_cu"].ToString();
+                txt_swapModal_csCuoiCu.Text = tblcsCu.Rows[0]["cs_moi"].ToString();
+
+                if (txt_swapModal_csCu.Text == "")
+                {
+                    txt_swapModal_csCu.Text = "0";
+                }
+                if (txt_swapModal_csCuoiCu.Text == "")
+                {
+                    txt_swapModal_csCuoiCu.Text = txt_swapModal_csCu.Text;
+                }
+            }
+            catch
+            {
+                txt_swapModal_csCu.Text = "0";
+                txt_swapModal_csCuoiCu.Text = "0";
+            }
+
             txt_swapModal_csDauMoi.Text = "0";
             txt_swapModal_csCuoiMoi.Text = "0";
             txt_swapModal_maCtoMoi.Text = "";
@@ -296,19 +321,22 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         float csCuoi_CToMoi = float.Parse(txt_swapModal_csCuoiMoi.Text);
         string ma_cto_cu = drp_swapModal_cTo.SelectedValue;
         string ma_cto_moi = txt_swapModal_maCtoMoi.Text;
+        // Lấy kỳ hợp đồng hiện tại
+        string ky_hd = drp_swapModal_ky.SelectedValue;
 
+        int check_ky_mcto = myCus.check_ma_cong_to_theo_ky(ma_cto_cu, ky_hd);
         int check_ma = myCus.check_ma_cong_to(ma_cto_moi);
         if (check_ma >= 1)
         {
-            e.Result = "2"; //Mã công tơ đã tồn tại
+            e.Result = "2"; // Mã công tơ đã tồn tại
+        }
+        else if (check_ky_mcto == 0)
+        {
+            e.Result = "3"; // Kỳ hợp đồng
         }
         else
         {
             DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
-            // Lấy kỳ hợp đồng hiện tại
-            DataTable tblKyHD = mySP.get_danh_sach_ky_hd();
-            string ky_hd = "";
-
             // Thêm mã công tơ mới trong bảng dm_cong_to và chi_so_cong_to
             int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
             DataTable tblCToCu = myCus.get_cong_to_theo_maCTo(ma_cto_cu.Trim());
@@ -326,9 +354,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             // Cập nhật mã công tơ mới trong bảng khach_hang
             string maCtoMoiKh = maCtoKh.Replace(ma_cto_cu, ma_cto_moi);
             myCus.cap_nhat_cong_to_khach_hang(ma_kh, maCtoMoiKh);
-
             e.Result = "1";
-
             string log = "Đổi công tơ của khách hàng có mã " + ten_kh + " mã công tơ cũ: " + ma_cto_cu + ", mã công tơ mới: " + ma_cto_moi;
             myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
             try
@@ -353,5 +379,38 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         }
         catch { }
         return result;
+    }
+    protected void Change_Ma_Cong_to(object sender, EventArgs e)
+    {
+        DataTable tblcsCu = myCus.get_chi_so_cto_theo_ma_cong_to_va_ky(drp_swapModal_cTo.SelectedValue, drp_swapModal_ky.SelectedValue);
+        try
+        {
+            txt_swapModal_csCu.Text = tblcsCu.Rows[0]["cs_cu"].ToString();
+            txt_swapModal_csCuoiCu.Text = tblcsCu.Rows[0]["cs_moi"].ToString();
+
+            if (txt_swapModal_csCu.Text == "")
+            {
+                txt_swapModal_csCu.Text = "0";
+            }
+            if (txt_swapModal_csCuoiCu.Text == "")
+            {
+                txt_swapModal_csCuoiCu.Text = txt_swapModal_csCu.Text;
+            }
+        }
+        catch
+        {
+            txt_swapModal_csCu.Text = "0";
+            txt_swapModal_csCuoiCu.Text = "0";
+        }
+
+        txt_swapModal_csDauMoi.Text = "0";
+        txt_swapModal_csCuoiMoi.Text = "0";
+        txt_swapModal_maCtoMoi.Text = "";
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.Append(@"<script type='text/javascript'>");
+        sb.Append("$('.modal-backdrop').remove();");
+        sb.Append("$('#SwapModal').modal('show');");
+        sb.Append(@"</script>");
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "MyModal", sb.ToString(), false);
     }
 }
