@@ -172,6 +172,7 @@ public partial class LapHoaDon : System.Web.UI.Page
                     if (i < dtbInv.Rows.Count && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i - 1]["ma_kh"].ToString()) == 0)
                     {
                         idHD = idHD - 1;
+                     
                     }
                 }
                 myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact);
