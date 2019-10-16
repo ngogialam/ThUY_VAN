@@ -1146,6 +1146,48 @@ public class clsKhachHang
         cnstr.InsertUpdateDataTable(sqlQuery);
     }
 
+    public DataTable get_chi_so_cto_theo_ma_cong_to_va_ky(string ma_cong_to, string ky)
+    {
+        string sqlQuery = string.Format("select * from chi_so_cong_to where ma_cong_to = '{0}' and ky = '{1}'", ma_cong_to, ky);
+        return cnstr.GetDataTable(sqlQuery);
+    }
+
+    public int check_ma_cong_to_theo_ky(string ma_cong_to, string ky)
+    {
+        int ma = 0;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("select * from chi_so_cong_to where ma_cong_to = '{0}' and ky = '{1}'", ma_cong_to, ky);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ma = dts.Tables[0].Rows.Count;
+            return ma;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
     public void cap_nhat_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms)
     {
         clsConnect cnstr = new clsConnect();

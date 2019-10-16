@@ -771,17 +771,24 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                                <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px;display: none">
-                                    <label class="key">Mã khách hàng (<span style="color: red">*</span>):</label>
-                                    <div class="value">
-                                        <asp:TextBox ID="txt_swapModal_maKH" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
-                                    </div>
+                            <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px; display: none">
+                                <label class="key">Mã khách hàng (<span style="color: red">*</span>):</label>
+                                <div class="value">
+                                    <asp:TextBox ID="txt_swapModal_maKH" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
                                 </div>
+                            </div>
                             <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px">
                                 <label class="key">Tên khách hàng (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txt_swapModal_tenKH" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" ReadOnly="true"></asp:TextBox>
                                 </div>
+                            </div>
+                            <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px">
+                                <label class="key">Kỳ :</label>
+                                    <div class="value">
+                                        <asp:DropDownList ID="drp_swapModal_ky" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" DataTextField="ky" DataValueField="ky">
+                                        </asp:DropDownList>
+                                    </div>
                             </div>
 
                             <div class="column">
@@ -789,12 +796,13 @@
                                 <div class="user-info-row ">
                                     <label class="key">Mã công tơ :</label>
                                     <div class="value">
-                                        <asp:DropDownList ID="drp_swapModal_cTo" runat="server" ClientIDMode="Static" CssClass="form-control input-lg">
+                                        <asp:DropDownList ID="drp_swapModal_cTo" runat="server" ClientIDMode="Static" AutoPostBack="true"
+                                            CssClass="form-control input-lg" OnSelectedIndexChanged="Change_Ma_Cong_to">
                                         </asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="user-info-row" style="border: none">
-                                    <label class="key">Chỉ số cũ :</label>
+                                    <label class="key">Chỉ số đầu :</label>
                                     <div class="value">
                                         <asp:TextBox ID="txt_swapModal_csCu" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
                                     </div>
