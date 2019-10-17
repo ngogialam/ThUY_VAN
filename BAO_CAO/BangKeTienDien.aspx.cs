@@ -154,8 +154,19 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 newRowTong[5] = tbx.Rows[i]["ma_cong_to"].ToString();
                 newRowTong[6] = tbx.Rows[i]["chi_so_cu"].ToString();
                 newRowTong[7] = tbx.Rows[i]["chi_so_moi"].ToString();
-                newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
+              //  newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
                 newRowTong[9] = tbx.Rows[i]["dien_nang_tt"].ToString();
+                if (tbx.Rows[i]["dien_nang_tt"].ToString() == "0")
+                {
+                    // check xem hộ đó có dùng nhiều công tơ không, nếu dùng nhiều vẫn chỉ tính là 1 hộ
+                    string so_cong_to = cslBC.CheckCongTo(tbx.Rows[i]["ma_kh"].ToString());
+                    if(so_cong_to == "1")
+                        newRowTong[8] = "1";
+                    else
+                        newRowTong[8] = "0";
+                }
+                else
+                    newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
 
                 //=================tinh san luong dien sinh hoat theo tung muc===============
                 if (tbx.Rows[i]["id_bang_gia_dien"].ToString() == "1" )

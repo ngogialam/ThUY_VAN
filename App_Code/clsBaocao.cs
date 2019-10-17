@@ -331,6 +331,29 @@ public class clsBaocao
 
     }
 
+    public string CheckCongTo(string ma_kh)
+    {
+        string so_luong = "0";
+        int nam = DateTime.Now.Year;
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = myConn;
+        cmd.CommandText = "select count(*) as so_luong, ma_kh from dm_cong_to where ma_kh='"+ ma_kh.Trim() +"' group by ma_kh ";
+        cmd.CommandType = CommandType.Text;
+        SqlDataAdapter myData = new SqlDataAdapter(cmd);
+        DataSet dts = new DataSet();
+        myConn.Open();
+        myData.Fill(dts);
+        myData.Dispose();
+        cmd.Parameters.Clear();
+        cmd.Connection.Close();
+        myConn.Close();
+        so_luong = dts.Tables[0].Rows[0]["so_luong"].ToString();
+        return so_luong;
+
+    }
+
 
     public DataTable SELECT_CHOT_CONG_TO(string id_tram_bien_ap, int id_khu, int id_thoi_gian, string ky_hd)
     {
