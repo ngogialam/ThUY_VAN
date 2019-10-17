@@ -174,7 +174,7 @@
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Hướng dẫn sử dụng">
-                    <a class="nav-link" href="HDSD/VNPT_HDSD_VNPT-EMAN.pdf" target="_blank">
+                    <a class="nav-link" href="<%= ResolveUrl("HDSD/VNPT_HDSD_VNPT-EMAN.pdf")%>" target="_blank">
                         <i class="fa fa-file-pdf-o" style="font-size: 20px"></i>
                         <span class="nav-link-text" style="font-size: 18px; margin-left: 4px">Hướng dẫn sử dụng</span>
                     </a>
