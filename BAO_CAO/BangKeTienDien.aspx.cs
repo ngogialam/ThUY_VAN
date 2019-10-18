@@ -441,8 +441,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                             {
                                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
                                 {
-                                    if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
-                                    {
+                                    
                                         if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "NT")
                                         {
                                             newRowTong[16] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
@@ -560,8 +559,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                                         sh5 = sh5 + double.Parse(muc[4]);
                                         newRowTong[15] = muc[5];
                                         sh6 = sh6 + double.Parse(muc[5]);
-                                    }
-                                }
+                                    }                              
 
                             }
 
