@@ -63,7 +63,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
             if (xmlData != null)
             {
                 PublishInvWS.PublishService service = new PublishInvWS.PublishService();
-                //PublishInvWS
+               
                 var result = service.ImportAndPublishInv(adminName, adminPass, xmlData, userName, userPass, pattern, serial, 0);
                 if (result.StartsWith("OK:"))
                 {
