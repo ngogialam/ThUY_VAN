@@ -4,9 +4,9 @@ using System.Data;
 
 public partial class PhatHanhHD : System.Web.UI.Page
 {
-    private static string adminName = "htxthanhdinhadmin";
+    private static string adminName = "htxthuyvanadmin";
     private static string adminPass = "123456aA@";
-    private static string userName = "thanhdinhws";
+    private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
     private static string serial = "TV/19E";
@@ -63,6 +63,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
             if (xmlData != null)
             {
                 PublishInvWS.PublishService service = new PublishInvWS.PublishService();
+                //PublishInvWS
                 var result = service.ImportAndPublishInv(adminName, adminPass, xmlData, userName, userPass, pattern, serial, 0);
                 if (result.StartsWith("OK:"))
                 {
