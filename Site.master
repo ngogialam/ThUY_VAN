@@ -266,7 +266,7 @@
        <%-- <script src="../vendor/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
         <script src="../vendor/datepicker/locales/bootstrap-datepicker.vi.js" type="text/javascript"></script>--%>
         <!-- bootstrap time picker -->
-        <script src="../vendor/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+       <%-- <script src="../vendor/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>--%>
     </div>
 
 </body>
