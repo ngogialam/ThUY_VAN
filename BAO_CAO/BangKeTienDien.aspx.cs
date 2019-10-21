@@ -306,17 +306,17 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     {
                         //newRowTong[16] = "";
                         Double sumDN = 0;
-                        Double dn = 0;
-                        newRowTong[17] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                        HH = HH + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
+                        Double dn = 0;                       
+                        HH = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         string id_bang_gia = tbx.Rows[i]["id_bang_gia_dien"].ToString();
                         clsNhapChiSo myNCS = new clsNhapChiSo();
                         DataTable BangGiaHH = myNCS.lay_bang_gia_chi_tiet(id_bang_gia);
-                        for (i = 0; i < BangGiaHH.Rows.Count; i++)
+                        int j;
+                        for (j = 0; j < BangGiaHH.Rows.Count; j++)
                         {
-                            DataTable dtbtemp = myNCS.lay_bang_gia(BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
-                            int tyle = Convert.ToInt32(BangGiaHH.Rows[i]["ty_le"].ToString().Trim());
-                            if (i != BangGiaHH.Rows.Count - 1)
+                            DataTable dtbtemp = myNCS.lay_bang_gia(BangGiaHH.Rows[j]["id_bang_gia_ty_le"].ToString().Trim());
+                            int tyle = Convert.ToInt32(BangGiaHH.Rows[j]["ty_le"].ToString().Trim());
+                            if (j != BangGiaHH.Rows.Count - 1)
                             {
                                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
                                 {
@@ -480,6 +480,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                                 }
                             }
 
+
                         }
                     }
                     else
@@ -496,12 +497,9 @@ public partial class BangKeTienDien : System.Web.UI.Page
 
                 }
 
-
                 tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
                 so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
                 san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-
-
                 tbxView.Rows.InsertAt(newRowTong, i);
             }
         }
@@ -545,6 +543,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
         Session["KeTienDienNgayThang"] = "THÁNG " + ddlThang.SelectedItem + " NĂM " + ddlNam.SelectedItem;
         Session["KeTienDienNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
     }
+
 
 
 
