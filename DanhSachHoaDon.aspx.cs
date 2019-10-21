@@ -5,9 +5,9 @@ using System.Data;
 
 public partial class DanhSachHoaDon : System.Web.UI.Page
 {
-    private static string adminName = "htxthanhdinhadmin";
+    private static string adminName = "htxthuyvanadmin";
     private static string adminPass = "123456aA@";
-    private static string userName = "thanhdinhws";
+    private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
     private static string serial = "TV/19E";
@@ -26,9 +26,7 @@ public partial class DanhSachHoaDon : System.Web.UI.Page
             drpTram.DataBind();
 
             drpKy.DataSource = myNCS.get_danhsach_ky();
-            drpKy.DataBind();
-
-            
+            drpKy.DataBind();            
         }
     }
 

@@ -475,7 +475,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="huyModalLable">Sửa thông tin</h5>
+                    <h5 class="modal-title" id="huyModalLable">Thêm khách hàng</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -486,6 +486,12 @@
                             <label class="key">Tên khách hàng (<span style="color: red">*</span>):</label>
                             <div class="value">
                                 <asp:TextBox ID="txtTenKh_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                            </div>
+                        </div>
+                         <div class="user-info-row" style="border: none">
+                            <label class="key">Mã KH (<span style="color: red">*</span>):</label>
+                            <div class="value">
+                                <asp:TextBox ID="txtMaKh_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                         </div>
                         <div class="user-info-row">

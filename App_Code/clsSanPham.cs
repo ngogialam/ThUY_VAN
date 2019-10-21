@@ -13,7 +13,7 @@ public class clsSanPham
 
     public DataTable get_danh_sach_ky_hd()
     {
-        string sqlQuery = "select * from ky order by id";
+        string sqlQuery = "select * from ky order by id DESC";
         DataTable new_table = cnstr.GetDataTable(sqlQuery);
         return new_table;
     }

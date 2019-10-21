@@ -202,9 +202,10 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
 
     protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
-        string ma_tu_sinh = myCus.get_ma_kh_tu_sinh();
-        txtThuTu.Text = ma_tu_sinh;
-        string ma_kh = ma_tu_sinh + "." + myCus.get_ten_viet_tat_TBA(drpTramBienAp_AddModal.SelectedValue.ToString());
+        //string ma_tu_sinh = myCus.get_ma_kh_tu_sinh();
+       // txtThuTu.Text = ma_tu_sinh;
+       // string ma_kh = ma_tu_sinh + "." + myCus.get_ten_viet_tat_TBA(drpTramBienAp_AddModal.SelectedValue.ToString());
+        string ma_kh = txtMaKh_AddModal.Text.ToString().Trim();
         string ten_kh = txtTenKh_AddModal.Text.ToString().Trim();
         int id_bang_gia = int.Parse(drpBangGia_AddModal.SelectedValue.ToString());
         string dia_chi = txtDiaChi_AddModal.Text.ToString().Trim();
@@ -241,7 +242,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             {
                 try
                 {
-                    int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
+                    string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
+                    int id_dn = Convert.ToInt32(id_doanh_nghiep);
                     //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
                     int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_dn);
                     if (i == 0)
@@ -343,7 +345,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         {
             DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
             // Thêm mã công tơ mới trong bảng dm_cong_to và chi_so_cong_to
-            int id_dn = Int32.Parse(Session["IDDoanhNghiep"].ToString());
+            string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
+            int id_dn = Convert.ToInt32(id_doanh_nghiep);
             DataTable tblCToCu = myCus.get_cong_to_theo_maCTo(ma_cto_cu.Trim());
             int trang_thai = tblCToCu.Rows[0].Field<int>("trang_thai");
             //float hSoTiCu = tblCToCu.Rows[0].Field<float>("he_so_ti");
