@@ -7,7 +7,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
     clsConnect myCon = new clsConnect();
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -17,7 +17,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
             Session.Remove("KeTienDienKyTramBA");
             Session.Remove("KeTienDienNgayThang");
             Session.Remove("KeTienDienNgayIn");
-            
+
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
             newRow[0] = 0;
@@ -26,7 +26,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
             ddlTramBA.DataSource = tram_bien_ap;
             ddlTramBA.DataBind();
 
-            
+
 
             DataTable khu = myCus.get_khu();
             //DataRow newRow1 = bang_gia_dien.NewRow();
@@ -53,16 +53,16 @@ public partial class BangKeTienDien : System.Web.UI.Page
         string thang = ddlThang.SelectedValue.ToString();
 
         string nam = ddlNam.SelectedValue.ToString();
-        
+
         if (thang != "" && nam != "")
         {
             string ky_hd = thang + "/" + nam;
-                int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
-                string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
-                
-                bindGrid(id_tram_bien_ap, id_dia_ban,  ky_hd);
-           //     bindGrid(tungay1, denngay1, id_dia_ban);
-            
+            int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+            string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
+
+            bindGrid(id_tram_bien_ap, id_dia_ban, ky_hd);
+            //     bindGrid(tungay1, denngay1, id_dia_ban);
+
         }
         else
         {
@@ -83,7 +83,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-       // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
+        // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
     void bindGrid(string id_tram_bien_ap, int id_khu, string ky_hd)
     {
@@ -155,13 +155,13 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 newRowTong[5] = tbx.Rows[i]["ma_cong_to"].ToString();
                 newRowTong[6] = tbx.Rows[i]["chi_so_cu"].ToString();
                 newRowTong[7] = tbx.Rows[i]["chi_so_moi"].ToString();
-              //  newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
+                //  newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
                 newRowTong[9] = tbx.Rows[i]["dien_nang_tt"].ToString();
                 if (tbx.Rows[i]["dien_nang_tt"].ToString() == "0")
                 {
                     // check xem hộ đó có dùng nhiều công tơ không, nếu dùng nhiều vẫn chỉ tính là 1 hộ
                     string so_cong_to = cslBC.CheckCongTo(tbx.Rows[i]["ma_kh"].ToString());
-                    if(so_cong_to == "1")
+                    if (so_cong_to == "1")
                         newRowTong[8] = "1";
                     else
                         newRowTong[8] = "0";
@@ -170,7 +170,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     newRowTong[8] = tbx.Rows[i]["so_ho"].ToString();
 
                 //=================tinh san luong dien sinh hoat theo tung muc===============
-                if (tbx.Rows[i]["id_bang_gia_dien"].ToString() == "1" )
+                if (tbx.Rows[i]["ten_viet_tat"].ToString() == "SH")
                 {
                     string[] muc = new string[] { };
                     muc = cslBC.TINH_BAC_DIEN_SH(double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString()), int.Parse(tbx.Rows[i]["so_ho"].ToString()));
@@ -305,7 +305,8 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     else if (tbx.Rows[i]["ten_viet_tat"].ToString() == "HH")
                     {
                         //newRowTong[16] = "";
-                        double sumDN = 0;
+                        Double sumDN = 0;
+                        Double dn = 0;
                         newRowTong[17] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         HH = HH + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                         string id_bang_gia = tbx.Rows[i]["id_bang_gia_dien"].ToString();
@@ -319,110 +320,151 @@ public partial class BangKeTienDien : System.Web.UI.Page
                             {
                                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
                                 {
-                                    if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "NT")
+                                    dn = HH * tyle / 100;
+                                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
+                                    sumDN = sumDN + dn;
+                                    if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "NT")
                                     {
-                                        newRowTong[16] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        NT = NT + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[17] = "";
-                                        //newRowTong[18] = "";
-                                        //newRowTong[19] = "";
-                                        //newRowTong[20] = "";
-                                        //newRowTong[21] = "";
-                                        //newRowTong[22] = "";
-                                        //newRowTong[23] = "";
+                                        newRowTong[16] = dn;
+                                        NT = NT + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "BV")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "BV")
                                     {
-                                        //newRowTong[16] = "";
-                                        newRowTong[17] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        BV = BV + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[18] = "";
-                                        //newRowTong[19] = "";
-                                        //newRowTong[20] = "";
-                                        //newRowTong[21] = "";
-                                        //newRowTong[22] = "";
-                                        //newRowTong[23] = "";
+
+                                        newRowTong[17] = dn;
+                                        BV = BV + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "KD")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "KD")
                                     {
-                                        //newRowTong[16] = "";
-                                        //newRowTong[17] = "";
-                                        newRowTong[18] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        KD = KD + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[19] = "";
-                                        //newRowTong[20] = "";
-                                        //newRowTong[21] = "";
-                                        //newRowTong[22] = "";
-                                        //newRowTong[23] = "";
+
+                                        newRowTong[18] = dn;
+                                        KD = KD + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "CSCC")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "CSCC")
                                     {
-                                        //newRowTong[16] = "";
-                                        //newRowTong[17] = "";
-                                        //newRowTong[18] = "";
-                                        newRowTong[19] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        CSCC = CSCC + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[20] = "";
-                                        //newRowTong[21] = "";
-                                        //newRowTong[22] = "";
-                                        //newRowTong[23] = "";
+
+                                        newRowTong[19] = dn;
+                                        CSCC = CSCC + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "TH")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "TH")
                                     {
-                                        //newRowTong[16] = "";
-                                        //newRowTong[17] = "";
-                                        //newRowTong[18] = "";
-                                        //newRowTong[19] = "";
-                                        newRowTong[20] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        TH = TH + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[21] = "";
-                                        //newRowTong[22] = "";
-                                        //newRowTong[23] = "";
+
+                                        newRowTong[20] = dn;
+                                        TH = TH + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "HCSN")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "HCSN")
                                     {
-                                        //newRowTong[16] = "";
-                                        //newRowTong[17] = "";
-                                        //newRowTong[18] = "";
-                                        //newRowTong[19] = "";
-                                        //newRowTong[20] = "";
-                                        newRowTong[21] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        HCSN = HCSN + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[22] = "";
-                                        //newRowTong[23] = "";
+
+                                        newRowTong[21] = dn;
+                                        HCSN = HCSN + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "BN")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "BN")
                                     {
-                                        //newRowTong[16] = "";
-                                        //newRowTong[17] = "";
-                                        //newRowTong[18] = "";
-                                        //newRowTong[19] = "";
-                                        //newRowTong[20] = "";
-                                        //newRowTong[21] = "";
-                                        newRowTong[22] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        BN = BN + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        //newRowTong[23] = "";
+
+                                        newRowTong[22] = dn;
+                                        BN = BN + dn;
+
                                     }
-                                    else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "SX")
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "SX")
                                     {
-                                        //newRowTong[16] = "";
-                                        //newRowTong[17] = "";
-                                        //newRowTong[18] = "";
-                                        //newRowTong[19] = "";
-                                        //newRowTong[20] = "";
-                                        //newRowTong[21] = "";
-                                        //newRowTong[22] = "";
-                                        newRowTong[23] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        SX = SX + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
+                                        newRowTong[23] = dn;
+                                        SX = SX + dn;
                                     }
+
                                 }
                                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
                                 {
-                                    double SH = HH * tyle / 100;
-                                    SH = Math.Round(HH, 0, MidpointRounding.AwayFromZero);
-                                    sumDN = sumDN + SH;
+                                    dn = HH * tyle / 100;
+                                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
+                                    sumDN = sumDN + dn;
                                     string[] muc = new string[] { };
-                                    muc = cslBC.TINH_BAC_DIEN_SH(SH * tyle / 100, int.Parse(tbx.Rows[i]["so_ho"].ToString()));
+                                    muc = cslBC.TINH_BAC_DIEN_SH(dn, int.Parse(tbx.Rows[i]["so_ho"].ToString()));
+                                    newRowTong[10] = muc[0];
+                                    sh1 = sh1 + double.Parse(muc[0]);
+                                    newRowTong[11] = muc[1];
+                                    sh2 = sh2 + double.Parse(muc[1]);
+                                    newRowTong[12] = muc[2];
+                                    sh3 = sh4 + double.Parse(muc[2]);
+                                    newRowTong[13] = muc[3];
+                                    sh4 = sh4 + double.Parse(muc[3]);
+                                    newRowTong[14] = muc[4];
+                                    sh5 = sh5 + double.Parse(muc[4]);
+                                    newRowTong[15] = muc[5];
+                                    sh6 = sh6 + double.Parse(muc[5]);
+
+                                }
+                            }
+                            else
+                            {
+                                dn = HH - sumDN;
+                                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+                                {
+
+                                    if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "NT")
+                                    {
+                                        newRowTong[16] = dn;
+                                        NT = NT + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "BV")
+                                    {
+
+                                        newRowTong[17] = dn;
+                                        BV = BV + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "KD")
+                                    {
+
+                                        newRowTong[18] = dn;
+                                        KD = KD + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "CSCC")
+                                    {
+
+                                        newRowTong[19] = dn;
+                                        CSCC = CSCC + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "TH")
+                                    {
+
+                                        newRowTong[20] = dn;
+                                        TH = TH + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "HCSN")
+                                    {
+
+                                        newRowTong[21] = dn;
+                                        HCSN = HCSN + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "BN")
+                                    {
+
+                                        newRowTong[22] = dn;
+                                        BN = BN + dn;
+
+                                    }
+                                    else if (dtbtemp.Rows[0]["ten_viet_tat"].ToString() == "SX")
+                                    {
+                                        newRowTong[23] = dn;
+                                        SX = SX + dn;
+                                    }
+
+                                }
+                                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+                                {
+                                    string[] muc = new string[] { };
+                                    muc = cslBC.TINH_BAC_DIEN_SH(dn, int.Parse(tbx.Rows[i]["so_ho"].ToString()));
                                     newRowTong[10] = muc[0];
                                     sh1 = sh1 + double.Parse(muc[0]);
                                     newRowTong[11] = muc[1];
@@ -437,138 +479,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                                     sh6 = sh6 + double.Parse(muc[5]);
                                 }
                             }
-                            else
-                            {
-                                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
-                                {
-                                    
-                                        if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "NT")
-                                        {
-                                            newRowTong[16] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            NT = NT + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[17] = "";
-                                            //newRowTong[18] = "";
-                                            //newRowTong[19] = "";
-                                            //newRowTong[20] = "";
-                                            //newRowTong[21] = "";
-                                            //newRowTong[22] = "";
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "BV")
-                                        {
-                                            //newRowTong[16] = "";
-                                            newRowTong[17] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            BV = BV + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[18] = "";
-                                            //newRowTong[19] = "";
-                                            //newRowTong[20] = "";
-                                            //newRowTong[21] = "";
-                                            //newRowTong[22] = "";
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "KD")
-                                        {
-                                            //newRowTong[16] = "";
-                                            //newRowTong[17] = "";
-                                            newRowTong[18] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            KD = KD + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[19] = "";
-                                            //newRowTong[20] = "";
-                                            //newRowTong[21] = "";
-                                            //newRowTong[22] = "";
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "CSCC")
-                                        {
-                                            //newRowTong[16] = "";
-                                            //newRowTong[17] = "";
-                                            //newRowTong[18] = "";
-                                            newRowTong[19] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            CSCC = CSCC + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[20] = "";
-                                            //newRowTong[21] = "";
-                                            //newRowTong[22] = "";
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "TH")
-                                        {
-                                            //newRowTong[16] = "";
-                                            //newRowTong[17] = "";
-                                            //newRowTong[18] = "";
-                                            //newRowTong[19] = "";
-                                            newRowTong[20] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            TH = TH + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[21] = "";
-                                            //newRowTong[22] = "";
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "HCSN")
-                                        {
-                                            //newRowTong[16] = "";
-                                            //newRowTong[17] = "";
-                                            //newRowTong[18] = "";
-                                            //newRowTong[19] = "";
-                                            //newRowTong[20] = "";
-                                            newRowTong[21] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            HCSN = HCSN + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[22] = "";
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "BN")
-                                        {
-                                            //newRowTong[16] = "";
-                                            //newRowTong[17] = "";
-                                            //newRowTong[18] = "";
-                                            //newRowTong[19] = "";
-                                            //newRowTong[20] = "";
-                                            //newRowTong[21] = "";
-                                            newRowTong[22] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            BN = BN + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            //newRowTong[23] = "";
-                                        }
-                                        else if (dtbtemp.Rows[i]["ten_viet_tat"].ToString() == "SX")
-                                        {
-                                            //newRowTong[16] = "";
-                                            //newRowTong[17] = "";
-                                            //newRowTong[18] = "";
-                                            //newRowTong[19] = "";
-                                            //newRowTong[20] = "";
-                                            //newRowTong[21] = "";
-                                            //newRowTong[22] = "";
-                                            newRowTong[23] = double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                            SX = SX + double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                                        }
-                                    }
-                                    if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
-                                    {
 
-                                        double SH = HH - sumDN;
-                                        //SH = Math.Round(HH, 0, MidpointRounding.AwayFromZero);
-                                        //  sumDN = sumDN + SH;
-                                        string[] muc = new string[] { };
-                                        muc = cslBC.TINH_BAC_DIEN_SH(SH * tyle / 100, int.Parse(tbx.Rows[i]["so_ho"].ToString()));
-                                        newRowTong[10] = muc[0];
-                                        sh1 = sh1 + double.Parse(muc[0]);
-                                        newRowTong[11] = muc[1];
-                                        sh2 = sh2 + double.Parse(muc[1]);
-                                        newRowTong[12] = muc[2];
-                                        sh3 = sh4 + double.Parse(muc[2]);
-                                        newRowTong[13] = muc[3];
-                                        sh4 = sh4 + double.Parse(muc[3]);
-                                        newRowTong[14] = muc[4];
-                                        sh5 = sh5 + double.Parse(muc[4]);
-                                        newRowTong[15] = muc[5];
-                                        sh6 = sh6 + double.Parse(muc[5]);
-                                    }                              
-
-                            }
-
-                            //newRowTong[18] = "";
-                            //newRowTong[19] = "";
-                            //newRowTong[20] = "";
-                            //newRowTong[21] = "";
-                            //newRowTong[22] = "";
-                            //newRowTong[23] = "";
                         }
                     }
                     else
@@ -589,7 +500,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
                 so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
                 san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
-                
+
 
                 tbxView.Rows.InsertAt(newRowTong, i);
             }
@@ -601,7 +512,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
         //newRow4[2] = "";
         //newRow4[3] = "";
         //newRow4[4] = "";
-       // newRow4[5] = tong_tien;
+        // newRow4[5] = tong_tien;
         newRow4[4] = tong_tien;
         newRow4[8] = so_ho;
         newRow4[9] = san_luong_tt;
@@ -669,6 +580,6 @@ public partial class BangKeTienDien : System.Web.UI.Page
         }
 
     }
-   
-    
+
+
 }
