@@ -99,7 +99,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
         tbxView.Columns.Add("ma_kh", typeof(String));
         tbxView.Columns.Add("ten_kh", typeof(String));
         tbxView.Columns.Add("dia_chi", typeof(String));
-        tbxView.Columns.Add("ma_cong_to", typeof(Double));
+        tbxView.Columns.Add("ma_cong_to", typeof(String));
         tbxView.Columns.Add("t1", typeof(Double));
         tbxView.Columns.Add("t2", typeof(Double));
         tbxView.Columns.Add("t3", typeof(Double));
@@ -138,7 +138,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
             newRowTong[1] = tbx.Rows[i]["ma_kh"].ToString();
             newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
             newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
-            newRowTong[4] = double.Parse(tbx.Rows[i]["ma_cong_to"].ToString());
+            newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
 
             if (id_thoi_gian == "03")
             {
