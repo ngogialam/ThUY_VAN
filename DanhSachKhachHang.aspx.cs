@@ -65,9 +65,14 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             drpSms_AddModal.DataSource = tblSms;
             drpSms_AddModal.DataBind();
 
-            // Modal đổi công tơ
-            DataTable tblKyHD = mySP.get_ky_hd_moi_nhat();
-            drp_swapModal_ky.DataSource = tblKyHD;
+            // Modal thêm mới (kỳ hợp đồng)
+            DataTable tblKyHD = mySP.get_danh_sach_ky_hd();
+            drpKy_AddModal.DataSource = tblKyHD;
+            drpKy_AddModal.DataBind();
+
+            // Modal đổi công tơ (kỳ hợp đồng)
+            DataTable tblKyHDMoiNhat = mySP.get_ky_hd_moi_nhat();
+            drp_swapModal_ky.DataSource = tblKyHDMoiNhat;
             drp_swapModal_ky.DataBind();
         }
     }
@@ -216,8 +221,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         int thu_tu = int.Parse(txtThuTu_AddModal.Text.Trim());
         int id_phuong_xa = int.Parse(drpPhuongXa_AddModal.SelectedValue.ToString());
         int id_huyen = int.Parse(drpHuyen_AddModal.SelectedValue.ToString());
-        string ky_hd = DateTime.Now.Month + "/" + DateTime.Now.Year;
-        if (DateTime.Now.Month < 10) ky_hd = "0" + ky_hd;
+        string ky_hd = drpKy_AddModal.SelectedValue;
+
         string ma_cong_to = txtMaCongTo_AddModal.Text.Trim();
         string[] list_ma_cong_to = ma_cong_to.Split('|');
         string[] list_ma_cong_to_check = ma_cong_to.Split('|');
