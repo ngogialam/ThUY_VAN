@@ -498,7 +498,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 }
 
                 tong_tien += double.Parse(tbx.Rows[i]["tong_tien_sau_thue"].ToString());
-                so_ho += double.Parse(tbx.Rows[i]["so_ho"].ToString());
+                so_ho += double.Parse(newRowTong[8].ToString());
                 san_luong_tt += double.Parse(tbx.Rows[i]["dien_nang_tt"].ToString());
                 tbxView.Rows.InsertAt(newRowTong, i);
             }
