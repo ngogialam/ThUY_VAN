@@ -898,7 +898,7 @@ public class clsBaocao
             sql = sql + " and a.id_bang_gia_dien=d.id_bang_gia ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
-            sql = sql + " group by d.id_bang_gia,d.ten_bang_gia,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
+            sql = sql + " group by d.id_bang_gia,d.ten_bang_gia ";
             sql = sql + " order by d.ten_bang_gia ";
 
         }
@@ -914,7 +914,7 @@ public class clsBaocao
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
-            sql = sql + " group by d.id_bang_gia,d.ten_bang_gia,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
+            sql = sql + " group by d.id_bang_gia,d.ten_bang_gia ";
             sql = sql + " order by d.ten_bang_gia ";
         }
         cmd.CommandText = sql;
@@ -949,7 +949,7 @@ public class clsBaocao
             sql = sql + " and b.id_tram_bien_ap=d.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + "  and a.ky_hd='" + ky_hd + "'  ";
-            sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
+            sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap ";
             sql = sql + " order by d.ten_tram_bien_ap ";
         }
         else
@@ -964,7 +964,7 @@ public class clsBaocao
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + "  and c.id_khu=" + id_khu + "  ";
             sql = sql + "  and a.ky_hd='" + ky_hd + "'  ";
-            sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap,a.dien_nang_tt,a.tong_tien_truoc_thue,a.thue_gtgt,a.tong_tien_sau_thue ";
+            sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap ";
             sql = sql + " order by d.ten_tram_bien_ap ";
         }
         cmd.CommandText = sql;

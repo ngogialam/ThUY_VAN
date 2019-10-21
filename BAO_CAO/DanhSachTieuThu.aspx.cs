@@ -101,7 +101,7 @@ public partial class DanhSachTieuThu : System.Web.UI.Page
         tbxView.Columns.Add("ma_kh", typeof(String));
         tbxView.Columns.Add("ten_kh", typeof(String));
         tbxView.Columns.Add("dia_chi", typeof(String));
-        tbxView.Columns.Add("ma_cong_to", typeof(Double));
+        tbxView.Columns.Add("ma_cong_to", typeof(String));
         tbxView.Columns.Add("t1", typeof(Double));
         tbxView.Columns.Add("t2", typeof(Double));
         tbxView.Columns.Add("t3", typeof(Double));
