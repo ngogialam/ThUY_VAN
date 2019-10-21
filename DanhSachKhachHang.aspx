@@ -533,18 +533,16 @@
                             <label class="key">Số hộ (<span style="color: red">*</span>):</label>
                             <div class="value">
                                 <asp:TextBox ID="txtSoHo_AddModal" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
-
                             </div>
                         </div>
-                    </div>
-                    <div class="column">
                         <div class="user-info-row" style="border: none">
                             <label class="key">Hệ số ti (<span style="color: red">*</span>):</label>
                             <div class="value">
                                 <asp:TextBox ID="txtHSTi_AddModal" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
-
                             </div>
                         </div>
+                    </div>
+                    <div class="column">
                         <div class="user-info-row ">
                             <label class="key">Điện thoại (<span style="color: red">*</span>):</label>
                             <div class="value">
@@ -567,6 +565,13 @@
                             <label class="key">Mã công tơ (<span style="color: red">*</span>):</label>
                             <div class="value">
                                 <asp:TextBox ID="txtMaCongTo_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="user-info-row ">
+                            <label class="key">Kỳ hợp đồng (<span style="color: red">*</span>):</label>
+                            <div class="value">
+                                <asp:DropDownList ID="drpKy_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" DataTextField="ky" DataValueField="ky">
+                                </asp:DropDownList>
                             </div>
                         </div>
                         <div class="user-info-row ">
