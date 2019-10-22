@@ -111,7 +111,7 @@ public partial class NhapChiSo : System.Web.UI.Page
                 if (result == 1)
                 {
                     string kycu = ddlKyCu.SelectedItem.ToString();
-                    CusList = myNCS.get_danh_sach_nhap_cs("0", kycu);
+                    CusList = myNCS.get_danh_cs_kymoi("0", kycu);
                     for (i = 0; i < CusList.Rows.Count; i++)
                     {
                         string mact = CusList.Rows[i]["ma_cong_to"].ToString();
