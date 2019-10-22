@@ -179,7 +179,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                     newRowTong[11] = muc[1];
                     sh2 = sh2 + double.Parse(muc[1]);
                     newRowTong[12] = muc[2];
-                    sh3 = sh4 + double.Parse(muc[2]);
+                    sh3 = sh3 + double.Parse(muc[2]);
                     newRowTong[13] = muc[3];
                     sh4 = sh4 + double.Parse(muc[3]);
                     newRowTong[14] = muc[4];
@@ -390,7 +390,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                                     newRowTong[11] = muc[1];
                                     sh2 = sh2 + double.Parse(muc[1]);
                                     newRowTong[12] = muc[2];
-                                    sh3 = sh4 + double.Parse(muc[2]);
+                                    sh3 = sh3 + double.Parse(muc[2]);
                                     newRowTong[13] = muc[3];
                                     sh4 = sh4 + double.Parse(muc[3]);
                                     newRowTong[14] = muc[4];
@@ -470,7 +470,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
                                     newRowTong[11] = muc[1];
                                     sh2 = sh2 + double.Parse(muc[1]);
                                     newRowTong[12] = muc[2];
-                                    sh3 = sh4 + double.Parse(muc[2]);
+                                    sh3 = sh3 + double.Parse(muc[2]);
                                     newRowTong[13] = muc[3];
                                     sh4 = sh4 + double.Parse(muc[3]);
                                     newRowTong[14] = muc[4];
