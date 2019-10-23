@@ -60,7 +60,7 @@ public class clsBaocao
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select id_tram_bien_ap, ten_tram_bien_ap from tram_bien_ap where trang_thai = 1 ORDER BY ABS(id_tram_bien_ap)";
+            cmd.CommandText = "select id_tram_bien_ap, ten_tram_bien_ap from tram_bien_ap where trang_thai = 1 ORDER BY id_tram_bien_ap";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
