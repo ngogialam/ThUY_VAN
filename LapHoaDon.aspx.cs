@@ -144,6 +144,10 @@ public partial class LapHoaDon : System.Web.UI.Page
                 string idTram = dtbInv.Rows[i]["id_tram_bien_ap"].ToString();
                 string idBangGia = dtbInv.Rows[i]["id_bang_gia"].ToString();
                 string vaterate = dtbInv.Rows[i]["vatrate"].ToString();
+                string ten_kh = dtbInv.Rows[i]["ten_kh"].ToString();
+                string id_tram_bien_ap = dtbInv.Rows[i]["id_tram_bien_ap"].ToString();
+                string id_khu = dtbInv.Rows[i]["id_khu"].ToString();               
+
 
                 if (dtbInv.Rows[i]["total"].ToString() == ""){
                     dtbInv.Rows[i]["total"] = "0";
@@ -175,7 +179,7 @@ public partial class LapHoaDon : System.Web.UI.Page
                      
                     }
                 }
-                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact);
+                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact,soho,ten_kh,id_tram_bien_ap,id_khu);
                 if (i > 0)
                 {
                     if (i < dtbInv.Rows.Count && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i - 1]["ma_kh"].ToString()) != 0)

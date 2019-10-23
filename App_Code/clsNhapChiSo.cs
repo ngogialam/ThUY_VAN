@@ -161,7 +161,7 @@ public class clsNhapChiSo
         sql = "select a.thu_tu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai";
         sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f ";
         sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai=1 and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
-        sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + " and";
+        sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
         sql = sql + " order by a.thu_tu,d.id";
         try
         {
@@ -483,7 +483,7 @@ public class clsNhapChiSo
     public DataTable get_danhsach_ky()
     {
         SqlConnection myConn = null;
-        string sql = " select id,ky from ky where trang_thai=1 ";
+        string sql = " select id,ky from ky where trang_thai=1 order by id DESC ";
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -832,15 +832,15 @@ public class clsNhapChiSo
     }
 
     //Insert bang hoa_don
-    public void them_moi_hoa_don(Int64 id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to)
+    public void them_moi_hoa_don(Int64 id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to, int so_ho, string ten_kh, string id_tram_bien_ap, string id_khu)
     {
 
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
-        string sql = "insert into hoa_don(id,ma_kh,ky_hd,tu_ngay,den_ngay,chi_so_cu,chi_so_moi,dien_nang_tt,tong_tien_truoc_thue,vat_rate,thue_gtgt,tong_tien_sau_thue,id_nguoi_nhap,id_bang_gia_dien,ngay_nhap,trang_thai,ma_cong_to,id_doanh_nghiep) ";
-        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'" + vat_rate + "'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "'," + id_doanh_nghiep + ") ";
+        string sql = "insert into hoa_don(id,ma_kh,ky_hd,tu_ngay,den_ngay,chi_so_cu,chi_so_moi,dien_nang_tt,tong_tien_truoc_thue,vat_rate,thue_gtgt,tong_tien_sau_thue,id_nguoi_nhap,id_bang_gia_dien,ngay_nhap,trang_thai,ma_cong_to,id_doanh_nghiep,so_ho,ten_kh,id_tram_bien_ap,id_khu) ";
+        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'" + vat_rate + "'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "'," + id_doanh_nghiep + ","+so_ho+",N'"+ten_kh+"','"+id_tram_bien_ap+"',"+id_khu+") ";
 
         try
         {
