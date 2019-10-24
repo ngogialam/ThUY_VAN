@@ -153,6 +153,7 @@ public class clsNhapChiSo
         }
 
     }
+    // Trạng thái chỉ số 1 ( chưa chốt)
     public DataTable get_danh_sach_lap_hd(string id_tramba, string ky)
     {
         SqlConnection myConn = null;
