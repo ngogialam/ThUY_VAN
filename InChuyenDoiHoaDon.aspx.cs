@@ -59,7 +59,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
         for (i = 0; i < invList.Rows.Count; i++)
         {
             fkey = invList.Rows[i]["id"].ToString();
-            htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoice(fkey, userName, userPass);
+            htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoice(fkey, userName, userPass);          
         }
         if (GridViewEman.Rows.Count > 0)
         {

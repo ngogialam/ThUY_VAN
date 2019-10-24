@@ -148,7 +148,8 @@ public class clsHoaDon
                 break;
         }
         return error;
-    }
+    }    
+  
     //Lấy các dòng hóa đơn
     public DataTable lay_hoa_don_chi_tiet(string id_hoa_don)
     {
