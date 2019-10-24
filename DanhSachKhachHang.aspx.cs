@@ -360,7 +360,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             myCus.them_moi_chi_so_cong_to(ma_cto_moi, ky_hd, id_dn);
 
             // Cập nhật trạng thái công tơ cũ trong bảng chi_so_cong_to và dm_cong_to
-            myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
+          // myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
             myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
 
             string maCtoKh = tblKH.Rows[0].Field<string>("ma_cong_to");
