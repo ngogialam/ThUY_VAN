@@ -1178,9 +1178,9 @@ public class clsKhachHang
         }
         return recordsAffected;
     }
-    public void cap_nhat_trang_thai_chi_so_cong_to(string ma_cong_to, string ky, int trang_thai)
+    public void cap_nhat_chi_so_cong_to(string ma_cong_to, string ky, float chi_so)
     {
-        string sqlQuery = string.Format("update chi_so_cong_to set trang_thai = {2} where ma_cong_to = '{0}' and ky = '{1}'", ma_cong_to, ky, trang_thai);
+        string sqlQuery = string.Format("update chi_so_cong_to set cs_moi = {2} where ma_cong_to = '{0}' and ky = '{1}'", ma_cong_to, ky, chi_so);
         cnstr.InsertUpdateDataTable(sqlQuery);
     }
 

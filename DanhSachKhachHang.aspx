@@ -287,6 +287,8 @@
                 location.reload();
             } else if (e.result == "2") {
                 alert("Trùng mã công tơ!");
+            } else if (e.result == "3") {
+                alert("Lỗi kỳ!");
             }
             else {
                 alert("Cập nhật thất bại. Vui lòng thử lại!");

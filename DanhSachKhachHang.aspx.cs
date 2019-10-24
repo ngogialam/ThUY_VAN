@@ -363,6 +363,9 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
           // myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
             myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
 
+            // Cập nhật chỉ số công tơ cũ trong bảng chi_so_cong_to
+            myCus.cap_nhat_chi_so_cong_to(ma_cto_cu, ky_hd, csCuoi_CToCu);
+
             string maCtoKh = tblKH.Rows[0].Field<string>("ma_cong_to");
             // Cập nhật mã công tơ mới trong bảng khach_hang
             string maCtoMoiKh = maCtoKh.Replace(ma_cto_cu, ma_cto_moi);
