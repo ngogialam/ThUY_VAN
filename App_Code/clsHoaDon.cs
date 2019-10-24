@@ -287,7 +287,7 @@ public class clsHoaDon
                     else
                     {
                         sb.Append("<CusCode>");
-                        sb.Append(convertSpecialCharacter(dr[CusCode].ToString().Trim()));
+                        sb.Append(convertSpecialCharacter(dr[CusCode].ToString().Trim().Replace(" ","")));
                         sb.Append("</CusCode>");
                         sb.Append("<CusName>");
                         sb.Append(convertSpecialCharacter(dr[CusName].ToString().Trim()));

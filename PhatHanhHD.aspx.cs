@@ -65,6 +65,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
                 PublishInvWS.PublishService service = new PublishInvWS.PublishService();
                
                 var result = service.ImportAndPublishInv(adminName, adminPass, xmlData, userName, userPass, pattern, serial, 0);
+              //  var result = service.ImportInv(xmlData, userName, userPass,0);
                 if (result.StartsWith("OK:"))
                 {
                     string[] ketqua = result.ToString().Split('-');
