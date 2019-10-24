@@ -232,9 +232,14 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             list_ma_cong_to_check[i] = string.Format("'{0}'", list_ma_cong_to_check[i]);
         }
         int check_ma = myCus.check_list_ma_cong_to(string.Join(", ", list_ma_cong_to_check));
+        int check_ma_kh = myCus.check_ma_khach_hang(ma_kh);
         if (check_ma >= 1)
         {
             e.Result = "2"; //Mã công tơ đã tồn tại
+        }
+        else if (check_ma_kh >= 1)
+        {
+            e.Result = "3"; //Mã khách hàng đã tồn tại
         }
         else
         {

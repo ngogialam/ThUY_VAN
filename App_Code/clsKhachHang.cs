@@ -952,6 +952,7 @@ public class clsKhachHang
             }
         }
     }
+
     //Kiểm tra danh sách mã công tơ có bị trùng
     public int check_list_ma_cong_to(string ma_cong_to)
     {
@@ -964,6 +965,43 @@ public class clsKhachHang
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
             cmd.CommandText = " SELECT * from dm_cong_to where ma_cong_to in (" + ma_cong_to + ")";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ma = dts.Tables[0].Rows.Count;
+            return ma;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    //Kiểm tra mã khách hàng bị trùng
+    public int check_ma_khach_hang(string ma_kh)
+    {
+        int ma = 0;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = string.Format("SELECT * from khach_hang where ma_kh = '{0}'", ma_kh);
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
