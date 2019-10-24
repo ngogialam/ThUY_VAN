@@ -123,6 +123,8 @@
                 location.reload();
             } else if (e.result == "2") {
                 alert("Trùng mã công tơ!");
+            } else if (e.result == "3") {
+                alert("Trùng mã khách hàng!");
             }
             else {
                 alert("Thêm mới thất bại. Vui lòng thử lại!");
