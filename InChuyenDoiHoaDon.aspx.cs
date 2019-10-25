@@ -66,7 +66,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
         htmlToPdf.Orientation = PageOrientation.Portrait;
-        //htmlToPdf.Zoom = 1.13f;
+        htmlToPdf.Zoom = 1.13f;
         htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
         var pdfBytes = htmlToPdf.GeneratePdf(htmlInv);
         string pdffilename = "RepConvertInv\\inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
