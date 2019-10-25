@@ -108,6 +108,9 @@
                             <a href='<%= ResolveUrl("InChuyenDoiHoaDon.aspx")%>'>In chuyển đổi</a>
                         </li>
                         <li>
+                            <a href='<%= ResolveUrl("InChuyenDoiTheoSoHD.aspx")%>'>In chuyển đổi theo số hóa đơn</a>
+                        </li>
+                        <li>
                             <a href='<%= ResolveUrl("DanhSachHoaDon.aspx")%>'>Danh sách HDDT</a>
                         </li>
 
