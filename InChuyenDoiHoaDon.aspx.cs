@@ -51,8 +51,8 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
         string id_tram = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
         // Regex reg = new Regex("[*'\",_&#^@]");
-        
-        invList = myINV.get_danh_sach_hddt(id_tram, kyhd, "2");
+
+        invList = myINV.get_danh_sach_chuyen_doi(id_tram, kyhd, "2");
         int i;
         string fkey;
         string htmlInv = "";
