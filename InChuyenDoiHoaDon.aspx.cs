@@ -48,7 +48,7 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
     }
     protected void btnInLoHD_Click(object sender, EventArgs e)
     {
-        string id_tram = drpTram.SelectedItem.ToString();
+        string id_tram = myNCS.get_ten_tba(drpTram.SelectedValue.ToString());
         string kyhd = drpKy.SelectedItem.ToString();
         // Regex reg = new Regex("[*'\",_&#^@]");
 
