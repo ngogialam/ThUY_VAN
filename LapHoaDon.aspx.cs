@@ -38,8 +38,10 @@ public partial class LapHoaDon : System.Web.UI.Page
         string id_tramba = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
         CusList = dtb_bind(id_tramba, kyhd);
+        
         GridViewEman.DataSource = CusList;
         GridViewEman.DataBind();
+        
         if (CusList.Rows.Count > 0)
         {
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
@@ -51,9 +53,9 @@ public partial class LapHoaDon : System.Web.UI.Page
         int i = 0;
         int j = 0;
         CusList.Columns.Add("san_luong", typeof(String));
-        CusList.Columns.Add("total", typeof(String));
-        CusList.Columns.Add("vatamount", typeof(String));
-        CusList.Columns.Add("amount", typeof(String));
+        CusList.Columns.Add("total", typeof(Double));
+        CusList.Columns.Add("vatamount", typeof(Double));
+        CusList.Columns.Add("amount", typeof(Double));
         CusList.Columns.Add("vatrate", typeof(String));
         if (CusList.Rows.Count > 0)
         {
@@ -90,10 +92,10 @@ public partial class LapHoaDon : System.Web.UI.Page
                // do
                 //{
                     CusList.Rows[i]["san_luong"] = dntt.ToString();
-                    CusList.Rows[i]["total"] = total.ToString();
+                    CusList.Rows[i]["total"] = total;
                     CusList.Rows[i]["vatrate"] = vatrate.ToString();
-                    CusList.Rows[i]["vatamount"] = vatamount.ToString();
-                    CusList.Rows[i]["amount"] = amount.ToString();
+                    CusList.Rows[i]["vatamount"] = vatamount;
+                    CusList.Rows[i]["amount"] = amount;
                     //CusList.Rows[j]["san_luong"] = null;
                     //CusList.Rows[j]["total"] = null;
                     //CusList.Rows[j]["vatrate"] = null;
