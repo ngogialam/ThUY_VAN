@@ -80,7 +80,55 @@ public class clsHoaDon
         sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and  d.id_tram_bien_ap='" + id_tramba + "' and d.ky_hd='" + ky + "'";
         sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep;
         sql = sql + " order by d.id,d.dien_nang_tt DESC";
-        
+
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+
+    }
+    //Danh sách fkey hóa đơn điện tử chuyển đổi
+    public DataTable get_danh_sach_chuyen_doi(string id_tramba, string ky, string trangthai)
+    {
+        SqlConnection myConn = null;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        string sql = "select distinct id from hoa_don";
+        sql = sql + " where trang_thai=" + trangthai + " and  id_tram_bien_ap='" + id_tramba + "' and ky_hd='" + ky + "'";
+        sql = sql + " and id_doanh_nghiep = " + id_doanh_nghiep;
+        // sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep;
+        //sql = "select  d.id,d.so_hd,d.mau_so,d.ky_hieu,d.ma_kh, d.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
+        // sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+        // sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv";
+        // sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and  d.id_tram_bien_ap='" + id_tramba + "' and d.ky_hd='" + ky + "'";
+        // sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep;
+        //  sql = sql + " order by d.id,d.dien_nang_tt DESC";
+
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -114,14 +162,16 @@ public class clsHoaDon
 
     }
     //Chuyen doi hoa don
-    public string PrintInvoice(string Fkey,string userName,string userPass)
+    public string PrintInvoice(string Fkey, string userName, string userPass)
     {
         PortalInvWS.PortalService portalservice = new PortalInvWS.PortalService();
         string pdf = portalservice.convertForStoreFkey(Fkey, userName, userPass);
         if (CheckConvertFor(pdf).Contains("ERR"))
-        {            
+        {
             return CheckConvertFor(pdf);
-        }else{
+        }
+        else
+        {
 
 
             return pdf;
@@ -149,6 +199,7 @@ public class clsHoaDon
         }
         return error;
     }
+
     //Lấy các dòng hóa đơn
     public DataTable lay_hoa_don_chi_tiet(string id_hoa_don)
     {
@@ -287,7 +338,7 @@ public class clsHoaDon
                     else
                     {
                         sb.Append("<CusCode>");
-                        sb.Append(convertSpecialCharacter(dr[CusCode].ToString().Trim().Replace(" ","")));
+                        sb.Append(convertSpecialCharacter(dr[CusCode].ToString().Trim().Replace(" ", "")));
                         sb.Append("</CusCode>");
                         sb.Append("<CusName>");
                         sb.Append(convertSpecialCharacter(dr[CusName].ToString().Trim()));
@@ -326,7 +377,7 @@ public class clsHoaDon
                     sb.Append("</Extra>");
 
                     sb.Append("<Extra1>");
-                        sb.Append(dr[DTSuaChua].ToString().Trim());
+                    sb.Append(dr[DTSuaChua].ToString().Trim());
                     sb.Append("</Extra1>");
                     //Tunga-denngay
                     sb.Append("<FromDate>");

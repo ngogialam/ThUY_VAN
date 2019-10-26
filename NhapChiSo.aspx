@@ -167,7 +167,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="CS mới">
                             <ItemTemplate>
-                                <asp:TextBox ID="txtCSMoi" type="number" CssClass="form-control" runat="server" Text='<%# Eval("cs_moi") %>'></asp:TextBox>
+                                <asp:TextBox ID="txtCSMoi" CssClass="form-control" runat="server" Text='<%# Eval("cs_moi") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Điện năng TT">

@@ -268,6 +268,41 @@ public class clsNhapChiSo
             }
         }
     }
+    public string get_ten_tba(string id)
+    {
+        SqlConnection myConn = null;
+        string sql = "select ten_viet_tat from tram_bien_ap where trang_thai=1 and id_tram_bien_ap="+ id;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0].Rows[0]["ten_viet_tat"].ToString();
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     public Double[] tinh_cs_6_muc(Double sanluong, int sh)
     {
         Double[] muc = new Double[] { };

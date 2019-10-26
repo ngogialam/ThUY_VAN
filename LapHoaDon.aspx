@@ -133,19 +133,20 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thành tiền" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
-                                <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("total","{0:0,0}") %>'></asp:Label>
+                                <asp:Label ID="lblTotal" runat="server" Text='<%# string.Format("{0:#,0}",Eval("total") ) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tiền thuế" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
-                                <asp:Label ID="lblVatAmount" runat="server" Text='<%# Eval("vatamount") %>'></asp:Label>
+                                <asp:Label ID="lblVatAmount" runat="server" Text='<%# string.Format("{0:#,0}",Eval("vatamount") ) %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tổng tiền" ItemStyle-Font-Bold="true" ItemStyle-CssClass="text-right">
                             <ItemTemplate>
-                                <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("amount") %>'></asp:Label>
+                                <asp:Label ID="lblAmount" runat="server"  Text='<%# string.Format("{0:#,0}",Eval("amount") )%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+
                         <asp:TemplateField HeaderText="idkhu" Visible="False">
                             <ItemTemplate>
                                 <asp:Label ID="lblidKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
@@ -162,6 +163,7 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
+                     
                 </asp:GridView>
             </div>
         </div>

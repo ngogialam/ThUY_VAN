@@ -51,22 +51,22 @@ public partial class InChuyenDoiHoaDon : System.Web.UI.Page
         string id_tram = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
         // Regex reg = new Regex("[*'\",_&#^@]");
-        
-        invList = myINV.get_danh_sach_hddt(id_tram, kyhd, "2");
+
+        invList = myINV.get_danh_sach_chuyen_doi(id_tram, kyhd, "2");
         int i;
         string fkey;
         string htmlInv = "";
         for (i = 0; i < invList.Rows.Count; i++)
         {
             fkey = invList.Rows[i]["id"].ToString();
-            htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoice(fkey, userName, userPass);
+            htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoice(fkey, userName, userPass);          
         }
         if (GridViewEman.Rows.Count > 0)
         {
             GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
         }
         htmlToPdf.Orientation = PageOrientation.Portrait;
-        //htmlToPdf.Zoom = 1.13f;
+        htmlToPdf.Zoom = 1.13f;
         htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
         var pdfBytes = htmlToPdf.GeneratePdf(htmlInv);
         string pdffilename = "RepConvertInv\\inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
