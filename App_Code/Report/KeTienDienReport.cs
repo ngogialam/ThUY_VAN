@@ -58,7 +58,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
     private XRTableCell xrTableCell22;
     private XRTableCell xrTableCell24;
     private XRTableCell xrTableCell19;
-    private XRTableCell xrTableCell11;
     private XRTableCell xrTableCell25;
     private XRTableCell xrTableCell26;
     private XRTableCell xrTableCell23;
@@ -71,7 +70,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
     private XRTableCell xrTableCell27;
     private XRTableCell xrTableCell36;
     private XRTableCell xrTableCell33;
-    private XRTableCell lblEmpty;
     private XRTableCell lblSh1;
     private XRTableCell lblSh2;
     private XRTableCell lblSh3;
@@ -132,7 +130,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblChiSoMoi = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblSoHo = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblDienNangTT = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lblEmpty = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblSh1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblSh2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblSh3 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -179,7 +176,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell22 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -230,7 +226,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblChiSoCu.StylePriority.UseFont = false;
             this.lblChiSoCu.StylePriority.UseTextAlignment = false;
             this.lblChiSoCu.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblChiSoCu.Weight = 0.34942935185559659D;
+            this.lblChiSoCu.Weight = 0.29119108852490511D;
             // 
             // xrTableRow1
             // 
@@ -245,7 +241,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblChiSoMoi,
             this.lblSoHo,
             this.lblDienNangTT,
-            this.lblEmpty,
             this.lblSh1,
             this.lblSh2,
             this.lblSh3,
@@ -273,7 +268,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // 
             // lblTenKh
             // 
-            this.lblTenKh.Font = new System.Drawing.Font("Times New Roman", 9.75F);
+            this.lblTenKh.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.lblTenKh.Name = "lblTenKh";
             this.lblTenKh.StylePriority.UseFont = false;
             this.lblTenKh.StylePriority.UseTextAlignment = false;
@@ -282,7 +277,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // 
             // lblTienSauThue
             // 
-            this.lblTienSauThue.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblTienSauThue.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.lblTienSauThue.Name = "lblTienSauThue";
             this.lblTienSauThue.StylePriority.UseFont = false;
             this.lblTienSauThue.StylePriority.UseTextAlignment = false;
@@ -307,7 +302,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblChiSoMoi.StylePriority.UseFont = false;
             this.lblChiSoMoi.StylePriority.UseTextAlignment = false;
             this.lblChiSoMoi.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblChiSoMoi.Weight = 0.34942935114732088D;
+            this.lblChiSoMoi.Weight = 0.29119108781662939D;
             // 
             // lblSoHo
             // 
@@ -316,7 +311,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSoHo.StylePriority.UseFont = false;
             this.lblSoHo.StylePriority.UseTextAlignment = false;
             this.lblSoHo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblSoHo.Weight = 0.34942969514304045D;
+            this.lblSoHo.Weight = 0.29119107635446995D;
             // 
             // lblDienNangTT
             // 
@@ -325,14 +320,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblDienNangTT.StylePriority.UseFont = false;
             this.lblDienNangTT.StylePriority.UseTextAlignment = false;
             this.lblDienNangTT.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblDienNangTT.Weight = 0.34942970052000139D;
-            // 
-            // lblEmpty
-            // 
-            this.lblEmpty.Name = "lblEmpty";
-            this.lblEmpty.StylePriority.UseTextAlignment = false;
-            this.lblEmpty.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblEmpty.Weight = 0.31061904729833412D;
+            this.lblDienNangTT.Weight = 0.29119108173143093D;
             // 
             // lblSh1
             // 
@@ -341,7 +329,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh1.StylePriority.UseFont = false;
             this.lblSh1.StylePriority.UseTextAlignment = false;
             this.lblSh1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblSh1.Weight = 0.29119110467887832D;
+            this.lblSh1.Weight = 0.29119110721703745D;
             // 
             // lblSh2
             // 
@@ -350,7 +338,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh2.StylePriority.UseFont = false;
             this.lblSh2.StylePriority.UseTextAlignment = false;
             this.lblSh2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblSh2.Weight = 0.29119109198962045D;
+            this.lblSh2.Weight = 0.29119109198962057D;
             // 
             // lblSh3
             // 
@@ -377,7 +365,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh5.StylePriority.UseFont = false;
             this.lblSh5.StylePriority.UseTextAlignment = false;
             this.lblSh5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblSh5.Weight = 0.29119109132038262D;
+            this.lblSh5.Weight = 0.29119109132038268D;
             // 
             // lblSh6
             // 
@@ -386,7 +374,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSh6.StylePriority.UseFont = false;
             this.lblSh6.StylePriority.UseTextAlignment = false;
             this.lblSh6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblSh6.Weight = 0.29119109127260839D;
+            this.lblSh6.Weight = 0.29119109127260845D;
             // 
             // lblNT
             // 
@@ -395,7 +383,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblNT.StylePriority.UseFont = false;
             this.lblNT.StylePriority.UseTextAlignment = false;
             this.lblNT.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblNT.Weight = 0.29119109124872145D;
+            this.lblNT.Weight = 0.29119109124872156D;
             // 
             // lblBV
             // 
@@ -404,7 +392,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblBV.StylePriority.UseFont = false;
             this.lblBV.StylePriority.UseTextAlignment = false;
             this.lblBV.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblBV.Weight = 0.29119109123678416D;
+            this.lblBV.Weight = 0.29119109123678411D;
             // 
             // lblKD
             // 
@@ -431,7 +419,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblTH.StylePriority.UseFont = false;
             this.lblTH.StylePriority.UseTextAlignment = false;
             this.lblTH.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblTH.Weight = 0.29119110233588213D;
+            this.lblTH.Weight = 0.29119110233588208D;
             // 
             // lblHCSN
             // 
@@ -458,14 +446,14 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.lblSX.StylePriority.UseFont = false;
             this.lblSX.StylePriority.UseTextAlignment = false;
             this.lblSX.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblSX.Weight = 0.291191089836672D;
+            this.lblSX.Weight = 0.29119108983667197D;
             // 
             // lblGhiChu
             // 
             this.lblGhiChu.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.lblGhiChu.Name = "lblGhiChu";
             this.lblGhiChu.StylePriority.UseFont = false;
-            this.lblGhiChu.Weight = 0.31631586629447789D;
+            this.lblGhiChu.Weight = 0.44593167129262024D;
             // 
             // Detail
             // 
@@ -486,7 +474,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(3, 3, 3, 3, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(1727F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(1655.92F, 25F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UsePadding = false;
@@ -552,7 +540,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // lblKyTramBA
             // 
             this.lblKyTramBA.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.lblKyTramBA.LocationFloat = new DevExpress.Utils.PointFloat(1552.9F, 96.98238F);
+            this.lblKyTramBA.LocationFloat = new DevExpress.Utils.PointFloat(1482.756F, 98.19072F);
             this.lblKyTramBA.Name = "lblKyTramBA";
             this.lblKyTramBA.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.lblKyTramBA.SizeF = new System.Drawing.SizeF(173.1637F, 23F);
@@ -582,7 +570,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3,
             this.xrTableRow2});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(1727F, 120F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(1655.92F, 120F);
             this.xrTable3.StylePriority.UseBorders = false;
             this.xrTable3.StylePriority.UseTextAlignment = false;
             this.xrTable3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -620,7 +608,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // xrTableCell2
             // 
             this.xrTableCell2.CanGrow = false;
-            this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 13F, System.Drawing.FontStyle.Bold);
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
@@ -656,7 +644,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // xrTableCell15
             // 
             this.xrTableCell15.CanGrow = false;
-            this.xrTableCell15.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell15.Font = new System.Drawing.Font("Times New Roman", 13F, System.Drawing.FontStyle.Bold);
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.StylePriority.UseFont = false;
             this.xrTableCell15.StylePriority.UseTextAlignment = false;
@@ -673,7 +661,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell17.StylePriority.UseTextAlignment = false;
             this.xrTableCell17.Text = "Thành phần điện đầu nguồn";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell17.Weight = 60.481380251567408D;
+            this.xrTableCell17.Weight = 53.106874358840308D;
             // 
             // xrTableCell21
             // 
@@ -684,7 +672,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell21.StylePriority.UseTextAlignment = false;
             this.xrTableCell21.Text = "Sản lượng tiêu thụ điện Sinh Hoạt ở các mức (kWh)";
             this.xrTableCell21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell21.Weight = 65.141939072005741D;
+            this.xrTableCell21.Weight = 55.308761932102904D;
             // 
             // xrTableCell19
             // 
@@ -702,7 +690,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell27.CanGrow = false;
             this.xrTableCell27.Name = "xrTableCell27";
             this.xrTableCell27.Text = "Ghi chú";
-            this.xrTableCell27.Weight = 10.013512102581412D;
+            this.xrTableCell27.Weight = 14.116728770915408D;
             // 
             // xrTableRow2
             // 
@@ -717,7 +705,6 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell20,
             this.xrTableCell10,
             this.xrTableCell22,
-            this.xrTableCell11,
             this.xrTableCell24,
             this.xrTableCell12,
             this.xrTableCell25,
@@ -802,12 +789,13 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell16.CanGrow = false;
+            this.xrTableCell16.Multiline = true;
             this.xrTableCell16.Name = "xrTableCell16";
             this.xrTableCell16.StylePriority.UseBorders = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
-            this.xrTableCell16.Text = "Chỉ số công tơ đầu kỳ";
+            this.xrTableCell16.Text = "Chỉ số \r\nđầu";
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell16.Weight = 11.061759031150002D;
+            this.xrTableCell16.Weight = 9.2181325579682252D;
             // 
             // xrTableCell20
             // 
@@ -818,9 +806,9 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.StylePriority.UseBorders = false;
             this.xrTableCell20.StylePriority.UseTextAlignment = false;
-            this.xrTableCell20.Text = "Chỉ số công tơ cuối kỳ";
+            this.xrTableCell20.Text = "Chỉ số cuối";
             this.xrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell20.Weight = 11.061759031150004D;
+            this.xrTableCell20.Weight = 9.218132206324384D;
             // 
             // xrTableCell10
             // 
@@ -831,9 +819,9 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell10.Name = "xrTableCell10";
             this.xrTableCell10.StylePriority.UseBorders = false;
             this.xrTableCell10.StylePriority.UseTextAlignment = false;
-            this.xrTableCell10.Text = "Số hộ sử dụng";
+            this.xrTableCell10.Text = "Số hộ";
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell10.Weight = 11.061758935120329D;
+            this.xrTableCell10.Weight = 9.2181324619385521D;
             // 
             // xrTableCell22
             // 
@@ -845,21 +833,9 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.StylePriority.UseBorders = false;
             this.xrTableCell22.StylePriority.UseTextAlignment = false;
-            this.xrTableCell22.Text = "Điện năng tiêu thụ\r\n";
+            this.xrTableCell22.Text = "ĐNTT";
             this.xrTableCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell22.Weight = 11.061758935120329D;
-            // 
-            // xrTableCell11
-            // 
-            this.xrTableCell11.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right) 
-            | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTableCell11.CanGrow = false;
-            this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.StylePriority.UseBorders = false;
-            this.xrTableCell11.StylePriority.UseTextAlignment = false;
-            this.xrTableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell11.Weight = 9.833162393243839D;
+            this.xrTableCell22.Weight = 9.2181321102947109D;
             // 
             // xrTableCell24
             // 
@@ -872,7 +848,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell24.StylePriority.UseTextAlignment = false;
             this.xrTableCell24.Text = "1678 đ/kWh";
             this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell24.Weight = 9.2181324330561445D;
+            this.xrTableCell24.Weight = 9.21813245543857D;
             // 
             // xrTableCell12
             // 
@@ -885,7 +861,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell12.StylePriority.UseTextAlignment = false;
             this.xrTableCell12.Text = "1734 đ/kWh";
             this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell12.Weight = 9.21813203742183D;
+            this.xrTableCell12.Weight = 9.2181320374218281D;
             // 
             // xrTableCell25
             // 
@@ -898,7 +874,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell25.StylePriority.UseTextAlignment = false;
             this.xrTableCell25.Text = "2014 đ/kWh";
             this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell25.Weight = 9.2181320374218263D;
+            this.xrTableCell25.Weight = 9.2181320374218281D;
             // 
             // xrTableCell13
             // 
@@ -963,7 +939,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell23.StylePriority.UseTextAlignment = false;
             this.xrTableCell23.Text = "1771 đ/kWh BV";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell23.Weight = 9.2181322611873746D;
+            this.xrTableCell23.Weight = 9.21813226118738D;
             // 
             // xrTableCell29
             // 
@@ -976,7 +952,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell29.StylePriority.UseTextAlignment = false;
             this.xrTableCell29.Text = "2666 đ/kWh KD";
             this.xrTableCell29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell29.Weight = 9.2181322611873657D;
+            this.xrTableCell29.Weight = 9.2181322611873675D;
             // 
             // xrTableCell28
             // 
@@ -989,7 +965,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell28.StylePriority.UseTextAlignment = false;
             this.xrTableCell28.Text = "1902 đ/kWh CSCC";
             this.xrTableCell28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell28.Weight = 9.2181322611873764D;
+            this.xrTableCell28.Weight = 9.21813226118737D;
             // 
             // xrTableCell31
             // 
@@ -1003,7 +979,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell31.StylePriority.UseTextAlignment = false;
             this.xrTableCell31.Text = "1771 đ/kWh TH\r\n";
             this.xrTableCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell31.Weight = 9.218132313548125D;
+            this.xrTableCell31.Weight = 9.2181323135481286D;
             // 
             // xrTableCell30
             // 
@@ -1016,7 +992,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
             this.xrTableCell30.Text = "1902 đ/kWh HCSN";
             this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell30.Weight = 9.2181323397285038D;
+            this.xrTableCell30.Weight = 9.2181323397285055D;
             // 
             // xrTableCell34
             // 
@@ -1027,7 +1003,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell34.Name = "xrTableCell34";
             this.xrTableCell34.StylePriority.UseBorders = false;
             this.xrTableCell34.Text = "1685 đ/kWh BN";
-            this.xrTableCell34.Weight = 9.2181323528186923D;
+            this.xrTableCell34.Weight = 9.2181323528186958D;
             // 
             // xrTableCell36
             // 
@@ -1038,7 +1014,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseBorders = false;
             this.xrTableCell36.Text = "1685 đ/kWh SX";
-            this.xrTableCell36.Weight = 9.2181323593637821D;
+            this.xrTableCell36.Weight = 9.2181323593637785D;
             // 
             // xrTableCell33
             // 
@@ -1047,7 +1023,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell33.CanGrow = false;
             this.xrTableCell33.Name = "xrTableCell33";
             this.xrTableCell33.StylePriority.UseBorders = false;
-            this.xrTableCell33.Weight = 10.013508535656278D;
+            this.xrTableCell33.Weight = 14.116711138236544D;
             // 
             // xrLabel5
             // 
@@ -1091,7 +1067,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             // xrLabel1
             // 
             this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(1037.17F, 14.83339F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(1005.92F, 14.83337F);
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel1.SizeF = new System.Drawing.SizeF(650.0001F, 23F);
@@ -1121,7 +1097,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.PageHeader,
             this.ReportFooter});
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(15, 0, 27, 27);
+            this.Margins = new System.Drawing.Printing.Margins(15, 1, 27, 27);
             this.PageHeight = 1268;
             this.PageWidth = 1752;
             this.PaperKind = System.Drawing.Printing.PaperKind.A3Extra;
