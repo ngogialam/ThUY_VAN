@@ -75,7 +75,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
                         string[] invDatas = FkeyList.Split('_');
                         string fkey = invDatas[0];
                         string so_hd = invDatas[1];
-                        myINV.updateEInvoice(fkey, kyhd, so_hd, pattern, serial);
+                        myINV.updateEInvoice(fkey, kyhd, so_hd, pattern, serial,"2");
                     }
                     txtErr.Text = "Phát hành "+FkeyLists.Length+" hóa đơn thành công";
 
