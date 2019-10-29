@@ -271,7 +271,7 @@ public class clsNhapChiSo
     public string get_ten_tba(string id)
     {
         SqlConnection myConn = null;
-        string sql = "select ten_viet_tat from tram_bien_ap where trang_thai=1 and id_tram_bien_ap="+ id;
+        string sql = "select ten_viet_tat from tram_bien_ap where trang_thai=1 and id_tram_bien_ap=" + id;
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -664,12 +664,13 @@ public class clsNhapChiSo
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         int recordsAffected = 0;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         try
         {
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            cmd.CommandText = "update chi_so_cong_to set cs_moi='" + csmoi + "', ngay_capnhat = CONVERT( Datetime, GETDATE() ,103) where ma_cong_to='" + mact + "' and ky='" + ky + "'";
+            cmd.CommandText = "update chi_so_cong_to set cs_moi='" + csmoi + "', ngay_capnhat = CONVERT( Datetime, GETDATE() ,103) where ma_cong_to='" + mact + "' and ky='" + ky + "' and id_doanh_nghiep=" + id_doanh_nghiep;
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
@@ -727,7 +728,7 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to,cs_cu,ky,ngay_capnhat,trang_thai,id_doanh_nghiep) values ('" + mact + "'," + csmoi + ",'" + kymoi + "',CONVERT( Datetime, GETDATE() ,103),1,"+ id_doanh_nghiep+")";
+            cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to,cs_cu,ky,ngay_capnhat,trang_thai,id_doanh_nghiep) values ('" + mact + "'," + csmoi + ",'" + kymoi + "',CONVERT( Datetime, GETDATE() ,103),1," + id_doanh_nghiep + ")";
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
@@ -876,7 +877,7 @@ public class clsNhapChiSo
         SqlCommand cmd = new SqlCommand();
         string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         string sql = "insert into hoa_don(id,ma_kh,ky_hd,tu_ngay,den_ngay,chi_so_cu,chi_so_moi,dien_nang_tt,tong_tien_truoc_thue,vat_rate,thue_gtgt,tong_tien_sau_thue,id_nguoi_nhap,id_bang_gia_dien,ngay_nhap,trang_thai,ma_cong_to,id_doanh_nghiep,so_ho,ten_kh,id_tram_bien_ap,id_khu) ";
-        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'" + vat_rate + "'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "'," + id_doanh_nghiep + ","+so_ho+",N'"+ten_kh+"','"+id_tram_bien_ap+"',"+id_khu+") ";
+        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'" + vat_rate + "'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "'," + id_doanh_nghiep + "," + so_ho + ",N'" + ten_kh + "','" + id_tram_bien_ap + "'," + id_khu + ") ";
 
         try
         {

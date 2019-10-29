@@ -113,6 +113,9 @@
                         <li>
                             <a href='<%= ResolveUrl("DanhSachHoaDon.aspx")%>'>Danh sách HDDT</a>
                         </li>
+                         <li>
+                            <a href='<%= ResolveUrl("ThayTheHoaDon.aspx")%>'>Lập hóa đơn thay thế</a>
+                        </li>
 
                     </ul>
                 </li>
