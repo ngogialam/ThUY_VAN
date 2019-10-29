@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Title="In chuyển đổi theo lô" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="ThayTheHoaDon.aspx.cs" Inherits="ThayTheHoaDon" %>
+﻿<%@ Page Language="C#" Title="Thay thế hóa đơn" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="ThayTheHoaDon.aspx.cs" Inherits="ThayTheHoaDon" %>
 
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
 </asp:Content>

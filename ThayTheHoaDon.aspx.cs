@@ -21,6 +21,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
     clsNguoiBan mySeller = new clsNguoiBan();
     clsNhapChiSo myNCS = new clsNhapChiSo();
     clsBaocao myBC = new clsBaocao();
+    clsConnect myCon = new clsConnect();
     DataTable invList = new DataTable();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -253,7 +254,8 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
                     //Cập nhật hóa đơn cũ
                     myINV.updateEInvoice(fkey_cu, ky, sohd_cu, pattern, serial, "3");
                     txtErr.Text = "Phát hành hóa đơn thành công. Số hóa đơn: "+so_hd;
-
+                    string log = "Thay thế hóa đơn số " +sohd_cu+" bằng số " + so_hd;
+                    myCon.save_log(user, log, "666");
 
                 }
                 else
