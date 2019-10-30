@@ -121,7 +121,7 @@
     <value>int RecordCount = 0;
 private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e) {
      RecordCount += 1;
-     if (RecordCount == 25)
+     if (RecordCount == 20)
      {
          Detail.PageBreak = PageBreak.AfterBand;
          RecordCount = 0;
