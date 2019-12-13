@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 public partial class BaoCaoQuanTri : System.Web.UI.Page
 {
     clsBaocao myCus = new clsBaocao();
+    clsConnect myCon = new clsConnect();
     
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -132,7 +133,7 @@ public partial class BaoCaoQuanTri : System.Web.UI.Page
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
         double tham_so = 0;
-        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
         if (ddlChonBC.SelectedValue == "01")//Danh sách KH có chỉ số đồng hồ lớn
         {
             //lblTenThamSo.Text = "Chỉ số đồng hồ lớn hơn hoặc bằng:";
