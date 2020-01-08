@@ -57,7 +57,12 @@ public partial class DSChotChiSo : System.Web.UI.Page
             int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
             string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
             string id_thoi_gian = ddlThoiGian.SelectedValue.ToString();
-            bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
+            if(chkInTrang.Checked)
+                bindGrid_Trang(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
+            else
+            {
+                bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
+            }
         }
         else
         {
@@ -191,6 +196,65 @@ public partial class DSChotChiSo : System.Web.UI.Page
 
         }
 
+
+        GridView1.DataSource = tbxView;
+        GridView1.DataBind();
+        ViewState["DataTable"] = tbxView;
+        Session["DSChotChiSoCtoTable"] = tbxView;
+        Session["DSChotChiSoCtoTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
+        Session["DSChotChiSoCtoTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
+        Session["DSChotChiSoCtoQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;
+        Session["DSChotChiSoCtoNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
+    }
+
+
+    void bindGrid_Trang(string id_tram_bien_ap, int id_khu, string id_thoi_gian)
+    {
+        DataTable tbx = new DataTable();
+        DataTable tbxView = new DataTable();
+        clsBaocao cslBC = new clsBaocao();
+        string nam = ddlNam.SelectedValue.ToString();
+        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        tbx = cslBC.SELECT_CHOT_CONG_TO_TRANG(id_tram_bien_ap, id_khu, nam, id_doanh_nghiep);
+
+        DataRow dr;
+        tbxView.Columns.Add("stt", typeof(String));
+        tbxView.Columns.Add("ma_kh", typeof(String));
+        tbxView.Columns.Add("ten_kh", typeof(String));
+        tbxView.Columns.Add("dia_chi", typeof(String));
+        tbxView.Columns.Add("ma_cong_to", typeof(String));
+        tbxView.Columns.Add("t1", typeof(String));
+        tbxView.Columns.Add("t2", typeof(String));
+        tbxView.Columns.Add("t3", typeof(String));
+        tbxView.Columns.Add("t4", typeof(String));
+        tbxView.Columns.Add("t5", typeof(String));
+        tbxView.Columns.Add("t6", typeof(String));
+        tbxView.Columns.Add("t7", typeof(String));
+        tbxView.Columns.Add("t8", typeof(String));
+        tbxView.Columns.Add("t9", typeof(String));
+        tbxView.Columns.Add("t10", typeof(String));
+        tbxView.Columns.Add("t11", typeof(String));
+        tbxView.Columns.Add("t12", typeof(String));
+
+        dr = tbxView.NewRow();
+        for (int i = 0; i < tbx.Rows.Count; i++)
+        {
+            DataRow newRowTong = tbxView.NewRow();
+            newRowTong[0] = (i + 1).ToString();
+            newRowTong[1] = tbx.Rows[i]["ma_kh"].ToString();
+            newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
+            newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
+            newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
+
+            //newRowTong[5] = "";
+            //newRowTong[6] = "";
+            //newRowTong[7] = "";
+            //newRowTong[8] = "";
+            //newRowTong[9] = "";
+            //newRowTong[10] = "";
+          
+            tbxView.Rows.InsertAt(newRowTong, i);
+        }
 
         GridView1.DataSource = tbxView;
         GridView1.DataBind();

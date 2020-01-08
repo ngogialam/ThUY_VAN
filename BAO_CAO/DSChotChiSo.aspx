@@ -56,6 +56,7 @@
         <td>
             <a href="./DSChotChiSoDetail.aspx" class="btn btn-primary" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Xuất BC</a>
         </td>
+        <asp:CheckBox ID="chkInTrang" runat="server" Text="In Sổ Trắng" />
     </div>
     <div class="form-group" style="clear: both;">
         <asp:Label ID="txtErr" runat="server" ForeColor="#FF3300"></asp:Label>

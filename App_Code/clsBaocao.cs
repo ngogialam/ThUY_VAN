@@ -445,6 +445,57 @@ public class clsBaocao
         // return dts;    
     }
 
+    public DataTable SELECT_CHOT_CONG_TO_TRANG(string id_tram_bien_ap, int id_khu, string nam, string id_doanh_nghiep)
+    {
+        string sql = "";
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = myConn;
+        if (id_tram_bien_ap == "0")
+        {
+            sql = "select ROW_NUMBER() OVER(ORDER BY m.ma_kh ASC) as stt,ma_kh,ten_kh,dia_chi,ma_cong_to from ( select b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
+            sql = sql + " and c.id_khu=" + id_khu + "  ";
+            sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
+            sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to ";
+            sql = sql + " ) m  order by m.thu_tu ";
+
+        }
+        else
+        {
+            sql = "select ROW_NUMBER() OVER(ORDER BY m.ma_kh ASC) as stt,ma_kh,ten_kh,dia_chi,ma_cong_to from ( select b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";
+            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
+            sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
+            sql = sql + " and c.id_khu=" + id_khu + "  ";
+            sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
+            sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to ";
+            sql = sql + " ) m  order by m.thu_tu ";
+
+            
+        }
+        cmd.CommandText = sql;
+        cmd.CommandType = CommandType.Text;
+        SqlDataAdapter myData = new SqlDataAdapter(cmd);
+        DataSet dts = new DataSet();
+        myConn.Open();
+        myData.Fill(dts);
+        myData.Dispose();
+        cmd.Parameters.Clear();
+        cmd.Connection.Close();
+        myConn.Close();
+        return dts.Tables[0];
+        // return dts;    
+    }
+
     public double SELECT_CHOT_CONG_TO_THEO_MAKH(string ma_kh, string thang, string nam)
     {
         string sql = "";
