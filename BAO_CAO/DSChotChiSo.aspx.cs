@@ -15,7 +15,8 @@ public partial class DSChotChiSo : System.Web.UI.Page
             Session.Remove("DSChotChiSoCtoTenTramBA");
             Session.Remove("DSChotChiSoCtoQuyNam");
             Session.Remove("DSChotChiSoCtoNgayIn");
-
+            Session.Remove("DSChotChiSoInSoTrang");
+            Session.Remove("DSChotChiSoKhoangThoiGian");
             DataTable tram_bien_ap = myCus.get_tram_bien_ap();
             DataRow newRow = tram_bien_ap.NewRow();
             newRow[0] = 0;
@@ -205,6 +206,15 @@ public partial class DSChotChiSo : System.Web.UI.Page
         Session["DSChotChiSoCtoTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
         Session["DSChotChiSoCtoQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;
         Session["DSChotChiSoCtoNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
+        if (chkInTrang.Checked)
+        {
+            Session["DSChotChiSoInSoTrang"] = "true";
+        }
+        else
+        {
+            Session["DSChotChiSoInSoTrang"] = "false";
+        }
+        Session["DSChotChiSoKhoangThoiGian"] = ddlThoiGian.SelectedValue;
     }
 
 
@@ -264,6 +274,16 @@ public partial class DSChotChiSo : System.Web.UI.Page
         Session["DSChotChiSoCtoTenTramBA"] = "Trạm: " + ddlTramBA.SelectedItem.ToString();
         Session["DSChotChiSoCtoQuyNam"] = "Khoảng thời gian: " + ddlThoiGian.SelectedItem + ", năm " + ddlNam.SelectedItem;
         Session["DSChotChiSoCtoNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");
+        if (chkInTrang.Checked)
+        {
+            Session["DSChotChiSoInSoTrang"] = "true";
+        }
+        else
+        {
+            Session["DSChotChiSoInSoTrang"] = "false";
+        }
+        Session["DSChotChiSoKhoangThoiGian"] = ddlThoiGian.SelectedValue;
+
     }
 
     protected void GridView1_DataBound(object sender, EventArgs e)
