@@ -220,6 +220,10 @@ public partial class DSChotChiSo : System.Web.UI.Page
 
     void bindGrid_Trang(string id_tram_bien_ap, int id_khu, string id_thoi_gian)
     {
+        // in sổ trắng phải in được số liệu của tháng liền trước để đối chiếu
+        // in 6 tháng đầu năm phải có cột chỉ số của tháng 12 năm ngoái, in 6 tháng cuối năm phải có chỉ số của tháng 6 năm đó
+        
+
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
@@ -238,16 +242,20 @@ public partial class DSChotChiSo : System.Web.UI.Page
         tbxView.Columns.Add("t3", typeof(String));
         tbxView.Columns.Add("t4", typeof(String));
         tbxView.Columns.Add("t5", typeof(String));
-        tbxView.Columns.Add("t6", typeof(String));
+        tbxView.Columns.Add("t6", typeof(double));
         tbxView.Columns.Add("t7", typeof(String));
         tbxView.Columns.Add("t8", typeof(String));
         tbxView.Columns.Add("t9", typeof(String));
         tbxView.Columns.Add("t10", typeof(String));
         tbxView.Columns.Add("t11", typeof(String));
-        tbxView.Columns.Add("t12", typeof(String));
+        tbxView.Columns.Add("t12", typeof(double));
 
         dr = tbxView.NewRow();
-        for (int i = 0; i < tbx.Rows.Count; i++)
+
+        double tong_thang_6 = 0;
+        double tong_thang_12 = 0;
+
+                for (int i = 0; i < tbx.Rows.Count; i++)
         {
             DataRow newRowTong = tbxView.NewRow();
             newRowTong[0] = (i + 1).ToString();
@@ -262,7 +270,19 @@ public partial class DSChotChiSo : System.Web.UI.Page
             //newRowTong[8] = "";
             //newRowTong[9] = "";
             //newRowTong[10] = "";
-          
+            if (id_thoi_gian == "06" || id_thoi_gian == "03") // in tháng đầu năm phải tính dc chỉ số của tháng 12 năm trước
+            {
+                int nam_truoc = int.Parse(nam) - 1;
+                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "12", nam_truoc.ToString());
+                newRowTong[16] = tong_thang_12;
+            }
+            else// in 6 tháng cuối năm phải tính được chỉ số của tháng 6 năm đó
+            {
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
+                newRowTong[10] = tong_thang_6;
+            }
+
+            
             tbxView.Rows.InsertAt(newRowTong, i);
         }
 
