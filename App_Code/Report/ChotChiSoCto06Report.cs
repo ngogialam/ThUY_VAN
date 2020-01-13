@@ -26,10 +26,9 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
     private XRTable xrTable1;
     private XRTableRow xrTableRow1;
     private XRTableCell lblStt;
-    private XRTableCell lblMaKh;
     private XRTableCell lblTenKh;
-    private XRTableCell lblDiaChi;
-    private XRTableCell lblMaCto;
+    private XRTableCell lblMaKh;
+    private XRTableCell lblSoCot;
     private XRTableCell lblT1;
     private XRTableCell lblT2;
     private XRTableCell lblT3;
@@ -41,7 +40,6 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
     private XRTableCell xrTableCell1;
     private XRTableCell xrTableCell2;
     private XRTableCell xrTableCell3;
-    private XRTableCell xrTableCell4;
     private XRTableCell xrTableCell15;
     private XRTableCell xrTableCell17;
     private XRTableCell xrTableCell7;
@@ -49,7 +47,7 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
     private XRTableCell xrTableCell8;
     private XRTableCell xrTableCell5;
     private XRTableCell xrTableCell10;
-    private XRTableCell lblSoCot;
+    private XRTableCell lblMaCto;
     private XRTableCell lblT12;
     private XRTableCell xrTableCell11;
     private XRTableCell xrTableCell9;
@@ -92,10 +90,11 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lblStt = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lblMaKh = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblTenKh = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lblDiaChi = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lblMaKh = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lblSoCot = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblMaCto = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lblT12 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblT1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblT2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblT3 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -109,8 +108,9 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell15 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell17 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -128,10 +128,6 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lblT12 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lblSoCot = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -166,11 +162,10 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             // 
             this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.lblStt,
-            this.lblMaKh,
             this.lblTenKh,
-            this.lblDiaChi,
-            this.lblMaCto,
+            this.lblMaKh,
             this.lblSoCot,
+            this.lblMaCto,
             this.lblT12,
             this.lblT1,
             this.lblT2,
@@ -190,15 +185,6 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.lblStt.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.lblStt.Weight = 0.54727096305207745D;
             // 
-            // lblMaKh
-            // 
-            this.lblMaKh.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.lblMaKh.Name = "lblMaKh";
-            this.lblMaKh.StylePriority.UseFont = false;
-            this.lblMaKh.StylePriority.UseTextAlignment = false;
-            this.lblMaKh.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblMaKh.Weight = 0.82970266155470906D;
-            // 
             // lblTenKh
             // 
             this.lblTenKh.Font = new System.Drawing.Font("Times New Roman", 10F);
@@ -206,25 +192,35 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.lblTenKh.StylePriority.UseFont = false;
             this.lblTenKh.StylePriority.UseTextAlignment = false;
             this.lblTenKh.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblTenKh.Weight = 1.8434795898072081D;
+            this.lblTenKh.Weight = 1.9786160208109793D;
             // 
-            // lblDiaChi
+            // lblMaKh
             // 
-            this.lblDiaChi.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.lblDiaChi.Name = "lblDiaChi";
-            this.lblDiaChi.StylePriority.UseFont = false;
-            this.lblDiaChi.StylePriority.UseTextAlignment = false;
-            this.lblDiaChi.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblDiaChi.Weight = 1.6474615882287442D;
+            this.lblMaKh.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.lblMaKh.Name = "lblMaKh";
+            this.lblMaKh.StylePriority.UseFont = false;
+            this.lblMaKh.StylePriority.UseTextAlignment = false;
+            this.lblMaKh.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.lblMaKh.Weight = 1.581431511493909D;
+            // 
+            // lblSoCot
+            // 
+            this.lblSoCot.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold);
+            this.lblSoCot.Name = "lblSoCot";
+            this.lblSoCot.StylePriority.UseFont = false;
+            this.lblSoCot.StylePriority.UseTextAlignment = false;
+            this.lblSoCot.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.lblSoCot.Weight = 0.987011704447572D;
             // 
             // lblMaCto
             // 
-            this.lblMaCto.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold);
             this.lblMaCto.Name = "lblMaCto";
-            this.lblMaCto.StylePriority.UseFont = false;
-            this.lblMaCto.StylePriority.UseTextAlignment = false;
-            this.lblMaCto.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.lblMaCto.Weight = 1.0347011006643321D;
+            this.lblMaCto.Weight = 1.5788493690595411D;
+            // 
+            // lblT12
+            // 
+            this.lblT12.Name = "lblT12";
+            this.lblT12.Weight = 0.8082835649157849D;
             // 
             // lblT1
             // 
@@ -322,7 +318,6 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell1,
             this.xrTableCell2,
             this.xrTableCell3,
-            this.xrTableCell4,
             this.xrTableCell15,
             this.xrTableCell11,
             this.xrTableCell9,
@@ -355,12 +350,13 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             // 
             this.xrTableCell2.CanGrow = false;
             this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
-            this.xrTableCell2.Text = "  Mã KH";
+            this.xrTableCell2.Text = " Họ tên\r\n";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell2.Weight = 14.193610722405209D;
+            this.xrTableCell2.Weight = 33.847931634716979D;
             // 
             // xrTableCell3
             // 
@@ -374,31 +370,40 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell3.StylePriority.UseBorders = false;
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
-            this.xrTableCell3.Text = "  Họ tên";
+            this.xrTableCell3.Text = "   Mã KH";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell3.Weight = 31.536154470199037D;
-            // 
-            // xrTableCell4
-            // 
-            this.xrTableCell4.CanGrow = false;
-            this.xrTableCell4.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.StylePriority.UseFont = false;
-            this.xrTableCell4.StylePriority.UseTextAlignment = false;
-            this.xrTableCell4.Text = "  Địa chỉ";
-            this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell4.Weight = 28.182918501575873D;
+            this.xrTableCell3.Weight = 27.053355868957372D;
             // 
             // xrTableCell15
             // 
             this.xrTableCell15.CanGrow = false;
             this.xrTableCell15.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell15.Multiline = true;
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.StylePriority.UseFont = false;
             this.xrTableCell15.StylePriority.UseTextAlignment = false;
-            this.xrTableCell15.Text = "  Mã công tơ";
+            this.xrTableCell15.Text = " Số cột\r\n";
             this.xrTableCell15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell15.Weight = 17.700509740067154D;
+            this.xrTableCell15.Weight = 16.884688138185268D;
+            // 
+            // xrTableCell11
+            // 
+            this.xrTableCell11.CanGrow = false;
+            this.xrTableCell11.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell11.Multiline = true;
+            this.xrTableCell11.Name = "xrTableCell11";
+            this.xrTableCell11.StylePriority.UseFont = false;
+            this.xrTableCell11.Text = " Mã công tơ\r\n";
+            this.xrTableCell11.Weight = 26.982271869602478D;
+            // 
+            // xrTableCell9
+            // 
+            this.xrTableCell9.CanGrow = false;
+            this.xrTableCell9.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell9.Name = "xrTableCell9";
+            this.xrTableCell9.StylePriority.UseFont = false;
+            this.xrTableCell9.Text = "T12";
+            this.xrTableCell9.Weight = 13.827206193118947D;
             // 
             // xrTableCell17
             // 
@@ -587,35 +592,6 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
             this.xrLabel2.Text = "Người lập biểu";
             this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
-            // xrTableCell9
-            // 
-            this.xrTableCell9.CanGrow = false;
-            this.xrTableCell9.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell9.Name = "xrTableCell9";
-            this.xrTableCell9.StylePriority.UseFont = false;
-            this.xrTableCell9.Text = "T12";
-            this.xrTableCell9.Weight = 13.827206193118947D;
-            // 
-            // xrTableCell11
-            // 
-            this.xrTableCell11.CanGrow = false;
-            this.xrTableCell11.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell11.Multiline = true;
-            this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.StylePriority.UseFont = false;
-            this.xrTableCell11.Text = "Số cột\r\n";
-            this.xrTableCell11.Weight = 13.155054077214818D;
-            // 
-            // lblT12
-            // 
-            this.lblT12.Name = "lblT12";
-            this.lblT12.Weight = 0.8082835649157849D;
-            // 
-            // lblSoCot
-            // 
-            this.lblSoCot.Name = "lblSoCot";
-            this.lblSoCot.Weight = 0.77056366555700784D;
-            // 
             // ChotChiSoCto06Report
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -649,7 +625,6 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
         lblStt.DataBindings.Add("Text", DataSource, "stt");
         lblMaKh.DataBindings.Add("Text", DataSource, "ma_kh");
         lblTenKh.DataBindings.Add("Text", DataSource, "ten_kh");
-        lblDiaChi.DataBindings.Add("Text", DataSource, "dia_chi");
         lblMaCto.DataBindings.Add("Text", DataSource, "ma_cong_to");
         lblSoCot.DataBindings.Add("Text", DataSource, "cot_dien_so");
         lblT12.DataBindings.Add("Text", DataSource, "t12", "{0:#,# ;(#,#);0}");
