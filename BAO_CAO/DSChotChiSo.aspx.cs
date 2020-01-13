@@ -249,6 +249,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
         tbxView.Columns.Add("t10", typeof(String));
         tbxView.Columns.Add("t11", typeof(String));
         tbxView.Columns.Add("t12", typeof(double));
+        tbxView.Columns.Add("cot_dien_so", typeof(String));
 
         dr = tbxView.NewRow();
 
@@ -263,6 +264,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
             newRowTong[2] = tbx.Rows[i]["ten_kh"].ToString();
             newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
             newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
+            //newRowTong[5] = tbx.Rows[i]["cot_dien_so"].ToString();
 
             //newRowTong[5] = "";
             //newRowTong[6] = "";
@@ -281,11 +283,12 @@ public partial class DSChotChiSo : System.Web.UI.Page
                 tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
                 newRowTong[10] = tong_thang_6;
             }
-
+            newRowTong[17] = tbx.Rows[i]["cot_dien_so"].ToString();
             
             tbxView.Rows.InsertAt(newRowTong, i);
         }
 
+        GridView1.DataSource = tbxView;
         GridView1.DataSource = tbxView;
         GridView1.DataBind();
         ViewState["DataTable"] = tbxView;
