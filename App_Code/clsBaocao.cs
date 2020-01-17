@@ -420,9 +420,9 @@ public class clsBaocao
         }
         else
         {
-            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
-            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
-            sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";
+            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,null as chi_so_moi  ";
+            sql = sql + " from dm_cong_to a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
@@ -430,6 +430,7 @@ public class clsBaocao
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+          
         }
         cmd.CommandText = sql;
         cmd.CommandType = CommandType.Text;
@@ -461,28 +462,31 @@ public class clsBaocao
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
-           // sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
-            sql = sql + " and b.trang_thai=1 ";
+            // sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
+            //sql = sql + " and b.trang_thai=1 ";
             sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
             sql = sql + " ) m  order by m.thu_tu ";
 
         }
         else
         {
-            sql = "select ROW_NUMBER() OVER(ORDER BY m.ma_kh ASC) as stt,ma_kh,ten_kh,dia_chi,cot_dien_so,ma_cong_to from ( select b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
-            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
-            sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";
-            sql = sql + " and b.id_khu=c.id_khu ";
-            sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
-            sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
-            sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
-            sql = sql + " and c.id_khu=" + id_khu + "  ";
-            //sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
-            sql = sql + " and b.trang_thai=1 ";
-            sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
-            sql = sql + " ) m  order by m.thu_tu ";
+            //sql = "select ROW_NUMBER() OVER(ORDER BY m.ma_kh ASC) as stt,ma_kh,ten_kh,dia_chi,cot_dien_so,ma_cong_to from ( select b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
+            //sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            //sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";
+            //sql = sql + " and b.id_khu=c.id_khu ";
+            //sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+            //sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
+            //sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
+            //sql = sql + " and c.id_khu=" + id_khu + "  ";
+            ////sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
+            //sql = sql + " and b.trang_thai=1 ";
+            //sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
+            //sql = sql + " ) m  order by m.thu_tu ";
+            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to  ";
+            sql = sql + " from dm_cong_to a,khach_hang b,tram_bien_ap e ";            
+            sql = sql + " where a.ma_kh=b.ma_kh and  b.id_tram_bien_ap=e.id_tram_bien_ap and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
+            sql = sql + " order by b.thu_tu ";
 
-            
         }
         cmd.CommandText = sql;
         cmd.CommandType = CommandType.Text;
@@ -498,7 +502,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public double SELECT_CHOT_CONG_TO_THEO_MAKH(string ma_kh, string thang, string nam)
+    public double SELECT_CHOT_CONG_TO_THEO_MAKH(string ma_ct, string thang, string nam)
     {
         string sql = "";
         double chi_so_cong_to = 0;
@@ -508,15 +512,17 @@ public class clsBaocao
         cmd.Connection = myConn;
         string ky_hd = thang + "/" + nam;
 
-        sql = "select b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
-        sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
-        sql = sql + " where a.ma_kh=b.ma_kh ";
-        sql = sql + " and b.id_khu=c.id_khu ";
-        sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
-        sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
-        sql = sql + " and b.ma_kh='" + ma_kh + "'  ";
-        sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
-
+        //sql = "select b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,a.chi_so_moi  ";
+        //sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
+        //sql = sql + " where a.ma_kh=b.ma_kh ";
+        //sql = sql + " and b.id_khu=c.id_khu ";
+        //sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
+        //sql = sql + " and a.ky_hd='" + ky_hd + "'  ";
+        //sql = sql + " and b.ma_kh='" + ma_kh + "'  ";
+        //sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+        sql = "select cs_moi as chi_so_moi from chi_so_cong_to where ";
+        sql = sql + " ky='" + ky_hd + "'  ";
+        sql = sql + " and ma_cong_to='" + ma_ct + "'  ";
         cmd.CommandText = sql;
         cmd.CommandType = CommandType.Text;
         SqlDataAdapter myData = new SqlDataAdapter(cmd);
@@ -529,7 +535,13 @@ public class clsBaocao
         myConn.Close();
 
         if (dts.Tables[0].Rows.Count >= 1)
-            chi_so_cong_to = double.Parse(dts.Tables[0].Rows[0]["chi_so_moi"].ToString());
+            if (dts.Tables[0].Rows[0]["chi_so_moi"] != DBNull.Value)
+            {
+                chi_so_cong_to = double.Parse(dts.Tables[0].Rows[0]["chi_so_moi"].ToString());
+            }
+            else{
+                chi_so_cong_to = 0;
+            }
         else
             chi_so_cong_to = 0;
 
@@ -816,7 +828,7 @@ public class clsBaocao
             sql = sql + " from chi_so_cong_to cs,dm_cong_to a, khach_hang b,dm_khu c,bang_gia_dien d,tram_bien_ap e  ";
             sql = sql + " where a.ma_kh=b.ma_kh and  b.id_khu=c.id_khu ";
             sql = sql + " and b.id_bang_gia = d.id_bang_gia  and b.id_tram_bien_ap=e.id_tram_bien_ap";
-            sql = sql + " and a.ma_cong_to =cs.ma_cong_to and (cs.cs_cu=cs.cs_moi  )";            
+            sql = sql + " and a.ma_cong_to =cs.ma_cong_to and (cs.cs_cu=cs.cs_moi  )";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
             sql = sql + " and cs.ky='" + ky_hd + "' order by b.id_tram_bien_ap";
         }

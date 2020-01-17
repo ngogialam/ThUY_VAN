@@ -96,7 +96,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
         //if(thoi_gian_xem == "01")
         //    tbx = cslBC.SELECT_CHOT_CONG_TO(id_tram_bien_ap, id_khu, id_thoi_gian, ky_hd);
         //else
-        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        string id_doanh_nghiep = "1";
         tbx = cslBC.SELECT_CHOT_CONG_TO_ALL(id_tram_bien_ap, id_khu, nam, id_doanh_nghiep);
 
 
@@ -228,7 +228,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
         string nam = ddlNam.SelectedValue.ToString();
-        string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
+        string id_doanh_nghiep = "1";
         tbx = cslBC.SELECT_CHOT_CONG_TO_TRANG(id_tram_bien_ap, id_khu, nam, id_doanh_nghiep);
 
         DataRow dr;
@@ -275,12 +275,12 @@ public partial class DSChotChiSo : System.Web.UI.Page
             if (id_thoi_gian == "06" || id_thoi_gian == "03") // in tháng đầu năm phải tính dc chỉ số của tháng 12 năm trước
             {
                 int nam_truoc = int.Parse(nam) - 1;
-                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "12", nam_truoc.ToString());
+                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "12", nam_truoc.ToString());
                 newRowTong[16] = tong_thang_12;
             }
             else// in 6 tháng cuối năm phải tính được chỉ số của tháng 6 năm đó
             {
-                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "06", nam);
                 newRowTong[10] = tong_thang_6;
             }
             newRowTong[17] = tbx.Rows[i]["cot_dien_so"].ToString();
