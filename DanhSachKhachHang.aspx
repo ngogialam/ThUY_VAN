@@ -283,7 +283,7 @@
         }
         function onClickDoiCToComplete(s, e) {
             if (e.result == "1") {
-                alert("Cập nhật thành công");
+                alert("Đổi công tơ thành công");
                 location.reload();
             } else if (e.result == "2") {
                 alert("Trùng mã công tơ!");
@@ -291,23 +291,41 @@
                 alert("Lỗi kỳ!");
             }
             else {
-                alert("Cập nhật thất bại. Vui lòng thử lại!");
+                alert("Đổi công tơ thất bại. Vui lòng thử lại!");
             }
-        }//Đổi công tơ
-        function onXoaCTo() {
+        }
+
+        //Xóa công tơ
+        function onClickXoaCTo() {
             cbXoaCTo.PerformCallback()
         }
         function onClickXoaCToComplete(s, e) {
             if (e.result == "1") {
                 alert("Xóa công tơ thành công");
                 location.reload();
-            } 
+            }
             else {
                 alert("Xóa công tơ thất bại. Vui lòng thử lại!");
             }
         }
 
-
+        //Thêm công tơ
+        function onClickThemCTo() {
+            cbThemCTo.PerformCallback()
+        }
+        function onClickThemCToComplete(s, e) {
+            if (e.result == "1") {
+                alert("Thêm công tơ thành công");
+                location.reload();
+            }
+            else if (e.result == "2") {
+                alert("Mã công tơ đã tồn tại");
+                location.reload();
+            }
+            else {
+                alert("Thêm công tơ thất bại. Vui lòng thử lại!");
+            }
+        }
 
     </script>
 </asp:Content>
@@ -506,7 +524,7 @@
                                 <asp:TextBox ID="txtTenKh_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                         </div>
-                         <div class="user-info-row" style="border: none">
+                        <div class="user-info-row" style="border: none">
                             <label class="key">Mã KH (<span style="color: red">*</span>):</label>
                             <div class="value">
                                 <asp:TextBox ID="txtMaKh_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
@@ -814,10 +832,10 @@
                             </div>
                             <div class="user-info-row" style="border: none; padding: 5px 5px 5px 5px; margin-bottom: 10px">
                                 <label class="key">Kỳ :</label>
-                                    <div class="value">
-                                        <asp:DropDownList ID="drp_swapModal_ky" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" DataTextField="ky" DataValueField="ky">
-                                        </asp:DropDownList>
-                                    </div>
+                                <div class="value">
+                                    <asp:DropDownList ID="drp_swapModal_ky" runat="server" ClientIDMode="Static" CssClass="form-control input-lg" DataTextField="ky" DataValueField="ky">
+                                    </asp:DropDownList>
+                                </div>
                             </div>
 
                             <div class="column">
@@ -864,17 +882,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" style="padding: 5px 5px 5px 5px;">
+                                <i class="fa fa-caret-right">&nbsp;Để thêm công tơ, bạn vui lòng nhập thông tin công tơ mới và chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Thêm công tơ <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
+                                    <br />
+                                </i>
+                                <i class="fa fa-caret-right">&nbsp;Để xóa công tơ, bạn vui lòng nhập chọn mã công tơ cũ và chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Xóa công tơ <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
+                                    <br />
+                                </i>
+                                <i class="fa fa-caret-right">&nbsp;Để đổi công tơ, bạn vui lòng nhập thông tin công tơ mới, chọn mã công tơ và chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Đổi công tơ <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
+                                    <br />
+                                </i>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" onclick="onClickDoiCTo();">Cập nhật</button>
-                            <button type="button" class="btn btn-success" onclick="onXoaCTo();">Xóa công tơ</button>
+                        <div class="modal-footer" style="padding-top: 0">
+                            <button type="button" class="btn btn-success" onclick="onClickThemCTo();">Thêm công tơ</button>
+                            <button type="button" class="btn btn-success" onclick="onClickXoaCTo();">Xóa công tơ</button>
+                            <button type="button" class="btn btn-success" onclick="onClickDoiCTo();">Đổi công tơ</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                             <dx:aspxcallback id="cbDoiCTo" clientinstancename="cbDoiCTo" clientidmode="Static" runat="server" oncallback="btnDoiCTo_Callback">
                                   <ClientSideEvents CallbackComplete="onClickDoiCToComplete" />
-                            </dx:aspxcallback>
+                                </dx:aspxcallback>
                             <dx:aspxcallback id="cbXoaCTo" clientinstancename="cbXoaCTo" clientidmode="Static" runat="server" oncallback="btnXoaCTo_Callback">
                                   <ClientSideEvents CallbackComplete="onClickXoaCToComplete" />
-                            </dx:aspxcallback>
+                                </dx:aspxcallback>
+                            <dx:aspxcallback id="cbThemCTo" clientinstancename="cbThemCTo" clientidmode="Static" runat="server" oncallback="btnThemCTo_Callback">
+                                  <ClientSideEvents CallbackComplete="onClickThemCToComplete" />
+                                </dx:aspxcallback>
                         </div>
                     </div>
                 </div>

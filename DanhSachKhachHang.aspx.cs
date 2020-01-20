@@ -394,7 +394,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
         int id_dn = Convert.ToInt32(id_doanh_nghiep);
 
-        
+
         try
         {
             // Cập nhật trạng thái công tơ và xóa
@@ -411,6 +411,47 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         catch (Exception)
         {
             e.Result = "0";
+        }
+    }
+
+    protected void btnThemCTo_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        string ma_kh = txt_swapModal_maKH.Text;
+        string ten_kh = txt_swapModal_tenKH.Text;
+        float csDau_CToMoi = float.Parse(txt_swapModal_csDauMoi.Text);
+        float csCuoi_CToMoi = float.Parse(txt_swapModal_csCuoiMoi.Text);
+        string ma_cto_moi = txt_swapModal_maCtoMoi.Text;
+        string ky_hd = drp_swapModal_ky.SelectedValue;
+
+        int check_ma = myCus.check_ma_cong_to(ma_cto_moi);
+        if (check_ma >= 1)
+        {
+            e.Result = "2"; // Mã công tơ đã tồn tại
+        }
+        else
+        {
+            DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
+            // Thêm mã công tơ mới trong bảng dm_cong_to và chi_so_cong_to
+            string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
+            int id_dn = Convert.ToInt32(id_doanh_nghiep);
+            myCus.them_moi_cong_to(ma_cto_moi, ma_kh, 1, id_dn, 1);
+            myCus.them_moi_chi_so_cong_to(ma_cto_moi, csDau_CToMoi, csCuoi_CToMoi, ky_hd, id_dn); // Cập nhật trạng thái công tơ và xóa
+            string[] arrMaCTo = tblKH.Rows[0].Field<string>("ma_cong_to").Split('|');
+            List<string> listMaCTo = new List<string>(arrMaCTo);
+            listMaCTo.Add(ma_cto_moi);
+            string maCtoMoiKh = String.Join("|", listMaCTo.ToArray());
+            myCus.cap_nhat_cong_to_khach_hang(ma_kh, maCtoMoiKh);
+            e.Result = "1";
+            string log = "Thêm công tơ của khách hàng " + ten_kh + " mã công tơ: " + csCuoi_CToMoi;
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+            try
+            {
+               
+            }
+            catch (Exception)
+            {
+                e.Result = "0";
+            }
         }
     }
 
