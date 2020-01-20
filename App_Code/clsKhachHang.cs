@@ -1153,7 +1153,7 @@ public class clsKhachHang
         return recordsAffected;
     }
 
-    public int them_moi_chi_so_cong_to(string ma_cong_to, string ky_hd, int id_doanh_nghiep)
+    public int them_moi_chi_so_cong_to(string ma_cong_to, float cs_cu, float cs_moi, string ky_hd, int id_doanh_nghiep)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -1162,7 +1162,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to, cs_cu, cs_moi,ky, trang_thai, id_doanh_nghiep) values('" + ma_cong_to + "',0,0,'" + ky_hd + "', 1, " + id_doanh_nghiep + ")";
+            cmd.CommandText = string.Format("insert into chi_so_cong_to(ma_cong_to, cs_cu, cs_moi, ky, trang_thai, id_doanh_nghiep) values('{0}', '{1}', '{2}', '{3}', 1, {4})", ma_cong_to, cs_cu, cs_moi, ky_hd, id_doanh_nghiep);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();

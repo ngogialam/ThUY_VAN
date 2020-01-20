@@ -819,13 +819,13 @@
                                 <div class="user-info-row" style="border: none">
                                     <label class="key">Chỉ số đầu :</label>
                                     <div class="value">
-                                        <asp:TextBox ID="txt_swapModal_csCu" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
+                                        <asp:TextBox ID="txt_swapModal_csCu" ReadOnly="true" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="user-info-row" style="border: none">
                                     <label class="key">Chỉ số cuối :</label>
                                     <div class="value">
-                                        <asp:TextBox ID="txt_swapModal_csCuoiCu" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
+                                        <asp:TextBox ID="txt_swapModal_csCuoiCu" ReadOnly="true" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>

@@ -182,7 +182,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
                 txt_swapModal_csCuoiCu.Text = "0";
             }
 
-            txt_swapModal_csDauMoi.Text = "0";
+            txt_swapModal_csDauMoi.Text = txt_swapModal_csCuoiCu.Text;
             txt_swapModal_csCuoiMoi.Text = "0";
             txt_swapModal_maCtoMoi.Text = "";
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -203,8 +203,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
     protected void btnThemMoi_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
     {
         //string ma_tu_sinh = myCus.get_ma_kh_tu_sinh();
-       // txtThuTu.Text = ma_tu_sinh;
-       // string ma_kh = ma_tu_sinh + "." + myCus.get_ten_viet_tat_TBA(drpTramBienAp_AddModal.SelectedValue.ToString());
+        // txtThuTu.Text = ma_tu_sinh;
+        // string ma_kh = ma_tu_sinh + "." + myCus.get_ten_viet_tat_TBA(drpTramBienAp_AddModal.SelectedValue.ToString());
         string ma_kh = txtMaKh_AddModal.Text.ToString().Trim();
         string ten_kh = txtTenKh_AddModal.Text.ToString().Trim();
         int id_bang_gia = int.Parse(drpBangGia_AddModal.SelectedValue.ToString());
@@ -264,11 +264,11 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
                         if (unique_ma_cto.Trim() != "" & i != 0)
                         {
                             int j = myCus.them_moi_cong_to(unique_ma_cto, ma_kh, he_so_ti, id_dn, trang_thai);
-                            int k = myCus.them_moi_chi_so_cong_to(unique_ma_cto, ky_hd, id_dn);
+                            int k = myCus.them_moi_chi_so_cong_to(unique_ma_cto, 0, 0, ky_hd, id_dn);
                         }
                     }
                 }
-                catch (Exception) {}
+                catch (Exception) { }
             }
             else
             {
@@ -357,14 +357,14 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             //float hSoTiCu = tblCToCu.Rows[0].Field<float>("he_so_ti");
             //System.Windows.Forms.MessageBox.Show(trang_thai.ToString());
             myCus.them_moi_cong_to(ma_cto_moi, ma_kh, 1, id_dn, trang_thai);
-            myCus.them_moi_chi_so_cong_to(ma_cto_moi, ky_hd, id_dn);
+            myCus.them_moi_chi_so_cong_to(ma_cto_moi, csDau_CToMoi, csCuoi_CToMoi, ky_hd, id_dn);
 
             // Cập nhật trạng thái công tơ cũ trong bảng chi_so_cong_to và dm_cong_to
-          // myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
+            // myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
             myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
 
             // Cập nhật chỉ số công tơ cũ trong bảng chi_so_cong_to
-            myCus.cap_nhat_chi_so_cong_to(ma_cto_cu, ky_hd, csCuoi_CToCu);
+            //myCus.cap_nhat_chi_so_cong_to(ma_cto_cu, ky_hd, csCuoi_CToCu);
 
             string maCtoKh = tblKH.Rows[0].Field<string>("ma_cong_to");
             // Cập nhật mã công tơ mới trong bảng khach_hang
@@ -419,7 +419,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             txt_swapModal_csCuoiCu.Text = "0";
         }
 
-        txt_swapModal_csDauMoi.Text = "0";
+        txt_swapModal_csDauMoi.Text = txt_swapModal_csCuoiCu.Text;
         txt_swapModal_csCuoiMoi.Text = "0";
         txt_swapModal_maCtoMoi.Text = "";
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
