@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
+using System.Collections.Generic;
 
 public partial class DanhSachKhachHang : System.Web.UI.Page
 {
@@ -182,7 +183,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
                 txt_swapModal_csCuoiCu.Text = "0";
             }
 
-            txt_swapModal_csDauMoi.Text = txt_swapModal_csCuoiCu.Text;
+            txt_swapModal_csDauMoi.Text = "0";
             txt_swapModal_csCuoiMoi.Text = "0";
             txt_swapModal_maCtoMoi.Text = "";
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -383,6 +384,36 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         }
     }
 
+    protected void btnXoaCTo_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        string ma_kh = txt_swapModal_maKH.Text;
+        string ten_kh = txt_swapModal_tenKH.Text;
+        string ma_cto_cu = drp_swapModal_cTo.SelectedValue;
+
+        DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
+        int id_dn = Convert.ToInt32(id_doanh_nghiep);
+
+        
+        try
+        {
+            // Cập nhật trạng thái công tơ và xóa
+            myCus.cap_nhat_trang_thai_cong_to(ma_cto_cu, 0);
+            string[] arrMaCTo = tblKH.Rows[0].Field<string>("ma_cong_to").Split('|');
+            List<string> listMaCTo = new List<string>(arrMaCTo);
+            listMaCTo.Remove(ma_cto_cu);
+            string maCtoMoiKh = String.Join("|", listMaCTo.ToArray());
+            myCus.cap_nhat_cong_to_khach_hang(ma_kh, maCtoMoiKh);
+            e.Result = "1";
+            string log = "Xóa công tơ của khách hàng " + ten_kh + " mã công tơ: " + ma_cto_cu;
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+        }
+        catch (Exception)
+        {
+            e.Result = "0";
+        }
+    }
+
     protected string convertTenBangGia(object idBangGia)
     {
         string result = "";
@@ -419,7 +450,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             txt_swapModal_csCuoiCu.Text = "0";
         }
 
-        txt_swapModal_csDauMoi.Text = txt_swapModal_csCuoiCu.Text;
+        txt_swapModal_csDauMoi.Text = "0";
         txt_swapModal_csCuoiMoi.Text = "0";
         txt_swapModal_maCtoMoi.Text = "";
         System.Text.StringBuilder sb = new System.Text.StringBuilder();

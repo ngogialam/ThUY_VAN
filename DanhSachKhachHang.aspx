@@ -293,7 +293,21 @@
             else {
                 alert("Cập nhật thất bại. Vui lòng thử lại!");
             }
+        }//Đổi công tơ
+        function onXoaCTo() {
+            cbXoaCTo.PerformCallback()
         }
+        function onClickXoaCToComplete(s, e) {
+            if (e.result == "1") {
+                alert("Xóa công tơ thành công");
+                location.reload();
+            } 
+            else {
+                alert("Xóa công tơ thất bại. Vui lòng thử lại!");
+            }
+        }
+
+
 
     </script>
 </asp:Content>
@@ -852,10 +866,14 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="btnDoiCTo" class="btn btn-success" onclick="onClickDoiCTo();">Cập nhật</button>
+                            <button type="button" class="btn btn-success" onclick="onClickDoiCTo();">Cập nhật</button>
+                            <button type="button" class="btn btn-success" onclick="onXoaCTo();">Xóa công tơ</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                             <dx:aspxcallback id="cbDoiCTo" clientinstancename="cbDoiCTo" clientidmode="Static" runat="server" oncallback="btnDoiCTo_Callback">
                                   <ClientSideEvents CallbackComplete="onClickDoiCToComplete" />
+                            </dx:aspxcallback>
+                            <dx:aspxcallback id="cbXoaCTo" clientinstancename="cbXoaCTo" clientidmode="Static" runat="server" oncallback="btnXoaCTo_Callback">
+                                  <ClientSideEvents CallbackComplete="onClickXoaCToComplete" />
                             </dx:aspxcallback>
                         </div>
                     </div>
