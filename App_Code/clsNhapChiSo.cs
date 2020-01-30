@@ -116,6 +116,48 @@ public class clsNhapChiSo
         }
 
     }
+    public DataTable get_danh_cs_themky(string ky)
+    {
+        SqlConnection myConn = null;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        string sql = "";
+
+        sql = "select * from chi_so_cong_to ";
+        sql = sql + " where ky='" + ky + "'";
+        sql = sql + " and id_doanh_nghiep = " + id_doanh_nghiep;
+
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+
+    }
     public DataTable get_danh_sach_nhap_cs_tong(string ky)
     {
         SqlConnection myConn = null;
