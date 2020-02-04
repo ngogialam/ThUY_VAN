@@ -96,7 +96,21 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         clsBaocao cslBC = new clsBaocao();
         string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
         if (loai_bc == "01")
-            tbx = cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd, id_doanh_nghiep);
+        {
+            if (id_khu == 0)
+            {
+                foreach (ListItem id_khu_item in ddlXomKhu.Items)
+                {
+                    //System.Windows.Forms.MessageBox.Show(id_khu_item.Value);
+                    if (Convert.ToInt32(id_khu_item.Value) != id_khu) 
+                        tbx.Merge(cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(Convert.ToInt32(id_khu_item.Value), ky_hd, id_doanh_nghiep));
+                }
+            }
+            else
+            {
+                tbx.Merge(cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd, id_doanh_nghiep));
+            }
+        }
         else
             tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_khu, ky_hd, id_doanh_nghiep);
 
