@@ -84,14 +84,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         if (ckbTrangThai.Checked == true) kich_hoat = 1;
         try
         {
-            if (loaiBG == "BT" | loaiBG == "HH")
-            {
-                myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, 0, 0, 0, 0, kich_hoat, loaiBG);
-            }
-            else
-            {
-                myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat, loaiBG);
-            }
+            myCus.cap_nhat_gia_dien(id_bang_gia, ten_bang_gia, ten_viet_tat, don_gia, tien_thue_vat, phan_tram_thue, gia_ban, kich_hoat, loaiBG);
             myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
             e.Result = "1";
         }
@@ -114,14 +107,7 @@ public partial class DanhMucBangGiaDien : System.Web.UI.Page
         int i = 0;
         if (ckbTrangThai_AddModal.Checked == true)
             kichHoat = 1;
-        if (loaiBG == "BT" | loaiBG == "HH")
-        {
-            i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, 0, 0, 0, 0, kichHoat, loaiBG);
-        }
-        else
-        {
-            i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, donGia, tienThue, phanTramThue, giaBan, kichHoat, loaiBG);
-        }
+        i = myCus.them_moi_gia_dien(tenBangGia, tenVietTat, donGia, tienThue, phanTramThue, giaBan, kichHoat, loaiBG);
         if (i == 0)
             e.Result = "0";
         else
