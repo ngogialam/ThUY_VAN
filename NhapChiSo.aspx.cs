@@ -100,7 +100,7 @@ public partial class NhapChiSo : System.Web.UI.Page
                 string tungay1 = tungay.Substring(0, 4) + "-" + tungay.Substring(4, 2) + "-" + tungay.Substring(6, 2);
                 string denngay1 = denngay.Substring(0, 4) + "-" + denngay.Substring(4, 2) + "-" + denngay.Substring(6, 2);
                 string thang = kyhd.Substring(0, 2);
-                int intthang = Convert.ToInt32(thang) + 1;
+                int intthang = Convert.ToInt32(thang);
                 if (intthang < 10)
                 {
                     thang = "0" + intthang.ToString();
