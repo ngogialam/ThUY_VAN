@@ -874,5 +874,22 @@ public class clsHoaDon
         }
         return recordsAffected;
     }
+    //Chuyen doi hoa don theo so 
+    public string PrintInvoiceByNo(string invToken, string userName, string userPass)
+    {
+        PortalInvWS.PortalService portalservice = new PortalInvWS.PortalService();
+        string pdf = portalservice.convertForStore(invToken, userName, userPass);
+        if (CheckConvertFor(pdf).Contains("ERR"))
+        {
+            return CheckConvertFor(pdf);
+        }
+        else
+        {
+
+
+            return pdf;
+        }
+
+    }
 
 }

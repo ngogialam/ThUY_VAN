@@ -116,6 +116,9 @@
                          <li>
                             <a href='<%= ResolveUrl("ThayTheHoaDon.aspx")%>'>Lập hóa đơn thay thế</a>
                         </li>
+                         <li>
+                            <a href='<%= ResolveUrl("HuyHoaDon.aspx")%>'>Hủy hóa đơn</a>
+                        </li>
 
                     </ul>
                 </li>
@@ -159,7 +162,7 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseExamplePages1">
                         <li>
-                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoTongHop.aspx")%>'>A. Báo cáo tổng hợp</a>
+                            <a href='<%= ResolveUrl("BAO_CAO/BaoCaoTongHop.aspx")%>'>A. Báo cáo tình hình sử dụng</a>
                         </li>
                         <li>
                             <a href='<%= ResolveUrl("BAO_CAO/BangKeTienDien.aspx")%>'>B. Bảng kê tiền điện</a>
