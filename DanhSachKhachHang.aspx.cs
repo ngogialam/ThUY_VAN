@@ -359,6 +359,8 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             //System.Windows.Forms.MessageBox.Show(trang_thai.ToString());
             myCus.them_moi_cong_to(ma_cto_moi, ma_kh, 1, id_dn, trang_thai);
             myCus.them_moi_chi_so_cong_to(ma_cto_moi, csDau_CToMoi, csCuoi_CToMoi, ky_hd, id_dn);
+            // Cập nhật chỉ số công tơ cũ
+            myCus.cap_nhat_chi_so_cong_to(ma_cto_cu.Trim(), ky_hd, csCuoi_CToCu);
 
             // Cập nhật trạng thái công tơ cũ trong bảng chi_so_cong_to và dm_cong_to
             // myCus.cap_nhat_trang_thai_chi_so_cong_to(ma_cto_cu, ky_hd, 0);
