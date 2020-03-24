@@ -124,7 +124,7 @@ public class clsNhapChiSo
 
         sql = "select a.* from chi_so_cong_to a, dm_cong_to b ";
         sql = sql + " where a.ky='" + ky + "' and a.ma_cong_to=b.ma_cong_to and b.trang_thai=1 ";
-        sql = sql + " and id_doanh_nghiep = " + id_doanh_nghiep;
+        sql = sql + " and a.id_doanh_nghiep = " + id_doanh_nghiep;
 
         try
         {
