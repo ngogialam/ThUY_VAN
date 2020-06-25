@@ -14,7 +14,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
     private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "TV/19E";
+    //private static string serial = "TV/19E";
 
     HtmlToPdfConverter htmlToPdf = new HtmlToPdfConverter();
     clsHoaDon myINV = new clsHoaDon();
@@ -37,6 +37,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
     {
 
         string strSoHD = txtSoHD.Text.ToString();
+        string serial = drpSerial.SelectedValue.ToString();
         if (!string.IsNullOrEmpty(strSoHD))
         {
             //  string strDenso = txtDenSo.Text.ToString();
@@ -135,7 +136,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         string makh = (GirdViewReplace.Rows[0].FindControl("lblMaKH") as Label).Text.ToString();
         string idtram_ba = (GirdViewReplace.Rows[0].FindControl("idTramBA") as Label).Text.ToString();
         string id_khu = (GirdViewReplace.Rows[0].FindControl("idKhu") as Label).Text.ToString();
-
+        string serial = drpSerial.SelectedValue.ToString();
         //Thông tin mới
         string tenkhnew = (GirdViewReplace.Rows[0].FindControl("lblTenKH") as TextBox).Text.ToString();
         int sohonew = Convert.ToInt16((GirdViewReplace.Rows[0].FindControl("lblSoHo") as TextBox).Text.ToString());

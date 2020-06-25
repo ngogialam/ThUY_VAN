@@ -9,7 +9,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
     private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "TV/19E";
+   
 
     clsHoaDon myINV = new clsHoaDon();
     clsNguoiBan mySeller = new clsNguoiBan();
@@ -56,6 +56,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
         string id_tram = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
         invList = myINV.get_du_lieu_hd(id_tram, kyhd, "1");
+        string serial = drpSerial.SelectedValue.ToString();
         string xmlData = myINV.ParseIInvoice(invList);
         int i = 0;
         try

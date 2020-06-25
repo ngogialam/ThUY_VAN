@@ -10,6 +10,14 @@
             <div class="col-xl-3 col-sm-4 mb-2">
                 <asp:TextBox ID="txtSoHD" CssClass="form-control" runat="server" placeholder="Nhập số hóa đơn cần thay thế"></asp:TextBox>
             </div>
+             <div class="col-xl-3 col-sm-4 mb-2">
+               <asp:DropDownList runat="server" ID="drpSerial" CssClass="form-control">
+                    <asp:ListItem Value="TV/20E" Selected="True"> TV/20E </asp:ListItem>
+                    <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>                
+
+
+               </asp:DropDownList>                         
+            </div>
             <div class="col-xl-3 col-sm-2 mb-2">
                 <asp:Button ID="btnLaySoLieu" runat="server" class="btn btn-success" Text="Thay thế" OnClick="btnLaySoLieu_Click"/>
                 <asp:Button ID="btnThayThe" runat="server" class="btn btn-primary" Text="Phát hành hóa đơn" OnClick="btnPhatHanhHD_Click" OnClientClick="return confirm('Bạn có chắc chắn thay thế hóa đơn?')" />

@@ -17,7 +17,7 @@ public partial class InChuyenDoiTheoSoHD : System.Web.UI.Page
     private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "TV/19E";
+    //private static string serial = "TV/19E";
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -36,6 +36,7 @@ public partial class InChuyenDoiTheoSoHD : System.Web.UI.Page
         string strDenso = txtDenSo.Text.ToString();
         int tuso = Convert.ToInt32(strTuso);
         int denso = Convert.ToInt32(strDenso);
+        string serial = drpSerial.SelectedValue.ToString();
         int i;
         string InvToken;
         string htmlInv = "";

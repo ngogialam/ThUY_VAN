@@ -13,6 +13,14 @@
             <div class="col-xl-3 col-sm-4 mb-2">
                 <asp:TextBox ID="txtDenSo" CssClass="form-control" placeholder="Đến số" runat="server"></asp:TextBox>
             </div>
+               <div class="col-xl-3 col-sm-4 mb-2">
+               <asp:DropDownList runat="server" ID="drpSerial" CssClass="form-control">
+                    <asp:ListItem Value="TV/20E" Selected="True"> TV/20E </asp:ListItem>
+                    <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>                
+
+
+               </asp:DropDownList>                         
+            </div>
             <div class="col-xl-3 col-sm-2 mb-2">
                 <%-- <asp:button id="btnLaySL" runat="server" text="Lấy số liệu" cssclass="btn btn-primary" onclick="btnLaySL_Click" />--%>
                 <asp:Button ID="btnInLoHD" runat="server" class="btn btn-success" Text="In chuyển đổi theo lô" OnClick="btnInLoHD_Click" OnClientClick="return confirm('Bạn có chắc chắn in lô hóa đơn (Chỉ in các hóa đơn đã phát hành)?')" />
