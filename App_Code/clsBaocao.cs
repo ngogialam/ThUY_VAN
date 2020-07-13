@@ -463,7 +463,7 @@ public class clsBaocao
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and c.id_khu=" + id_khu + "  ";
             // sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
-            //sql = sql + " and b.trang_thai=1 ";
+            sql = sql + " and b.trang_thai=1 ";
             sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
             sql = sql + " ) m  order by m.thu_tu ";
 
