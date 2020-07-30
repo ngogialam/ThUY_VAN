@@ -14,7 +14,7 @@ public partial class HuyHoaDon : System.Web.UI.Page
     private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "TV/19E";
+    private static string serial = "TV/20E";
 
     HtmlToPdfConverter htmlToPdf = new HtmlToPdfConverter();
     clsHoaDon myINV = new clsHoaDon();
