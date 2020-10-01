@@ -26,21 +26,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
             ddlTramBA.DataSource = tram_bien_ap;
             ddlTramBA.DataBind();
 
-
-
-            DataTable khu = myCus.get_khu();
-            //DataRow newRow1 = bang_gia_dien.NewRow();
-            //newRow[0] = 0;
-            //newRow[1] = "Tất cả";
-            //bang_gia_dien.Rows.InsertAt(newRow, 0);
-            ddlXomKhu.DataSource = khu;
-            ddlXomKhu.DataBind();
-
             DataTable nam = myCus.get_nam();
-            //DataRow newRow1 = bang_gia_dien.NewRow();
-            //newRow[0] = 0;
-            //newRow[1] = "Tất cả";
-            //bang_gia_dien.Rows.InsertAt(newRow, 0);
             ddlNam.DataSource = nam;
             ddlNam.DataBind();
         }
@@ -57,12 +43,9 @@ public partial class BangKeTienDien : System.Web.UI.Page
         if (thang != "" && nam != "")
         {
             string ky_hd = thang + "/" + nam;
-            int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
             string id_tram_bien_ap = ddlTramBA.SelectedValue.ToString();
 
-            bindGrid(id_tram_bien_ap, id_dia_ban, ky_hd);
-            //     bindGrid(tungay1, denngay1, id_dia_ban);
-
+            bindGrid(id_tram_bien_ap, ky_hd);
         }
         else
         {
@@ -85,14 +68,14 @@ public partial class BangKeTienDien : System.Web.UI.Page
         GridView1.PageIndex = e.NewPageIndex;
         // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
-    void bindGrid(string id_tram_bien_ap, int id_khu, string ky_hd)
+    void bindGrid(string id_tram_bien_ap, string ky_hd)
     {
         DataTable tbx = new DataTable();
         DataTable tbxView = new DataTable();
         clsBaocao cslBC = new clsBaocao();
         //string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
-        tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, id_khu, ky_hd, id_doanh_nghiep);
+        tbx = cslBC.SELECT_BANG_KE_TIEN_DIEN(id_tram_bien_ap, ky_hd, id_doanh_nghiep);
 
         DataRow dr;
         tbxView.Columns.Add("stt", typeof(String));

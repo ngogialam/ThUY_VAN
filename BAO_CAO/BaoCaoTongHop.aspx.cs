@@ -32,13 +32,13 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
             //ddlBangGiaDien.DataSource = bang_gia_dien;
             //ddlBangGiaDien.DataBind();
 
-            DataTable khu = myCus.get_khu();
-            DataRow newRow2 = khu.NewRow();
+            DataTable tram_ba = myCus.get_tram_bien_ap();
+            DataRow newRow2 = tram_ba.NewRow();
             newRow2[0] = 0;
             newRow2[1] = "Tất cả";
-            khu.Rows.InsertAt(newRow2, 0);
-            ddlXomKhu.DataSource = khu;
-            ddlXomKhu.DataBind();
+            tram_ba.Rows.InsertAt(newRow2, 0);
+            ddlTramBA.DataSource = tram_ba;
+            ddlTramBA.DataBind();
 
             DataTable nam = myCus.get_nam();
             //DataRow newRow1 = bang_gia_dien.NewRow();
@@ -62,7 +62,7 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         {
 
             string ky_hd = thang + "/" + nam;
-            int id_dia_ban = int.Parse(ddlXomKhu.SelectedValue.ToString());
+            int id_dia_ban = int.Parse(ddlTramBA.SelectedValue.ToString());
             string loai_bc = ddlChonBC.SelectedValue.ToString();
 
             bindGrid(loai_bc, id_dia_ban, ky_hd);
@@ -90,29 +90,29 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         GridView1.PageIndex = e.NewPageIndex;
         // bindGrid(int.Parse(drpDonVi.SelectedValue.ToString()));
     }
-    void bindGrid(string loai_bc, int id_khu, string ky_hd)
+    void bindGrid(string loai_bc, int id_tram_ba, string ky_hd)
     {
         DataTable tbx = new DataTable();
         clsBaocao cslBC = new clsBaocao();
         string id_doanh_nghiep = Session["IDDoanhNghiep"].ToString();
         if (loai_bc == "01")
         {
-            if (id_khu == 0)
+            if (id_tram_ba == 0)
             {
-                foreach (ListItem id_khu_item in ddlXomKhu.Items)
+                foreach (ListItem id_tram_ba_item in ddlTramBA.Items)
                 {
                     //System.Windows.Forms.MessageBox.Show(id_khu_item.Value);
-                    if (Convert.ToInt32(id_khu_item.Value) != id_khu) 
-                        tbx.Merge(cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(Convert.ToInt32(id_khu_item.Value), ky_hd, id_doanh_nghiep));
+                    if (Convert.ToInt32(id_tram_ba_item.Value) != id_tram_ba)
+                        tbx.Merge(cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(Convert.ToInt32(id_tram_ba_item.Value), ky_hd, id_doanh_nghiep));
                 }
             }
             else
             {
-                tbx.Merge(cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_khu, ky_hd, id_doanh_nghiep));
+                tbx.Merge(cslBC.SELECT_SAN_LUONG_THEO_TRAM_BA(id_tram_ba, ky_hd, id_doanh_nghiep));
             }
         }
         else
-            tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_khu, ky_hd, id_doanh_nghiep);
+            tbx = cslBC.SELECT_SAN_LUONG_THEO_BANG_GIA_DIEN(id_tram_ba, ky_hd, id_doanh_nghiep);
 
         double san_luong = 0;
         double tong_tien_truoc_thue = 0;
@@ -146,7 +146,7 @@ public partial class BaoCaoTongHop : System.Web.UI.Page
         GridView1.DataBind();
         ViewState["DataTable"] = tbx;
         Session["BaoCaoTongHopTable"] = tbx;
-        Session["BaoCaoTongHopTenXomKhu"] = "Xóm/khu: " + ddlXomKhu.SelectedItem.ToString();
+        Session["BaoCaoTongHopTenXomKhu"] = "Xóm/khu: " + ddlTramBA.SelectedItem.ToString();
         Session["BaoCaoTongHopLoaiBaoCao"] = ddlChonBC.SelectedItem.ToString().ToUpper();
         Session["BaoCaoTongHopThangNam"] = "THÁNG " + ddlThang.SelectedItem + " NĂM " + ddlNam.SelectedItem;
         Session["BaoCaoTongHopNgayIn"] = "Ngày in:  " + DateTime.Today.ToString("dd/MM/yyyy");

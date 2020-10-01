@@ -19,13 +19,6 @@
                         </asp:DropDownList>
                     </div>
                 </div>
-                <div class="user-info-row" style="border: none">
-                    <label class="key">Xóm/Khu (<span style="color: red">*</span>):</label>
-                    <div class="value">
-                        <asp:DropDownList ID="ddlXomKhu" runat="server" DataTextField="ten_khu" DataValueField="id_khu" CssClass="form-control">
-                        </asp:DropDownList>
-                    </div>
-                </div>
             </div>
             <div class="col-sm-6">
                 <div class="user-info-row" style="border: none">

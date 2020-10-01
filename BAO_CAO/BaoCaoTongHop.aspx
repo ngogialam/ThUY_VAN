@@ -22,9 +22,9 @@
                     </div>
                 </div>
                 <div class="user-info-row" style="border: none">
-                    <label class="key">Xóm/Khu (<span style="color: red">*</span>):</label>
+                    <label class="key">Trạm biến áp (<span style="color: red">*</span>):</label>
                     <div class="value">
-                        <asp:DropDownList ID="ddlXomKhu" runat="server" DataTextField="ten_khu" DataValueField="id_khu" CssClass="form-control">
+                        <asp:DropDownList ID="ddlTramBA" runat="server" DataTextField="ten_tram_bien_ap" DataValueField="id_tram_bien_ap" CssClass="form-control">
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="ma" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                    HeaderText="Mã KH" />
+                                    HeaderText="Mã trạm" />
                             </Columns>
                             <Columns>
                                 <asp:BoundField DataField="ten" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
