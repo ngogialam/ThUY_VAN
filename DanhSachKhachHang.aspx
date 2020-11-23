@@ -244,10 +244,10 @@
         function onClickDoiCTo() {
             var re = /d+/;
             var txtMaCTo = $('#txt_swapModal_maCtoMoi').val();
-            var txtCSCu = parseInt($('#txt_swapModal_csCu').val());
-            var txtCSCuoiCu = parseInt($('#txt_swapModal_csCuoiCu').val());
-            var txtCSDauMoi = parseInt($('#txt_swapModal_csDauMoi').val());
-            var txtCSCuoiMoi = parseInt($('#txt_swapModal_csCuoiMoi').val());
+            var txtCSCu = $('#txt_swapModal_csCu').val();
+            var txtCSCuoiCu = $('#txt_swapModal_csCuoiCu').val();
+            var txtCSDauMoi = $('#txt_swapModal_csDauMoi').val();
+            var txtCSCuoiMoi = $('#txt_swapModal_csCuoiMoi').val();
 
             if (txtMaCTo === "") {
                 alert("Vui lòng nhập mã công tơ!");

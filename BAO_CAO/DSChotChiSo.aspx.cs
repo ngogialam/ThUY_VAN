@@ -280,8 +280,8 @@ public partial class DSChotChiSo : System.Web.UI.Page
             }
             else// in 6 tháng cuối năm phải tính được chỉ số của tháng 6 năm đó
             {
-                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "06", nam);
-                newRowTong[10] = tong_thang_6;
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "10", nam);
+                newRowTong[14] = tong_thang_6;
             }
             newRowTong[17] = tbx.Rows[i]["cot_dien_so"].ToString();
             
