@@ -1020,14 +1020,14 @@ public class clsBaocao
         // return dts;    
     }
 
-    public DataTable SELECT_SAN_LUONG_THEO_TRAM_BA(int id_khu, string ky_hd, string id_doanh_nghiep)
+    public DataTable SELECT_SAN_LUONG_THEO_TRAM_BA(int id_tba, string ky_hd, string id_doanh_nghiep)
     {
         string sql = "";
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = myConn;
-        if (id_khu == 0)
+        if (id_tba == 0)
         {
             sql = "select ROW_NUMBER() OVER(ORDER BY d.ten_tram_bien_ap ASC) as stt, ";
             sql = sql + " d.id_tram_bien_ap as ma, d.ten_tram_bien_ap as ten,sum(a.dien_nang_tt) as dien_nang_tt,sum(a.tong_tien_truoc_thue) as tong_tien_truoc_thue , ";
@@ -1051,7 +1051,7 @@ public class clsBaocao
             sql = sql + " and b.id_khu=c.id_khu  ";
             sql = sql + " and b.id_tram_bien_ap=d.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
-            sql = sql + "  and c.id_khu=" + id_khu + "  ";
+            sql = sql + "  and b.id_tram_bien_ap=" + id_tba + "  ";
             sql = sql + "  and a.ky_hd='" + ky_hd + "'  ";
             sql = sql + " group by d.id_tram_bien_ap,d.ten_tram_bien_ap ";
             sql = sql + " order by d.ten_tram_bien_ap ";
