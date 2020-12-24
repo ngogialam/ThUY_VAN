@@ -247,11 +247,6 @@ public partial class LapHoaDon : System.Web.UI.Page
                 dntt = cs_moi - cs_cu;
                 sh = Convert.ToInt32(CusList.Rows[i]["so_ho"].ToString());
                 total = myNCS.tinh_tien_dien_giam_tru(dntt, sh, id_bg);
-
-                vatamount = vatrate * total / 100;
-                //Làm tròn
-                vatamount = Math.Round(vatamount, 0, MidpointRounding.AwayFromZero);
-
                 // Giảm trừ
                 string test = CusList.Rows[i]["ma_kh"].ToString();
                 Double giam_tru = 0;
@@ -261,7 +256,13 @@ public partial class LapHoaDon : System.Web.UI.Page
                 {
                     giam_tru = Convert.ToDouble(table_giam_tru.Rows[0]["giam_tru"].ToString());
                 }
-                amount = total + vatamount - giam_tru;
+                total = total - giam_tru;
+
+                vatamount = vatrate * total / 100;
+                //Làm tròn
+                vatamount = Math.Round(vatamount, 0, MidpointRounding.AwayFromZero);
+
+                amount = total + vatamount;
                 //  j = i;
                 // do
                 //{
