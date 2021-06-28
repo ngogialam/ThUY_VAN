@@ -323,7 +323,7 @@ public class clsHoaDon
     public string PaymentInvoice(string Fkey, string userName, string userPass)
     {
         BusinessInvWS.BusinessService businessService = new BusinessInvWS.BusinessService();
-        string res = businessService.confirmPaymentFkey(Fkey, userName, userPass);      
+        string res = businessService.confirmPaymentDetailFkey(Fkey, userName, userPass);      
         return res;
     }
     public string CheckConvertFor(string ReturnValue)
