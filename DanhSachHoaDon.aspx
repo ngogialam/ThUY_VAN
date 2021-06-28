@@ -32,15 +32,16 @@
                     <asp:ListItem Value="3">Hóa đơn đã hủy</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div class="col-xl-3 col-sm-4 mb-2">
+            <div class="col-xl-2 col-sm-4 mb-2">
                 <asp:DropDownList runat="server" ID="drpTram" DataValueField="id_tram_bien_ap" DataTextField="ten_tram_bien_ap" CssClass="form-control"></asp:DropDownList>
             </div>
-            <div class="col-xl-3 col-sm-4 mb-2">
+            <div class="col-xl-2 col-sm-4 mb-2">
                 <asp:DropDownList runat="server" ID="drpKy" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>
             </div>
-            <div class="col-xl-3 col-sm-2 mb-2">
+            <div class="col-xl-5 col-sm-2 mb-2">
                 <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
                 <asp:Button ID="btnInLoHD" runat="server" class="btn btn-success" Text="In chuyển đổi theo lô" OnClick="btnInLoHD_Click" OnClientClick="return confirm('Bạn có chắc chắn in lô hóa đơn (Chỉ in các hóa đơn đã phát hành)?')" />
+            <asp:Button ID="btnThanhToanHD" runat="server" class="btn btn-info" Text="Thanh toán cả trạm" OnClick="btnThanhToanHD_Click" OnClientClick="return confirm('Bạn có chắc chắn thanh toán toàn bộ hóa đơn?')" />
             </div>
         </div>
         <div class="row">

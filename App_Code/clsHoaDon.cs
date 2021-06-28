@@ -319,6 +319,13 @@ public class clsHoaDon
         }
 
     }
+    //Thanh toán hóa đơn
+    public string PaymentInvoice(string Fkey, string userName, string userPass)
+    {
+        BusinessInvWS.BusinessService businessService = new BusinessInvWS.BusinessService();
+        string res = businessService.confirmPaymentFkey(Fkey, userName, userPass);      
+        return res;
+    }
     public string CheckConvertFor(string ReturnValue)
     {
         string error = "";
@@ -395,6 +402,40 @@ public class clsHoaDon
         cmd.Parameters.AddWithValue("@ky_hieu", ky_hieu);
         cmd.Parameters.AddWithValue("@ky", ky);
         cmd.Parameters.AddWithValue("@trang_thai", trang_thai);
+        cmd.Parameters.AddWithValue("@id_doanh_nghiep", id_doanh_nghiep);
+
+        int recordsAffected = 0;
+        try
+        {
+            myConn.Open();
+            recordsAffected = cmd.ExecuteNonQuery();
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
+    //Cap Nhat Thanh toán
+    public int updatePayment(string id, string ky, string thanh_toan)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        // cmd.Connection = myConn;            
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        string CommandText = "update hoa_don set thanh_toan=@thanh_toan where id=@id and ky_hd=@ky and id_doanh_nghiep=@id_doanh_nghiep";
+        SqlCommand cmd = new SqlCommand(CommandText, myConn);
+        cmd.Parameters.AddWithValue("@id", id);
+        cmd.Parameters.AddWithValue("@ky", ky);
+        cmd.Parameters.AddWithValue("@thanh_toan", thanh_toan);
         cmd.Parameters.AddWithValue("@id_doanh_nghiep", id_doanh_nghiep);
 
         int recordsAffected = 0;

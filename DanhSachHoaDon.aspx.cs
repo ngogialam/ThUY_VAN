@@ -76,4 +76,32 @@ public partial class DanhSachHoaDon : System.Web.UI.Page
 
     }
 
+    protected void btnThanhToanHD_Click(object sender, EventArgs e)
+    {
+        string id_tram = drpTram.SelectedValue.ToString();
+        string kyhd = drpKy.SelectedItem.ToString();
+        invList = myINV.get_danh_sach_hddt(id_tram, kyhd, "2");
+        int i;
+        string listFkey = "";
+        for (i = 0; i < invList.Rows.Count; i++)
+        {
+            if (i < (invList.Rows.Count - 1))
+            {
+                listFkey = listFkey + invList.Rows[i]["id"].ToString() + "_";
+            }
+            else
+            {
+                listFkey = listFkey + invList.Rows[i]["id"].ToString();
+            }
+        }
+        string res = myINV.PaymentInvoice(listFkey, userName, userPass);
+        txtErr.Text = res;
+        if (GridViewEman.Rows.Count > 0)
+        {
+            GridViewEman.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+
+
+    }
+
 }
