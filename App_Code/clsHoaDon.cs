@@ -313,8 +313,6 @@ public class clsHoaDon
         }
         else
         {
-
-
             return pdf;
         }
 
