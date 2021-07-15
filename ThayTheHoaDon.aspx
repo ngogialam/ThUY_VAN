@@ -12,7 +12,8 @@
             </div>
              <div class="col-xl-3 col-sm-4 mb-2">
                <asp:DropDownList runat="server" ID="drpSerial" CssClass="form-control">
-                    <asp:ListItem Value="TV/20E" Selected="True"> TV/20E </asp:ListItem>
+		<asp:ListItem Value="TV/21E" Selected="True"> TV/21E </asp:ListItem>
+                    <asp:ListItem Value="TV/20E"> TV/20E </asp:ListItem>
                     <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>                
 
 
@@ -23,6 +24,22 @@
                 <asp:Button ID="btnThayThe" runat="server" class="btn btn-primary" Text="Phát hành hóa đơn" OnClick="btnPhatHanhHD_Click" OnClientClick="return confirm('Bạn có chắc chắn thay thế hóa đơn?')" />
             </div>
         </div>
+<div class="row">
+<div class="col-xl-3 col-sm-4 mb-2">
+                
+                <p>Mẫu số, ký hiệu mới</p>
+</div>
+        </div>   
+<div class="row">
+
+             <div class="col-xl-3 col-sm-4 mb-2">
+               <asp:DropDownList runat="server" ID="drpSerialNew" CssClass="form-control">
+<asp:ListItem Value="TV/21E" Selected="True"> TV/21E </asp:ListItem>
+                    <asp:ListItem Value="TV/20E"> TV/20E </asp:ListItem>
+                    <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>            
+               </asp:DropDownList>                         
+            </div>
+</div>
         <div class="row">
             <div class="col-sm-12 mb-2">
                 <asp:Label runat="server" ID="txtErr" Font-Size="14px"></asp:Label>

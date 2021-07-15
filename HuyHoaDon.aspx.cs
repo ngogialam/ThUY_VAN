@@ -14,7 +14,7 @@ public partial class HuyHoaDon : System.Web.UI.Page
     private static string userName = "thuyvanws";
     private static string userPass = "123456aA@";
     private static string pattern = "01GTKT0/001";
-    private static string serial = "TV/20E";
+   // private static string serial = "TV/20E";
 
     HtmlToPdfConverter htmlToPdf = new HtmlToPdfConverter();
     clsHoaDon myINV = new clsHoaDon();
@@ -35,7 +35,7 @@ public partial class HuyHoaDon : System.Web.UI.Page
 
     protected void btnLaySoLieu_Click(object sender, EventArgs e)
     {
-
+string serial = drpSerial.SelectedValue.ToString();
         string strSoHD = txtSoHD.Text.ToString();
         if (!string.IsNullOrEmpty(strSoHD))
         {
@@ -136,7 +136,7 @@ public partial class HuyHoaDon : System.Web.UI.Page
         string mau_so = (GirdViewReplace.Rows[0].FindControl("lblMauSo") as Label).Text.ToString();
         string ky_hieu = (GirdViewReplace.Rows[0].FindControl("lblKyHieu") as Label).Text.ToString();
         string ky = (GirdViewReplace.Rows[0].FindControl("lblKy") as Label).Text.ToString();
-       
+       string serial = drpSerial.SelectedValue.ToString();
 
         try
         {

@@ -406,7 +406,7 @@ public class clsNhapChiSo
         return total;
 
     }
-    //Tính tiền điện sinh hoạt
+    //Tính tiền điện MDK
     public Double tinh_tien_dien_sh(Double dntt, int sh, string id_bang_gia)
     {
         Double total = 0;
@@ -493,135 +493,6 @@ public class clsNhapChiSo
         total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
         return total;
     }
-
-    // GiangPTO 23/12/2020 - Thêm hàm Lập hóa đơn riêng cho các tháng giảm trừ (tháng 10, 11, 12) -- START
-    //Lấy bảng giá chi tiết
-    public DataTable lay_tien_dien_giam_tru(string ma_kh)
-    {
-        SqlConnection myConn = null;
-        string sql = "select * from temp_giam_tru where ma_kh = '" + ma_kh + "'";
-        try
-        {
-            clsConnect cnstr = new clsConnect();
-            myConn = cnstr.ConnectSQL();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = myConn;
-            cmd.CommandText = sql;
-            cmd.CommandType = CommandType.Text;
-            SqlDataAdapter myData = new SqlDataAdapter(cmd);
-            DataSet dts = new DataSet();
-            myConn.Open();
-            myData.Fill(dts);
-            return dts.Tables[0];
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message, ex);
-        }
-        finally
-        {
-            if (myConn != null)
-            {
-                myConn.Close();
-            }
-        }
-    }
-    public Double tinh_tien_dien_sh_giam_tru(Double dntt, int sh, string id_bang_gia)
-    {
-        Double total = 0;
-        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
-        Double[] muc = tinh_cs_6_muc(dntt, sh);
-        Double[] dongiamuc = new Double[] { };
-        int[] muc_giam_tru = { 1, 2, 3, 4 };
-        int j = 0;
-        for (j = 0; j < muc.Length; j++)
-        {
-            Double gia_muc_j = 0;
-            if (Array.IndexOf(muc_giam_tru, j + 1) > -1)
-            {
-                gia_muc_j = 0.9 * muc[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString()); // Giảm 10 % với mức từ 1 -> 4
-            } 
-            else
-            {
-                gia_muc_j = muc[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString());
-            }
-            total = total + gia_muc_j;
-        }
-        return total;
-    }
-
-    public Double tinh_tien_dien_HH_giam_tru(Double dntt, int sh, string id_bang_gia)
-    {
-        Double total = 0;
-        Double dn = 0;
-        Double sumDN = 0;
-        DataTable BangGiaHH = lay_bang_gia_chi_tiet(id_bang_gia);
-        int i = 0;
-        for (i = 0; i < BangGiaHH.Rows.Count; i++)
-        {
-            DataTable dtbtemp = lay_bang_gia(BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
-            int tyle = Convert.ToInt32(BangGiaHH.Rows[i]["ty_le"].ToString().Trim());
-            if (i != BangGiaHH.Rows.Count - 1)
-            {
-                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
-                {
-                    dn = dntt * tyle / 100;
-                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
-                    sumDN = sumDN + dn;
-                    total = total + tinh_tien_dien_MDK(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
-                }
-                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
-                {
-                    dn = dntt * tyle / 100;
-                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
-                    sumDN = sumDN + dn;
-                    total = total + tinh_tien_dien_sh_giam_tru(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
-                }
-            }
-            else
-            {
-                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
-                {
-                    dn = dntt - sumDN;
-                    total = total + tinh_tien_dien_MDK(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
-                }
-                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
-                {
-                    dn = dntt - sumDN;
-                    total = total + tinh_tien_dien_sh_giam_tru(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
-                }
-            }
-
-        }
-
-        return total;
-    }
-    public Double tinh_tien_dien_giam_tru(Double dntt, int sh, string id_bang_gia)
-    {
-
-        Double total = 0;
-        DataTable BangGia = lay_bang_gia(id_bang_gia);
-        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
-        {
-
-            // dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-            // total = dntt * dongia;
-            total = tinh_tien_dien_MDK(dntt, sh, id_bang_gia);
-        }
-        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
-        {
-            total = tinh_tien_dien_sh_giam_tru(dntt, sh, id_bang_gia);
-
-        }
-        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
-        {
-            total = tinh_tien_dien_HH_giam_tru(dntt, sh, id_bang_gia);
-        }
-        //Làm tròn
-        total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
-        return total;
-    }
-    // GiangPTO 23/12/2020 - Thêm hàm Lập hóa đơn riêng cho các tháng giảm trừ (tháng 10, 11, 12) -- END
 
     //Lấy bảng giá
     public DataTable lay_bang_gia(string id_bang_gia)
@@ -1071,42 +942,8 @@ public class clsNhapChiSo
             }
         }
     }
-
-    // GiangPTO 23/12/2020 - Hàm thêm mới hóa đơn đưa cả giảm trừ -- START
-    public void them_moi_hoa_don_giam_tru(Int64 id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to, int so_ho, string ten_kh, string id_tram_bien_ap, string id_khu, Double giam_tru)
-    {
-
-        clsConnect cnstr = new clsConnect();
-        SqlConnection myConn = cnstr.ConnectSQL();
-        SqlCommand cmd = new SqlCommand();
-        string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
-        string sql = "insert into hoa_don(id,ma_kh,ky_hd,tu_ngay,den_ngay,chi_so_cu,chi_so_moi,dien_nang_tt,tong_tien_truoc_thue,vat_rate,thue_gtgt,tong_tien_sau_thue,id_nguoi_nhap,id_bang_gia_dien,ngay_nhap,trang_thai,ma_cong_to,id_doanh_nghiep,so_ho,ten_kh,id_tram_bien_ap,id_khu, giam_tru) ";
-        sql = sql + " values(" + id + ",'" + ma_kh + "','" + ky_hd + "', '" + tu_ngay + "', '" + den_ngay + "'," + chi_so_cu + "," + chi_so_moi + "," + dien_nang_tt + "," + tong_tien_truoc_thue + ",'" + vat_rate + "'," + thue_gtgt + "," + tong_tien_sau_thue + ",'" + id_nguoi_nhap + "','" + id_bang_gia_dien + "',CONVERT( Datetime, GETDATE() ,103),1,'" + ma_cong_to + "'," + id_doanh_nghiep + "," + so_ho + ",N'" + ten_kh + "','" + id_tram_bien_ap + "'," + id_khu + "," + giam_tru + ") ";
-
-        try
-        {
-            myConn.Open();
-            cmd.Connection = myConn;
-            cmd.Parameters.Clear();
-            cmd.CommandText = sql;
-            int recordsAffected = cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message, ex);
-        }
-        finally
-        {
-            if (myConn != null)
-            {
-                myConn.Close();
-            }
-        }
-    }
-    // GiangPTO 23/12/2020 - Hàm thêm mới hóa đơn đưa cả giảm trừ -- END
-
     //Insert hoa_don_chi_tiet
+
     public int them_moi_hoa_don_chi_tiet(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
     {
         int recordsAffected = 0;
