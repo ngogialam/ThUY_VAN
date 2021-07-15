@@ -627,12 +627,12 @@ public class ChotChiSoCto06Report : DevExpress.XtraReports.UI.XtraReport
         lblTenKh.DataBindings.Add("Text", DataSource, "ten_kh");
         lblMaCto.DataBindings.Add("Text", DataSource, "ma_cong_to");
         lblSoCot.DataBindings.Add("Text", DataSource, "cot_dien_so");
-        lblT12.DataBindings.Add("Text", DataSource, "t12", "{0:#,# ;(#,#);0}");
+        lblT6.DataBindings.Add("Text", DataSource, "t6", "{0:#,# ;(#,#);0}");
         lblT1.DataBindings.Add("Text", DataSource, "t1", "{0:#,# ;(#,#);0}");
         lblT2.DataBindings.Add("Text", DataSource, "t2", "{0:#,# ;(#,#);0}");
         lblT3.DataBindings.Add("Text", DataSource, "t3", "{0:#,# ;(#,#);0}");
         lblT4.DataBindings.Add("Text", DataSource, "t4", "{0:#,# ;(#,#);0}");
         lblT5.DataBindings.Add("Text", DataSource, "t5", "{0:#,# ;(#,#);0}");
-        lblT6.DataBindings.Add("Text", DataSource, "t6", "{0:#,# ;(#,#);0}");
+        lblT12.DataBindings.Add("Text", DataSource, "t12", "{0:#,# ;(#,#);0}");
     }
 }

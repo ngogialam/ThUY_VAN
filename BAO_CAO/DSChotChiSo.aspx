@@ -32,9 +32,8 @@
                     <label class="key">Khoảng thời gian (<span style="color: red">*</span>):</label>
                     <div class="value">
                         <asp:DropDownList ID="ddlThoiGian" runat="server" DataTextField="ten_bang_gia" DataValueField="id_thoi_gian" CssClass="form-control">
-                            <asp:ListItem Value="03">03 tháng</asp:ListItem>
-                            <asp:ListItem Value="06">06 tháng</asp:ListItem>
-                            <asp:ListItem Value="12">12 tháng</asp:ListItem>
+                            <asp:ListItem Value="03">06 đầu năm</asp:ListItem>
+                            <asp:ListItem Value="06">06 tháng cuối năm</asp:ListItem>                           
                         </asp:DropDownList>
                     </div>
                 </div>

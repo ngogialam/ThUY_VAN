@@ -19,7 +19,7 @@ public partial class DSChotChiSoDetail : System.Web.UI.Page
             {
                 if (Session["DSChotChiSoKhoangThoiGian"].ToString() == "03")
                 {
-                    ChotChiSoCto03Report rpt = new ChotChiSoCto03Report(); // đối tượng này là report
+                    ChotChiSoCto06Report rpt = new ChotChiSoCto06Report(); // đối tượng này là report
                     DataTable fixDs = new DataTable();
                     DataTable ds = new DataTable();
                     try
@@ -36,7 +36,7 @@ public partial class DSChotChiSoDetail : System.Web.UI.Page
                 }
                 if (Session["DSChotChiSoKhoangThoiGian"].ToString() == "06")
                 {
-                    ChotChiSoCto06Report rpt = new ChotChiSoCto06Report(); // đối tượng này là report
+                    ChotChiSoCto12Report rpt = new ChotChiSoCto12Report(); // đối tượng này là report
                     DataTable fixDs = new DataTable();
                     DataTable ds = new DataTable();
                     try

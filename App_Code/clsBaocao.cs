@@ -421,7 +421,7 @@ public class clsBaocao
         else
         {
             sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,null as chi_so_moi  ";
-            sql = sql + " from dm_cong_to a,khach_hang b,dm_khu c,tram_bien_ap e ";
+            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
