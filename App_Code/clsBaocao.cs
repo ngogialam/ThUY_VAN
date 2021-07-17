@@ -456,12 +456,11 @@ public class clsBaocao
         if (id_tram_bien_ap == "0")
         {
             sql = "select ROW_NUMBER() OVER(ORDER BY m.ma_kh ASC) as stt,ma_kh,ten_kh,dia_chi,cot_dien_so,ma_cong_to from ( select b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
-            sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
-            sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";
-            sql = sql + " and b.id_khu=c.id_khu ";
+            sql = sql + " from hoa_don a,khach_hang b,tram_bien_ap e ";
+            sql = sql + " where a.ma_kh=b.ma_kh and a.trang_thai=2 ";         
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
-            sql = sql + " and c.id_khu=" + id_khu + "  ";
+     
             // sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
             //sql = sql + " and b.trang_thai=1 ";
             sql = sql + " group by b.thu_tu,b.ma_kh,b.ten_kh,b.dia_chi,b.cot_dien_so,a.ma_cong_to ";
