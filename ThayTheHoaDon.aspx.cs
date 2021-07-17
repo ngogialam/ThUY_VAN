@@ -137,6 +137,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         string idtram_ba = (GirdViewReplace.Rows[0].FindControl("idTramBA") as Label).Text.ToString();
         string id_khu = (GirdViewReplace.Rows[0].FindControl("idKhu") as Label).Text.ToString();
         string serial = drpSerial.SelectedValue.ToString();
+string serialNew = drpSerial.SelectedValue.ToString();
         //Thông tin mới
         string tenkhnew = (GirdViewReplace.Rows[0].FindControl("lblTenKH") as TextBox).Text.ToString();
         int sohonew = Convert.ToInt16((GirdViewReplace.Rows[0].FindControl("lblSoHo") as TextBox).Text.ToString());
@@ -242,7 +243,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
             {
                 BusinessInvWS.BusinessService service = new BusinessInvWS.BusinessService();
 
-                var result = service.replaceInv(adminName, adminPass, xmlData, userName, userPass, fkey_cu,0);
+                var result = service.ReplaceInvoiceAction(adminName, adminPass, xmlData, userName, userPass, fkey_cu,"",0,pattern, serialNew);
                 //  var result = service.ImportInv(xmlData, userName, userPass,0);
                 if (result.StartsWith("OK:"))
                 {
@@ -251,7 +252,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
                     string so_hd = invDatas[1];
                     string fkey = invDatas[0];
                     //cập nhật hóa đơn mới
-                    myINV.updateEInvoice(fkey, ky, so_hd, pattern, serial,"2");
+                    myINV.updateEInvoice(fkey, ky, so_hd, pattern, serialNew,"2");
                     //Cập nhật hóa đơn cũ
                     myINV.updateEInvoice(fkey_cu, ky, sohd_cu, pattern, serial, "3");
                     txtErr.Text = "Phát hành hóa đơn thành công. Số hóa đơn: "+so_hd;

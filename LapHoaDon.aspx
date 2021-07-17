@@ -59,8 +59,7 @@
                 </div>
                 <div class="col-sm-6 mb-1">
                     <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />
-                    <%--<asp:Button ID="btnCapNhat" runat="server" Text="Lập hóa đơn" CssClass="btn btn-success" OnClick="btnChotSL_Click" OnClientClick="return confirm('Sau khi lập hóa đơn sẽ không thể thay đổi dữ liệu. Bạn có chắc chắn thực hiện?')" />--%>
-                    <asp:Button ID="Button1" runat="server" Text="Lập hóa đơn có giảm trừ" CssClass="btn btn-success" OnClick="btnChotSL_GiamTru_Click" OnClientClick="return confirm('Sau khi lập hóa đơn sẽ không thể thay đổi dữ liệu. Bạn có chắc chắn thực hiện?')" />
+                    <asp:Button ID="btnCapNhat" runat="server" Text="Lập hóa đơn" CssClass="btn btn-success" OnClick="btnChotSL_Click" OnClientClick="return confirm('Sau khi lập hóa đơn sẽ không thể thay đổi dữ liệu. Bạn có chắc chắn thực hiện?')" />
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addKyModal">Thêm Kỳ HĐ</button>
                 </div>
             </div>
