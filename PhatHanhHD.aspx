@@ -32,11 +32,7 @@
             </div>
             <div class="col-xl-3 col-sm-4 mb-2">
                <asp:DropDownList runat="server" ID="drpSerial" CssClass="form-control">
-<<<<<<< Updated upstream
                    <asp:ListItem Value="TV/21E" Selected="True"> TV/21E </asp:ListItem>
-=======
- <asp:ListItem Value="TV/21E" Selected="True"> TV/21E </asp:ListItem>
->>>>>>> Stashed changes
                     <asp:ListItem Value="TV/20E" > TV/20E </asp:ListItem>
                     <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>                
 
