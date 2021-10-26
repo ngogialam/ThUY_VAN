@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using System.IO;
+using System.Xml;
 public partial class PhatHanhHD : System.Web.UI.Page
 {
     private static string adminName = "htxthuyvanadmin";
@@ -98,6 +99,54 @@ public partial class PhatHanhHD : System.Web.UI.Page
         catch (Exception ex)
         {
             txtErr.Text = "Có lỗi";
+        }
+
+    }
+    protected void btnDongBo_Click(object sender, EventArgs e)
+    {
+        string id_tram = drpTram.SelectedValue.ToString();
+        string kyhd = drpKy.SelectedItem.ToString();
+        invList = myINV.get_danh_sach_dong_bo(id_tram, kyhd);
+        int i = 0;
+        string fkey;
+        int j = 0;
+        int fail = 0;
+        XmlDocument doc = new XmlDocument();
+        try
+        {
+            for (i = 0; i < invList.Rows.Count; i++)
+            {
+                fkey = invList.Rows[i]["id"].ToString();
+                PortalInvWS.PortalService service = new PortalInvWS.PortalService();
+                var result = service.downloadInvFkeyNoPay(fkey, userName, userPass);
+                if (myINV.CheckConvertFor(result).Contains("ERR"))
+                {
+                    // continue;
+                    fail++;
+                }
+                else
+                {
+                    j = i;
+                    doc.LoadXml(result);
+                    XmlNodeList elemList = doc.GetElementsByTagName("InvoiceNo");
+                    string so_hd = elemList[0].InnerXml.ToString();
+                    elemList = doc.GetElementsByTagName("SerialNo");
+                    string serial = elemList[0].InnerXml.ToString();
+                    elemList = doc.GetElementsByTagName("InvoicePattern");
+                    string pattern = elemList[0].InnerXml.ToString();
+
+                    myINV.updateEInvoice(fkey, kyhd, so_hd, pattern, serial, "2");
+
+
+                }
+
+            }
+            txtErr.Text = "Đồng bộ " + j.ToString() + " hóa đơn thành công";
+
+        }
+        catch (Exception ex)
+        {
+            txtErr.Text = "Có lỗi " + ex.ToString();
         }
 
     }

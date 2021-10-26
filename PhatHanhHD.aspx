@@ -39,12 +39,17 @@
 
                </asp:DropDownList>                         
             </div>
-            <div class="col-xl-3 col-sm-2 mb-2"> 
-                <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />               
-                <asp:Button ID="btnPhatHanh" runat="server" class="btn btn-danger" Text="Phát hành HD cả trạm" OnClick="btnPhatHanh_Click" OnClientClick="return confirm('Bạn có chắc chắn phát hành hóa đơn?')" />
-            </div>
+           
 
         </div>
+        <div class="row">
+             <div class="col-xl-6 col-sm-2 mb-2"> 
+                <asp:Button ID="btnLaySL" runat="server" Text="Lấy số liệu" CssClass="btn btn-primary" OnClick="btnLaySL_Click" />               
+                <asp:Button ID="btnPhatHanh" runat="server" class="btn btn-danger" Text="Phát hành HD cả trạm" OnClick="btnPhatHanh_Click" OnClientClick="return confirm('Bạn có chắc chắn phát hành hóa đơn?')" />
+            <asp:Button ID="btnDongBo" runat="server" class="btn btn-danger" Text="Đồng bộ hóa đơn lỗi" OnClick="btnDongBo_Click" OnClientClick="return confirm('Bạn có chắc chắn muốn đồng bộ hóa đơn?')" />
+             </div>
+            </div>
+
         <div class="row">
                 <div class="col-sm-12 mb-2">
                 <asp:Label runat="server" ID="txtErr" Font-Size="14px" ></asp:Label>

@@ -161,6 +161,47 @@ public class clsHoaDon
         }
 
     }
+    //Danh sách fkey hóa đơn điện tử đồng bộ
+    public DataTable get_danh_sach_dong_bo(string id_tramba, string ky)
+    {
+        SqlConnection myConn = null;
+        // string id_doanh_nghiep = 1
+        string sql = "select distinct id from hoa_don";
+        sql = sql + " where so_hd is null and  id_tram_bien_ap='" + id_tramba + "' and ky_hd='" + ky + "'";
+
+
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+
+    }
     //Danh sách xử lý hóa đơn điện tử
     public DataTable get_danh_sach_xu_ly_hddt(string id_tramba, string ky, string trangthai)
     {
