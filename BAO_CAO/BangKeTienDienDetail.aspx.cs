@@ -20,7 +20,13 @@ public partial class BangKeTienDienDetail: System.Web.UI.Page
         {
             fixDs = (DataTable)Session["KeTienDienTable"];
             ds = fixDs.Copy();
-            rpt.AddBindings(Session["KeTienDienTenTramBA"].ToString(), Session["KeTienDienKyTramBA"].ToString(), Session["KeTienDienNgayThang"].ToString(), Session["KeTienDienNgayIn"].ToString(), Session["TenDoanhNghiep"].ToString());
+            string tentramBA = Session["KeTienDienTenTramBA"].ToString();
+            string kyhd = Session["KeTienDienKyTramBA"].ToString();
+            string ngaythang = Session["KeTienDienNgayThang"].ToString();
+            string ngayin = Session["KeTienDienNgayIn"].ToString();
+            string donvi = "HTX Điện năng Thụy Vân";
+
+           rpt.AddBindings(tentramBA, kyhd, ngaythang, ngayin, donvi);
             DataRow newRow = ds.NewRow();
             newRow.ItemArray = ds.Rows[0].ItemArray; // copy data
             ds.Rows.Remove(ds.Rows[0]);
