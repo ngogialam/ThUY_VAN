@@ -639,7 +639,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
-            this.xrTableCell4.Text = "Địa chỉ";
+            this.xrTableCell4.Text = "Điện thoại";
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell4.Weight = 28.51275675371587D;
             // 
@@ -1125,7 +1125,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
         lblStt.DataBindings.Add("Text", DataSource, "stt");
         lblTenKh.DataBindings.Add("Text", DataSource, "ten_kh");
         lblMaKh.DataBindings.Add("Text", DataSource, "ma_kh");
-        lblDiaChi.DataBindings.Add("Text", DataSource, "dia_chi");
+        lblDiaChi.DataBindings.Add("Text", DataSource, "dien_thoai");
         lblTienSauThue.DataBindings.Add("Text", DataSource, "tong_tien_sau_thue", "{0:#,# ;(#,#);0}");
         lblMaCT.DataBindings.Add("Text", DataSource, "ma_cong_to");
         lblChiSoCu.DataBindings.Add("Text", DataSource, "chi_so_cu", "{0:#,# ;(#,#);0}");

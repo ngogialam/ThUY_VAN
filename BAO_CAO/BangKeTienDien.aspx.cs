@@ -81,7 +81,7 @@ public partial class BangKeTienDien : System.Web.UI.Page
         tbxView.Columns.Add("stt", typeof(String));
         tbxView.Columns.Add("ten_kh", typeof(String));
         tbxView.Columns.Add("ma_kh", typeof(String));
-        tbxView.Columns.Add("dia_chi", typeof(String));
+        tbxView.Columns.Add("dien_thoai", typeof(String));
         tbxView.Columns.Add("tong_tien_sau_thue", typeof(Double));
         tbxView.Columns.Add("ma_cong_to", typeof(String));
         tbxView.Columns.Add("chi_so_cu", typeof(Double));
@@ -132,8 +132,8 @@ public partial class BangKeTienDien : System.Web.UI.Page
                 DataRow newRowTong = tbxView.NewRow();
                 newRowTong[0] = i + 1;
                 newRowTong[1] = tbx.Rows[i]["ten_kh"].ToString();
-                newRowTong[2] = tbx.Rows[i]["ma_kh"].ToString();
-                newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
+                newRowTong[2] = tbx.Rows[i]["ma_kh"].ToString();              
+                newRowTong[3] = tbx.Rows[i]["dien_thoai"].ToString();
                 newRowTong[4] = tbx.Rows[i]["tong_tien_sau_thue"].ToString();
                 newRowTong[5] = tbx.Rows[i]["ma_cong_to"].ToString();
                 newRowTong[6] = tbx.Rows[i]["chi_so_cu"].ToString();

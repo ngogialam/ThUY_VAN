@@ -94,11 +94,11 @@
                                 <asp:BoundField DataField="ma_kh" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
                                     HeaderText="Mã KH" />
                             </Columns>
-                            <Columns>
-                                <asp:BoundField DataField="dia_chi" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
-                                    HeaderText="Địa chỉ" />
+                             <Columns>
+                                <asp:BoundField DataField="dien_thoai" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left"
+                                    HeaderText="Điện thoại" />
                             </Columns>
-                            <Columns>
+                                                       <Columns>
                                 <asp:BoundField DataField="tong_tien_sau_thue" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right"
                                     HeaderText="Tổng tiền" DataFormatString="{0:0,0}" />
                             </Columns>
