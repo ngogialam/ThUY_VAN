@@ -844,7 +844,27 @@ public class clsHoaDon
                         sb.Append(dr[SAN_LUONG].ToString().Trim());
                     }
                     sb.Append("</DNSD>");
-                    sb.Append("<ChiSoCu></ChiSoCu><ChiSoMoi></ChiSoMoi>");
+                    //chỉ số nhiều công tơ
+                    sb.Append("<ChiSoCu>");
+                    int f = i;
+                    do
+                    {
+                        DataRow drSumtion1 = objTable.Rows[f];                      
+                       string tempcs = drSumtion1[CHI_SO_DAU_KY].ToString().Trim() + ";";                                           
+                       
+                        f++;
+                    } while (f < objTable.Rows.Count && string.Compare(objTable.Rows[f][Fkey].ToString(), objTable.Rows[f - 1][Fkey].ToString()) == 0);
+                    sb.Append("</ChiSoCu>");
+                    sb.Append("<ChiSoMoi>");
+                    int t = i;
+                    do
+                    {
+                        DataRow drSumtion2 = objTable.Rows[f];
+                        string tempcs = drSumtion2[CHI_SO_CUOI_KY].ToString().Trim() + ";";
+
+                        t++;
+                    } while (t < objTable.Rows.Count && string.Compare(objTable.Rows[t][Fkey].ToString(), objTable.Rows[t - 1][Fkey].ToString()) == 0);
+                    sb.Append("</ChiSoMoi>");
                     //Cong to
                     sb.Append("<Sumptions>");
                     int j = i;
