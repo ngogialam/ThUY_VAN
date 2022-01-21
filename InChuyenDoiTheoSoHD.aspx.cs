@@ -12,11 +12,11 @@ public partial class InChuyenDoiTheoSoHD : System.Web.UI.Page
     clsNhapChiSo myNCS = new clsNhapChiSo();
     DataTable invList = new DataTable();
 
-  private static string adminName = "htxthuyvanadmin";
-    private static string adminPass = "123456aA@";
-    private static string userName = "thuyvanws";
-    private static string userPass = "123456aA@";
-    private static string pattern = "01GTKT0/001";
+    private static string adminName = "eman";
+    private static string adminPass = "Einv@oi@vn#pt20";
+    private static string userName = "emanws";
+    private static string userPass = "Einv@oi@vn#pt20";
+    private static string pattern = "1/001";
     //private static string serial = "TV/19E";
 
 

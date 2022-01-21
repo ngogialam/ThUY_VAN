@@ -597,9 +597,10 @@ public class clsHoaDon
                     }
                     sb.Append("</KindOfService>");
 
-                    sb.Append("<Extra>");
-                    sb.Append(key);
-                    sb.Append("</Extra>");
+                    // VND TT78
+                    sb.Append("<CurrencyUnit>VND");
+
+                    sb.Append("</CurrencyUnit>");
 
                     sb.Append("<Extra1>");
                     sb.Append(dr[DTSuaChua].ToString().Trim());
@@ -669,9 +670,9 @@ public class clsHoaDon
                         sb.Append(drProduct[ProdQuantity].ToString().Replace(",", ""));
                         sb.Append("</ProdQuantity><ProdPrice>");
                         sb.Append(drProduct[ProdPrice].ToString().Trim().Replace(",", ""));
-                        sb.Append("</ProdPrice><Amount>");
+                        sb.Append("</ProdPrice><Total>");
                         sb.Append(drProduct[ProdTotal].ToString().Trim().Replace(",", ""));
-                        sb.Append("</Amount>");
+                        sb.Append("</Total>");
 
                         //end
                         sb.Append("</Product>");
@@ -807,9 +808,10 @@ public class clsHoaDon
                     }
                     sb.Append("</KindOfService>");
 
-                    sb.Append("<Extra>");
-                    sb.Append(key);
-                    sb.Append("</Extra>");
+                    // VND TT78
+                    sb.Append("<CurrencyUnit>VND");
+
+                    sb.Append("</CurrencyUnit>");
 
                     sb.Append("<Extra1>");
                     sb.Append(dr[DTSuaChua].ToString().Trim());
@@ -879,9 +881,9 @@ public class clsHoaDon
                         sb.Append(drProduct[ProdQuantity].ToString().Replace(",", ""));
                         sb.Append("</ProdQuantity><ProdPrice>");
                         sb.Append(drProduct[ProdPrice].ToString().Trim().Replace(",", ""));
-                        sb.Append("</ProdPrice><Amount>");
+                        sb.Append("</ProdPrice><Total>");
                         sb.Append(drProduct[ProdTotal].ToString().Trim().Replace(",", ""));
-                        sb.Append("</Amount>");
+                        sb.Append("</Total>");
 
                         //end
                         sb.Append("</Product>");
