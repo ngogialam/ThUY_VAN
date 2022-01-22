@@ -583,9 +583,16 @@ public class clsHoaDon
                         sb.Append(dr[CusPhone].ToString().Trim());
                     }
                     sb.Append("</CusPhone><CusTaxCode>");
+                    string mst = "";
                     if (dr.Table.Columns.Contains(CusTaxCode))
                     {
-                        sb.Append(dr[CusTaxCode].ToString().Trim());
+                        mst = dr[CusTaxCode].ToString().Trim();
+                        if (mst != "0" && mst != "" && mst.Length > 9)
+                        {
+                            sb.Append(dr[CusTaxCode].ToString().Trim());
+                        }
+
+
                     }
                     sb.Append("</CusTaxCode><PaymentMethod>");
                     sb.Append(convertSpecialCharacter("TM/CK"));
@@ -633,27 +640,10 @@ public class clsHoaDon
                         sb.Append(dr[SAN_LUONG].ToString().Trim());
                     }
                     sb.Append("</DNSD>");
-                    //chỉ số nhiều công tơ
-                    sb.Append("<ChiSoCu>");
-                    int f = i;
-                    do
-                    {
-                        DataRow drSumtion1 = objTable.Rows[f];
-                        string tempcs = drSumtion1[CHI_SO_DAU_KY].ToString().Trim() + ";";
 
-                        f++;
-                    } while (f < objTable.Rows.Count && string.Compare(objTable.Rows[f][Fkey].ToString(), objTable.Rows[f - 1][Fkey].ToString()) == 0);
-                    sb.Append("</ChiSoCu>");
-                    sb.Append("<ChiSoMoi>");
-                    int t = i;
-                    do
-                    {
-                        DataRow drSumtion2 = objTable.Rows[f];
-                        string tempcs = drSumtion2[CHI_SO_CUOI_KY].ToString().Trim() + ";";
+                    string tempcscu = "";
+                    string tempcsmoi = "";
 
-                        t++;
-                    } while (t < objTable.Rows.Count && string.Compare(objTable.Rows[t][Fkey].ToString(), objTable.Rows[t - 1][Fkey].ToString()) == 0);
-                    sb.Append("</ChiSoMoi>");
                     //Cong to
                     sb.Append("<Sumptions>");
                     int j = i;
@@ -663,15 +653,24 @@ public class clsHoaDon
                         sb.Append("<Sumption>");
                         sb.Append("<CHI_SO_DAU_KY>");
                         sb.Append(drSumtion[CHI_SO_DAU_KY].ToString().Trim());
+                        tempcscu = tempcscu + ";" + drSumtion[CHI_SO_DAU_KY].ToString().Trim();
                         sb.Append("</CHI_SO_DAU_KY>");
                         sb.Append("<CHI_SO_CUOI_KY>");
                         sb.Append(drSumtion[CHI_SO_CUOI_KY].ToString().Trim());
+                        tempcsmoi = tempcsmoi + ";" + drSumtion[CHI_SO_CUOI_KY].ToString().Trim();
                         sb.Append("</CHI_SO_CUOI_KY>");
                         sb.Append("<SAN_LUONG></SAN_LUONG><MA_TINH_TRANG_DH></MA_TINH_TRANG_DH>");
                         sb.Append("</Sumption>");
                         j++;
                     } while (j < objTable.Rows.Count && string.Compare(objTable.Rows[j][Fkey].ToString(), objTable.Rows[j - 1][Fkey].ToString()) == 0);
                     sb.Append("</Sumptions>");
+                    //chỉ số nhiều công tơ
+                    sb.Append("<ChiSoCu>");
+                    sb.Append(tempcscu);
+                    sb.Append("</ChiSoCu>");
+                    sb.Append("<ChiSoMoi>");
+                    sb.Append(tempcsmoi);
+                    sb.Append("</ChiSoMoi>");
                     //bat dau den san pham
                     sb.Append("<Products>");
                     DataTable dtbInvLine = lay_hoa_don_chi_tiet(key);
@@ -814,9 +813,16 @@ public class clsHoaDon
                         sb.Append(dr[CusPhone].ToString().Trim());
                     }
                     sb.Append("</CusPhone><CusTaxCode>");
+                    string mst = "";
                     if (dr.Table.Columns.Contains(CusTaxCode))
                     {
-                        sb.Append(dr[CusTaxCode].ToString().Trim());
+                        mst = dr[CusTaxCode].ToString().Trim();
+                        if (mst != "0" && mst != "" && mst.Length > 9)
+                        {
+                            sb.Append(dr[CusTaxCode].ToString().Trim());
+                        }
+
+
                     }
                     sb.Append("</CusTaxCode><PaymentMethod>");
                     sb.Append(convertSpecialCharacter("TM/CK"));
@@ -864,27 +870,10 @@ public class clsHoaDon
                         sb.Append(dr[SAN_LUONG].ToString().Trim());
                     }
                     sb.Append("</DNSD>");
-                    //chỉ số nhiều công tơ
-                    sb.Append("<ChiSoCu>");
-                    int f = i;
-                    do
-                    {
-                        DataRow drSumtion1 = objTable.Rows[f];                      
-                       string tempcs = drSumtion1[CHI_SO_DAU_KY].ToString().Trim() + ";";                                           
-                       
-                        f++;
-                    } while (f < objTable.Rows.Count && string.Compare(objTable.Rows[f][Fkey].ToString(), objTable.Rows[f - 1][Fkey].ToString()) == 0);
-                    sb.Append("</ChiSoCu>");
-                    sb.Append("<ChiSoMoi>");
-                    int t = i;
-                    do
-                    {
-                        DataRow drSumtion2 = objTable.Rows[f];
-                        string tempcs = drSumtion2[CHI_SO_CUOI_KY].ToString().Trim() + ";";
 
-                        t++;
-                    } while (t < objTable.Rows.Count && string.Compare(objTable.Rows[t][Fkey].ToString(), objTable.Rows[t - 1][Fkey].ToString()) == 0);
-                    sb.Append("</ChiSoMoi>");
+                    string tempcscu = "";
+                    string tempcsmoi = "";
+
                     //Cong to
                     sb.Append("<Sumptions>");
                     int j = i;
@@ -894,15 +883,24 @@ public class clsHoaDon
                         sb.Append("<Sumption>");
                         sb.Append("<CHI_SO_DAU_KY>");
                         sb.Append(drSumtion[CHI_SO_DAU_KY].ToString().Trim());
+                        tempcscu = tempcscu + ";" + drSumtion[CHI_SO_DAU_KY].ToString().Trim();
                         sb.Append("</CHI_SO_DAU_KY>");
                         sb.Append("<CHI_SO_CUOI_KY>");
                         sb.Append(drSumtion[CHI_SO_CUOI_KY].ToString().Trim());
+                        tempcsmoi = tempcsmoi + ";" + drSumtion[CHI_SO_CUOI_KY].ToString().Trim();
                         sb.Append("</CHI_SO_CUOI_KY>");
                         sb.Append("<SAN_LUONG></SAN_LUONG><MA_TINH_TRANG_DH></MA_TINH_TRANG_DH>");
                         sb.Append("</Sumption>");
                         j++;
                     } while (j < objTable.Rows.Count && string.Compare(objTable.Rows[j][Fkey].ToString(), objTable.Rows[j - 1][Fkey].ToString()) == 0);
                     sb.Append("</Sumptions>");
+                    //chỉ số nhiều công tơ
+                    sb.Append("<ChiSoCu>");
+                    sb.Append(tempcscu);
+                    sb.Append("</ChiSoCu>");
+                    sb.Append("<ChiSoMoi>");
+                    sb.Append(tempcsmoi);
+                    sb.Append("</ChiSoMoi>");
                     //bat dau den san pham
                     sb.Append("<Products>");
                     DataTable dtbInvLine = lay_hoa_don_chi_tiet(key);
