@@ -30,6 +30,40 @@ public partial class InChuyenDoiTheoSoHD : System.Web.UI.Page
     }
 
 
+    //protected void btnInLoHD_Click(object sender, EventArgs e)
+    //{
+    //    string strTuso = txtTuSo.Text.ToString();
+    //    string strDenso = txtDenSo.Text.ToString();
+    //    int tuso = Convert.ToInt32(strTuso);
+    //    int denso = Convert.ToInt32(strDenso);
+    //    string serial = drpSerial.SelectedValue.ToString();
+    //    int i;
+    //    string InvToken;
+    //    string htmlInv = "";
+    //    for (i = tuso; i <= denso; i++)
+    //    {
+    //        InvToken = pattern + ";" +serial+";" + i.ToString();
+    //        htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoiceByNo(InvToken, userName, userPass);
+    //    }
+
+    //    htmlToPdf.Orientation = PageOrientation.Portrait;
+    //    htmlToPdf.Zoom = 1.13f;
+    //    htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
+    //    var pdfBytes = htmlToPdf.GeneratePdf(htmlInv);
+    //    // string pdffilename = "RepConvertInv\\inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
+    //    string pdfdownloadname = "inv_" + strTuso + "_" + strDenso;
+    //    // string zipfilename = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".zip";
+    //    Response.Clear();
+    //    MemoryStream ms = new MemoryStream(pdfBytes);
+    //    Response.ContentType = "application/pdf";
+    //    Response.AddHeader("content-disposition", "attachment;filename=" + pdfdownloadname + ".pdf");
+    //    Response.Buffer = true;
+    //    ms.WriteTo(Response.OutputStream);
+    //    Response.End();
+
+    //    // Response.Redirect(pdffilename);
+    //}
+
     protected void btnInLoHD_Click(object sender, EventArgs e)
     {
         string strTuso = txtTuSo.Text.ToString();
@@ -37,21 +71,24 @@ public partial class InChuyenDoiTheoSoHD : System.Web.UI.Page
         int tuso = Convert.ToInt32(strTuso);
         int denso = Convert.ToInt32(strDenso);
         string serial = drpSerial.SelectedValue.ToString();
+
+
+        invList = myINV.get_danh_sach_chuyen_doi_theo_so(strTuso, strDenso, serial);
         int i;
-        string InvToken;
+        string fkey;
         string htmlInv = "";
-        for (i = tuso; i <= denso; i++)
+        for (i = 0; i < invList.Rows.Count; i++)
         {
-            InvToken = pattern + ";" +serial+";" + i.ToString();
-            htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoiceByNo(InvToken, userName, userPass);
+            fkey = invList.Rows[i]["id"].ToString();
+            htmlInv = htmlInv + "<p style='page-break-after:always;'></p>" + myINV.PrintInvoice(fkey, userName, userPass);
         }
 
         htmlToPdf.Orientation = PageOrientation.Portrait;
         htmlToPdf.Zoom = 1.13f;
         htmlToPdf.Size = NReco.PdfGenerator.PageSize.A4;
         var pdfBytes = htmlToPdf.GeneratePdf(htmlInv);
-        // string pdffilename = "RepConvertInv\\inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".pdf";
-        string pdfdownloadname = "inv_" + strTuso + "_" + strDenso;
+        string pdffilename = "RepConvertInv\\inv" + strTuso + "_" + strDenso + ".pdf";
+        string pdfdownloadname = "inv_" + strTuso + "_" + strDenso + ".pdf";
         // string zipfilename = "inv_" + id_tram + "_" + kyhd.Replace("/", string.Empty) + ".zip";
         Response.Clear();
         MemoryStream ms = new MemoryStream(pdfBytes);
@@ -63,6 +100,5 @@ public partial class InChuyenDoiTheoSoHD : System.Web.UI.Page
 
         // Response.Redirect(pdffilename);
     }
-
 
 }

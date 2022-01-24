@@ -161,6 +161,48 @@ public class clsHoaDon
         }
 
     }
+    //Danh sách chuyển đổi theo số hóa đơn
+    public DataTable get_danh_sach_chuyen_doi_theo_so(string tuso, string denso, string serial)
+    {
+        SqlConnection myConn = null;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        string sql = "select distinct id from hoa_don";
+        sql = sql + " where mau_so='1/001' and ky_hieu='" + serial + "' and so_hd between " + tuso + " and " + denso;
+
+
+
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+
+    }
     //Danh sách fkey hóa đơn điện tử đồng bộ
     public DataTable get_danh_sach_dong_bo(string id_tramba, string ky)
     {
