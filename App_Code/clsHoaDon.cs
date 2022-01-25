@@ -622,7 +622,7 @@ public class clsHoaDon
                     sb.Append("</CusAddress><CusPhone>");
                     if (dr.Table.Columns.Contains(CusPhone))
                     {
-                        sb.Append(dr[CusPhone].ToString().Trim());
+                        sb.Append(dr[CusPhone].ToString().Trim().Substring(0,10));
                     }
                     sb.Append("</CusPhone><CusTaxCode>");
                     string mst = "";
@@ -852,7 +852,7 @@ public class clsHoaDon
                     sb.Append("</CusAddress><CusPhone>");
                     if (dr.Table.Columns.Contains(CusPhone))
                     {
-                        sb.Append(dr[CusPhone].ToString().Trim());
+                        sb.Append(dr[CusPhone].ToString().Trim().Substring(0, 10));
                     }
                     sb.Append("</CusPhone><CusTaxCode>");
                     string mst = "";

@@ -911,7 +911,7 @@ public class clsNhapChiSo
     }
 
     //Insert bang hoa_don
-    public void them_moi_hoa_don(Int64 id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to, int so_ho, string ten_kh, string id_tram_bien_ap, string id_khu)
+    public void them_moi_hoa_don(string id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to, int so_ho, string ten_kh, string id_tram_bien_ap, string id_khu)
     {
 
         clsConnect cnstr = new clsConnect();

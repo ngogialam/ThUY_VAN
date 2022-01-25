@@ -181,7 +181,8 @@ public partial class LapHoaDon : System.Web.UI.Page
                      
                     }
                 }
-                myNCS.them_moi_hoa_don(idHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact,soho,ten_kh,id_tram_bien_ap,id_khu);
+                string stridHD = idTram + idHD.ToString() + idKhu;
+                myNCS.them_moi_hoa_don(stridHD, makh, kyhd, tungay, denngay, cscu, csmoi, dntt.ToString(), total, vaterate, vatamount, amount, user, idBangGia, mact,soho,ten_kh,id_tram_bien_ap,id_khu);
                 if (i > 0)
                 {
                     if (i < dtbInv.Rows.Count && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i - 1]["ma_kh"].ToString()) != 0)
