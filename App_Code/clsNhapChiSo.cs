@@ -874,9 +874,9 @@ public class clsNhapChiSo
         return recordsAffected;
     }
 
-    public Int64 lay_idhd()
+    public int lay_idhd()
     {
-        Int64 sohd;
+        int sohd;
         SqlConnection myConn = null;
         try
         {
@@ -894,7 +894,7 @@ public class clsNhapChiSo
             cmd.Parameters.Clear();
             cmd.Connection.Close();
             myConn.Close();
-            sohd = Convert.ToInt64(dts.Tables[0].Rows[0]["sohd"].ToString()) + 1;
+            sohd = Convert.ToInt32(dts.Tables[0].Rows[0]["sohd"].ToString()) + 1;
             return sohd;
         }
         catch (Exception ex)
@@ -911,7 +911,7 @@ public class clsNhapChiSo
     }
 
     //Insert bang hoa_don
-    public void them_moi_hoa_don(string id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to, int so_ho, string ten_kh, string id_tram_bien_ap, string id_khu)
+    public void them_moi_hoa_don(int id, string ma_kh, string ky_hd, string tu_ngay, string den_ngay, string chi_so_cu, string chi_so_moi, string dien_nang_tt, Double tong_tien_truoc_thue, string vat_rate, Double thue_gtgt, Double tong_tien_sau_thue, string id_nguoi_nhap, string id_bang_gia_dien, string ma_cong_to, int so_ho, string ten_kh, string id_tram_bien_ap, string id_khu)
     {
 
         clsConnect cnstr = new clsConnect();
