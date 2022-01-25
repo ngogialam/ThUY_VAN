@@ -874,9 +874,9 @@ public class clsNhapChiSo
         return recordsAffected;
     }
 
-    public int lay_idhd()
+    public Int64 lay_idhd()
     {
-        int sohd;
+        Int64 sohd;
         SqlConnection myConn = null;
         try
         {
@@ -894,7 +894,7 @@ public class clsNhapChiSo
             cmd.Parameters.Clear();
             cmd.Connection.Close();
             myConn.Close();
-            sohd = Convert.ToInt32(dts.Tables[0].Rows[0]["sohd"].ToString()) + 1;
+            sohd = Convert.ToInt64(dts.Tables[0].Rows[0]["sohd"].ToString()) + 1;
             return sohd;
         }
         catch (Exception ex)
