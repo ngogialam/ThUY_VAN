@@ -19,7 +19,7 @@ public class clsHoaDon
         string sql = "";
         if (id_tramba == "0")
         {
-            sql = "select d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
+            sql = "select d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.email,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
             sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and d.ky_hd='" + ky + "'";
@@ -28,7 +28,7 @@ public class clsHoaDon
         }
         else
         {
-            sql = "select d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
+            sql = "select d.id,d.so_hd,d.mau_so,d.ky_hieu,a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.email,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
             sql = sql + "d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
             sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv";
             sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=" + trangthai + " and  a.id_tram_bien_ap='" + id_tramba + "' and d.ky_hd='" + ky + "'";
@@ -347,7 +347,7 @@ public class clsHoaDon
       //  sql = sql + " and id_doanh_nghiep = " + id_doanh_nghiep;
        // sql = sql + " order by id DESC";
 
-        sql = sql + "select d.id,d.so_hd,d.mau_so,d.ky_hieu,d.ma_kh, d.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
+        sql = sql + "select d.id,d.so_hd,d.mau_so,d.ky_hieu,d.ma_kh, d.ten_kh,b.ten_khu,a.dia_chi,a.email,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
         sql = sql + " d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, d.id_tram_bien_ap,d.id_bang_gia_dien,d.so_ho,d.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
         sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv ";
         sql = sql + "where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=2";
@@ -560,6 +560,7 @@ public class clsHoaDon
                 const string CusCode = "ma_kh";
                 const string CusName = "ten_kh";
                 const string CusAddress = "dia_chi";
+                const string CusEmail = "email";
                 const string CusPhone = "dien_thoai";
                 const string CusTaxCode = "mst_kh";
                 const string KindOfService = "ky_hd";
@@ -644,6 +645,12 @@ public class clsHoaDon
                     sb.Append("</CusTaxCode><PaymentMethod>");
                     sb.Append(convertSpecialCharacter("TM/CK"));
                     sb.Append("</PaymentMethod>");
+                    sb.Append("<Email>");
+                    if (dr.Table.Columns.Contains(CusEmail))
+                    {
+                        sb.Append(convertSpecialCharacter(dr[CusEmail].ToString().Trim()));
+                    }
+                    sb.Append("</Email>");
                     sb.Append("<KindOfService>");
                     if (dr.Table.Columns.Contains(KindOfService))
                     {
@@ -793,8 +800,9 @@ public class clsHoaDon
                 //khach hang
                 //const string Buyer = "Khách hàng";
                 const string CusCode = "ma_kh";
-                const string CusName = "ten_kh";
+                const string CusName = "ten_kh";              
                 const string CusAddress = "dia_chi";
+                const string CusEmail = "email";
                 const string CusPhone = "dien_thoai";
                 const string CusTaxCode = "mst_kh";
                 const string KindOfService = "ky_hd";
@@ -879,6 +887,12 @@ public class clsHoaDon
                     sb.Append("</CusTaxCode><PaymentMethod>");
                     sb.Append(convertSpecialCharacter("TM/CK"));
                     sb.Append("</PaymentMethod>");
+                    sb.Append("<Email>");
+                    if (dr.Table.Columns.Contains(CusEmail))
+                    {
+                        sb.Append(convertSpecialCharacter(dr[CusEmail].ToString().Trim()));
+                    }
+                    sb.Append("</Email>");
                     sb.Append("<KindOfService>");
                     if (dr.Table.Columns.Contains(KindOfService))
                     {

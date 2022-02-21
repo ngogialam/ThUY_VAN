@@ -12,6 +12,7 @@
             var re = /d+/;
             var txtTenKH = $('#txtTenKh_AddModal').val();
             var txtDiaChi = $('#txtDiaChi_AddModal').val();
+            var txtEmail = $('#txtEmail_AddModal').val();
             var txtSoHo = $('#txtSoHo_AddModal').val();
             var txtHeSoTi = $('#txtHSTi_AddModal').val();
             var txtSDT = $('#txtSoDT_AddModal').val();
@@ -136,6 +137,7 @@
             var re = /d+/;
             var txtTenKH = $('#txtTenKh').val();
             var txtDiaChi = $('#txtDiaChi').val();
+            var txtEmail = $('#txtEmail').val();
             var txtSoHo = $('#txtSoHo').val();
             var txtHeSoTi = $('#txtHSTi').val();
             var txtSDT = $('#txtSoDT').val();
@@ -407,16 +409,22 @@
                                 <asp:Label ID="lblDiaChi" runat="server" Text='<%# Eval("dia_chi") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Email" >
+                            <ItemTemplate>
+                                <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("email") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Id khu" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblKhu" runat="server" Text='<%# Eval("id_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Khu">
+                        <asp:TemplateField HeaderText="Khu" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblTenKhu" runat="server" Text='<%# Eval("ten_khu") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                           
                         <asp:TemplateField HeaderText="Id trạm biến áp" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblIdBA" runat="server" Text='<%# Eval("id_tram_bien_ap") %>'></asp:Label>
@@ -534,6 +542,12 @@
                             <label class="key">Địa chỉ (<span style="color: red">*</span>):</label>
                             <div class="value">
                                 <asp:TextBox ID="txtDiaChi_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                            </div>
+                        </div>
+                         <div class="user-info-row">
+                            <label class="key">Email (<span style="color: red">*</span>):</label>
+                            <div class="value">
+                                <asp:TextBox ID="txtEmail_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                         </div>
                         <div class="user-info-row ">
@@ -685,6 +699,13 @@
                                     <label class="key">Địa chỉ (<span style="color: red">*</span>):</label>
                                     <div class="value">
                                         <asp:TextBox ID="txtDiaChi" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                                <div class="user-info-row">
+                                    <label class="key">Email (<span style="color: red">*</span>):</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txtEmail" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
 
                                     </div>
                                 </div>

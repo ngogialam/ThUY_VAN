@@ -1062,7 +1062,7 @@ public class clsKhachHang
             }
         }
     }
-    public int them_moi_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms, int id_doanh_nghiep)
+    public int them_moi_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi,string email, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms, int id_doanh_nghiep)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -1071,7 +1071,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = string.Format("insert into khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho,he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_doanh_nghiep) values('{0}', N'{1}', {2}, N'{3}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, '{12}', {13}, {14}, {15}, {16}, {17}, {18})", ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_doanh_nghiep);
+            cmd.CommandText = string.Format("insert into khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho,he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_doanh_nghiep, email) values('{0}', N'{1}', {2}, N'{3}', {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, '{12}', {13}, {14}, {15}, {16}, {17}, {18},{19})", ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_doanh_nghiep,email);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
@@ -1226,7 +1226,7 @@ public class clsKhachHang
         }
     }
 
-    public void cap_nhat_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms)
+    public void cap_nhat_khach_hang(string ma_kh, string ten_kh, int id_bang_gia, string dia_chi,string email, int id_khu, string id_tram_bien_ap, int so_ho, float he_so_ti, string dien_thoai, string mst_kh, string cot_dien_so, int sl_dong_ho, string ma_cong_to, int trang_thai, int thu_tu, int id_phuong_xa, int id_huyen, int sms)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -1235,7 +1235,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "update khach_hang set ten_kh=N'" + ten_kh + "',dia_chi=N'" + dia_chi + "',id_bang_gia='" + id_bang_gia + "',id_khu=" + id_khu + ",id_tram_bien_ap='" + id_tram_bien_ap + "',so_ho=" + so_ho + ",he_so_ti=" + he_so_ti + ",dien_thoai='" + dien_thoai + "',mst_kh='" + mst_kh + "',cot_dien_so='" + cot_dien_so + "',sl_dong_ho=" + sl_dong_ho + ",ma_cong_to='" + ma_cong_to + "',trang_thai=" + trang_thai + ",thu_tu=" + thu_tu + ",id_phuong_xa=" + id_phuong_xa + ", id_huyen=" + id_huyen + ", sms=" + sms + " where ma_kh='" + ma_kh + "' ";
+            cmd.CommandText = "update khach_hang set ten_kh=N'" + ten_kh + "',dia_chi=N'" + dia_chi + "',email=N'" + email + "',id_bang_gia='" + id_bang_gia + "',id_khu=" + id_khu + ",id_tram_bien_ap='" + id_tram_bien_ap + "',so_ho=" + so_ho + ",he_so_ti=" + he_so_ti + ",dien_thoai='" + dien_thoai + "',mst_kh='" + mst_kh + "',cot_dien_so='" + cot_dien_so + "',sl_dong_ho=" + sl_dong_ho + ",ma_cong_to='" + ma_cong_to + "',trang_thai=" + trang_thai + ",thu_tu=" + thu_tu + ",id_phuong_xa=" + id_phuong_xa + ", id_huyen=" + id_huyen + ", sms=" + sms + " where ma_kh='" + ma_kh + "' ";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();

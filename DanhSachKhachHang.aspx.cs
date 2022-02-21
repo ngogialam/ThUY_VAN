@@ -101,6 +101,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         Label id = (Label)row.FindControl("lblMaKH");
         Label name = (Label)row.FindControl("lblTenKH");
         Label diachi = (Label)row.FindControl("lblDiaChi");
+        Label email = (Label)row.FindControl("lblEmail");
         Label dt = (Label)row.FindControl("lblDienThoai");
         Label sms = (Label)row.FindControl("lblNumSms");
         Label thutu = (Label)row.FindControl("lblThuTu");
@@ -126,6 +127,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
             txtMaKH.Text = id.Text;
             txtTenKh.Text = name.Text;
             txtDiaChi.Text = diachi.Text;
+            txtEmail.Text = email.Text;
             txtSoDT.Text = dt.Text;
             txtSoHo.Text = idsoho.Text;
             txtHSTi.Text = idHeSoti.Text;
@@ -210,6 +212,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string ten_kh = txtTenKh_AddModal.Text.ToString().Trim();
         int id_bang_gia = int.Parse(drpBangGia_AddModal.SelectedValue.ToString());
         string dia_chi = txtDiaChi_AddModal.Text.ToString().Trim();
+        string email = txtEmail_AddModal.Text.ToString().Trim();
         int id_khu = int.Parse(drpKhu_AddModal.SelectedValue.ToString());
         string id_tram_bien_ap = drpTramBienAp_AddModal.SelectedValue.ToString();
         int so_ho = int.Parse(txtSoHo_AddModal.Text.Trim());
@@ -251,7 +254,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
                     string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
                     int id_dn = Convert.ToInt32(id_doanh_nghiep);
                     //thêm khách hàng phải thêm cả 2 bảng dm_cong_to và chi_so_cong_to
-                    int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_dn);
+                    int i = myCus.them_moi_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi,email, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms, id_dn);
                     if (i == 0)
                     {
                         e.Result = "0";
@@ -285,6 +288,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         string ten_kh = txtTenKh.Text;
         int id_bang_gia = int.Parse(drpBangGia.SelectedValue.ToString());
         string dia_chi = txtDiaChi.Text;
+        string email = txtEmail.Text;
         int id_khu = int.Parse(cbKhu.SelectedValue.ToString());
         string id_tram_bien_ap = drpTramBienAp.SelectedValue.ToString();
         int so_ho = int.Parse(txtSoHo.Text);
@@ -304,7 +308,7 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         try
         {
             string log = "Sửa khách hàng mã " + ma_kh;
-            myCus.cap_nhat_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
+            myCus.cap_nhat_khach_hang(ma_kh, ten_kh, id_bang_gia, dia_chi,email, id_khu, id_tram_bien_ap, so_ho, he_so_ti, dien_thoai, mst_kh, cot_dien_so, sl_dong_ho, ma_cong_to, trang_thai, thu_tu, id_phuong_xa, id_huyen, sms);
             if (selected_kh.Rows[0]["trang_thai"].ToString() != trang_thai.ToString())
             {
                 string[] list_ma_cong_to = ma_cong_to.Split('|');
