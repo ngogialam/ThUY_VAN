@@ -646,15 +646,15 @@ public class clsHoaDon
                     sb.Append(convertSpecialCharacter("TM/CK"));
                     sb.Append("</PaymentMethod>");
                     string email = dr[CusEmail].ToString().Trim();
-                   // if (email.Length > 0)
-                  //  {
-                  //      sb.Append("<Email>");
-                  //      if (dr.Table.Columns.Contains(CusEmail))
-                  //      {
-                   //         sb.Append(convertSpecialCharacter(dr[CusEmail].ToString().Trim()));
-                  //      }
-                   //     sb.Append("</Email>");
-                 //   }
+                    if (email.Length > 0)
+                    {
+                       sb.Append("<EmailDeliver>");
+                       if (dr.Table.Columns.Contains(CusEmail))
+                      {
+                           sb.Append(convertSpecialCharacter(dr[CusEmail].ToString().Trim()));
+                       }
+                       sb.Append("</EmailDeliver>");
+                   }
                     sb.Append("<KindOfService>");
                     if (dr.Table.Columns.Contains(KindOfService))
                     {
