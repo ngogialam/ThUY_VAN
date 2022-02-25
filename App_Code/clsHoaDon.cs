@@ -648,7 +648,11 @@ public class clsHoaDon
                     sb.Append("<Email>");
                     if (dr.Table.Columns.Contains(CusEmail))
                     {
-                        sb.Append(convertSpecialCharacter(dr[CusEmail].ToString().Trim()));
+                        string email = dr[CusEmail].ToString().Trim();
+                        if (email.Length > 0 )
+                        {
+                            sb.Append(convertSpecialCharacter(dr[CusEmail].ToString().Trim()));
+                        }
                     }
                     sb.Append("</Email>");
                     sb.Append("<KindOfService>");
