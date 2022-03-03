@@ -191,7 +191,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
 
         invReplace.Rows[0]["dien_nang_tt"] = dntt.ToString();
         invReplace.Rows[0]["tong_tien_truoc_thue"] = total;
-        invReplace.Rows[0]["vat_rate"] = "10";
+        invReplace.Rows[0]["vat_rate"] = vatrate;
         invReplace.Rows[0]["thue_gtgt"] = vatamount;
         invReplace.Rows[0]["tong_tien_sau_thue"] = amount;
          i = 0;
