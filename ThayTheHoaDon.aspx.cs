@@ -89,15 +89,15 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         Double vatamount = 0;
         Double amount = 0; // amount = total + vatamount
 
-        Double vatrate = 10;
+        Double vatrate = Convert.ToDouble((GirdViewReplace.Rows[0].FindControl("txtVatrate") as TextBox).Text.ToString());
         int i = 0;
         Double cs_cu = 0;
         Double cs_moi = 0;
+        
         do
         {
             cs_cu = cs_cu + Convert.ToDouble((GirdViewReplace.Rows[i].FindControl("lblCSCu") as Label).Text.ToString());
-
-            cs_moi = cs_moi + Convert.ToDouble((GirdViewReplace.Rows[i].FindControl("txtCSMoi") as TextBox).Text.ToString());
+            cs_moi = cs_moi + Convert.ToDouble((GirdViewReplace.Rows[i].FindControl("txtCSMoi") as TextBox).Text.ToString());          
             i++;
         } while (i < GirdViewReplace.Rows.Count && string.Compare((GirdViewReplace.Rows[i].FindControl("lblMaKH") as Label).Text.ToString(), (GirdViewReplace.Rows[i - 1].FindControl("lblMaKH") as Label).Text.ToString()) == 0);
 
@@ -109,6 +109,8 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         amount = total + vatamount;
 
         (GirdViewReplace.Rows[0].FindControl("lblAmount") as Label).Text = amount.ToString("###,0");
+        (GirdViewReplace.Rows[0].FindControl("lblVatAmount") as Label).Text = vatamount.ToString("###,0");
+        (GirdViewReplace.Rows[0].FindControl("lblTotal") as Label).Text = total.ToString("###,0");
         (GirdViewReplace.Rows[0].FindControl("lblDienNangTT") as Label).Text = dntt.ToString();
 
     }
@@ -118,6 +120,10 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         updateChange();
     }
     protected void txtCSMoi_TextChanged(object sender, EventArgs e)
+    {
+        updateChange();
+    }
+    protected void txtVatRate_TextChanged(object sender, EventArgs e)
     {
         updateChange();
     }
@@ -137,7 +143,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         string idtram_ba = (GirdViewReplace.Rows[0].FindControl("idTramBA") as Label).Text.ToString();
         string id_khu = (GirdViewReplace.Rows[0].FindControl("idKhu") as Label).Text.ToString();
         string serial = drpSerial.SelectedValue.ToString();
-string serialNew = drpSerial.SelectedValue.ToString();
+        string serialNew = drpSerial.SelectedValue.ToString();
         //Thông tin mới
         string tenkhnew = (GirdViewReplace.Rows[0].FindControl("lblTenKH") as TextBox).Text.ToString();
         int sohonew = Convert.ToInt16((GirdViewReplace.Rows[0].FindControl("lblSoHo") as TextBox).Text.ToString());
@@ -160,9 +166,10 @@ string serialNew = drpSerial.SelectedValue.ToString();
 
         //Cập nhật chỉ số
         int i = 0;
+        Double vatrate = Convert.ToDouble((GirdViewReplace.Rows[0].FindControl("txtVatrate") as TextBox).Text.ToString());
         do
         {
-            string cs_moi = (GirdViewReplace.Rows[i].FindControl("txtCSMoi") as TextBox).Text.ToString();
+            string cs_moi = (GirdViewReplace.Rows[i].FindControl("txtCSMoi") as TextBox).Text.ToString();            
             string mact = (GirdViewReplace.Rows[i].FindControl("lblMaCT") as Label).Text.ToString();
             myNCS.cap_nhat_chi_so(mact, cs_moi, ky);
 
@@ -177,7 +184,7 @@ string serialNew = drpSerial.SelectedValue.ToString();
         Double dntt = Convert.ToDouble((GirdViewReplace.Rows[0].FindControl("lblDienNangTT") as Label).Text.ToString());
       
         Double total = myNCS.tinh_tien_dien(dntt, sohonew, id_bg_new);
-        Double vatamount = 10 * total / 100;
+        Double vatamount = vatrate * total / 100;
         //Làm tròn
         vatamount = Math.Round(vatamount, 0, MidpointRounding.AwayFromZero);
         Double amount = total + vatamount;

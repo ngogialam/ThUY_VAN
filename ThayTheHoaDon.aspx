@@ -115,17 +115,22 @@
                                     <asp:TextBox ID="txtCSMoi" CssClass="form-control" runat="server" Text='<%# Eval("chi_so_moi") %>' OnTextChanged="txtCSMoi_TextChanged" AutoPostBack="true"></asp:TextBox>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Thuế suất" ControlStyle-Width="100px">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtVatrate" CssClass="form-control" runat="server" Text='<%# Eval("vat_rate") %>' OnTextChanged="txtVatRate_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="ĐNTT">
                                 <ItemTemplate>
                                      <asp:Label ID="lblDienNangTT" runat="server" Text='<%# Eval("dien_nang_tt") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="Thành tiền" ItemStyle-CssClass="text-right" Visible="False">
+                             <asp:TemplateField HeaderText="Thành tiền" ItemStyle-CssClass="text-right" Visible="True">
                             <ItemTemplate>
                                 <asp:Label ID="lblTotal" runat="server" Text='<%# string.Format("{0:#,0}",Eval("tong_tien_truoc_thue") )%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tiền thuế" ItemStyle-CssClass="text-right" Visible="False">
+                        <asp:TemplateField HeaderText="Tiền thuế" ItemStyle-CssClass="text-right" Visible="True">
                             <ItemTemplate>
                                 <asp:Label ID="lblVatAmount" runat="server" Text='<%# string.Format("{0:#,0}",Eval("thue_gtgt")) %>'></asp:Label>
                             </ItemTemplate>
