@@ -266,7 +266,7 @@
                 $('#txt_swapModal_csCuoiCu').focus();
                 return false;
             }
-            if (txtCSCuoiCu < txtCSCu) {
+            if (parseInt(txtCSCuoiCu) < parseInt(txtCSCu)) {
                 alert("Chỉ số cuối nhỏ hơn chỉ số đầu!");
                 $('#txt_swapModal_csCuoiCu').focus();
                 return false;
@@ -281,6 +281,7 @@
                 $('#txt_swapModal_csCuoiMoi').focus();
                 return false;
             }
+
             cbDoiCTo.PerformCallback()
         }
         function onClickDoiCToComplete(s, e) {
