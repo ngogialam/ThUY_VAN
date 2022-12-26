@@ -298,6 +298,38 @@
             }
         }
 
+
+
+        //Thêm chỉ số
+        function onClickThemChiSo() {
+            var txtCSDauMoi = $('#txt_swapModal_csDauMoi').val();
+            var txtCSCuoiMoi = $('#txt_swapModal_csCuoiMoi').val();
+
+            if (txtCSDauMoi === "" || txtCSDauMoi < 0) {
+                alert("Vui lòng nhập chỉ số đầu!");
+                $('#txt_swapModal_csDauMoi').focus();
+                return false;
+            }
+            if (txtCSCuoiMoi === "" || txtCSCuoiMoi < 0) {
+                alert("Vui lòng nhập chỉ số cuối!");
+                $('#txt_swapModal_csCuoiMoi').focus();
+                return false;
+            }
+
+            cbThemChiSo.PerformCallback()
+        }
+        function onClickThemChiSoComplete(s, e) {
+            if (e.result == "1") {
+                alert("Thêm chỉ số công tơ thành công");
+                location.reload();
+            } else if (e.result == "2") {
+                alert("Chỉ số công tơ đã tồn tại!");
+            } 
+            else {
+                alert("Thêm chỉ số công tơ thất bại. Vui lòng thử lại!");
+            }
+        }
+
         //Xóa công tơ
         function onClickXoaCTo() {
             cbXoaCTo.PerformCallback()
@@ -480,7 +512,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã công tơ">
                             <ItemTemplate>
-                                <asp:Label ID="lblMaCongTo" runat="server" Text='<%# Eval("ma_cong_to") %>'></asp:Label>
+                                <asp:Label ID="lblMaCongTo" runat="server" Text='<%# Eval("ma_cong_to_chuan") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Trạng thái" Visible="False">
@@ -914,12 +946,16 @@
                                 <i class="fa fa-caret-right">&nbsp;Để đổi công tơ, bạn vui lòng nhập thông tin công tơ mới, chọn mã công tơ và chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Đổi công tơ <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
                                     <br />
                                 </i>
+                                <i class="fa fa-caret-right">&nbsp;Để thêm chỉ số công tơ, bạn vui lòng chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Thêm chỉ số <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
+                                    <br />
+                                </i>
                             </div>
                         </div>
                         <div class="modal-footer" style="padding-top: 0">
                             <button type="button" class="btn btn-success" onclick="onClickThemCTo();">Thêm công tơ</button>
                             <button type="button" class="btn btn-success" onclick="onClickXoaCTo();">Xóa công tơ</button>
                             <button type="button" class="btn btn-success" onclick="onClickDoiCTo();">Đổi công tơ</button>
+                            <button type="button" class="btn btn-success" onclick="onClickThemChiSo();">Thêm chỉ số</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                             <dx:aspxcallback id="cbDoiCTo" clientinstancename="cbDoiCTo" clientidmode="Static" runat="server" oncallback="btnDoiCTo_Callback">
                                   <ClientSideEvents CallbackComplete="onClickDoiCToComplete" />
@@ -929,6 +965,9 @@
                                 </dx:aspxcallback>
                             <dx:aspxcallback id="cbThemCTo" clientinstancename="cbThemCTo" clientidmode="Static" runat="server" oncallback="btnThemCTo_Callback">
                                   <ClientSideEvents CallbackComplete="onClickThemCToComplete" />
+                                </dx:aspxcallback>
+                             <dx:aspxcallback id="cbThemChiSo" clientinstancename="cbThemChiSo" clientidmode="Static" runat="server" oncallback="btnThemChiSo_Callback">
+                                  <ClientSideEvents CallbackComplete="onClickThemChiSoComplete" />
                                 </dx:aspxcallback>
                         </div>
                     </div>

@@ -59,11 +59,11 @@ public class clsKhachHang
             cmd.Connection = myConn;
             if (id_tramBAp == "0")
             {
-                cmd.CommandText = "select a.*, b.ten_khu, d.ten_phuong_xa, e.ten_tram_bien_ap from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap order by a.thu_tu";
+                cmd.CommandText = "select a.*, b.ten_khu, d.ten_phuong_xa, e.ten_tram_bien_ap, f.ma_cong_to_chuan from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e, (SELECT p.ma_kh, STUFF(( SELECT '|' + CAST(g.ma_cong_to AS varchar(100)) FROM dm_cong_to AS g WHERE g.ma_kh = p.ma_kh and g.trang_thai = 1 FOR XML PATH('') ),1,1,'') AS ma_cong_to_chuan FROM dm_cong_to AS p GROUP BY p.ma_kh) f where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap and a.ma_kh = f.ma_kh order by a.thu_tu";
             }
             else
             {
-                cmd.CommandText = "select a.*, b.ten_khu, d.ten_phuong_xa, e.ten_tram_bien_ap from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap and a.id_tram_bien_ap ='" + id_tramBAp + "' order by a.thu_tu";
+                cmd.CommandText = "select a.*, b.ten_khu, d.ten_phuong_xa, e.ten_tram_bien_ap, f.ma_cong_to_chuan from khach_hang a, dm_khu b, dm_huyen c, dm_phuong_xa d, tram_bien_ap e, (SELECT p.ma_kh, STUFF(( SELECT '|' + CAST(g.ma_cong_to AS varchar(100)) FROM dm_cong_to AS g WHERE g.ma_kh = p.ma_kh and g.trang_thai = 1 FOR XML PATH('') ),1,1,'') AS ma_cong_to_chuan FROM dm_cong_to AS p GROUP BY p.ma_kh) f where a.id_khu = b.id_khu and a.id_huyen = c.id_huyen and a.id_phuong_xa = d.id_phuong_xa and a.id_tram_bien_ap = e.id_tram_bien_ap and a.ma_kh = f.ma_kh and a.id_tram_bien_ap ='" + id_tramBAp + "' order by a.thu_tu";
             }
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
@@ -928,6 +928,43 @@ public class clsKhachHang
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
             cmd.CommandText = " SELECT * from dm_cong_to where ma_cong_to = '" + ma_cong_to + "'  ";
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            ma = dts.Tables[0].Rows.Count;
+            return ma;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
+
+    // Kiểm tra chỉ số công tơ đã tồn tại hay chưa
+    public int check_chi_so_cong_to(string ma_cto_cu, string ky_hd)
+    {
+        int ma = 0;
+        SqlConnection myConn = null;
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = " SELECT * from chi_so_cong_to where ma_cong_to = '" + ma_cto_cu + "' and ky = '" + ky_hd + "'";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();

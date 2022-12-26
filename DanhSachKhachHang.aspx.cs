@@ -461,6 +461,43 @@ public partial class DanhSachKhachHang : System.Web.UI.Page
         }
     }
 
+    // Thêm chỉ số công tơ
+    protected void btnThemChiSo_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        string ma_kh = txt_swapModal_maKH.Text;
+        string ten_kh = txt_swapModal_tenKH.Text;
+        string ma_cto_cu = drp_swapModal_cTo.SelectedValue;
+        string ky_hd = drp_swapModal_ky.SelectedValue;
+        float csDau_CToMoi = float.Parse(txt_swapModal_csDauMoi.Text);
+        float csCuoi_CToMoi = float.Parse(txt_swapModal_csCuoiMoi.Text);
+
+        int check_chi_so_cong_to = myCus.check_chi_so_cong_to(ma_cto_cu, ky_hd);
+        if (check_chi_so_cong_to >= 1)
+        {
+            e.Result = "2"; // Chỉ số công tơ cho kỳ đã tồn tại
+        }
+        else
+        {
+            DataTable tblKH = myCus.get_khach_hang_theo_makh(ma_kh);
+            // Thêm chi_so_cong_to
+            string id_doanh_nghiep = myCon.get_iddoanhnghiep(Context.User.Identity.Name.ToString());
+            int id_dn = Convert.ToInt32(id_doanh_nghiep);
+            myCus.them_moi_chi_so_cong_to(ma_cto_cu, csDau_CToMoi, csCuoi_CToMoi, ky_hd, id_dn); // Cập nhật trạng thái công tơ và xóa
+            
+            e.Result = "1";
+            string log = "Thêm chỉ số công tơ của khách hàng " + ten_kh + " mã công tơ: " + ma_cto_cu;
+            myCon.save_log(Context.User.Identity.Name.ToString(), log, "4");
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                e.Result = "0";
+            }
+        }
+    }
+
     protected string convertTenBangGia(object idBangGia)
     {
         string result = "";
