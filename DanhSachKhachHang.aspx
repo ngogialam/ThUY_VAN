@@ -946,7 +946,7 @@
                                 <i class="fa fa-caret-right">&nbsp;Để đổi công tơ, bạn vui lòng nhập thông tin công tơ mới, chọn mã công tơ và chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Đổi công tơ <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
                                     <br />
                                 </i>
-                                <i class="fa fa-caret-right">&nbsp;Để thêm chỉ số công tơ, bạn vui lòng chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Thêm chỉ số <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
+                                <i class="fa fa-caret-right">&nbsp;Để thêm chỉ số công tơ, bạn vui lòng nhập chỉ số đầu, cuối bên ô thông tin công tơ mới, sau đó chọn button <span style="background-color: white"><font color='009900'><b>&nbsp;Thêm chỉ số <i class="fa fa-pagelines"></i>&nbsp;</b></font></span>
                                     <br />
                                 </i>
                             </div>
