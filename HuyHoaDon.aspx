@@ -11,7 +11,7 @@
                 <asp:TextBox ID="txtSoHD" CssClass="form-control" runat="server" placeholder="Nhập số hóa đơn cần thay thế"></asp:TextBox>
             </div>
 <div class="col-xl-3 col-sm-2 mb-2">
-               <asp:DropDownList runat="server" ID="drpSerial" DataValueField="id" DataTextField="kyhieu" CssClass="form-control">                            
+               <asp:DropDownList runat="server" ID="drpSerial" DataValueField="kyhieu" DataTextField="kyhieu" CssClass="form-control">                            
 
 
                </asp:DropDownList>

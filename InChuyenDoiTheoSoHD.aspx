@@ -14,7 +14,7 @@
                 <asp:TextBox ID="txtDenSo" CssClass="form-control" placeholder="Đến số" runat="server"></asp:TextBox>
             </div>
                <div class="col-xl-3 col-sm-4 mb-2">
-                 <asp:DropDownList runat="server" ID="drpSerial" DataValueField="id" DataTextField="kyhieu" CssClass="form-control">                            
+                 <asp:DropDownList runat="server" ID="drpSerial" DataValueField="kyhieu" DataTextField="kyhieu" CssClass="form-control">                            
 
 
                </asp:DropDownList>                        

@@ -31,7 +31,7 @@
                <asp:DropDownList runat="server" ID="drpKy" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>                         
             </div>
             <div class="col-xl-3 col-sm-4 mb-2">
-               <asp:DropDownList runat="server" ID="drpSerial" DataValueField="id" DataTextField="kyhieu" CssClass="form-control">                            
+               <asp:DropDownList runat="server" ID="drpSerial" DataValueField="kyhieu" DataTextField="kyhieu" CssClass="form-control">                            
 
 
                </asp:DropDownList>                         
