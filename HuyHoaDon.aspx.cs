@@ -29,7 +29,8 @@ public partial class HuyHoaDon : System.Web.UI.Page
         txtErr.Text = "";
         if (!IsPostBack)
         {
-
+            drpSerial.DataSource = myINV.get_danh_sach_kyhieu();
+            drpSerial.DataBind();
         }
     }
 

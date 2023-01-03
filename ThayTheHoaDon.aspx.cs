@@ -29,7 +29,11 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         txtErr.Text = "";
         if (!IsPostBack)
         {
+            drpSerial.DataSource = myINV.get_danh_sach_kyhieu();
+            drpSerial.DataBind();
 
+            drpSerialNew.DataSource = myINV.get_danh_sach_kyhieu();
+            drpSerialNew.DataBind();
         }
     }
 

@@ -28,6 +28,9 @@ public partial class PhatHanhHD : System.Web.UI.Page
 
             drpKy.DataSource = myNCS.get_danhsach_ky();
             drpKy.DataBind();
+
+            drpSerial.DataSource = myINV.get_danh_sach_kyhieu();
+            drpSerial.DataBind();
         }
     }
     protected void btnLaySL_Click(object sender, EventArgs e)

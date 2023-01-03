@@ -11,14 +11,10 @@
                 <asp:TextBox ID="txtSoHD" CssClass="form-control" runat="server" placeholder="Nhập số hóa đơn cần thay thế"></asp:TextBox>
             </div>
              <div class="col-xl-3 col-sm-4 mb-2">
-               <asp:DropDownList runat="server" ID="drpSerial" CssClass="form-control">
-		                   <asp:ListItem Value="C22TTV" Selected="True"> C22TTV </asp:ListItem>
-                   <asp:ListItem Value="TV/21E"> TV/21E </asp:ListItem>
-                    <asp:ListItem Value="TV/20E" > TV/20E </asp:ListItem>
-                    <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>                
+                 <asp:DropDownList runat="server" ID="drpSerial" DataValueField="id" DataTextField="kyhieu" CssClass="form-control">                            
 
 
-               </asp:DropDownList>                         
+               </asp:DropDownList>             
             </div>
             <div class="col-xl-3 col-sm-2 mb-2">
                 <asp:Button ID="btnLaySoLieu" runat="server" class="btn btn-success" Text="Thay thế" OnClick="btnLaySoLieu_Click"/>
@@ -34,12 +30,11 @@
 <div class="row">
 
              <div class="col-xl-3 col-sm-4 mb-2">
-               <asp:DropDownList runat="server" ID="drpSerialNew" CssClass="form-control">
-                    <asp:ListItem Value="C22TTV" Selected="True"> C22TTV </asp:ListItem>
-<asp:ListItem Value="TV/21E" > TV/21E </asp:ListItem>
-                    <asp:ListItem Value="TV/20E"> TV/20E </asp:ListItem>
-                    <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>            
-               </asp:DropDownList>                         
+                   <asp:DropDownList runat="server" ID="drpSerialNew" DataValueField="id" DataTextField="kyhieu" CssClass="form-control">                            
+
+
+               </asp:DropDownList>  
+                                     
             </div>
 </div>
         <div class="row">

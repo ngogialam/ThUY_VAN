@@ -67,6 +67,44 @@ public class clsHoaDon
         }
 
     }
+    //Get danh sách ký hiệu hóa đơn
+    public DataTable get_danh_sach_kyhieu()
+    {
+        SqlConnection myConn = null;
+        // string sql = "select '0' id_tram_bien_ap, N'-- Tất cả trạm --' ten_tram_bien_ap ";
+        // sql = sql + " union all ";
+        string sql = " select * from dm_kyhieu order by id DESC";
+        try
+        {
+            clsConnect cnstr = new clsConnect();
+            myConn = cnstr.ConnectSQL();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter myData = new SqlDataAdapter(cmd);
+            DataSet dts = new DataSet();
+            myConn.Open();
+            myData.Fill(dts);
+            myData.Dispose();
+            cmd.Parameters.Clear();
+            cmd.Connection.Close();
+            myConn.Close();
+            return dts.Tables[0];
+            // return dts;    
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+    }
     //Danh sách hóa đơn điện tử
     public DataTable get_danh_sach_hddt(string id_tramba, string ky, string trangthai)
     {

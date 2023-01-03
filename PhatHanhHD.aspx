@@ -31,11 +31,7 @@
                <asp:DropDownList runat="server" ID="drpKy" DataValueField="id" DataTextField="ky" CssClass="form-control"></asp:DropDownList>                         
             </div>
             <div class="col-xl-3 col-sm-4 mb-2">
-               <asp:DropDownList runat="server" ID="drpSerial" CssClass="form-control">
-                   <asp:ListItem Value="C22TTV" Selected="True"> C22TTV </asp:ListItem>
-                   <asp:ListItem Value="TV/21E"> TV/21E </asp:ListItem>
-                    <asp:ListItem Value="TV/20E" > TV/20E </asp:ListItem>
-                    <asp:ListItem Value="TV/19E"> TV/19E </asp:ListItem>                
+               <asp:DropDownList runat="server" ID="drpSerial" DataValueField="id" DataTextField="kyhieu" CssClass="form-control">                            
 
 
                </asp:DropDownList>                         
