@@ -429,7 +429,7 @@ public class clsBaocao
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
            // sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
-            sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
+            sql = sql + " order by b.thu_tu ";
 
         }
         cmd.CommandText = sql;
