@@ -414,7 +414,7 @@ public class clsBaocao
             sql = sql + " and b.id_khu=c.id_khu ";
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
-            sql = sql + " and c.id_khu=" + id_khu + "  ";
+           //sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
         }
@@ -427,7 +427,7 @@ public class clsBaocao
             sql = sql + " and b.id_tram_bien_ap=e.id_tram_bien_ap ";
             sql = sql + "   and a.ma_kh in ( select ma_kh from khach_hang where id_doanh_nghiep=" + id_doanh_nghiep + ")  ";
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
-            sql = sql + " and c.id_khu=" + id_khu + "  ";
+           // sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
             sql = sql + " order by b.id_tram_bien_ap, c.id_khu ";
 
@@ -501,7 +501,7 @@ public class clsBaocao
         // return dts;    
     }
 
-    public double SELECT_CHOT_CONG_TO_THEO_MAKH(string ma_ct, string thang, string nam)
+    public double SELECT_CHOT_CONG_TO_THEO_MACT(string ma_ct, string thang, string nam)
     {
         string sql = "";
         double chi_so_cong_to = 0;
