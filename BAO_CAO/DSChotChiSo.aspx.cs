@@ -62,7 +62,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
                 bindGrid_Trang(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
             else
             {
-                bindGrid(id_tram_bien_ap, id_dia_ban, id_thoi_gian);
+                bindGrid(id_tram_bien_ap, id_dia_ban, "0");
             }
         }
         else
@@ -146,36 +146,19 @@ public partial class DSChotChiSo : System.Web.UI.Page
             newRowTong[3] = tbx.Rows[i]["dia_chi"].ToString();
             newRowTong[4] = tbx.Rows[i]["ma_cong_to"].ToString();
 
-            if (id_thoi_gian == "03")
-            {
-                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
-                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
-                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
-            }
-            else if (id_thoi_gian == "06")
-            {
-                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
-                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
-                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
-                tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "04", nam);
-                tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "05", nam);
-                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
-            }
-            else
-            {
-                tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "01", nam);
-                tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "02", nam);
-                tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "03", nam);
-                tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "04", nam);
-                tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "05", nam);
-                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "06", nam);
-                tong_thang_7 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "07", nam);
-                tong_thang_8 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "08", nam);
-                tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "09", nam);
-                tong_thang_10 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "10", nam);
-                tong_thang_11 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "11", nam);
-                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_kh"].ToString(), "12", nam);
-            }
+            tong_thang_1 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "01", nam);
+            tong_thang_2 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "02", nam);
+            tong_thang_3 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "03", nam);
+            tong_thang_4 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "04", nam);
+            tong_thang_5 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "05", nam);
+            tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "06", nam);
+            tong_thang_7 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "07", nam);
+            tong_thang_8 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "08", nam);
+            tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "09", nam);
+            tong_thang_10 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "10", nam);
+            tong_thang_11 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "11", nam);
+            tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "12", nam);
+            
 
             newRowTong[5] = tong_thang_1;
             newRowTong[6] = tong_thang_2;
@@ -276,13 +259,13 @@ public partial class DSChotChiSo : System.Web.UI.Page
             if (id_thoi_gian == "03") // in tháng đầu năm phải tính dc chỉ số của tháng 12 năm trước
             {
                 int nam_truoc = int.Parse(nam) - 1;
-                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "12", nam_truoc.ToString());
+                tong_thang_12 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "12", nam_truoc.ToString());
                 newRowTong[16] = tong_thang_12;
             }
             else// in 6 tháng cuối năm phải tính được chỉ số của tháng 6 năm đó
             {
-                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "06", nam);
-                tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MAKH(tbx.Rows[i]["ma_cong_to"].ToString(), "09", nam);
+                tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "06", nam);
+                tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "09", nam);
                 newRowTong[10] = tong_thang_6;
                 newRowTong[13] = tong_thang_9;
             }
