@@ -73,7 +73,7 @@ public class clsHoaDon
         SqlConnection myConn = null;
         // string sql = "select '0' id_tram_bien_ap, N'-- Tất cả trạm --' ten_tram_bien_ap ";
         // sql = sql + " union all ";
-        string sql = " select * from dm_kyhieu order by id DESC";
+        string sql = " select LTRIM(RTRIM(kyhieu))  as kyhieu from dm_kyhieu order by id DESC";
         try
         {
             clsConnect cnstr = new clsConnect();
