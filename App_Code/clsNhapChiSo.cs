@@ -393,6 +393,7 @@ public class clsNhapChiSo
         }
         return muc;
     }
+   
     //Tính tiền điện MDK
     public Double tinh_tien_dien_MDK(Double dntt, int sh, string id_bang_gia)
     {
@@ -420,6 +421,8 @@ public class clsNhapChiSo
         }
         return total;
     }
+    
+
     //Tính tiền điện hỗn hợp
     public Double tinh_tien_dien_HH(Double dntt, int sh, string id_bang_gia)
     {
@@ -493,7 +496,227 @@ public class clsNhapChiSo
         total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
         return total;
     }
+    //Tính tiền điện tăng giá
+    public Double tinh_tien_dien_adjusted(Double dntt, int sh, string id_bang_gia)
+    {
 
+        Double total = 0;
+        DataTable BangGia = lay_bang_gia(id_bang_gia);
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+        {
+
+            // dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+            // total = dntt * dongia;
+            total = tinh_tien_dien_MDK_adjusted(dntt, sh, id_bang_gia);
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+        {
+            total = tinh_tien_dien_sh_adjusted(dntt, sh, id_bang_gia);
+
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
+        {
+            total = tinh_tien_dien_HH_adjusted(dntt, sh, id_bang_gia);
+        }
+        //Làm tròn
+        total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
+        return total;
+    }
+    // Tính tiền điện sinh hoạt điều chỉnh giá
+    public Double tinh_tien_dien_sh_adjusted(Double dntt, int sh, string id_bang_gia)
+    {
+        Double total_old = 0;
+        Double total_new = 0;
+
+        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_new = dntt - dntt_old;
+
+        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
+
+
+        Double[] muc_old = tinh_cs_6_muc_adjusted_old(dntt_old, sh);
+        Double[] muc_new = tinh_cs_6_muc_adjusted_new(dntt_new, sh);
+
+        for (int j = 0; j < muc_old.Length; j++)
+        {
+            total_old = total_old + (muc_old[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat_cu"].ToString()));
+        }
+
+        for (int j = 0; j < muc_new.Length; j++)
+        {
+            total_new = total_new + (muc_new[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString()));
+        }
+
+        return total_old + total_new;
+    }
+
+    //Tính mức theo giá cũ
+    public Double[] tinh_cs_6_muc_adjusted_old(Double sanluong, int sh)
+    {
+        Double[] muc = new Double[] { };
+        if (sanluong > (107 * sh))
+        {
+            Double bac6 = sanluong - (107 * sh);
+            muc = new Double[] { 13 * sh, 13 * sh, 27 * sh, 27 * sh, 27 * sh, bac6 };
+
+        }
+        else
+        {
+            if (sanluong > (80 * sh))
+            {
+                Double bac5 = sanluong - (80 * sh);
+                muc = new Double[] { 13 * sh, 13 * sh, 27 * sh, 27 * sh, bac5 };
+            }
+            else
+            {
+                if (sanluong > (53 * sh))
+                {
+                    Double bac4 = sanluong - (53 * sh);
+                    muc = new Double[] { 13 * sh, 13 * sh, 27 * sh, bac4 };
+                }
+                else
+                {
+                    if (sanluong > (26 * sh))
+                    {
+                        Double bac3 = sanluong - (26 * sh);
+                        muc = new Double[] { (13 * sh), (13 * sh), bac3 };
+                    }
+                    else
+                    {
+                        if (sanluong > (13 * sh))
+                        {
+                            Double bac2 = sanluong - (13 * sh);
+                            muc = new Double[] { (13 * sh), bac2 };
+                        }
+                        else
+                        {
+                            Double bac1 = sanluong - 0;
+                            muc = new Double[] { bac1 };
+                        }
+                    }
+                }
+            }
+        }
+        return muc;
+    }
+
+    //Tính mức theo giá mới
+    public Double[] tinh_cs_6_muc_adjusted_new(Double sanluong, int sh)
+    {
+        Double[] muc = new Double[] { };
+        if (sanluong > (293 * sh))
+        {
+            Double bac6 = sanluong - (293 * sh);
+            muc = new Double[] { 37 * sh, 37 * sh, 73 * sh, 73 * sh, 73 * sh, bac6 };
+
+        }
+        else
+        {
+            if (sanluong > (220 * sh))
+            {
+                Double bac5 = sanluong - (220 * sh);
+                muc = new Double[] { 37 * sh, 37 * sh, 73 * sh, 73 * sh, bac5 };
+            }
+            else
+            {
+                if (sanluong > (147 * sh))
+                {
+                    Double bac4 = sanluong - (147 * sh);
+                    muc = new Double[] { 37 * sh, 37 * sh, 73 * sh, bac4 };
+                }
+                else
+                {
+                    if (sanluong > (73 * sh))
+                    {
+                        Double bac3 = sanluong - (73 * sh);
+                        muc = new Double[] { (37 * sh), (37 * sh), bac3 };
+                    }
+                    else
+                    {
+                        if (sanluong > (37 * sh))
+                        {
+                            Double bac2 = sanluong - (37 * sh);
+                            muc = new Double[] { (37 * sh), bac2 };
+                        }
+                        else
+                        {
+                            Double bac1 = sanluong - 0;
+                            muc = new Double[] { bac1 };
+                        }
+                    }
+                }
+            }
+        }
+        return muc;
+    }
+    //Tính tiền điện MDK tăng giá
+    public Double tinh_tien_dien_MDK_adjusted(Double dntt, int sh, string id_bang_gia)
+    {
+        Double dongia = 0;
+        Double dongia_cu = 0;
+        Double total = 0;
+        DataTable BangGia = lay_bang_gia(id_bang_gia);
+
+        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_new = dntt - dntt_old;
+
+        dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+        dongia_cu = Convert.ToDouble(BangGia.Rows[0]["don_gia_cu"].ToString());
+        total = (dntt_new * dongia) + (dntt_old * dongia_cu);
+
+        return total;
+
+    }
+
+    //Tính tiền điện hỗn hợp
+    public Double tinh_tien_dien_HH_adjusted(Double dntt, int sh, string id_bang_gia)
+    {
+        Double total = 0;
+        Double dn = 0;
+        Double sumDN = 0;
+        DataTable BangGiaHH = lay_bang_gia_chi_tiet(id_bang_gia);
+        int i = 0;
+
+       
+        for (i = 0; i < BangGiaHH.Rows.Count; i++)
+        {
+            DataTable dtbtemp = lay_bang_gia(BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            int tyle = Convert.ToInt32(BangGiaHH.Rows[i]["ty_le"].ToString().Trim());
+            if (i != BangGiaHH.Rows.Count - 1)
+            {
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+                {
+                    dn = dntt * tyle / 100;
+                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
+                    sumDN = sumDN + dn;
+                    total = total + tinh_tien_dien_MDK_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                }
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+                {
+                    dn = dntt * tyle / 100;
+                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
+                    sumDN = sumDN + dn;
+                    total = total + tinh_tien_dien_sh_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                }
+            }
+            else
+            {
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+                {
+                    dn = dntt - sumDN;
+                    total = total + tinh_tien_dien_MDK_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                }
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+                {
+                    dn = dntt - sumDN;
+                    total = total + tinh_tien_dien_sh_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                }
+            }
+
+        }
+
+        return total;
+    }
     //Lấy bảng giá
     public DataTable lay_bang_gia(string id_bang_gia)
     {
@@ -557,6 +780,7 @@ public class clsNhapChiSo
             }
         }
     }
+
     //Trạng thái kỳ 1-Chưa chốt, 0-đã chốt
     public DataTable get_danhsach_ky()
     {
@@ -1091,6 +1315,205 @@ public class clsNhapChiSo
                 {
                     dn = dntt - sumDN;
                     recordsAffected = them_moi_hoa_don_chi_tiet_sh(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    //sumDN = sumDN + dn;
+                }
+
+            }
+        }
+        return recordsAffected;
+    }
+    //Insert hoa_don_chi_tiet điện tăng giá
+
+    public int them_moi_hoa_don_chi_tiet_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+        int recordsAffected = 0;
+        DataTable BangGia = lay_bang_gia(id_bang_gia);
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+        {
+            recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dntt, sh, id_bang_gia);
+
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+        {
+            recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dntt, sh, id_bang_gia);
+        }
+        if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
+        {
+            recordsAffected = them_moi_hoa_don_chi_tiet_hh_adjusted(id_hd, dntt, sh, id_bang_gia);
+        }
+        return recordsAffected;
+
+    }
+    public int them_moi_hoa_don_chi_tiet_mdk_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        string sql = "";
+        Double dongia = 0;
+        Double total = 0;
+        string diengiai = "";
+
+        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_new = dntt - dntt_old;
+
+        int recordsAffected = 0;
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            DataTable BangGia = lay_bang_gia(id_bang_gia);
+
+            //Giá cũ
+            diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá cũ";
+            dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia_cu"].ToString());
+            total = dntt_old * dongia;
+            sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+            sql = sql + " values(" + id_hd + ",1,N'" + diengiai + "'," + dntt + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+
+            cmd.CommandText = sql;
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+            //Giá mới
+            diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá mới"; ;
+            dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+            total = dntt_old * dongia;
+            sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+            sql = sql + " values(" + id_hd + ",2,N'" + diengiai + "'," + dntt + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+
+            cmd.CommandText = sql;
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
+    public int them_moi_hoa_don_chi_tiet_sh_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        string id_doanh_nghiep = cnstr.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        string sql = "";
+        Double dongia = 0;
+        Double total = 0;
+        string diengiai = "";
+        int recordsAffected = 0;
+
+        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_new = dntt - dntt_old;
+
+        DataTable BangGia = lay_bang_gia_chi_tiet(id_bang_gia);
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            Double[] muc_old = tinh_cs_6_muc_adjusted_old(dntt_old, sh);
+            Double[] muc_new = tinh_cs_6_muc_adjusted_new(dntt_new, sh);
+
+            Double[] dongiamuc = new Double[] { };
+            int j = 0;
+            for (j = 0; j < muc_old.Length; j++)
+            {
+                diengiai = BangGia.Rows[j]["muc_thu"].ToString();
+                dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat_cu"].ToString());
+                total = muc_old[j] * dongia;
+                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+                sql = sql + " values(" + id_hd + "," + (j + 1) + ",N'" + diengiai + "','" + muc_old[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+                cmd.CommandText = sql;
+                recordsAffected = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+
+            //Giá mới
+            int k = muc_old.Length;
+            j = 0;
+            for (j = 0; j < muc_new.Length; j++)
+            {
+                diengiai = BangGia.Rows[j]["muc_thu"].ToString();
+                dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
+                total = muc_new[j] * dongia;
+                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+                sql = sql + " values(" + id_hd + "," + (j + k + 1) + ",N'" + diengiai + "','" + muc_new[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+                cmd.CommandText = sql;
+                recordsAffected = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
+
+    public int them_moi_hoa_don_chi_tiet_hh_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    {
+        Double dn = 0;
+        Double sumDN = 0;
+        DataTable BangGiaHH = lay_bang_gia_chi_tiet(id_bang_gia);
+        int i = 0;
+        int recordsAffected = 0;
+
+        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_new = dntt - dntt_old;
+
+        for (i = 0; i < BangGiaHH.Rows.Count; i++)
+        {
+            DataTable dtbtemp = lay_bang_gia(BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+            int tyle = Convert.ToInt32(BangGiaHH.Rows[i]["ty_le"].ToString().Trim());
+            if (i != BangGiaHH.Rows.Count - 1)
+            {
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+                {
+                    dn = dntt * tyle / 100;
+                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
+                    recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    sumDN = sumDN + dn;
+                }
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+                {
+                    dn = dntt * tyle / 100;
+                    dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
+                    recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    sumDN = sumDN + dn;
+                }
+            }
+            else
+            {
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
+                {
+                    dn = dntt - sumDN;
+                    recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    //sumDN = sumDN + dn;
+                }
+                if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
+                {
+                    dn = dntt - sumDN;
+                    recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
                     //sumDN = sumDN + dn;
                 }
 
