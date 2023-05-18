@@ -102,7 +102,7 @@
                             <a href='<%= ResolveUrl("LapHoaDon.aspx")%>'>Lập hóa đơn</a>
                         </li>
                         <li>
-                            <a href='<%= ResolveUrl("LapHoaDonDienTangGia.aspx")%>'>Lập hóa đơn</a>
+                            <a href='<%= ResolveUrl("LapHoaDonDienTangGia.aspx")%>'>Lập hóa đơn điện tăng giá</a>
                         </li>
                         <li>
                             <a href='<%= ResolveUrl("PhatHanhHD.aspx")%>'>Phát hành hóa đơn</a>
