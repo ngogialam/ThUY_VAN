@@ -626,9 +626,9 @@ public class clsNhapChiSo
                 }
                 else
                 {
-                    if (sanluong > (73 * sh))
+                    if (sanluong > (74 * sh))
                     {
-                        Double bac3 = sanluong - (73 * sh);
+                        Double bac3 = sanluong - (74 * sh);
                         muc = new Double[] { (37 * sh), (37 * sh), bac3 };
                     }
                     else
@@ -668,7 +668,7 @@ public class clsNhapChiSo
 
     }
 
-    //Tính tiền điện hỗn hợp
+    //Tính tiền điện hỗn hợp tăng giá
     public Double tinh_tien_dien_HH_adjusted(Double dntt, int sh, string id_bang_gia)
     {
         Double total = 0;
