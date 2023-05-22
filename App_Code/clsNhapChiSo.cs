@@ -1371,7 +1371,7 @@ public class clsNhapChiSo
             dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia_cu"].ToString());
             total = dntt_old * dongia;
             sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
-            sql = sql + " values(" + id_hd + ",1,N'" + diengiai + "'," + dntt + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+            sql = sql + " values(" + id_hd + ",1,N'" + diengiai + "'," + dntt_old + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
 
             cmd.CommandText = sql;
             recordsAffected = cmd.ExecuteNonQuery();
@@ -1380,9 +1380,9 @@ public class clsNhapChiSo
             //Giá mới
             diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá mới"; ;
             dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-            total = dntt_old * dongia;
+            total = dntt_new * dongia;
             sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
-            sql = sql + " values(" + id_hd + ",2,N'" + diengiai + "'," + dntt + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+            sql = sql + " values(" + id_hd + ",2,N'" + diengiai + "'," + dntt_new + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
 
             cmd.CommandText = sql;
             recordsAffected = cmd.ExecuteNonQuery();
