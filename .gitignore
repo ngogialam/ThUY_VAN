@@ -1,0 +1,11 @@
+
+*.config
+*.vsidx
+*.lock
+.vs/QuanLyHTXDienNang/v17/.wsuo
+*.bin
+*.sqlite
+*.json
+*.config
+*.config
+*.config
