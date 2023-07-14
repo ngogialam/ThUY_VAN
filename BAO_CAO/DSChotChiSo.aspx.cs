@@ -267,7 +267,7 @@ public partial class DSChotChiSo : System.Web.UI.Page
                 tong_thang_6 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "06", nam);
                 tong_thang_9 = cslBC.SELECT_CHOT_CONG_TO_THEO_MACT(tbx.Rows[i]["ma_cong_to"].ToString(), "09", nam);
                 newRowTong[10] = tong_thang_6;
-                newRowTong[13] = tong_thang_9;
+                //newRowTong[13] = tong_thang_9;
             }
             newRowTong[17] = tbx.Rows[i]["cot_dien_so"].ToString();
             
