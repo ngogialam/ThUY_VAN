@@ -420,7 +420,7 @@ public class clsBaocao
         }
         else
         {
-            sql = "select ROW_NUMBER() OVER(ORDER BY a.ma_kh ASC) as stt,month(ngay_nhap) as Thang, year(ngay_nhap) as Nam,b.ma_kh,b.ten_kh,b.dia_chi,a.ma_cong_to,null as chi_so_moi  ";
+            sql = "select max(year(ngay_nhap)) as Nam,max(b.ma_kh) as ma_kh,max(b.ten_kh) as ten_kh,max(b.dia_chi) as dia_chi,max(a.ma_cong_to) as ma_cong_to,null as chi_so_moi  ";
             sql = sql + " from hoa_don a,khach_hang b,dm_khu c,tram_bien_ap e ";
             sql = sql + " where a.ma_kh=b.ma_kh ";
             sql = sql + " and b.id_khu=c.id_khu ";
@@ -429,7 +429,7 @@ public class clsBaocao
             sql = sql + " and b.id_tram_bien_ap='" + id_tram_bien_ap + "' ";
            // sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
-            sql = sql + " order by b.thu_tu ";
+            sql = sql + " group by b.ma_kh ";
 
         }
         cmd.CommandText = sql;
