@@ -1355,7 +1355,7 @@ public class clsNhapChiSo
         Double total = 0;
         string diengiai = "";
 
-        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(14 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         int recordsAffected = 0;
@@ -1415,7 +1415,7 @@ public class clsNhapChiSo
         string diengiai = "";
         int recordsAffected = 0;
 
-        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(14 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         DataTable BangGia = lay_bang_gia_chi_tiet(id_bang_gia);
@@ -1478,7 +1478,7 @@ public class clsNhapChiSo
         int i = 0;
         int recordsAffected = 0;
 
-        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(14 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         for (i = 0; i < BangGiaHH.Rows.Count; i++)
