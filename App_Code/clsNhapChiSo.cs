@@ -528,7 +528,7 @@ public class clsNhapChiSo
         Double total_old = 0;
         Double total_new = 0;
 
-        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(14 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
@@ -554,39 +554,39 @@ public class clsNhapChiSo
     public Double[] tinh_cs_6_muc_adjusted_old(Double sanluong, int sh)
     {
         Double[] muc = new Double[] { };
-        if (sanluong > (107 * sh))
+        if (sanluong > (184 * sh))
         {
-            Double bac6 = sanluong - (107 * sh);
-            muc = new Double[] { 13 * sh, 13 * sh, 27 * sh, 27 * sh, 27 * sh, bac6 };
+            Double bac6 = sanluong - (184 * sh);
+            muc = new Double[] { 23 * sh, 23 * sh, 46 * sh, 46 * sh, 46 * sh, bac6 };
 
         }
         else
         {
-            if (sanluong > (80 * sh))
+            if (sanluong > (138 * sh))
             {
-                Double bac5 = sanluong - (80 * sh);
-                muc = new Double[] { 13 * sh, 13 * sh, 27 * sh, 27 * sh, bac5 };
+                Double bac5 = sanluong - (138 * sh);
+                muc = new Double[] { 23 * sh, 23 * sh, 46 * sh, 46 * sh, bac5 };
             }
             else
             {
-                if (sanluong > (53 * sh))
+                if (sanluong > (92 * sh))
                 {
-                    Double bac4 = sanluong - (53 * sh);
-                    muc = new Double[] { 13 * sh, 13 * sh, 27 * sh, bac4 };
+                    Double bac4 = sanluong - (92 * sh);
+                    muc = new Double[] { 23 * sh, 23 * sh, 46 * sh, bac4 };
                 }
                 else
                 {
-                    if (sanluong > (26 * sh))
+                    if (sanluong > (46 * sh))
                     {
-                        Double bac3 = sanluong - (26 * sh);
-                        muc = new Double[] { (13 * sh), (13 * sh), bac3 };
+                        Double bac3 = sanluong - (46 * sh);
+                        muc = new Double[] { (23 * sh), (23 * sh), bac3 };
                     }
                     else
                     {
-                        if (sanluong > (13 * sh))
+                        if (sanluong > (23 * sh))
                         {
-                            Double bac2 = sanluong - (13 * sh);
-                            muc = new Double[] { (13 * sh), bac2 };
+                            Double bac2 = sanluong - (23 * sh);
+                            muc = new Double[] { (23 * sh), bac2 };
                         }
                         else
                         {
@@ -604,39 +604,39 @@ public class clsNhapChiSo
     public Double[] tinh_cs_6_muc_adjusted_new(Double sanluong, int sh)
     {
         Double[] muc = new Double[] { };
-        if (sanluong > (293 * sh))
+        if (sanluong > (216 * sh))
         {
-            Double bac6 = sanluong - (293 * sh);
-            muc = new Double[] { 37 * sh, 37 * sh, 73 * sh, 73 * sh, 73 * sh, bac6 };
+            Double bac6 = sanluong - (216 * sh);
+            muc = new Double[] { 27 * sh, 27 * sh, 54 * sh, 54 * sh, 54 * sh, bac6 };
 
         }
         else
         {
-            if (sanluong > (220 * sh))
+            if (sanluong > (162 * sh))
             {
-                Double bac5 = sanluong - (220 * sh);
-                muc = new Double[] { 37 * sh, 37 * sh, 73 * sh, 73 * sh, bac5 };
+                Double bac5 = sanluong - (162 * sh);
+                muc = new Double[] { 27 * sh, 27 * sh, 54 * sh, 54 * sh, bac5 };
             }
             else
             {
-                if (sanluong > (147 * sh))
+                if (sanluong > (108 * sh))
                 {
-                    Double bac4 = sanluong - (147 * sh);
-                    muc = new Double[] { 37 * sh, 37 * sh, 73 * sh, bac4 };
+                    Double bac4 = sanluong - (108 * sh);
+                    muc = new Double[] { 27 * sh, 27 * sh, 54 * sh, bac4 };
                 }
                 else
                 {
-                    if (sanluong > (74 * sh))
+                    if (sanluong > (54 * sh))
                     {
-                        Double bac3 = sanluong - (74 * sh);
-                        muc = new Double[] { (37 * sh), (37 * sh), bac3 };
+                        Double bac3 = sanluong - (54 * sh);
+                        muc = new Double[] { (27 * sh), (27 * sh), bac3 };
                     }
                     else
                     {
-                        if (sanluong > (37 * sh))
+                        if (sanluong > (27 * sh))
                         {
-                            Double bac2 = sanluong - (37 * sh);
-                            muc = new Double[] { (37 * sh), bac2 };
+                            Double bac2 = sanluong - (27 * sh);
+                            muc = new Double[] { (27 * sh), bac2 };
                         }
                         else
                         {
@@ -657,7 +657,7 @@ public class clsNhapChiSo
         Double total = 0;
         DataTable BangGia = lay_bang_gia(id_bang_gia);
 
-        Double dntt_old = Math.Round(8 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(14 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
