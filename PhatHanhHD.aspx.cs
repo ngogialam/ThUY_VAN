@@ -131,12 +131,12 @@ public partial class PhatHanhHD : System.Web.UI.Page
                 {
                     j = i;
                     doc.LoadXml(result);
-                    XmlNodeList elemList = doc.GetElementsByTagName("InvoiceNo");
+                    XmlNodeList elemList = doc.GetElementsByTagName("SHDon");
                     string so_hd = elemList[0].InnerXml.ToString();
-                    elemList = doc.GetElementsByTagName("SerialNo");
+                    elemList = doc.GetElementsByTagName("KHHDon");
                     string serial = elemList[0].InnerXml.ToString();
-                    elemList = doc.GetElementsByTagName("InvoicePattern");
-                    string pattern = elemList[0].InnerXml.ToString();
+                    //elemList = doc.GetElementsByTagName("InvoicePattern");
+                    string pattern = "1/001";
 
                     myINV.updateEInvoice(fkey, kyhd, so_hd, pattern, serial, "2");
 
