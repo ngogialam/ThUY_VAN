@@ -247,7 +247,7 @@ public class clsHoaDon
         SqlConnection myConn = null;
         // string id_doanh_nghiep = 1
         string sql = "select distinct id from hoa_don";
-        sql = sql + " where so_hd is null and  id_tram_bien_ap='" + id_tramba + "' and ky_hd='" + ky + "'";
+        sql = sql + " where so_hd is null and  id_tram_bien_ap='" + id_tramba + "' and ky_hd='" + ky + "' and trang_thai=1";
 
 
         try
