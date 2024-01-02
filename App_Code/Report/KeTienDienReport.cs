@@ -849,7 +849,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.StylePriority.UseBorders = false;
             this.xrTableCell24.StylePriority.UseTextAlignment = false;
-            this.xrTableCell24.Text = "1728 đ/kWh";
+            this.xrTableCell24.Text = "1806 đ/kWh";
             this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell24.Weight = 9.21813245543857D;
             // 
@@ -862,7 +862,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseBorders = false;
             this.xrTableCell12.StylePriority.UseTextAlignment = false;
-            this.xrTableCell12.Text = "1786 đ/kWh";
+            this.xrTableCell12.Text = "1866 đ/kWh";
             this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell12.Weight = 9.2181334439973046D;
             // 
@@ -875,7 +875,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell25.Name = "xrTableCell25";
             this.xrTableCell25.StylePriority.UseBorders = false;
             this.xrTableCell25.StylePriority.UseTextAlignment = false;
-            this.xrTableCell25.Text = "2074 đ/kWh";
+            this.xrTableCell25.Text = "2167 đ/kWh";
             this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell25.Weight = 9.2181334439973046D;
             // 
@@ -888,7 +888,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseBorders = false;
             this.xrTableCell13.StylePriority.UseTextAlignment = false;
-            this.xrTableCell13.Text = "2612 đ/kWh";
+            this.xrTableCell13.Text = "2729 đ/kWh";
             this.xrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell13.Weight = 9.21813245311264D;
             // 
@@ -901,7 +901,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell26.Name = "xrTableCell26";
             this.xrTableCell26.StylePriority.UseBorders = false;
             this.xrTableCell26.StylePriority.UseTextAlignment = false;
-            this.xrTableCell26.Text = "2919 đ/kWh";
+            this.xrTableCell26.Text = "3050 đ/kWh";
             this.xrTableCell26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell26.Weight = 9.2181331564004338D;
             // 
@@ -914,7 +914,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseBorders = false;
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
-            this.xrTableCell14.Text = "3015 đ/kWh";
+            this.xrTableCell14.Text = "3151 đ/kWh";
             this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell14.Weight = 9.2181335630413415D;
             // 
@@ -927,7 +927,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell32.Name = "xrTableCell32";
             this.xrTableCell32.StylePriority.UseBorders = false;
             this.xrTableCell32.StylePriority.UseTextAlignment = false;
-            this.xrTableCell32.Text = "2074 đ/kWh NT";
+            this.xrTableCell32.Text = "2167 đ/kWh NT";
             this.xrTableCell32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell32.Weight = 9.2181335630413415D;
             // 
@@ -940,7 +940,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.StylePriority.UseBorders = false;
             this.xrTableCell23.StylePriority.UseTextAlignment = false;
-            this.xrTableCell23.Text = "1805 đ/kWh BV";
+            this.xrTableCell23.Text = "1886 đ/kWh BV";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell23.Weight = 9.2181336677628565D;
             // 
@@ -953,7 +953,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell29.Name = "xrTableCell29";
             this.xrTableCell29.StylePriority.UseBorders = false;
             this.xrTableCell29.StylePriority.UseTextAlignment = false;
-            this.xrTableCell29.Text = "2746 đ/kWh KD";
+            this.xrTableCell29.Text = "2870 đ/kWh KD";
             this.xrTableCell29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell29.Weight = 9.218133667762844D;
             // 
@@ -966,7 +966,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell28.Name = "xrTableCell28";
             this.xrTableCell28.StylePriority.UseBorders = false;
             this.xrTableCell28.StylePriority.UseTextAlignment = false;
-            this.xrTableCell28.Text = "1940 đ/kWh CSCC";
+            this.xrTableCell28.Text = "2027 đ/kWh CSCC";
             this.xrTableCell28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell28.Weight = 9.2181336677628458D;
             // 
@@ -980,7 +980,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell31.Name = "xrTableCell31";
             this.xrTableCell31.StylePriority.UseBorders = false;
             this.xrTableCell31.StylePriority.UseTextAlignment = false;
-            this.xrTableCell31.Text = "1805 đ/kWh TH\r\n";
+            this.xrTableCell31.Text = "1886 đ/kWh TH\r\n";
             this.xrTableCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell31.Weight = 9.2181337201236069D;
             // 
@@ -993,7 +993,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.StylePriority.UseBorders = false;
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
-            this.xrTableCell30.Text = "1940 đ/kWh HCSN";
+            this.xrTableCell30.Text = "2027 đ/kWh HCSN";
             this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell30.Weight = 9.2181337463039821D;
             // 
@@ -1005,7 +1005,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell34.CanGrow = false;
             this.xrTableCell34.Name = "xrTableCell34";
             this.xrTableCell34.StylePriority.UseBorders = false;
-            this.xrTableCell34.Text = "1738 đ/kWh BN";
+            this.xrTableCell34.Text = "1809 đ/kWh BN";
             this.xrTableCell34.Weight = 9.2181323528186958D;
             // 
             // xrTableCell36
@@ -1016,7 +1016,7 @@ public class KeTienDienReport : DevExpress.XtraReports.UI.XtraReport
             this.xrTableCell36.CanGrow = false;
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseBorders = false;
-            this.xrTableCell36.Text = "1738 đ/kWh SX";
+            this.xrTableCell36.Text = "1809 đ/kWh SX";
             this.xrTableCell36.Weight = 9.2181323593637785D;
             // 
             // xrTableCell33
