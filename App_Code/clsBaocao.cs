@@ -430,6 +430,8 @@ public class clsBaocao
            // sql = sql + " and c.id_khu=" + id_khu + "  ";
             sql = sql + " and SUBSTRING(ky_hd,4,4)='" + nam + "'  ";
             sql = sql + " group by b.ma_kh ";
+            sql = sql + " order by b.thu_tu ";
+           
 
         }
         cmd.CommandText = sql;
