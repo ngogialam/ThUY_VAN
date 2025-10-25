@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Title="In chuyển đổi theo lô" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="InChuyenDoiHoaDon.aspx.cs" Inherits="InChuyenDoiHoaDon" %>
+﻿<%@ Page Language="C#" Title="In chuyển đổi theo lô" EnableEventValidation="false" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="InChuyenDoiHoaDon.aspx.cs" Inherits="InChuyenDoiHoaDon" %>
 
 <asp:Content runat="server" ID="head" ContentPlaceHolderID="head">
 

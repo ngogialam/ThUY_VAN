@@ -1522,4 +1522,46 @@ public class clsNhapChiSo
         return recordsAffected;
     }
 
+    public int import_chi_so_from_excel(string mact, string csmoi, string ky, string id_doanh_nghiep)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        int recordsAffected = 0;
+        
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            
+            int existingRecords = check_cs_ct(mact, ky);
+            
+            if (existingRecords > 0)
+            {
+                cmd.CommandText = "update chi_so_cong_to set cs_moi='" + csmoi + "', ngay_capnhat = CONVERT(Datetime, GETDATE(), 103) where ma_cong_to='" + mact + "' and ky='" + ky + "' and id_doanh_nghiep=" + id_doanh_nghiep;
+                recordsAffected = cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                cmd.CommandText = "insert into chi_so_cong_to(ma_cong_to, cs_moi, ky, ngay_capnhat, trang_thai, id_doanh_nghiep) values ('" + mact + "', " + csmoi + ", '" + ky + "', CONVERT(Datetime, GETDATE(), 103), 1, " + id_doanh_nghiep + ")";
+                recordsAffected = cmd.ExecuteNonQuery();
+            }
+            
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
+
 }
