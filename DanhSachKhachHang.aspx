@@ -21,6 +21,8 @@
             var txtMaCongTo = $('#txtMaCongTo_AddModal').val();
             var txtSoDongHo = $('#txtSoDongHo_AddModal').val();
             var txtThuTu = $('#txtThuTu_AddModal').val();
+            var txtCccd = $('#txtCccd_AddModal').val();
+            var txtMaQhns = $('#txtMaQhns_AddModal').val();
 
             if (txtTenKH === "") {
                 alert("Vui lòng nhập tên khách hàng!");
@@ -110,6 +112,19 @@
                 $('#txtThuTu_AddModal').focus();
                 return false
             }
+            // 1. Kiểm tra CCCD: 
+            if (txtCccd !== "" && isNaN(txtCccd)) {
+                alert("Căn cước công dân phải là số!");
+                $('#txtCccd_AddModal').focus();
+                return false;
+            }
+
+            // 2. Kiểm tra Mã QHNS: 
+            if (txtMaQhns !== "" && isNaN(txtMaQhns)) {
+                alert("Mã quan hệ ngân sách phải là số!");
+                $('#txtMaQhns_AddModal').focus();
+                return false;
+            }
             //var isMaCongTo = re.test(txtMaCongTo);
             //if (isMaCongTo) {
             //    alert("Bạn chỉ được nhập số!");
@@ -146,6 +161,8 @@
             var txtMaCongTo = $('#txtMaCongTo').val();
             var txtSoDongHo = $('#txtSoDongHo').val();
             var txtThuTu = $('#txtThuTu').val();
+            var txtCccd = $('#txtCccd').val();
+            var txtMaQhns = $('#txtMaQhns').val();
 
             if (txtTenKH === "") {
                 alert("Vui lòng nhập tên khách hàng!");
@@ -229,6 +246,19 @@
                 alert("Thứ tự phải lớn hơn 0!");
                 $('#txtThuTu').focus();
                 return false
+            }
+            // 1. Kiểm tra CCCD: 
+            if (txtCccd !== "" && isNaN(txtCccd)) {
+                alert("Căn cước công dân phải là số!");
+                $('#txtCccd_AddModal').focus();
+                return false;
+            }
+
+            // 2. Kiểm tra Mã QHNS: 
+            if (txtMaQhns !== "" && isNaN(txtMaQhns)) {
+                alert("Mã quan hệ ngân sách phải là số!");
+                $('#txtMaQhns_AddModal').focus();
+                return false;
             }
 
             cbCapNhat.PerformCallback()
@@ -500,6 +530,16 @@
                                 <asp:Label ID="lblMtsKH" runat="server" Text='<%# Eval("mst_kh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Mã QHNS" Visible="False">
+                            <ItemTemplate>
+                                <asp:Label ID="lblMaQhns" runat="server" Text='<%# Eval("ma_qhns") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="CCCD" Visible="False">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCccd" runat="server" Text='<%# Eval("cccd") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Cột điện số" Visible="False">
                             <ItemTemplate>
                                 <asp:Label ID="lblCotDienSo" runat="server" Text='<%# Eval("cot_dien_so") %>'></asp:Label>
@@ -630,6 +670,7 @@
                                 <asp:TextBox ID="txtHSTi_AddModal" runat="server" ClientIDMode="Static" type="number" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="column">
                         <div class="user-info-row ">
@@ -686,6 +727,18 @@
                             <div class="value">
                                 <asp:CheckBox ID="ckbTrangThai_AddModal" runat="server" ClientIDMode="Static" />
                                 <label>Kích hoạt</label>
+                            </div>
+                        </div>
+                        <div class="user-info-row" style="border: none">
+                            <label class="key">Mã số QHNS (<span style="color: red">*</span>):</label>
+                            <div class="value">
+                                <asp:TextBox ID="txtMaQhns_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="user-info-row" style="border: none">
+                            <label class="key">Số định danh (<span style="color: red">*</span>):</label>
+                            <div class="value">
+                                <asp:TextBox ID="txtCccd_AddModal" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -839,6 +892,18 @@
                                     <label class="key">Trạng thái:</label>
                                     <div class="value">
                                         <asp:CheckBox ID="ckbTrangThai" runat="server" ClientIDMode="Static" CssClass="form-control input-lg noBorder" Text="Kích hoạt" />
+                                    </div>
+                                </div>
+                                <div class="user-info-row" style="border: none">
+                                    <label class="key">Mã số QHNS (<span style="color: red">*</span>):</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txtMaQhns" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="user-info-row" style="border: none">
+                                    <label class="key">Số định danh (<span style="color: red">*</span>):</label>
+                                    <div class="value">
+                                        <asp:TextBox ID="txtCccd" runat="server" ClientIDMode="Static" CssClass="form-control input-lg"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
