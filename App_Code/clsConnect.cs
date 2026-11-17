@@ -8,7 +8,7 @@ public class clsConnect
 {
     public SqlConnection ConnectSQL()
     {
-        string constr = "Data Source=10.24.30.12;Initial Catalog=VNPT_EMAN;user id=eman;password=Eman@2019;";
+        string constr = "Data Source=10.24.30.12;Initial Catalog=VNPT_EMAN_DEV;user id=eman;password=Eman@2019;";
         // string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection myConn = new SqlConnection(constr);
         return myConn;

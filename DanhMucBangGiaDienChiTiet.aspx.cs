@@ -10,7 +10,6 @@ public partial class DanhMucBangGiaDienChiTiet : System.Web.UI.Page
     DataTable CusList = new DataTable();
     clsBaocao myBC = new clsBaocao();
 
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -102,7 +101,7 @@ public partial class DanhMucBangGiaDienChiTiet : System.Web.UI.Page
         double denSo = Convert.ToDouble(txtDenSo.Text);
         double giaKhongVAT = Convert.ToDouble(txtGiaKhongVAT.Text);
         string mucThu = txtMucThu.Text;
-        double phanTramThue = Convert.ToDouble(txtPhanTramThue.Text);
+        double dongiacu = Convert.ToDouble(txtPhanTramThue.Text);
         int idBangGiaTyLe = Convert.ToInt32(drpBangGiaTyLe.SelectedValue);
         double tyLe = 0;
         try
@@ -116,7 +115,7 @@ public partial class DanhMucBangGiaDienChiTiet : System.Web.UI.Page
         {
             if (idBangGiaTyLe == 0)
             {
-                myCus.cap_nhat_gia_dien_chi_tiet(id, tuSo, denSo, giaKhongVAT, mucThu, phanTramThue, idBangGiaTyLe, 0, moTa);
+                myCus.cap_nhat_gia_dien_chi_tiet(id, tuSo, denSo, giaKhongVAT, mucThu, dongiacu, idBangGiaTyLe, 0, moTa);
             }
             else
             {

@@ -5,11 +5,11 @@ using System.IO;
 using System.Xml;
 public partial class PhatHanhHD : System.Web.UI.Page
 {
-    private static string adminName = "eman";
-    private static string adminPass = "Einv@oi@vn#pt20";
-    private static string userName = "emanws";
-    private static string userPass = "Einv@oi@vn#pt20";
-    private static string pattern = "1/001";
+    private static string adminName = "vpctestviewadmin_demo";
+    private static string adminPass = "123456aA@78";
+    private static string userName = "vpctestviewadmins";
+    private static string userPass = "123456aA@78";
+    private static string pattern = "1/004";
    
 
     clsHoaDon myINV = new clsHoaDon();

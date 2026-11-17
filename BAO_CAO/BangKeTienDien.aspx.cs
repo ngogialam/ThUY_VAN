@@ -130,6 +130,14 @@ public partial class BangKeTienDien : System.Web.UI.Page
             if (ma_kh != "")
             {
                 DataRow newRowTong = tbxView.NewRow();
+                // Khởi tạo: để trống (DBNull) cho cột số nếu không có dữ liệu
+                for (int col = 0; col < tbxView.Columns.Count; col++)
+                {
+                    if (tbxView.Columns[col].DataType == typeof(Double))
+                        newRowTong[col] = DBNull.Value;
+                    else
+                        newRowTong[col] = "";
+                }
                 newRowTong[0] = i + 1;
                 newRowTong[1] = tbx.Rows[i]["ten_kh"].ToString();
                 newRowTong[2] = tbx.Rows[i]["ma_kh"].ToString();              
@@ -488,6 +496,14 @@ public partial class BangKeTienDien : System.Web.UI.Page
         }
 
         DataRow newRow4 = tbxView.NewRow();
+        // Khởi tạo: để trống (DBNull) cho cột số nếu không có dữ liệu
+        for (int col = 0; col < tbxView.Columns.Count; col++)
+        {
+            if (tbxView.Columns[col].DataType == typeof(Double))
+                newRow4[col] = DBNull.Value;
+            else
+                newRow4[col] = "";
+        }
         //newRow4[0] = "Tổng";
         newRow4[1] = "Tổng";
         //newRow4[2] = "";

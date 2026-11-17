@@ -80,9 +80,30 @@
                                     <asp:Label ID="lblMaKH" runat="server" Text='<%# Eval("ma_kh") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
+							<asp:TemplateField HeaderText="CCCD" ControlStyle-Width="160px">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtCCCD" runat="server" CssClass="form-control"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="MST" ControlStyle-Width="160px">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtMST" runat="server" CssClass="form-control"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+							
                             <asp:TemplateField HeaderText="Tên khách hàng" ControlStyle-Width="280px">
                                 <ItemTemplate>
                                     <asp:TextBox ID="lblTenKH" runat="server" Text='<%# Eval("ten_kh") %>'></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+							<asp:TemplateField HeaderText="Từ ngày" ControlStyle-Width="180px">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="lblTuNgay" runat="server" Text='<%# Eval("tu_ngay") %>'></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+							<asp:TemplateField HeaderText="Đến ngày" ControlStyle-Width="180px">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="lblDenNgay" runat="server" Text='<%# Eval("den_ngay") %>'></asp:TextBox>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Số hộ" ControlStyle-Width="50px">

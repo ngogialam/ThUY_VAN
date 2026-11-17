@@ -65,6 +65,26 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
             DDBangGia.DataSource = bang_gia_dien;
             DDBangGia.DataBind();
             DDBangGia.SelectedValue = idBG.Text.ToString();
+			
+			TextBox txtCCCD = (e.Row.FindControl("txtCCCD") as TextBox);
+            if (txtCCCD != null)
+            {
+                DataRowView rowView = e.Row.DataItem as DataRowView;
+                if (rowView != null && rowView.Row.Table.Columns.Contains("cccd"))
+                {
+                    txtCCCD.Text = rowView["cccd"].ToString();
+                }
+            }
+
+            TextBox txtMST = (e.Row.FindControl("txtMST") as TextBox);
+            if (txtMST != null)
+            {
+                DataRowView mstView = e.Row.DataItem as DataRowView;
+                if (mstView != null && mstView.Row.Table.Columns.Contains("mst_kh"))
+                {
+                    txtMST.Text = mstView["mst_kh"].ToString();
+                }
+            }
 
         }
 
@@ -144,6 +164,8 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         string ky_hieu = (GirdViewReplace.Rows[0].FindControl("lblKyHieu") as Label).Text.ToString();
         string ky = (GirdViewReplace.Rows[0].FindControl("lblKy") as Label).Text.ToString();
         string makh = (GirdViewReplace.Rows[0].FindControl("lblMaKH") as Label).Text.ToString();
+		string cccdnew = (GirdViewReplace.Rows[0].FindControl("txtCCCD") as TextBox).Text.ToString();
+        string mstnew = (GirdViewReplace.Rows[0].FindControl("txtMST") as TextBox).Text.ToString();
         string idtram_ba = (GirdViewReplace.Rows[0].FindControl("idTramBA") as Label).Text.ToString();
         string id_khu = (GirdViewReplace.Rows[0].FindControl("idKhu") as Label).Text.ToString();
         string serial = drpSerial.SelectedValue.ToString();
@@ -164,8 +186,8 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
         string user = Context.User.Identity.Name.ToString();
      
 
-        //Cập nhật tenekh, số hộ, bảng giá
-       myINV.updateKHreplace(makh, tenkhnew, sohonew.ToString(), id_bg_new);
+        //Cập nhật tên khách hàng, số hộ, bảng giá, CCCD và MST
+        myINV.updateKHreplace(makh, tenkhnew, sohonew.ToString(), id_bg_new, cccdnew, mstnew);
 
 
         //Cập nhật chỉ số
@@ -176,10 +198,20 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
             string cs_moi = (GirdViewReplace.Rows[i].FindControl("txtCSMoi") as TextBox).Text.ToString();            
             string mact = (GirdViewReplace.Rows[i].FindControl("lblMaCT") as Label).Text.ToString();
             myNCS.cap_nhat_chi_so(mact, cs_moi, ky);
-
+			
+			if (!invReplace.Columns.Contains("cccd"))
+            {
+                invReplace.Columns.Add("cccd", typeof(string));
+            }
+            if (!invReplace.Columns.Contains("mst_kh"))
+            {
+                invReplace.Columns.Add("mst_kh", typeof(string));
+            }
 
             invReplace.Rows[i]["ten_kh"] = tenkhnew;
             invReplace.Rows[i]["so_ho"] = sohonew;
+			invReplace.Rows[i]["cccd"] = cccdnew;
+            invReplace.Rows[i]["mst_kh"] = mstnew;
             invReplace.Rows[i]["chi_so_moi"] = cs_moi;
             invReplace.Rows[i]["id"] = fkey_moi;
             i++;
@@ -273,7 +305,7 @@ public partial class ThayTheHoaDon : System.Web.UI.Page
                 }
                 else
                 {
-                    txtErr.Text = "Có lỗi xảy ra" + result;
+					txtErr.Text = "Có lỗi xảy ra" + result + "<br>" +Server.HtmlEncode(xmlData).Replace("\n", "<br/>");
                 }
 
 

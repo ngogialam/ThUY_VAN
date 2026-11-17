@@ -189,9 +189,9 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Giá bán">
+                        <asp:TemplateField HeaderText="Đơn giá cũ">
                             <ItemTemplate>
-                                <asp:Label ID="lblGiaBan" runat="server" Text='<%# Eval("gia_ban") %>'></asp:Label>
+                                <asp:Label ID="lblGiaBan" runat="server" Text='<%# Eval("don_gia_cu") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
@@ -265,7 +265,7 @@
                         </div>
                     </div>
                     <div class="user-info-row">
-                        <label class="key">Giá bán (<span style="color: red">*</span>):</label>
+                        <label class="key">Đơn giá cũ (<span style="color: red">*</span>):</label>
                         <div class="value">
                             <asp:TextBox ID="txtGiaBan_AddModal" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                         </div>
@@ -352,7 +352,7 @@
                                 </div>
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Giá bán (<span style="color: red">*</span>):</label>
+                                <label class="key">Đơn giá cũ (<span style="color: red">*</span>):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtGiaBan" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>

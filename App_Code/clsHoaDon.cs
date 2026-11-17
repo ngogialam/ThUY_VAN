@@ -385,7 +385,7 @@ public class clsHoaDon
       //  sql = sql + " and id_doanh_nghiep = " + id_doanh_nghiep;
        // sql = sql + " order by id DESC";
 
-        sql = sql + "select d.id,d.so_hd,d.mau_so,d.ky_hieu,d.ma_kh, d.ten_kh,b.ten_khu,a.dia_chi,a.email,a.dien_thoai,a.mst_kh,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
+        sql = sql + "select d.id,d.so_hd,d.mau_so,d.ky_hieu,d.ma_kh, d.ten_kh,b.ten_khu,a.dia_chi,a.email,a.dien_thoai,a.mst_kh,a.cccd,c.ten_viet_tat,nv.dien_thoai dt_sua_chua,d.chi_so_cu,d.chi_so_moi,d.dien_nang_tt dien_nang_tt,";
         sql = sql + " d.tong_tien_truoc_thue,d.vat_rate,d.thue_gtgt,d.tong_tien_sau_thue,d.ky_hd,d.ma_cong_to,d.tu_ngay,d.den_ngay,e.ten_tram_bien_ap, d.id_tram_bien_ap,d.id_bang_gia_dien,d.so_ho,d.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
         sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, hoa_don d, tram_bien_ap e,dm_trang_thai_hd tt, nhan_vien nv ";
         sql = sql + "where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and e.nguoi_phu_trach=nv.ma_nv and  d.trang_thai=tt.trang_thai_id and d.ma_kh=a.ma_kh and d.trang_thai=2";
@@ -604,7 +604,7 @@ public class clsHoaDon
                 const string KindOfService = "ky_hd";
                 const string DTSuaChua = "dt_sua_chua";
                 const string CCCDan = "cccd";
-                const string MaQHNSach = "ma_qhns";
+                const string MDVQHNSach = "ma_qhns";
 
                 //Core mo rong 
                 const string StartDate = "tu_ngay";
@@ -684,7 +684,7 @@ public class clsHoaDon
                     }
                     sb.Append("</CusTaxCode>");
                     // Thêm CCCD
-                    sb.Append("<CCCD>");
+                    sb.Append("<CCCDan>");
                     if (dr.Table.Columns.Contains(CCCDan))
                     {
                         string cccd = dr[CCCDan].ToString().Trim();
@@ -693,18 +693,18 @@ public class clsHoaDon
                             sb.Append(cccd);
                         }
                     }
-                    sb.Append("</CCCD>");
+                    sb.Append("</CCCDan>");
                     // Thêm Mã QHNS
-                    sb.Append("<MaQHNS>");
-                    if (dr.Table.Columns.Contains(MaQHNSach))
+                    sb.Append("<MDVQHNSach>");
+                    if (dr.Table.Columns.Contains(MDVQHNSach))
                     {
-                        string qhns = dr[MaQHNSach].ToString().Trim();
+                        string qhns = dr[MDVQHNSach].ToString().Trim();
                         if (qhns != "0" && qhns != "")
                         {
                             sb.Append(qhns);
                         }
                     }
-                    sb.Append("</MaQHNS>");
+                    sb.Append("</MDVQHNSach>");
                     sb.Append("<PaymentMethod>");
                     sb.Append(convertSpecialCharacter("TM/CK"));
                     sb.Append("</PaymentMethod>");
@@ -858,6 +858,19 @@ public class clsHoaDon
         //tao file xml
         if (objTable.Rows.Count > 0)
         {
+			if (!objTable.Columns.Contains("mst_kh"))
+            {
+                objTable.Columns.Add("mst_kh", typeof(string));
+            }
+            if (!objTable.Columns.Contains("cccd"))
+            {
+                objTable.Columns.Add("cccd", typeof(string));
+            }
+            if (!objTable.Columns.Contains("ma_qhns"))
+            {
+                objTable.Columns.Add("ma_qhns", typeof(string));
+            }
+			
             rv = new StringBuilder("<ReplaceInv>");
             StringBuilder Failed = new StringBuilder("<ReplaceInv>");
 
@@ -939,7 +952,7 @@ public class clsHoaDon
                         {
                             sb.Append(dr[CusPhone].ToString().Trim().Substring(0, 10));
                         }
-                        //sb.Append(dr[CusPhone].ToString().Trim().Substring(0,10));
+                        //sb.Append(dr[CusPhone].ToString().Trim().Substring(0,10)); 
                     }
                     sb.Append("</CusPhone><CusTaxCode>");
                     string mst = "";
@@ -955,7 +968,7 @@ public class clsHoaDon
                     }
                     sb.Append("</CusTaxCode>");
                     // Thêm CCCD
-                    sb.Append("<CCCD>");
+                    sb.Append("<CCCDan>");
                     if (dr.Table.Columns.Contains(CCCDan))
                     {
                         string cccd = dr[CCCDan].ToString().Trim();
@@ -964,9 +977,9 @@ public class clsHoaDon
                             sb.Append(cccd);
                         }
                     }
-                    sb.Append("</CCCD>");
+                    sb.Append("</CCCDan>");
                     // Thêm Mã QHNS
-                    sb.Append("<MaQHNS>");
+                    sb.Append("<MDVQHNSach>");
                     if (dr.Table.Columns.Contains(MDVQHNSach))
                     {
                         string qhns = dr[MDVQHNSach].ToString().Trim();
@@ -975,7 +988,7 @@ public class clsHoaDon
                             sb.Append(qhns);
                         }
                     }
-                    sb.Append("</MaQHNS>");
+                    sb.Append("</MDVQHNSach>");
                     sb.Append("<PaymentMethod>");
                     sb.Append(convertSpecialCharacter("TM/CK"));
                     sb.Append("</PaymentMethod>");
@@ -1123,18 +1136,20 @@ public class clsHoaDon
         return "<![CDATA[" + xmlData + "]]>";
     }
     //Cap Nhat tên KH mới, bảng giá mới khi thay thế hóa đơn
-    public int updateKHreplace(string makh, string tenkh,string soho, string idbg)
+    public int updateKHreplace(string makh, string tenkh,string soho, string idbg, string cccd, string mst)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         // cmd.Connection = myConn;            
-        string CommandText = "update khach_hang set ten_kh=@ten_kh,so_ho=@so_ho,id_bang_gia=@id_bang_gia where ma_kh=@ma_kh and id_doanh_nghiep=@id_doanh_nghiep";
+        string CommandText = "update khach_hang set ten_kh=@ten_kh,so_ho=@so_ho,id_bang_gia=@id_bang_gia,cccd=@cccd,mst_kh=@mst_kh where ma_kh=@ma_kh and id_doanh_nghiep=@id_doanh_nghiep";
         SqlCommand cmd = new SqlCommand(CommandText, myConn);
         cmd.Parameters.AddWithValue("@ma_kh", makh);
         cmd.Parameters.AddWithValue("@so_ho", soho);
         cmd.Parameters.AddWithValue("@id_bang_gia", idbg);
         cmd.Parameters.AddWithValue("@ten_kh", tenkh);
+        cmd.Parameters.AddWithValue("@cccd", string.IsNullOrEmpty(cccd) ? (object)DBNull.Value : cccd);
+        cmd.Parameters.AddWithValue("@mst_kh", string.IsNullOrEmpty(mst) ? (object)DBNull.Value : mst);
         cmd.Parameters.AddWithValue("@id_doanh_nghiep", id_doanh_nghiep);
         int recordsAffected = 0;
         try

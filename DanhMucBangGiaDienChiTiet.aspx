@@ -95,6 +95,9 @@
             <a href="javascript:history.go(-1)" class="btn btn-primary btn-flat">Quay lại</a>
         </div>
         <div class="card-body">
+            <div class="alert alert-info">
+                Với từng bảng giá, Từ số/Đến số và Đơn giá cũ giữ 6 bậc cũ. Đơn giá mới áp dụng 5 bậc theo thứ tự 5 dòng đầu; dòng thứ 6 chỉ dùng đơn giá cũ.
+            </div>
             <div class="table-responsive">
                 <asp:GridView ID="GridViewEman" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" AutoGenerateColumns="False" OnRowCommand="GridView_OnRowCommand">
                     <Columns>
@@ -126,7 +129,7 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Giá không VAT">
+                        <asp:TemplateField HeaderText="Đơn giá mới (5 bậc)">
                             <ItemTemplate>
                                 <asp:Label ID="lblGiaKhongVAT" runat="server" Text='<%# Eval("gia_ko_vat") %>'></asp:Label>
                             </ItemTemplate>
@@ -138,9 +141,9 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Phần trăm thuế">
+                        <asp:TemplateField HeaderText="Đơn giá cũ">
                             <ItemTemplate>
-                                <asp:Label ID="lblPhanTramThue" runat="server" Text='<%# Eval("phan_tram_thue") %>'></asp:Label>
+                                <asp:Label ID="lblPhanTramThue" runat="server" Text='<%# Eval("gia_ko_vat_cu") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
@@ -208,7 +211,7 @@
                         </div>
                     </div>
                     <div class="user-info-row">
-                        <label class="key">Giá không VAT:</label>
+                        <label class="key">Đơn giá mới (5 bậc):</label>
                         <div class="value">
                             <asp:TextBox ID="txtGiaKhongVAT_AddModal" ClientIDMode="Static" runat="server" Text="0" CssClass="form-control input-lg"></asp:TextBox>
                         </div>
@@ -220,7 +223,7 @@
                         </div>
                     </div>
                     <div class="user-info-row">
-                        <label class="key">Phần trăm thuế:</label>
+                        <label class="key">Đơn giá cũ:</label>
                         <div class="value">
                             <asp:TextBox ID="txtPhanTramThue_AddModal" ClientIDMode="Static" runat="server" Text="0" CssClass="form-control input-lg"></asp:TextBox>
                         </div>
@@ -290,7 +293,7 @@
                                 </div>
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Giá không VAT:</label>
+                                <label class="key">Đơn giá mới (5 bậc):</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtGiaKhongVAT" Text="0" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>
@@ -302,7 +305,7 @@
                                 </div>
                             </div>
                             <div class="user-info-row">
-                                <label class="key">Phần trăm thuế:</label>
+                                <label class="key">Đơn giá cũ</label>
                                 <div class="value">
                                     <asp:TextBox ID="txtPhanTramThue" Text="0" ClientIDMode="Static" runat="server" CssClass="form-control input-lg"></asp:TextBox>
                                 </div>

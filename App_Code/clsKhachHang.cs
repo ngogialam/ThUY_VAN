@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
@@ -74,6 +75,14 @@ public class clsKhachHang
             cmd.Parameters.Clear();
             cmd.Connection.Close();
             myConn.Close();
+            if (!dts.Tables[0].Columns.Contains("ma_qhns"))
+            {
+                dts.Tables[0].Columns.Add("ma_qhns", typeof(string));
+            }
+            if (!dts.Tables[0].Columns.Contains("cccd"))
+            {
+                dts.Tables[0].Columns.Add("cccd", typeof(string));
+            }
             return dts.Tables[0];
             // return dts;    
         }
@@ -161,7 +170,7 @@ public class clsKhachHang
             myConn = cnstr.ConnectSQL();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = myConn;
-            cmd.CommandText = "select a.*, b.ten_bang_gia, c.ten_bang_gia as ten_bang_gia_ty_le from bang_gia_dien_chi_tiet as a left join bang_gia_dien as c on a.id_bang_gia_ty_le = c.id_bang_gia inner join bang_gia_dien as b on a.id_bang_gia = b.id_bang_gia";
+            cmd.CommandText = "select a.*, b.ten_bang_gia, c.ten_bang_gia as ten_bang_gia_ty_le from bang_gia_dien_chi_tiet as a left join bang_gia_dien as c on a.id_bang_gia_ty_le = c.id_bang_gia inner join bang_gia_dien as b on a.id_bang_gia = b.id_bang_gia order by a.id_bang_gia, a.tu_so, a.id";
             cmd.CommandType = CommandType.Text;
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
@@ -214,7 +223,7 @@ public class clsKhachHang
         return recordsAffected;
     }
 
-    public int them_moi_gia_dien_chi_tiet(int id_bang_gia, double tu_so, double den_so, double gia_khong_vat, string muc_thu, double phan_tram_thue, int id_bang_gia_ty_le, double ty_le, string mo_ta)
+    public int them_moi_gia_dien_chi_tiet(int id_bang_gia, double tu_so, double den_so, double gia_khong_vat, string muc_thu, double dongiacu, int id_bang_gia_ty_le, double ty_le, string mo_ta)
     {
         int recordsAffected = 0;
         clsConnect cnstr = new clsConnect();
@@ -223,7 +232,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = string.Format("insert into bang_gia_dien_chi_tiet (id_bang_gia, tu_so, den_so, gia_ko_vat, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le) values({0}, {1}, {2}, {3}, N'{4}', N'{5}', {6}, {7}, {8})", id_bang_gia, tu_so, den_so, gia_khong_vat, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le);
+            cmd.CommandText = string.Format(CultureInfo.InvariantCulture, "insert into bang_gia_dien_chi_tiet (id_bang_gia, tu_so, den_so, gia_ko_vat, gia_ko_vat_cu, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le) values({0}, {1}, {2}, {3}, {4}, N'{5}', N'{6}', 0, {7}, {8})", id_bang_gia, tu_so, den_so, gia_khong_vat, dongiacu, mo_ta, muc_thu, id_bang_gia_ty_le, ty_le);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             recordsAffected = cmd.ExecuteNonQuery();
@@ -252,7 +261,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = "update bang_gia_dien set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat='" + tien_thue_vat + "',phan_tram_thue='" + phan_tram_thue + "', gia_ban='" + gia_ban + "',kich_hoat='" + kich_hoat + "',loai_bg='" + loaiBG + "' where id_bang_gia='" + id + "'";
+            cmd.CommandText = "update bang_gia_dien set ten_bang_gia=N'" + ten_bang_gia + "',ten_viet_tat='" + ten_viet_tat + "',don_gia='" + don_gia + "',tien_thue_vat='" + tien_thue_vat + "',phan_tram_thue='" + phan_tram_thue + "', don_gia_cu='" + gia_ban + "',kich_hoat='" + kich_hoat + "',loai_bg='" + loaiBG + "' where id_bang_gia='" + id + "'";
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();
@@ -270,7 +279,7 @@ public class clsKhachHang
             myConn.Close();
         }
     }
-    public void cap_nhat_gia_dien_chi_tiet(int id, double tu_so, double den_so, double gia_khong_vat, string muc_thu, double phan_tram_thue, int id_bang_gia_ty_le, double ty_le, string mo_ta)
+    public void cap_nhat_gia_dien_chi_tiet(int id, double tu_so, double den_so, double gia_khong_vat, string muc_thu, double dongiacu, int id_bang_gia_ty_le, double ty_le, string mo_ta)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -279,7 +288,7 @@ public class clsKhachHang
         try
         {
             cmd.Connection = myConn;
-            cmd.CommandText = string.Format("update bang_gia_dien_chi_tiet set tu_so = {1}, den_so = {2}, gia_ko_vat = {3}, mo_ta = N'{4}', muc_thu = N'{5}', phan_tram_thue = {6}, id_bang_gia_ty_le = {7}, ty_le = {8} where id = {0}", id, tu_so, den_so, gia_khong_vat, mo_ta, muc_thu, phan_tram_thue, id_bang_gia_ty_le, ty_le);
+            cmd.CommandText = string.Format(CultureInfo.InvariantCulture, "update bang_gia_dien_chi_tiet set tu_so = {1}, den_so = {2}, gia_ko_vat = {3}, mo_ta = N'{4}', muc_thu = N'{5}', gia_ko_vat_cu = {6}, id_bang_gia_ty_le = {7}, ty_le = {8} where id = {0}", id, tu_so, den_so, gia_khong_vat, mo_ta, muc_thu, dongiacu, id_bang_gia_ty_le, ty_le);
             cmd.CommandType = CommandType.Text;
             myConn.Open();
             int recordsAffected = cmd.ExecuteNonQuery();

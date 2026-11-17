@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -15,22 +15,44 @@ public class clsNhapChiSo
         SqlConnection myConn = null;
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         string sql = "";
+        // if (id_tramba == "0")
+        // {
+        //     sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+        //     sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
+        //     sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and d.ky='" + ky + "'";
+        //     sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
+        //     sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
+        // }
+        // else
+        // {
+        //     sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+        //     sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
+        //     sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+        //     sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
+        //     sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
+        // }
+        string fields = "SELECT a.ma_kh, a.ten_kh, b.ten_khu, a.dia_chi, a.dien_thoai, c.ten_bang_gia, d.cs_cu, d.cs_moi, f.ma_cong_to, e.ten_tram_bien_ap, a.id_tram_bien_ap, a.id_bang_gia, a.so_ho, a.id_khu, b.id_khu, d.trang_thai, tt.ten_trang_thai ";
+        string joins = "FROM khach_hang a " +
+                    "INNER JOIN dm_khu b ON a.id_khu = b.id_khu " +
+                    "INNER JOIN bang_gia_dien c ON a.id_bang_gia = c.id_bang_gia " +
+                    "INNER JOIN tram_bien_ap e ON a.id_tram_bien_ap = e.id_tram_bien_ap " +
+                    "INNER JOIN dm_cong_to f ON a.ma_kh = f.ma_kh " +
+                    "INNER JOIN chi_so_cong_to d ON d.ma_cong_to = f.ma_cong_to " +
+                    "INNER JOIN dm_trang_thai_cs tt ON d.trang_thai = tt.trang_thai_id ";
+
         if (id_tramba == "0")
         {
-            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and d.ky='" + ky + "'";
-            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
-            sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
+            sql = fields + joins + 
+                "WHERE d.ky = '" + ky + "' AND d.id_doanh_nghiep = " + id_doanh_nghiep + " " +
+                "ORDER BY a.thu_tu, a.ma_kh, d.id";
         }
         else
         {
-            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
-            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
-            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
-            sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
+            sql = fields + joins + 
+                "WHERE a.id_tram_bien_ap = '" + id_tramba + "' AND d.ky = '" + ky + "' AND d.id_doanh_nghiep = " + id_doanh_nghiep + " " +
+                "ORDER BY a.thu_tu, a.ma_kh, d.id";
         }
+
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -345,55 +367,6 @@ public class clsNhapChiSo
             }
         }
     }
-    public Double[] tinh_cs_6_muc(Double sanluong, int sh)
-    {
-        Double[] muc = new Double[] { };
-        if (sanluong > (400 * sh))
-        {
-            Double bac6 = sanluong - (400 * sh);
-            muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, 100 * sh, 100 * sh, bac6 };
-
-        }
-        else
-        {
-            if (sanluong > (300 * sh))
-            {
-                Double bac5 = sanluong - (300 * sh);
-                muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, 100 * sh, bac5 };
-            }
-            else
-            {
-                if (sanluong > (200 * sh))
-                {
-                    Double bac4 = sanluong - (200 * sh);
-                    muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, bac4 };
-                }
-                else
-                {
-                    if (sanluong > (100 * sh))
-                    {
-                        Double bac3 = sanluong - (100 * sh);
-                        muc = new Double[] { (50 * sh), (50 * sh), bac3 };
-                    }
-                    else
-                    {
-                        if (sanluong > (50 * sh))
-                        {
-                            Double bac2 = sanluong - (50 * sh);
-                            muc = new Double[] { (50 * sh), bac2 };
-                        }
-                        else
-                        {
-                            Double bac1 = sanluong - 0;
-                            muc = new Double[] { bac1 };
-                        }
-                    }
-                }
-            }
-        }
-        return muc;
-    }
-   
     //Tính tiền điện MDK
     public Double tinh_tien_dien_MDK(Double dntt, int sh, string id_bang_gia)
     {
@@ -411,15 +384,54 @@ public class clsNhapChiSo
     public Double tinh_tien_dien_sh(Double dntt, int sh, string id_bang_gia)
     {
         Double total = 0;
-        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
-        Double[] muc = tinh_cs_6_muc(dntt, sh);
-        Double[] dongiamuc = new Double[] { };
-        int j = 0;
-        for (j = 0; j < muc.Length; j++)
+        DataTable bangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
+        Double[] muc = TinhMucTheoBac(dntt, sh, 1.0, 100, 200, 400, 700);
+        for (int j = 0; j < muc.Length; j++)
         {
-            total = total + (muc[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString()));
+            total += muc[j] * Convert.ToDouble(bangGiaCT.Rows[j]["gia_ko_vat"].ToString());
         }
         return total;
+    }
+
+    private Double[] TinhMucTheoBac(Double sanLuong, int soHo, Double heSoNgay, params Double[] nguong)
+    {
+        Double[] muc = new Double[nguong.Length + 1];
+        Double gioiHanTruoc = 0;
+
+        for (int i = 0; i < nguong.Length; i++)
+        {
+            Double gioiHan = nguong[i] * soHo * heSoNgay;
+            if (gioiHan < gioiHanTruoc)
+                throw new InvalidOperationException("Ngưỡng bậc biểu giá không hợp lệ.");
+
+            muc[i] = Math.Max(0, Math.Min(sanLuong, gioiHan) - gioiHanTruoc);
+            gioiHanTruoc = gioiHan;
+        }
+
+        muc[muc.Length - 1] = Math.Max(0, sanLuong - gioiHanTruoc);
+        return muc;
+    }
+
+    private Double[] TinhMucTheoBacCu(Double sanLuong, int soHo, DataTable bangGia, Double heSoNgay)
+    {
+        if (bangGia.Rows.Count == 0)
+            throw new InvalidOperationException("Biểu giá cũ chưa được cấu hình bậc.");
+
+        Double[] muc = new Double[bangGia.Rows.Count];
+        Double gioiHanTruoc = 0;
+
+        for (int i = 0; i < bangGia.Rows.Count - 1; i++)
+        {
+            Double gioiHan = Convert.ToDouble(bangGia.Rows[i]["den_so"].ToString()) * soHo * heSoNgay;
+            if (gioiHan < gioiHanTruoc)
+                throw new InvalidOperationException("Ngưỡng biểu giá cũ không hợp lệ.");
+
+            muc[i] = Math.Max(0, Math.Min(sanLuong, gioiHan) - gioiHanTruoc);
+            gioiHanTruoc = gioiHan;
+        }
+
+        muc[muc.Length - 1] = Math.Max(0, sanLuong - gioiHanTruoc);
+        return muc;
     }
     
 
@@ -528,127 +540,26 @@ public class clsNhapChiSo
         Double total_old = 0;
         Double total_new = 0;
 
-        Double dntt_old = Math.Round(15 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
-        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
-
-
-        Double[] muc_old = tinh_cs_6_muc_adjusted_old(dntt_old, sh);
-        Double[] muc_new = tinh_cs_6_muc_adjusted_new(dntt_new, sh);
+        DataTable bangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
+        Double[] muc_old = TinhMucTheoBacCu(dntt_old, sh, bangGiaCT, 0.5);
+        Double[] muc_new = TinhMucTheoBac(dntt_new, sh, 0.5, 100, 200, 400, 700);
 
         for (int j = 0; j < muc_old.Length; j++)
         {
-            total_old = total_old + (muc_old[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat_cu"].ToString()));
+            total_old += muc_old[j] * Convert.ToDouble(bangGiaCT.Rows[j]["gia_ko_vat_cu"].ToString());
         }
 
         for (int j = 0; j < muc_new.Length; j++)
         {
-            total_new = total_new + (muc_new[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString()));
+            total_new += muc_new[j] * Convert.ToDouble(bangGiaCT.Rows[j]["gia_ko_vat"].ToString());
         }
 
         return total_old + total_new;
     }
 
-    //Tính mức theo giá cũ
-    public Double[] tinh_cs_6_muc_adjusted_old(Double sanluong, int sh)
-    {
-        Double[] muc = new Double[] { };
-        if (sanluong > (200 * sh))
-        {
-            Double bac6 = sanluong - (200 * sh);
-            muc = new Double[] { 25 * sh, 25 * sh, 50 * sh, 50 * sh, 50 * sh, bac6 };
-
-        }
-        else
-        {
-            if (sanluong > (150 * sh))
-            {
-                Double bac5 = sanluong - (150 * sh);
-                muc = new Double[] { 25 * sh, 25 * sh, 50 * sh, 50 * sh, bac5 };
-            }
-            else
-            {
-                if (sanluong > (100 * sh))
-                {
-                    Double bac4 = sanluong - (100 * sh);
-                    muc = new Double[] { 25 * sh, 25 * sh, 50 * sh, bac4 };
-                }
-                else
-                {
-                    if (sanluong > (50 * sh))
-                    {
-                        Double bac3 = sanluong - (50 * sh);
-                        muc = new Double[] { (25 * sh), (25 * sh), bac3 };
-                    }
-                    else
-                    {
-                        if (sanluong > (25 * sh))
-                        {
-                            Double bac2 = sanluong - (25 * sh);
-                            muc = new Double[] { (25 * sh), bac2 };
-                        }
-                        else
-                        {
-                            Double bac1 = sanluong - 0;
-                            muc = new Double[] { bac1 };
-                        }
-                    }
-                }
-            }
-        }
-        return muc;
-    }
-
-    //Tính mức theo giá mới
-    public Double[] tinh_cs_6_muc_adjusted_new(Double sanluong, int sh)
-    {
-        Double[] muc = new Double[] { };
-        if (sanluong > (200 * sh))
-        {
-            Double bac6 = sanluong - (200 * sh);
-            muc = new Double[] { 25 * sh, 25 * sh, 50 * sh, 50 * sh, 50 * sh, bac6 };
-
-        }
-        else
-        {
-            if (sanluong > (150 * sh))
-            {
-                Double bac5 = sanluong - (150 * sh);
-                muc = new Double[] { 25 * sh, 25 * sh, 50 * sh, 50 * sh, bac5 };
-            }
-            else
-            {
-                if (sanluong > (100 * sh))
-                {
-                    Double bac4 = sanluong - (100 * sh);
-                    muc = new Double[] { 25 * sh, 25 * sh, 50 * sh, bac4 };
-                }
-                else
-                {
-                    if (sanluong > (50 * sh))
-                    {
-                        Double bac3 = sanluong - (50 * sh);
-                        muc = new Double[] { (25 * sh), (25 * sh), bac3 };
-                    }
-                    else
-                    {
-                        if (sanluong > (25 * sh))
-                        {
-                            Double bac2 = sanluong - (25 * sh);
-                            muc = new Double[] { (25 * sh), bac2 };
-                        }
-                        else
-                        {
-                            Double bac1 = sanluong - 0;
-                            muc = new Double[] { bac1 };
-                        }
-                    }
-                }
-            }
-        }
-        return muc;
-    }
     //Tính tiền điện MDK tăng giá
     public Double tinh_tien_dien_MDK_adjusted(Double dntt, int sh, string id_bang_gia)
     {
@@ -657,7 +568,7 @@ public class clsNhapChiSo
         Double total = 0;
         DataTable BangGia = lay_bang_gia(id_bang_gia);
 
-        Double dntt_old = Math.Round(15 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
@@ -753,7 +664,7 @@ public class clsNhapChiSo
     public DataTable lay_bang_gia_chi_tiet(string id_bang_gia)
     {
         SqlConnection myConn = null;
-        string sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia;
+        string sql = "select * from bang_gia_dien_chi_tiet where id_bang_gia=" + id_bang_gia + " order by tu_so, id";
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -937,6 +848,36 @@ public class clsNhapChiSo
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
             cmd.CommandText = "update chi_so_cong_to set cs_moi='" + csmoi + "', ngay_capnhat = CONVERT( Datetime, GETDATE() ,103) where ma_cong_to='" + mact + "' and ky='" + ky + "' and id_doanh_nghiep=" + id_doanh_nghiep;
+            recordsAffected = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+        finally
+        {
+            if (myConn != null)
+            {
+                myConn.Close();
+            }
+        }
+        return recordsAffected;
+    }
+
+    public int cap_nhat_chi_so_cu(string mact, string cscu, string ky)
+    {
+        clsConnect cnstr = new clsConnect();
+        SqlConnection myConn = cnstr.ConnectSQL();
+        SqlCommand cmd = new SqlCommand();
+        int recordsAffected = 0;
+        string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
+        try
+        {
+            myConn.Open();
+            cmd.Connection = myConn;
+            cmd.Parameters.Clear();
+            cmd.CommandText = "update chi_so_cong_to set cs_cu='" + cscu + "', ngay_capnhat = CONVERT( Datetime, GETDATE() ,103) where ma_cong_to='" + mact + "' and ky='" + ky + "' and id_doanh_nghiep=" + id_doanh_nghiep;
             recordsAffected = cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
         }
@@ -1246,10 +1187,8 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            Double[] muc = tinh_cs_6_muc(dntt, sh);
-            Double[] dongiamuc = new Double[] { };
-            int j = 0;
-            for (j = 0; j < muc.Length; j++)
+            Double[] muc = TinhMucTheoBac(dntt, sh, 1.0, 100, 200, 400, 700);
+            for (int j = 0; j < muc.Length; j++)
             {
                 diengiai = BangGia.Rows[j]["muc_thu"].ToString();
                 dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
@@ -1355,7 +1294,7 @@ public class clsNhapChiSo
         Double total = 0;
         string diengiai = "";
 
-        Double dntt_old = Math.Round(15 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         int recordsAffected = 0;
@@ -1415,7 +1354,7 @@ public class clsNhapChiSo
         string diengiai = "";
         int recordsAffected = 0;
 
-        Double dntt_old = Math.Round(15 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         DataTable BangGia = lay_bang_gia_chi_tiet(id_bang_gia);
@@ -1424,8 +1363,8 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            Double[] muc_old = tinh_cs_6_muc_adjusted_old(dntt_old, sh);
-            Double[] muc_new = tinh_cs_6_muc_adjusted_new(dntt_new, sh);
+            Double[] muc_old = TinhMucTheoBacCu(dntt_old, sh, BangGia, 0.5);
+            Double[] muc_new = TinhMucTheoBac(dntt_new, sh, 0.5, 100, 200, 400, 700);
 
             Double[] dongiamuc = new Double[] { };
             int j = 0;
@@ -1478,7 +1417,7 @@ public class clsNhapChiSo
         int i = 0;
         int recordsAffected = 0;
 
-        Double dntt_old = Math.Round(15 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
         Double dntt_new = dntt - dntt_old;
 
         for (i = 0; i < BangGiaHH.Rows.Count; i++)
