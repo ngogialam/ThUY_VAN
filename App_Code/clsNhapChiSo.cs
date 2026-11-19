@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 /// tuanbn.pto cls Nhập chỉ số điện năng
 public class clsNhapChiSo
 {
+    private static readonly DateTime BieuGiaMoiTuNgay = new DateTime(2026, 11, 1);
+
     clsConnect myCon = new clsConnect();
 
     public DataTable get_danh_sach_nhap_cs(string id_tramba, string ky)
@@ -15,44 +17,22 @@ public class clsNhapChiSo
         SqlConnection myConn = null;
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(HttpContext.Current.User.Identity.Name.ToString());
         string sql = "";
-        // if (id_tramba == "0")
-        // {
-        //     sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-        //     sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
-        //     sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and d.ky='" + ky + "'";
-        //     sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
-        //     sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
-        // }
-        // else
-        // {
-        //     sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
-        //     sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
-        //     sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
-        //     sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
-        //     sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
-        // }
-        string fields = "SELECT a.ma_kh, a.ten_kh, b.ten_khu, a.dia_chi, a.dien_thoai, c.ten_bang_gia, d.cs_cu, d.cs_moi, f.ma_cong_to, e.ten_tram_bien_ap, a.id_tram_bien_ap, a.id_bang_gia, a.so_ho, a.id_khu, b.id_khu, d.trang_thai, tt.ten_trang_thai ";
-        string joins = "FROM khach_hang a " +
-                    "INNER JOIN dm_khu b ON a.id_khu = b.id_khu " +
-                    "INNER JOIN bang_gia_dien c ON a.id_bang_gia = c.id_bang_gia " +
-                    "INNER JOIN tram_bien_ap e ON a.id_tram_bien_ap = e.id_tram_bien_ap " +
-                    "INNER JOIN dm_cong_to f ON a.ma_kh = f.ma_kh " +
-                    "INNER JOIN chi_so_cong_to d ON d.ma_cong_to = f.ma_cong_to " +
-                    "INNER JOIN dm_trang_thai_cs tt ON d.trang_thai = tt.trang_thai_id ";
-
         if (id_tramba == "0")
         {
-            sql = fields + joins + 
-                "WHERE d.ky = '" + ky + "' AND d.id_doanh_nghiep = " + id_doanh_nghiep + " " +
-                "ORDER BY a.thu_tu, a.ma_kh, d.id";
+            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and d.ky='" + ky + "'";
+            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
+            sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
         }
         else
         {
-            sql = fields + joins + 
-                "WHERE a.id_tram_bien_ap = '" + id_tramba + "' AND d.ky = '" + ky + "' AND d.id_doanh_nghiep = " + id_doanh_nghiep + " " +
-                "ORDER BY a.thu_tu, a.ma_kh, d.id";
+            sql = "select a.ma_kh, a.ten_kh,b.ten_khu,a.dia_chi,a.dien_thoai,c.ten_bang_gia,d.cs_cu,d.cs_moi,f.ma_cong_to,e.ten_tram_bien_ap, a.id_tram_bien_ap,a.id_bang_gia,a.so_ho,a.id_khu, b.id_khu,d.trang_thai,tt.ten_trang_thai";
+            sql = sql + " from khach_hang a, dm_khu b,bang_gia_dien c, chi_so_cong_to d, tram_bien_ap e,dm_cong_to f,dm_trang_thai_cs tt ";
+            sql = sql + " where a.id_khu = b.id_khu and a.id_bang_gia=c.id_bang_gia and  a.id_tram_bien_ap=e.id_tram_bien_ap and a.ma_kh=f.ma_kh and d.ma_cong_to=f.ma_cong_to and d.trang_thai = tt.trang_thai_id and a.id_tram_bien_ap='" + id_tramba + "' and d.ky='" + ky + "'";
+            sql = sql + " and d.id_doanh_nghiep = " + id_doanh_nghiep + "";
+            sql = sql + " order by a.thu_tu,a.ma_kh, d.id";
         }
-
         try
         {
             clsConnect cnstr = new clsConnect();
@@ -64,6 +44,8 @@ public class clsNhapChiSo
             SqlDataAdapter myData = new SqlDataAdapter(cmd);
             DataSet dts = new DataSet();
             myConn.Open();
+			// Chèn thêm dòng này vào trước dòng myData.Fill(dts);
+			cmd.CommandTimeout = 500; 
             myData.Fill(dts);
             myData.Dispose();
             cmd.Parameters.Clear();
@@ -367,6 +349,55 @@ public class clsNhapChiSo
             }
         }
     }
+    public Double[] tinh_cs_6_muc(Double sanluong, int sh)
+    {
+        Double[] muc = new Double[] { };
+        if (sanluong > (400 * sh))
+        {
+            Double bac6 = sanluong - (400 * sh);
+            muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, 100 * sh, 100 * sh, bac6 };
+
+        }
+        else
+        {
+            if (sanluong > (300 * sh))
+            {
+                Double bac5 = sanluong - (300 * sh);
+                muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, 100 * sh, bac5 };
+            }
+            else
+            {
+                if (sanluong > (200 * sh))
+                {
+                    Double bac4 = sanluong - (200 * sh);
+                    muc = new Double[] { 50 * sh, 50 * sh, 100 * sh, bac4 };
+                }
+                else
+                {
+                    if (sanluong > (100 * sh))
+                    {
+                        Double bac3 = sanluong - (100 * sh);
+                        muc = new Double[] { (50 * sh), (50 * sh), bac3 };
+                    }
+                    else
+                    {
+                        if (sanluong > (50 * sh))
+                        {
+                            Double bac2 = sanluong - (50 * sh);
+                            muc = new Double[] { (50 * sh), bac2 };
+                        }
+                        else
+                        {
+                            Double bac1 = sanluong - 0;
+                            muc = new Double[] { bac1 };
+                        }
+                    }
+                }
+            }
+        }
+        return muc;
+    }
+   
     //Tính tiền điện MDK
     public Double tinh_tien_dien_MDK(Double dntt, int sh, string id_bang_gia)
     {
@@ -384,54 +415,15 @@ public class clsNhapChiSo
     public Double tinh_tien_dien_sh(Double dntt, int sh, string id_bang_gia)
     {
         Double total = 0;
-        DataTable bangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
-        Double[] muc = TinhMucTheoBac(dntt, sh, 1.0, 100, 200, 400, 700);
-        for (int j = 0; j < muc.Length; j++)
+        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
+        Double[] muc = tinh_cs_6_muc(dntt, sh);
+        Double[] dongiamuc = new Double[] { };
+        int j = 0;
+        for (j = 0; j < muc.Length; j++)
         {
-            total += muc[j] * Convert.ToDouble(bangGiaCT.Rows[j]["gia_ko_vat"].ToString());
+            total = total + (muc[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString()));
         }
         return total;
-    }
-
-    private Double[] TinhMucTheoBac(Double sanLuong, int soHo, Double heSoNgay, params Double[] nguong)
-    {
-        Double[] muc = new Double[nguong.Length + 1];
-        Double gioiHanTruoc = 0;
-
-        for (int i = 0; i < nguong.Length; i++)
-        {
-            Double gioiHan = nguong[i] * soHo * heSoNgay;
-            if (gioiHan < gioiHanTruoc)
-                throw new InvalidOperationException("Ngưỡng bậc biểu giá không hợp lệ.");
-
-            muc[i] = Math.Max(0, Math.Min(sanLuong, gioiHan) - gioiHanTruoc);
-            gioiHanTruoc = gioiHan;
-        }
-
-        muc[muc.Length - 1] = Math.Max(0, sanLuong - gioiHanTruoc);
-        return muc;
-    }
-
-    private Double[] TinhMucTheoBacCu(Double sanLuong, int soHo, DataTable bangGia, Double heSoNgay)
-    {
-        if (bangGia.Rows.Count == 0)
-            throw new InvalidOperationException("Biểu giá cũ chưa được cấu hình bậc.");
-
-        Double[] muc = new Double[bangGia.Rows.Count];
-        Double gioiHanTruoc = 0;
-
-        for (int i = 0; i < bangGia.Rows.Count - 1; i++)
-        {
-            Double gioiHan = Convert.ToDouble(bangGia.Rows[i]["den_so"].ToString()) * soHo * heSoNgay;
-            if (gioiHan < gioiHanTruoc)
-                throw new InvalidOperationException("Ngưỡng biểu giá cũ không hợp lệ.");
-
-            muc[i] = Math.Max(0, Math.Min(sanLuong, gioiHan) - gioiHanTruoc);
-            gioiHanTruoc = gioiHan;
-        }
-
-        muc[muc.Length - 1] = Math.Max(0, sanLuong - gioiHanTruoc);
-        return muc;
     }
     
 
@@ -509,66 +501,107 @@ public class clsNhapChiSo
         return total;
     }
     //Tính tiền điện tăng giá
-    public Double tinh_tien_dien_adjusted(Double dntt, int sh, string id_bang_gia)
+    private void LaySoNgayApDung(DateTime tuNgay, DateTime denNgay, out int tongSoNgay, out int soNgayGiaCu, out int soNgayGiaMoi)
     {
+        tuNgay = tuNgay.Date;
+        denNgay = denNgay.Date;
+        if (denNgay < tuNgay)
+            throw new ArgumentException("Ngày kết thúc kỳ phải sau hoặc bằng ngày bắt đầu kỳ.");
 
+        tongSoNgay = (denNgay - tuNgay).Days + 1;
+        DateTime ngayCuoiGiaCu = BieuGiaMoiTuNgay.AddDays(-1);
+        soNgayGiaCu = 0;
+        if (tuNgay <= ngayCuoiGiaCu)
+        {
+            DateTime ngayCuoiApDungGiaCu = denNgay < ngayCuoiGiaCu ? denNgay : ngayCuoiGiaCu;
+            soNgayGiaCu = (ngayCuoiApDungGiaCu - tuNgay).Days + 1;
+        }
+        soNgayGiaMoi = tongSoNgay - soNgayGiaCu;
+    }
+
+    private Double[] TinhMucTheoDinhMucNgay(Double sanLuong, int soHo, int soNgayApDung, int tongSoNgay, params int[] dinhMucBac)
+    {
+        if (soHo <= 0 || tongSoNgay <= 0 || soNgayApDung < 0 || soNgayApDung > tongSoNgay)
+            throw new ArgumentOutOfRangeException("Thông tin số hộ hoặc số ngày tính giá không hợp lệ.");
+
+        Double[] muc = new Double[dinhMucBac.Length + 1];
+        Double sanLuongDaPhanBo = 0;
+        for (int i = 0; i < dinhMucBac.Length; i++)
+        {
+            Double dinhMuc = Math.Round((Double)dinhMucBac[i] * soHo * soNgayApDung / tongSoNgay, MidpointRounding.AwayFromZero);
+            muc[i] = Math.Min(Math.Max(0, sanLuong - sanLuongDaPhanBo), dinhMuc);
+            sanLuongDaPhanBo += muc[i];
+        }
+
+        muc[muc.Length - 1] = Math.Max(0, sanLuong - sanLuongDaPhanBo);
+        return muc;
+    }
+
+    private Double TinhSanLuongGiaCu(Double dienNangTieuThu, int soNgayGiaCu, int tongSoNgay)
+    {
+        return Math.Round(dienNangTieuThu * soNgayGiaCu / tongSoNgay, MidpointRounding.AwayFromZero);
+    }
+
+    public Double tinh_tien_dien_adjusted(Double dntt, int sh, string id_bang_gia, DateTime tuNgay, DateTime denNgay)
+    {
+        int tongSoNgay;
+        int soNgayGiaCu;
+        int soNgayGiaMoi;
+        LaySoNgayApDung(tuNgay, denNgay, out tongSoNgay, out soNgayGiaCu, out soNgayGiaMoi);
         Double total = 0;
         DataTable BangGia = lay_bang_gia(id_bang_gia);
         if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
         {
-
-            // dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-            // total = dntt * dongia;
-            total = tinh_tien_dien_MDK_adjusted(dntt, sh, id_bang_gia);
+            total = tinh_tien_dien_MDK_adjusted(dntt, id_bang_gia, soNgayGiaCu, tongSoNgay);
         }
         if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
         {
-            total = tinh_tien_dien_sh_adjusted(dntt, sh, id_bang_gia);
-
+            total = tinh_tien_dien_sh_adjusted(dntt, sh, id_bang_gia, soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
         }
         if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
         {
-            total = tinh_tien_dien_HH_adjusted(dntt, sh, id_bang_gia);
+            total = tinh_tien_dien_HH_adjusted(dntt, sh, id_bang_gia, soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
         }
-        //Làm tròn
         total = Math.Round(total, 0, MidpointRounding.AwayFromZero);
         return total;
     }
-    // Tính tiền điện sinh hoạt điều chỉnh giá
-    public Double tinh_tien_dien_sh_adjusted(Double dntt, int sh, string id_bang_gia)
+
+    public Double tinh_tien_dien_sh_adjusted(Double dntt, int sh, string id_bang_gia, int soNgayGiaCu, int soNgayGiaMoi, int tongSoNgay)
     {
         Double total_old = 0;
         Double total_new = 0;
-
-        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = TinhSanLuongGiaCu(dntt, soNgayGiaCu, tongSoNgay);
         Double dntt_new = dntt - dntt_old;
+        DataTable BangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
+        if (BangGiaCT.Rows.Count < 6)
+            throw new InvalidOperationException("Biểu giá sinh hoạt cần đủ 6 dòng đơn giá để tính giá cũ.");
 
-        DataTable bangGiaCT = lay_bang_gia_chi_tiet(id_bang_gia);
-        Double[] muc_old = TinhMucTheoBacCu(dntt_old, sh, bangGiaCT, 0.5);
-        Double[] muc_new = TinhMucTheoBac(dntt_new, sh, 0.5, 100, 200, 400, 700);
+        Double[] muc_old = TinhMucTheoDinhMucNgay(dntt_old, sh, soNgayGiaCu, tongSoNgay, 50, 50, 100, 100, 100);
+        Double[] muc_new = TinhMucTheoDinhMucNgay(dntt_new, sh, soNgayGiaMoi, tongSoNgay, 100, 100, 200, 300);
 
         for (int j = 0; j < muc_old.Length; j++)
         {
-            total_old += muc_old[j] * Convert.ToDouble(bangGiaCT.Rows[j]["gia_ko_vat_cu"].ToString());
+            if (muc_old[j] > 0)
+                total_old += muc_old[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat_cu"].ToString());
         }
 
         for (int j = 0; j < muc_new.Length; j++)
         {
-            total_new += muc_new[j] * Convert.ToDouble(bangGiaCT.Rows[j]["gia_ko_vat"].ToString());
+            if (muc_new[j] > 0)
+                total_new += muc_new[j] * Convert.ToDouble(BangGiaCT.Rows[j]["gia_ko_vat"].ToString());
         }
 
         return total_old + total_new;
     }
 
-    //Tính tiền điện MDK tăng giá
-    public Double tinh_tien_dien_MDK_adjusted(Double dntt, int sh, string id_bang_gia)
+    public Double tinh_tien_dien_MDK_adjusted(Double dntt, string id_bang_gia, int soNgayGiaCu, int tongSoNgay)
     {
         Double dongia = 0;
         Double dongia_cu = 0;
         Double total = 0;
         DataTable BangGia = lay_bang_gia(id_bang_gia);
 
-        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = TinhSanLuongGiaCu(dntt, soNgayGiaCu, tongSoNgay);
         Double dntt_new = dntt - dntt_old;
 
         dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
@@ -580,7 +613,7 @@ public class clsNhapChiSo
     }
 
     //Tính tiền điện hỗn hợp tăng giá
-    public Double tinh_tien_dien_HH_adjusted(Double dntt, int sh, string id_bang_gia)
+    public Double tinh_tien_dien_HH_adjusted(Double dntt, int sh, string id_bang_gia, int soNgayGiaCu, int soNgayGiaMoi, int tongSoNgay)
     {
         Double total = 0;
         Double dn = 0;
@@ -600,14 +633,14 @@ public class clsNhapChiSo
                     dn = dntt * tyle / 100;
                     dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
                     sumDN = sumDN + dn;
-                    total = total + tinh_tien_dien_MDK_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    total += tinh_tien_dien_MDK_adjusted(dn, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, tongSoNgay);
                 }
                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
                 {
                     dn = dntt * tyle / 100;
                     dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
                     sumDN = sumDN + dn;
-                    total = total + tinh_tien_dien_sh_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    total += tinh_tien_dien_sh_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
                 }
             }
             else
@@ -615,12 +648,12 @@ public class clsNhapChiSo
                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
                 {
                     dn = dntt - sumDN;
-                    total = total + tinh_tien_dien_MDK_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    total += tinh_tien_dien_MDK_adjusted(dn, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, tongSoNgay);
                 }
                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
                 {
                     dn = dntt - sumDN;
-                    total = total + tinh_tien_dien_sh_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    total += tinh_tien_dien_sh_adjusted(dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
                 }
             }
 
@@ -1187,8 +1220,10 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            Double[] muc = TinhMucTheoBac(dntt, sh, 1.0, 100, 200, 400, 700);
-            for (int j = 0; j < muc.Length; j++)
+            Double[] muc = tinh_cs_6_muc(dntt, sh);
+            Double[] dongiamuc = new Double[] { };
+            int j = 0;
+            for (j = 0; j < muc.Length; j++)
             {
                 diengiai = BangGia.Rows[j]["muc_thu"].ToString();
                 dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
@@ -1263,27 +1298,31 @@ public class clsNhapChiSo
     }
     //Insert hoa_don_chi_tiet điện tăng giá
 
-    public int them_moi_hoa_don_chi_tiet_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    public int them_moi_hoa_don_chi_tiet_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia, DateTime tuNgay, DateTime denNgay)
     {
+        int tongSoNgay;
+        int soNgayGiaCu;
+        int soNgayGiaMoi;
+        LaySoNgayApDung(tuNgay, denNgay, out tongSoNgay, out soNgayGiaCu, out soNgayGiaMoi);
         int recordsAffected = 0;
         DataTable BangGia = lay_bang_gia(id_bang_gia);
         if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
         {
-            recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dntt, sh, id_bang_gia);
+            recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dntt, id_bang_gia, soNgayGiaCu, tongSoNgay);
 
         }
         if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "BT")
         {
-            recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dntt, sh, id_bang_gia);
+            recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dntt, sh, id_bang_gia, soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
         }
         if (BangGia.Rows[0]["loai_bg"].ToString().Trim() == "HH")
         {
-            recordsAffected = them_moi_hoa_don_chi_tiet_hh_adjusted(id_hd, dntt, sh, id_bang_gia);
+            recordsAffected = them_moi_hoa_don_chi_tiet_hh_adjusted(id_hd, dntt, sh, id_bang_gia, soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
         }
         return recordsAffected;
 
     }
-    public int them_moi_hoa_don_chi_tiet_mdk_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    public int them_moi_hoa_don_chi_tiet_mdk_adjusted(Int64 id_hd, Double dntt, string id_bang_gia, int soNgayGiaCu, int tongSoNgay)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -1294,7 +1333,7 @@ public class clsNhapChiSo
         Double total = 0;
         string diengiai = "";
 
-        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = TinhSanLuongGiaCu(dntt, soNgayGiaCu, tongSoNgay);
         Double dntt_new = dntt - dntt_old;
 
         int recordsAffected = 0;
@@ -1305,27 +1344,30 @@ public class clsNhapChiSo
             cmd.Parameters.Clear();
             DataTable BangGia = lay_bang_gia(id_bang_gia);
 
-            //Giá cũ
-            diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá cũ";
-            dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia_cu"].ToString());
-            total = dntt_old * dongia;
-            sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
-            sql = sql + " values(" + id_hd + ",1,N'" + diengiai + "'," + dntt_old + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+            int line = 1;
+            if (soNgayGiaCu > 0)
+            {
+                diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá cũ";
+                dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia_cu"].ToString());
+                total = dntt_old * dongia;
+                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+                sql = sql + " values(" + id_hd + "," + line++ + ",N'" + diengiai + "'," + dntt_old + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+                cmd.CommandText = sql;
+                recordsAffected = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
 
-            cmd.CommandText = sql;
-            recordsAffected = cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear();
-
-            //Giá mới
-            diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá mới"; ;
-            dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
-            total = dntt_new * dongia;
-            sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
-            sql = sql + " values(" + id_hd + ",2,N'" + diengiai + "'," + dntt_new + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
-
-            cmd.CommandText = sql;
-            recordsAffected = cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear();
+            if (soNgayGiaCu < tongSoNgay)
+            {
+                diengiai = BangGia.Rows[0]["ten_bang_gia"].ToString() + " giá mới";
+                dongia = Convert.ToDouble(BangGia.Rows[0]["don_gia"].ToString());
+                total = dntt_new * dongia;
+                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+                sql = sql + " values(" + id_hd + "," + line + ",N'" + diengiai + "'," + dntt_new + ",'" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+                cmd.CommandText = sql;
+                recordsAffected = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
 
 
         }
@@ -1342,7 +1384,7 @@ public class clsNhapChiSo
         }
         return recordsAffected;
     }
-    public int them_moi_hoa_don_chi_tiet_sh_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    public int them_moi_hoa_don_chi_tiet_sh_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia, int soNgayGiaCu, int soNgayGiaMoi, int tongSoNgay)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -1354,7 +1396,7 @@ public class clsNhapChiSo
         string diengiai = "";
         int recordsAffected = 0;
 
-        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = TinhSanLuongGiaCu(dntt, soNgayGiaCu, tongSoNgay);
         Double dntt_new = dntt - dntt_old;
 
         DataTable BangGia = lay_bang_gia_chi_tiet(id_bang_gia);
@@ -1363,36 +1405,41 @@ public class clsNhapChiSo
             myConn.Open();
             cmd.Connection = myConn;
             cmd.Parameters.Clear();
-            Double[] muc_old = TinhMucTheoBacCu(dntt_old, sh, BangGia, 0.5);
-            Double[] muc_new = TinhMucTheoBac(dntt_new, sh, 0.5, 100, 200, 400, 700);
+            if (BangGia.Rows.Count < 6)
+                throw new InvalidOperationException("Biểu giá sinh hoạt cần đủ 6 dòng đơn giá để lập chi tiết hóa đơn.");
 
-            Double[] dongiamuc = new Double[] { };
-            int j = 0;
-            for (j = 0; j < muc_old.Length; j++)
+            Double[] muc_old = TinhMucTheoDinhMucNgay(dntt_old, sh, soNgayGiaCu, tongSoNgay, 50, 50, 100, 100, 100);
+            Double[] muc_new = TinhMucTheoDinhMucNgay(dntt_new, sh, soNgayGiaMoi, tongSoNgay, 100, 100, 200, 300);
+
+            int line = 1;
+            if (soNgayGiaCu > 0)
             {
-                diengiai = BangGia.Rows[j]["muc_thu"].ToString();
-                dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat_cu"].ToString());
-                total = muc_old[j] * dongia;
-                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
-                sql = sql + " values(" + id_hd + "," + (j + 1) + ",N'" + diengiai + "','" + muc_old[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
-                cmd.CommandText = sql;
-                recordsAffected = cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
+                for (int j = 0; j < muc_old.Length; j++)
+                {
+                    diengiai = BangGia.Rows[j]["muc_thu"].ToString();
+                    dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat_cu"].ToString());
+                    total = muc_old[j] * dongia;
+                    sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+                    sql = sql + " values(" + id_hd + "," + line++ + ",N'" + diengiai + "','" + muc_old[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+                    cmd.CommandText = sql;
+                    recordsAffected = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
             }
 
-            //Giá mới
-            int k = muc_old.Length;
-            j = 0;
-            for (j = 0; j < muc_new.Length; j++)
+            if (soNgayGiaMoi > 0)
             {
-                diengiai = BangGia.Rows[j]["muc_thu"].ToString();
-                dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
-                total = muc_new[j] * dongia;
-                sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
-                sql = sql + " values(" + id_hd + "," + (j + k + 1) + ",N'" + diengiai + "','" + muc_new[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
-                cmd.CommandText = sql;
-                recordsAffected = cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
+                for (int j = 0; j < muc_new.Length; j++)
+                {
+                    diengiai = BangGia.Rows[j]["muc_thu"].ToString();
+                    dongia = Convert.ToDouble(BangGia.Rows[j]["gia_ko_vat"].ToString());
+                    total = muc_new[j] * dongia;
+                    sql = "insert into hoa_don_chi_tiet(id_hoa_don,dong,dien_giai,so_luong,don_gia,thanh_tien,ngay_nhap,id_doanh_nghiep)";
+                    sql = sql + " values(" + id_hd + "," + line++ + ",N'" + diengiai + "','" + muc_new[j] + "','" + dongia + "', '" + total + "', CONVERT( Datetime, GETDATE() ,103)," + id_doanh_nghiep + ")";
+                    cmd.CommandText = sql;
+                    recordsAffected = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
             }
         }
         catch (Exception ex)
@@ -1409,7 +1456,7 @@ public class clsNhapChiSo
         return recordsAffected;
     }
 
-    public int them_moi_hoa_don_chi_tiet_hh_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia)
+    public int them_moi_hoa_don_chi_tiet_hh_adjusted(Int64 id_hd, Double dntt, int sh, string id_bang_gia, int soNgayGiaCu, int soNgayGiaMoi, int tongSoNgay)
     {
         Double dn = 0;
         Double sumDN = 0;
@@ -1417,7 +1464,7 @@ public class clsNhapChiSo
         int i = 0;
         int recordsAffected = 0;
 
-        Double dntt_old = Math.Round(9 * dntt / 30, MidpointRounding.AwayFromZero);
+        Double dntt_old = TinhSanLuongGiaCu(dntt, soNgayGiaCu, tongSoNgay);
         Double dntt_new = dntt - dntt_old;
 
         for (i = 0; i < BangGiaHH.Rows.Count; i++)
@@ -1430,14 +1477,14 @@ public class clsNhapChiSo
                 {
                     dn = dntt * tyle / 100;
                     dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
-                    recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dn, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, tongSoNgay);
                     sumDN = sumDN + dn;
                 }
                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
                 {
                     dn = dntt * tyle / 100;
                     dn = Math.Round(dn, 0, MidpointRounding.AwayFromZero);
-                    recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
                     sumDN = sumDN + dn;
                 }
             }
@@ -1446,13 +1493,13 @@ public class clsNhapChiSo
                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "MDK")
                 {
                     dn = dntt - sumDN;
-                    recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    recordsAffected = them_moi_hoa_don_chi_tiet_mdk_adjusted(id_hd, dn, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, tongSoNgay);
                     //sumDN = sumDN + dn;
                 }
                 if (dtbtemp.Rows[0]["loai_bg"].ToString().Trim() == "BT")
                 {
                     dn = dntt - sumDN;
-                    recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim());
+                    recordsAffected = them_moi_hoa_don_chi_tiet_sh_adjusted(id_hd, dn, sh, BangGiaHH.Rows[i]["id_bang_gia_ty_le"].ToString().Trim(), soNgayGiaCu, soNgayGiaMoi, tongSoNgay);
                     //sumDN = sumDN + dn;
                 }
 

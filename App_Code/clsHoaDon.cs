@@ -1136,7 +1136,7 @@ public class clsHoaDon
         return "<![CDATA[" + xmlData + "]]>";
     }
     //Cap Nhat tên KH mới, bảng giá mới khi thay thế hóa đơn
-    public int updateKHreplace(string makh, string tenkh,string soho, string idbg, string cccd, string mst)
+   public int updateKHreplace(string makh, string tenkh,string soho, string idbg, string cccd, string mst)
     {
         clsConnect cnstr = new clsConnect();
         SqlConnection myConn = cnstr.ConnectSQL();
@@ -1148,7 +1148,7 @@ public class clsHoaDon
         cmd.Parameters.AddWithValue("@so_ho", soho);
         cmd.Parameters.AddWithValue("@id_bang_gia", idbg);
         cmd.Parameters.AddWithValue("@ten_kh", tenkh);
-        cmd.Parameters.AddWithValue("@cccd", string.IsNullOrEmpty(cccd) ? (object)DBNull.Value : cccd);
+		cmd.Parameters.AddWithValue("@cccd", string.IsNullOrEmpty(cccd) ? (object)DBNull.Value : cccd);
         cmd.Parameters.AddWithValue("@mst_kh", string.IsNullOrEmpty(mst) ? (object)DBNull.Value : mst);
         cmd.Parameters.AddWithValue("@id_doanh_nghiep", id_doanh_nghiep);
         int recordsAffected = 0;

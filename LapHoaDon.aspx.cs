@@ -50,6 +50,9 @@ public partial class LapHoaDon : System.Web.UI.Page
     protected DataTable dtb_bind(string id_tramba, string kyhd)
     {
         CusList = myNCS.get_danh_sach_lap_hd(id_tramba, kyhd);
+        DataTable kyDates = myNCS.lay_tungay_denngay(kyhd);
+        DateTime tuNgayKy = Convert.ToDateTime(kyDates.Rows[0]["tu_ngay"]);
+        DateTime denNgayKy = Convert.ToDateTime(kyDates.Rows[0]["den_ngay"]);
         int i = 0;
         int j = 0;
         CusList.Columns.Add("san_luong", typeof(String));
@@ -82,7 +85,7 @@ public partial class LapHoaDon : System.Web.UI.Page
 
                 dntt = cs_moi - cs_cu;
                 sh = Convert.ToInt32(CusList.Rows[i]["so_ho"].ToString());
-                total = myNCS.tinh_tien_dien(dntt, sh, id_bg);
+                total = myNCS.tinh_tien_dien_adjusted(dntt, sh, id_bg, tuNgayKy, denNgayKy);
 
                 vatamount = vatrate * total / 100;
                 //Làm tròn
@@ -120,8 +123,11 @@ public partial class LapHoaDon : System.Web.UI.Page
         int recordsAffected = 0;
         string id_tram = drpTram.SelectedValue.ToString();
         string kyhd = drpKy.SelectedItem.ToString();
-        string tungay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["tu_ngay"].ToString().Substring(0, 10);
-        string denngay = myNCS.lay_tungay_denngay(kyhd).Rows[0]["den_ngay"].ToString().Substring(0, 10);
+        DataTable kyDates = myNCS.lay_tungay_denngay(kyhd);
+        DateTime tuNgayKy = Convert.ToDateTime(kyDates.Rows[0]["tu_ngay"]);
+        DateTime denNgayKy = Convert.ToDateTime(kyDates.Rows[0]["den_ngay"]);
+        string tungay = tuNgayKy.ToString("yyyy-MM-dd");
+        string denngay = denNgayKy.ToString("yyyy-MM-dd");
         string user = Context.User.Identity.Name.ToString();
         string id_doanh_nghiep = myCon.get_iddoanhnghiep(user);
         DataTable dtbInv = dtb_bind(id_tram, kyhd);
@@ -187,12 +193,12 @@ public partial class LapHoaDon : System.Web.UI.Page
                 {
                     if (i < dtbInv.Rows.Count && string.Compare(dtbInv.Rows[i]["ma_kh"].ToString(), dtbInv.Rows[i - 1]["ma_kh"].ToString()) != 0)
                     {
-                        recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                        recordsAffected = myNCS.them_moi_hoa_don_chi_tiet_adjusted(idHD, dntt, soho, idBangGia, tuNgayKy, denNgayKy);
                     }
                 }
                 if (i == 0)
                 {
-                    recordsAffected = myNCS.them_moi_hoa_don_chi_tiet(idHD, dntt, soho, idBangGia);
+                    recordsAffected = myNCS.them_moi_hoa_don_chi_tiet_adjusted(idHD, dntt, soho, idBangGia, tuNgayKy, denNgayKy);
                 }
                 //if (i == (dtbInv.Rows.Count - 1))
                 //{

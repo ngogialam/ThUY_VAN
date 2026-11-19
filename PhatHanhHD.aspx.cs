@@ -9,7 +9,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
     private static string adminPass = "123456aA@78";
     private static string userName = "vpctestviewadmins";
     private static string userPass = "123456aA@78";
-    private static string pattern = "1/004";
+    private static string pattern = "1/011";
    
 
     clsHoaDon myINV = new clsHoaDon();
@@ -63,6 +63,7 @@ public partial class PhatHanhHD : System.Web.UI.Page
         string serial = drpSerial.SelectedValue.ToString();
         string xmlData = myINV.ParseIInvoice(invList);
         int i = 0;
+        txtXmlLog.Text = xmlData ?? String.Empty;
         try
         {
             if (xmlData != null)

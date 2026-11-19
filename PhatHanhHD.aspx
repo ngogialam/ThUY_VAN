@@ -13,7 +13,7 @@
 
 </asp:Content>
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
-  
+  https://vpctestview-tt78admindemo.vnpt-invoice.com.vn
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div id="page-wrapper">  
@@ -50,6 +50,13 @@
         <div class="row">
                 <div class="col-sm-12 mb-2">
                 <asp:Label runat="server" ID="txtErr" Font-Size="14px" ></asp:Label>
+                <asp:Panel ID="pnlXmlLog" runat="server">
+                    <asp:Label runat="server"
+                        Text="XML gửi VNPT (có dữ liệu khách hàng):" />
+                    <asp:TextBox ID="txtXmlLog" runat="server"
+                        TextMode="MultiLine" Rows="20" ReadOnly="true"
+                        CssClass="form-control" />
+                </asp:Panel>
             </div>
         </div>
       
